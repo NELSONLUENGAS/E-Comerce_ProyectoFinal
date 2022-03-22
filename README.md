@@ -43,6 +43,7 @@ __IMPORTANTE__: El objeto de productos debe tener las siguientes propiedades
     ID: "1",
     name: "Tablet 10.1 Pulgadas 4G LTE Call,Android 9.0 Google Certificación GMS Tablets,3Go RAM + 32/128Go ROM",
     price: 38.000,
+    categoria:"Electronicos"
     detalleSobreProducto: {
       detalle: ["Series", "Marca", "Generación", "Tamaño de la pantalla", "Sistema operativo"],
       valorDetalle: ["11-inch iPad Pro Wi-Fi 128GB - Space Gray", "Apple", "2ª generación", "11 Pulgadas", "IOS"],
