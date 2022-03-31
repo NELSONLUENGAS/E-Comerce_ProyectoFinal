@@ -5,7 +5,7 @@ import CheckoutPage from './components/CheckoutPage';
 import {Route, Routes } from 'react-router';
 import {BrowserRouter as Router} from 'react-router-dom'
 import SignIn from './components/SignIn';
-import Checkout from './components/Register/Register';
+import RegistroForm from './components/Registro/Registro';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <Routes>
           <Route exact path="/checkout-page" element={<CheckoutPage/>} />
           <Route exact path="/SingIn" element={<SignIn/>}/>
-          <Route exact path="/Register" element={<Checkout/>}/>  
+          <Route exact path="/Register" element={<RegistroForm/>}/>
           <Route exact path="/" element={<Products/>} />
         </Routes>
     </div>
