@@ -5,14 +5,12 @@ const router = Router();
 //////////////////////////////////////////////////////////////////////////////////
 const productsRoute = require('./Products');
 const categoriesRoute = require('./Categories');
-const costumersRoute = require('./Customers');
-const ordersRoute = require('./Orders');
+const usersRoute = require('./Users');
 
 //////////////////////////////////////////////////////////////////////////////////
+router.use('/', usersRoute);
 router.use('/', productsRoute);
 router.use('/', categoriesRoute);
-router.use('/', costumersRoute);
-router.use('/', ordersRoute);
 
 //////////////////////////////////////////////////////////////////////////////////
 module.exports = router;
