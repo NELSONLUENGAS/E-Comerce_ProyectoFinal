@@ -1,5 +1,6 @@
 // //==== Setear Estado Global Inicial ======//
 const initialState = {
+    products:[],
     basket: [],
     SumPrice: []
 }
@@ -34,6 +35,11 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 SumPrice: state.basket?.reduce((amount, item) => item.price + amount, 0)
                
+            }
+        case 'GET_PRODUCTS':
+            return{
+                ...state,
+                products:action.payload
             }
         default:
             return state

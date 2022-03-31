@@ -192,8 +192,11 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-auto-rows: auto;
-        position: fixed;
+        position: absolute;
+        top:0;
+        left:0;
         width: calc(100% );
+        z-index: 1;
     }
     
     .cusElement1{

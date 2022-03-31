@@ -9,6 +9,7 @@ import { Typography } from "@material-ui/core";
 import CheckoutCard from "./CheckoutCard.jsx";
 import {useSelector} from 'react-redux'
 import Total from './Total'
+import NavBarGuest from "./Guest/NavBarGuest.jsx";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,8 @@ const CheckoutPage = () => {
         );
     }
 
-    return (
+    return (<>
+        <NavBarGuest/>
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -61,7 +63,7 @@ const CheckoutPage = () => {
                 </Grid>
             </Grid>
         </div>
-    );
+        </>);
 };
 
 export default CheckoutPage;

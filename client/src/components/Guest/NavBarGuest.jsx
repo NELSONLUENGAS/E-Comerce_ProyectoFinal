@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 import {products} from './Products'
 
 export default function NavBarGuest(){
@@ -114,9 +115,10 @@ export default function NavBarGuest(){
   }
   
   return (
+    <>
     <div  className="customerGrid">
       <div onMouseOver={modalDown} className="cusElement1">
-        <h1>Icono empresa</h1>
+        <Link to="/" style={{textDecoration:"none", color:"black"}}><h1>Icono empresa</h1></Link>
         {/* <img src="" alt="Icono empresa" /> */}
       </div>
       <div onMouseOver={modalDown} className="cusElement2">
@@ -155,7 +157,7 @@ export default function NavBarGuest(){
       </div>
       <div className="cusElement5">
         <span onMouseOver={modal} >
-          Categorías       
+          <Link to="/Categories">Categorías       </Link>
         </span>
       </div>
       <div onMouseOver={modalDown} className="cusElement6">
@@ -179,14 +181,14 @@ export default function NavBarGuest(){
       </div>
       <div onMouseOver={modalDown} className="cusElement9">
         <label>
-          <ShoppingCartIcon/>
+          <Link to="/checkout-page"><ShoppingCartIcon/></Link>
         </label>
         <span>
           10
         </span>
       </div>
       <div className="cusElement02"></div>
-      <div onMouseOver={modalDown} className="cusElement03"></div>
+      {/* <div onMouseOver={modalDown} className="cusElement03"></div> */}
       {expand.category && 
       <div className="cusElement0">
         <div className='categories'>
@@ -241,7 +243,7 @@ export default function NavBarGuest(){
       {
         expand.profile && 
         <div className='guest'>
-          <Link to='/LogIn' style={{textDecoration: 'none', color: 'black'}}>
+          <Link to='/SignIn' style={{textDecoration: 'none', color: 'black'}}>
             <option>Iniciar Secion</option>
           </Link>
           <Link to='/SignUp' style={{textDecoration: 'none', color: 'black'}}>
@@ -250,8 +252,8 @@ export default function NavBarGuest(){
         </div>
       }
       </div>
-      <div onMouseOver={modalDown} className="cusElement03">
-      {expand.mobile && 
+      {/* <div onMouseOver={modalDown} className="cusElement03"> */}
+      {/* {expand.mobile && 
         <div className="menuMobile">
           <Link to='/Categorias' style={{textDecoration: 'none', color: 'black'}}>
           <span>Categorías</span>
@@ -269,7 +271,7 @@ export default function NavBarGuest(){
           <span>Favoritos</span>
           </Link>
         </div>
-      }
+      } */}
       {
         expand.location && 
       <div className="modalLocation">
@@ -333,7 +335,10 @@ export default function NavBarGuest(){
         </div>
       </div>
       }
+      
       </div>
-    </div>
+      </>
+    // </div>
+    
   )
 }
