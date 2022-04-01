@@ -11,7 +11,12 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import NavBarGuest from './Guest/NavBarGuest'
 import { makeStyles } from '@material-ui/core/styles';
+import  { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "./LoginButton";
+import { LogoutButton } from "./LogoutButton";
+import { Profile } from "./Profile";
 
 function Copyright() {
   return (
@@ -59,9 +64,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const {isAuthenticated} = useAuth0();
 
   return (
     <Grid container component="main" className={classes.root}>
+      <NavBarGuest/>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -108,6 +115,16 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+
+            {isAuthenticated ? 
+            <>
+            <Profile /> 
+            <LogoutButton /> 
+            </>
+
+            :<LoginButton />
+            }
+
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

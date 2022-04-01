@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import axios from 'axios';
 
 
@@ -12,6 +10,7 @@ export function getProducts(){
         })
     }
 }
+
 export function getProductId(id){
     return async function (dispatch){
         const products = await axios.get('http://localhost:3001/products/'+id);
@@ -22,7 +21,7 @@ export function getProductId(id){
     }
 }
 
->>>>>>> Stashed changes
+
 export function addToBasket(payload){
     return{
         type:"ADD_TO_BASKET",

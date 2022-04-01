@@ -84,18 +84,12 @@ export default function Product({
   return (
     <Card className={classes.root}>
       <CardHeader
-        // avatar={
-        //   <Avatar aria-label="recipe" className={classes.avatar}>
-        //     R
-        //   </Avatar>
-        // }
         action={
           <Typography
               className={classes.action}
               variant='h5'
               color='textSecondary'
           >
-              {`US$${price}`}
           </Typography>
       }
         title={name}
@@ -115,11 +109,6 @@ export default function Product({
       <IconButton aria-label="add to Cart">
           <AddShoppingCartIcon fontSize='large' onClick={AddToBasket} />
         </IconButton>
-        <Rating 
-                       name="ready-only"
-                       readOnly
-                       value={rating}
-                /> 
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -128,17 +117,12 @@ export default function Product({
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-          {description}
-          </Typography>
-         
-        </CardContent>
-      </Collapse>
+      {/* {
+        accounting.formatMoney({price},"US")
+      }      */}
+      {`$ ${Intl.NumberFormat('es-ES').format(price)}`}
     </Card>
   );
 =======

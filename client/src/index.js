@@ -3,23 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";
-import {store}  from "./store";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
-<<<<<<< Updated upstream
-  <Provider  store = {store}>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-=======
+
   <Provider store={store}>
     <React.Fragment>
       <Auth0Provider domain="dev-97mfdrxp.us.auth0.com" clientId="gbSCy8uFsWQEtEYoK364LIQ6zZCsaWMg" redirectUri={window.location.origin}>
         <App />
       </Auth0Provider>
       </React.Fragment>
->>>>>>> Stashed changes
   </Provider>,
   document.getElementById('root')
 );

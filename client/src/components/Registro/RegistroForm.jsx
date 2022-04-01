@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 import {Formulario, Label, ContenedorTerminos, ContenedorBotonCentrado, Boton, MensajeExito, MensajeError} from './ElementsForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import NavBarGuest from '../Guest/NavBarGuest';
 import Input from './InputForm'
-import './../Css/Estilos.css'
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -84,7 +84,8 @@ const RegistroForm= () => {
 		}
 	}
 
-	return (
+	return ( <>
+		<NavBarGuest/>
 		<main className={classes.main}>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input
@@ -172,7 +173,8 @@ const RegistroForm= () => {
 				</ContenedorBotonCentrado>
 			</Formulario>
 		</main>
-	);
+		</>);
+	
 }
  
 export default RegistroForm;

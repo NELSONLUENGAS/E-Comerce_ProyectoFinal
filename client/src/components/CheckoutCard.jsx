@@ -12,7 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-
+import NavBarGuest from './Guest/NavBarGuest';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Rating } from '@mui/material';
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CheckoutCard({id, name, image, producType, price, rating}) {
+  
   const classes = useStyles();
   const Dispatch = useDispatch()
 
@@ -51,6 +52,8 @@ export default function CheckoutCard({id, name, image, producType, price, rating
   
 
   return (
+    <>
+    <NavBarGuest/>
     <Card className={classes.root}>
       <CardHeader
         // avatar={
@@ -100,5 +103,5 @@ export default function CheckoutCard({id, name, image, producType, price, rating
       </CardActions>
       
     </Card>
-  );
+    </>);
 }

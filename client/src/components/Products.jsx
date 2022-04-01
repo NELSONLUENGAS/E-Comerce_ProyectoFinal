@@ -9,17 +9,15 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Product from "./Product";
-import { products } from "../Inventario";
 import { useState } from "react";
 import Paginado from "../components/Paginado";
-<<<<<<< Updated upstream
-=======
+
 import NavBarGuest from "./Guest/NavBarGuest";
 import { getProducts } from "../actions/index";
 import Carrousel from "./Carrousel";
 import { useDispatch, useSelector } from "react-redux";
 import Categories from "./Categories";
->>>>>>> Stashed changes
+ 
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,10 +27,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Products() {
-<<<<<<< Updated upstream
-    const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 3;
-=======
     const categories=[{nombre:"belleza"},{nombre:"tecnologia"}]
     const dispatch = useDispatch();
 
@@ -43,33 +37,19 @@ export default function Products() {
     const productos = useSelector((state) => state.products);
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 12;
->>>>>>> Stashed changes
+
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const [currentProducts, setCurrentProducts] = useState(
-        products?.slice(indexOfFirstProduct, indexOfLastProduct)
+        productos.slice(indexOfFirstProduct, indexOfLastProduct)
     );
 
     function paginado(pageNumber) {
         setCurrentPage(pageNumber);
     }
+
     useEffect(() => {
-<<<<<<< Updated upstream
-      setCurrentProducts(
-        products?.slice(indexOfFirstProduct, indexOfLastProduct)
-    );       
-    }, [currentPage]);
-    const classes = useStyles();
-    return (
-        <>
-            <div className={classes.root}>
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                    
-=======
+
         setCurrentProducts(
             productos?.slice(indexOfFirstProduct, indexOfLastProduct)
         );
@@ -121,7 +101,6 @@ export default function Products() {
                         marginTop: "5rem",
                         position: "relative",
                     }}
->>>>>>> Stashed changes
                 >
                     <div
                         style={{
@@ -149,28 +128,7 @@ export default function Products() {
                         </select>
                     </div>
                     {currentProducts.map((product) => (
-<<<<<<< Updated upstream
-                        <Grid
-                        item                              
-                            xs={12}
-                            sm={12}
-                            md={12}
-                            lg={3}
-                            key={product.id}
-                        >
-                            <Product
-                                name={product.name}
-                                image={product.image}
-                                producType={product.producType}
-                                price={product.price}
-                                rating={product.rating}
-                                description={product.description}
-                                key={product.id}
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-=======
+
                         <Product
                             name={product.name}
                             image={product.image}
@@ -182,10 +140,9 @@ export default function Products() {
                         />
                     ))}
                 </div>
->>>>>>> Stashed changes
             </div>
             <Paginado
-                allProducts={products}
+                allProducts={productos}
                 currentPage={currentPage}
                 productsPerPage={productsPerPage}
                 paginado={paginado}
