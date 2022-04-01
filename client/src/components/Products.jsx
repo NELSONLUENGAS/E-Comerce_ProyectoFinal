@@ -11,10 +11,13 @@ import Grid from "@material-ui/core/Grid";
 import Product from "./Product";
 import { useState } from "react";
 import Paginado from "../components/Paginado";
+
 import NavBarGuest from "./Guest/NavBarGuest";
-import {getProducts} from '../actions/index'
-import Carrousel from './Carrousel'
-import {useDispatch,useSelector} from 'react-redux'
+import { getProducts } from "../actions/index";
+import Carrousel from "./Carrousel";
+import { useDispatch, useSelector } from "react-redux";
+import Categories from "./Categories";
+ 
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,17 +27,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Products() {
-    const dispatch = useDispatch()
+    const categories=[{nombre:"belleza"},{nombre:"tecnologia"}]
+    const dispatch = useDispatch();
 
-    useEffect(()=>{
-        dispatch(getProducts())
-    },[dispatch])
+    useEffect(() => {
+        dispatch(getProducts());
+    }, [dispatch]);
 
-    const productos = useSelector(state => state.products)
-    console.log(productos); 
-        
+    const productos = useSelector((state) => state.products);
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 6;
+    const productsPerPage = 12;
+
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const [currentProducts, setCurrentProducts] = useState(
@@ -46,45 +49,96 @@ export default function Products() {
     }
 
     useEffect(() => {
-      setCurrentProducts(
-        productos?.slice(indexOfFirstProduct, indexOfLastProduct)
-    );
-    }, [currentPage]);
+
+        setCurrentProducts(
+            productos?.slice(indexOfFirstProduct, indexOfLastProduct)
+        );
+        window.scroll({
+            top: 300,
+            left: 0,
+            behavior: "smooth",
+        })
+
+    }, [productos,currentPage]);
     const classes = useStyles();
     return (
-        <>
-        
-        <NavBarGuest/>
-        <Carrousel/>
-        
-            <div className={classes.root} >
-                <div>
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                    
+        <div style={{ backgroundColor: "#EBEBEB" }}>
+            <NavBarGuest />
+            <Carrousel />
+
+            <div
+                style={{ display: "flex", width: "100%", flexDirection: "row" }}
+            >
+                <div className="filters-of-products">
+                    <p>Categorias</p>
+                    <select>
+                        {
+                            categories.map((item,i) =>{
+                                return(
+                                    <option key={item.nombre}>
+                                        {item.nombre}
+                                    </option>
+                                )
+                            })
+                        }
+                    </select>
+                    <p>Llegan hoy</p>
+                    <p>Mas vendidos</p>
+                    <p>Precio</p>
+                    <p>Envio Gratis</p>
+                    <input style={{marginLeft:"5px",width:"75px",fontSize:"12px"}} type="number" placeholder="Minimo.."/>
+                    <input style={{marginLeft:"5px",width:"75px",fontSize:"12px"}} type="number" placeholder="Maximo.."/>
+                    <button style={{marginLeft:"5px",width:"50px",fontSize:"12px",borderRadius:"5px",}}>Enter</button>
+                </div>
+
+                <div
+                    style={{
+                        width: "50%",
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        gap: "1rem",
+                        marginTop: "5rem",
+                        position: "relative",
+                    }}
                 >
-                    {currentProducts.map((product) => (
-                        <Grid
-                        item                              
-                            xs={12}
-                            sm={12}
-                            md={12}
-                            lg={4}
-                            key={product.id}
+                    <div
+                        style={{
+                            position: "absolute",
+                            right: "10rem",
+                            top: "-3rem",
+                            display: "flex",
+                            flexDirection: "row",
+                        }}
+                    >
+                        <p>Ordenar por</p>
+                        <select
+                            name=""
+                            id=""
+                            style={{
+                                border: "transparent",
+                                marginLeft: "1rem",
+                                backgroundColor: "#EBEBEB",
+                                height: "25px",
+                            }}
                         >
-                            <Product 
-                                name={product.name}
-                                image={product.image}
-                                price={product.price}
-                                description={product.description}
-                                key={product.id}
-                            />
-                        </Grid>
+                            <option> Mas relevantes</option>
+                            <option> Menor precio</option>
+                            <option> Mayor precio</option>
+                        </select>
+                    </div>
+                    {currentProducts.map((product) => (
+
+                        <Product
+                            name={product.name}
+                            image={product.image}
+                            price={product.price}
+                            description={product.description}
+                            key={product.id}
+                            id={product.id}
+                            stock={product.stock}
+                        />
                     ))}
-                </Grid>
                 </div>
             </div>
             <Paginado
@@ -93,6 +147,6 @@ export default function Products() {
                 productsPerPage={productsPerPage}
                 paginado={paginado}
             />
-        </>
+        </div>
     );
 }

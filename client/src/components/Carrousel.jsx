@@ -14,17 +14,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const items = [
   {
-    src: 'https://cdn.domestika.org/c_limit,dpr_1.0,f_auto,q_auto,w_820/v1570664576/content-items/003/328/205/corner-ecobio-junio_06-original.jpg?1570664576',
+    src: 'https://http2.mlstatic.com/D_NQ_943534-MLA49357104694_032022-OO.webp',
     altText: 'Slide 1',
     caption: ' '
   },
   {
-    src: 'https://cdn.domestika.org/c_limit,dpr_1.0,f_auto,q_auto,w_820/v1570664565/content-items/003/328/198/drasanvi-full_es-original.jpg?1570664565 ',
+    src: 'https://http2.mlstatic.com/D_NQ_977635-MLA49448974486_032022-OO.webp',
     altText: 'Slide 2',
     caption: ' '
   },
   {
-    src: 'https://cdn.domestika.org/c_limit,dpr_1.0,f_auto,q_auto,w_820/v1570664553/content-items/003/328/192/gold-oct-full_pt-original.jpg?1570664553  ',
+    src: 'https://http2.mlstatic.com/D_NQ_722488-MLA49531513472_032022-OO.webp  ',
     altText: 'Slide 3',
     caption: ' '
   }

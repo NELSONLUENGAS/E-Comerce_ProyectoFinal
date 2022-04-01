@@ -1,0 +1,94 @@
+.container-card-product{
+    border:solid #cdc6c6 0.2px;
+    border-radius: 0.5rem;
+    height: 570px;
+    width: 285px;
+    overflow: hidden;
+    background-color: #fff;
+    margin-bottom: 25px;
+    text-align: left;
+    position: relative;
+}
+
+.heart{
+    position: absolute;
+    top:0.3rem;
+    right: 0.3rem;
+    height: 20px;
+    opacity: 0;
+}
+.heart2{
+    position: absolute;
+    top:0.3rem;
+    right: 0.3rem;
+    height: 20px;
+    opacity: 0;
+}
+.heart:hover {
+    opacity: 0;
+}
+.heart:hover .heart2{
+    opacity: 1;
+}
+
+.container-card-product:hover {
+    transition: all 0.3s ease-out;
+    
+    box-shadow: 0px 10px 10px -2px rgb(97, 94, 94);
+
+}
+.container-card-product:hover .heart{
+    opacity:1
+   }
+.container-card-product:hover .add-to-cart-product{
+ opacity:1
+}
+.card-image{
+    height: 285px;
+    width: 285px;
+    object-fit: cover;
+
+}
+.filters-of-products{
+    width: 33%;
+}
+.button-offer-product{
+    color:white;
+    background-color: #3483fa;
+    border: transparent;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    font-size: 11px;
+    margin-left: 1rem;
+}
+.button-best-seller-product{
+    margin-left: 1rem;
+    color:white;
+    background-color: #FC763D;
+    border: transparent;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    font-size: 11px;
+}
+.button-fast-delivery-product{
+    color:white;
+    background-color: #2cbf2f;
+    border: transparent;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    font-size: 13px;
+}
+.add-to-cart-product{
+    opacity: 0;
+    color:white;
+    background-color: #3483fa;
+    width: 200px;
+    text-align: center;
+    border: transparent;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    font-size: 14px;
+    margin-left: 1rem;
+    margin:auto;
+    margin-top: 2rem;
+}

@@ -24,9 +24,6 @@ export default function Paginado({
         
         <Pagination
         variant="outlined" shape="rounded"
-        previousLabel ={'Anterior'}
-        nextLabel={'Siguiente'}
-        breakLabel={'...'}
         count={pageNumbers.length}
         onChange={handleChange}        
         /> 
