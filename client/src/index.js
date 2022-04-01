@@ -7,10 +7,19 @@ import {Provider} from "react-redux";
 import {store}  from "./store";
 
 ReactDOM.render(
+<<<<<<< Updated upstream
   <Provider  store = {store}>
   <React.StrictMode>
     <App />
   </React.StrictMode>
+=======
+  <Provider store={store}>
+    <React.Fragment>
+      <Auth0Provider domain="dev-97mfdrxp.us.auth0.com" clientId="gbSCy8uFsWQEtEYoK364LIQ6zZCsaWMg" redirectUri={window.location.origin}>
+        <App />
+      </Auth0Provider>
+      </React.Fragment>
+>>>>>>> Stashed changes
   </Provider>,
   document.getElementById('root')
 );

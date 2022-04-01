@@ -57,9 +57,9 @@ export default function Categories() {
                 marginTop: "50px",
             }}
         >
-            {categories.map((element) => {
+            {categories.map((element,i) => {
                 return (
-                    <div>
+                    <div key={i}>
                         <img
                             style={{
                                 width: "400px",

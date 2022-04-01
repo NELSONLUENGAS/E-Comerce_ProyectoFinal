@@ -1,7 +1,8 @@
 // //==== Setear Estado Global Inicial ======//
 const initialState = {
     basket: [],
-    SumPrice: []
+    SumPrice: [],
+    productId:[]
 }
 // //==== Setear Reducers ======//
 function rootReducer(state = initialState, action) {
@@ -35,6 +36,19 @@ function rootReducer(state = initialState, action) {
                 SumPrice: state.basket?.reduce((amount, item) => item.price + amount, 0)
                
             }
+<<<<<<< Updated upstream
+=======
+        case 'GET_PRODUCTS':
+            return{
+                ...state,
+                products:action.payload
+            }
+        case 'GET_ID_PRODUCTS':
+            return{
+                ...state,
+                productId:action.payload
+            }
+>>>>>>> Stashed changes
         default:
             return state
 
