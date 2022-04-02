@@ -13,9 +13,9 @@ import {
 } from './ElementsCrear';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-
+import { postProductos } from '../../actions';
 import Input from './InputCrear'
-
+import { useDispatch } from 'react-redux';
 const useStyles = makeStyles((theme) => ({
 	main: {
 		maxWidth: "800px",
@@ -31,16 +31,18 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 const CrearForm = () => {
+	const dispatch = useDispatch()
+
 	const classes = useStyles();
-	const [producto, cambiarUsuario] = useState({ campo: '', valido: null });
-	const [precio, cambiarNombre] = useState({ campo: '', valido: null });
-	const [stock, cambiarPassword] = useState({ campo: '', valido: null });
-	const [imagen, cambiarPassword2] = useState({ campo: '', valido: null });
-	const [descripcion, CambiarDescripcion] = useState({ campo: '', valido: null });
-	const {campo} = descripcion
+	const [name, cambiarname] = useState({ campo: '', valido: null });
+	const [price, cambiarprice] = useState({ campo: '', valido: null });
+	const [stock, cambiarstock] = useState({ campo: '', valido: null });
+	const [image, cambiarimage] = useState({ campo: '', valido: null });
+	const [description, CambiarDescripcion] = useState({ campo: '', valido: null });
+	const {campo} = description
 	const [terminos, cambiarTerminos] = useState(false);
 	const [formularioValido, cambiarFormularioValido] = useState(null);
-
+	
 	const expresiones = {
 		Producto: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 		Precio: /^\d{1,10}$/, // 4 a 12 digitos.
@@ -50,11 +52,11 @@ const CrearForm = () => {
 	}
 	const CambiarEstado = (e) => {
 		CambiarDescripcion({
-			...descripcion,
+			...description,
 			campo: e.target.value,
 			
 		});
-		console.log(descripcion)
+	
 	}
 	//Validad Descripcion
 	const[descriptionInput, ChangeDescription] = useState({
@@ -87,19 +89,26 @@ const CrearForm = () => {
 		e.preventDefault();
 
 		if (
-			producto.valido === 'true' &&
-			precio.valido === 'true' &&
+			name.valido === 'true' &&
+			price.valido === 'true' &&
 			stock.valido === 'true' &&
-			imagen.valido === 'true' &&
+			image.valido === 'true' &&
 			descripcionValidada ==="true" &&
 			terminos
 		) {
-
+			var input= {
+				name: name.campo,
+				price: price.campo,
+				stock: stock.campo,
+				image:image.campo,
+				description: description.campo
+			}
 			cambiarFormularioValido(true);
-			cambiarUsuario({ campo: '', valido: '' });
-			cambiarNombre({ campo: '', valido: null });
-			cambiarPassword({ campo: '', valido: null });
-			cambiarPassword2({ campo: '', valido: null });
+			dispatch(postProductos(input))
+			cambiarname({ campo: '', valido: '' });
+			cambiarprice({ campo: '', valido: null });
+			cambiarstock({ campo: '', valido: null });
+			cambiarimage({ campo: '', valido: null });
 			CambiarDescripcion({ campo: '', valido: null });
 
 			// ... 
@@ -113,28 +122,28 @@ const CrearForm = () => {
 		<main className={classes.main}>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input
-					estado={producto}
-					cambiarEstado={cambiarUsuario}
+					estado={name}
+					cambiarEstado={cambiarname}
 					tipo="text"
 					label="Nombre Del Producto"
 					placeholder="Heladera"
-					name="producto"
+					name="name"
 					leyendaError="El usuario tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
 					expresionRegular={expresiones.Producto}
 				/>
 				<Input
-					estado={precio}
-					cambiarEstado={cambiarNombre}
+					estado={price}
+					cambiarEstado={cambiarprice}
 					tipo="number"
 					label="Precio"
 					placeholder="15"
-					name="precio"
+					name="price"
 					leyendaError="El nombre solo puede contener letras y espacios."
 					expresionRegular={expresiones.Precio}
 				/>
 				<Input
 					estado={stock}
-					cambiarEstado={cambiarPassword}
+					cambiarEstado={cambiarstock}
 					tipo="number"
 					label="Stock"
 					placeholder="15"
@@ -143,14 +152,14 @@ const CrearForm = () => {
 					expresionRegular={expresiones.Stock}
 				/>
 				<Input
-					estado={imagen}
-					cambiarEstado={cambiarPassword2}
+					estado={image}
+					cambiarEstado={cambiarimage}
 					tipo="text"
 					label="Image"
 					name="imagen"
 					leyendaError="Esto no es una imagen."
 					expresionRegular={expresiones.Imagen}
-					valido={descripcion.valido}
+					valido={description.valido}
 				// funcion={validarPassword2}
 				/>
 				<ContenedorBotonCentrado>
