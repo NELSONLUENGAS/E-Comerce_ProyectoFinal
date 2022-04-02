@@ -2,7 +2,7 @@
 /////Total Del producto
 ///////////////////////
 import React, {useEffect} from 'react';
-
+import {Link} from 'react-router-dom'
 import { Button, makeStyles } from '@material-ui/core';
 
 import { useNavigate } from 'react-router-dom';
@@ -27,20 +27,18 @@ const Total = () => {
     const classes = useStyle();
     const dispatch = useDispatch();
     const navigate = useNavigate(); 
-    const toCheckOut = () =>{
-        navigate('/checkout')
-    }
+    
     const TotalPrice = useSelector((state)=>state.SumPrice)
-    const TotalItem = useSelector((state)=>state.basket)
+    const TotalItem = useSelector((state)=>state.ItemsAmount)
     useEffect(()=>{
         dispatch(SumItem())
     },[dispatch])
 
   return (
       <div className={classes.root} > 
-        <h5>Total item: {TotalItem.length}</h5>
-        <h5>{`US$${TotalPrice}`}</h5>
-        <Button className={classes.button} variant="contained" color="secondary" onClick={toCheckOut} >Check out</Button>
+        <h5>Total item: {TotalItem}</h5>
+        <h5>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h5>
+        <Link to="/checkout"><button style={{color:'white',backgroundColor:"#3483fa",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Continuar compra</button></Link>
 
      </div>
   )

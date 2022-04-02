@@ -60,16 +60,16 @@ export default function Product({
     rating,
     description,
 }) {
-    const Dispatch = useDispatch();
+    const dispatch = useDispatch();
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [item] = useState({
-        key: id,
+        id: id,
         name: name,
         image: image,
-        producType: producType,
         price: price,
-        rating: rating,
+        quantity:Number(1),
+        description:description
     });
 
     const handleExpandClick = () => {
@@ -77,61 +77,18 @@ export default function Product({
     };
 
     const AddToBasket = () => {
-        Dispatch(addToBasket(item));
+        dispatch(addToBasket(item));
     };
 
-<<<<<<< Updated upstream
-  return (
-    <Card className={classes.root}>
-      <CardHeader
-        action={
-          <Typography
-              className={classes.action}
-              variant='h5'
-              color='textSecondary'
-          >
-          </Typography>
-      }
-        title={name}
-        subheader="in stock"
-      />
-      <CardMedia
-        className={classes.media}
-        image={image}
-        title={name}
-      />
-      <CardContent>
-      <Typography variant="body2" color="textSecondary" component="p">
-      {producType}                      
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-      <IconButton aria-label="add to Cart">
-          <AddShoppingCartIcon fontSize='large' onClick={AddToBasket} />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-        </IconButton>
-      </CardActions>
-      {/* {
-        accounting.formatMoney({price},"US")
-      }      */}
-      {`$ ${Intl.NumberFormat('es-ES').format(price)}`}
-    </Card>
-  );
-=======
+
+  
     return (
-        <Link
+       
+            <div className="container-card-product">
+                 <Link
             style={{ textDecoration: "none", color: "black" }}
             to={"/product/" + id}
         >
-            <div className="container-card-product">
                 <img src={Corazon} className="heart" alt="" />
                 <img className="card-image" src={image} alt="" />
                 {price < 45000 ? (
@@ -172,55 +129,10 @@ export default function Product({
                         {name}
                     </p>
                 </div>
-
-                <div className="add-to-cart-product">Agregar al carrito <img style={{height:"20px",marginLeft:"1rem"}} src={Cart}/></div>
+                </Link>
+                <div className="add-to-cart-product" onClick={AddToBasket}>Agregar al carrito <img style={{height:"20px",marginLeft:"1rem"}} src={Cart}/></div>
             </div>
-        </Link>
-
-        // <Card className={classes.root}>
-        //   <CardHeader
-        //     action={
-        //       <Typography
-        //           className={classes.action}
-        //           variant='h5'
-        //           color='textSecondary'
-        //       >
-        //       </Typography>
-        //   }
-        //     title={name}
-        //     subheader="in stock"
-        //   />
-        //   <Link to={"/product/"+id}>
-        //   <CardMedia
-        //     className={classes.media}
-        //     image={image}
-        //     title={name}
-        //   />
-        //   </Link>
-        //   <CardContent>
-        //   <Typography variant="body2" color="textSecondary" component="p">
-        //   {producType}
-        //     </Typography>
-        //   </CardContent>
-        //   <CardActions disableSpacing>
-        //   <IconButton aria-label="add to Cart">
-        //       <AddShoppingCartIcon fontSize='large' onClick={AddToBasket} />
-        //     </IconButton>
-        //     <IconButton
-        //       className={clsx(classes.expand, {
-        //         [classes.expandOpen]: expanded,
-        //       })}
-        //       onClick={handleExpandClick}
-        //       aria-expanded={expanded}
-        //       aria-label="show more"
-        //     >
-        //     </IconButton>
-        //   </CardActions>
-        //   {/* {
-        //     accounting.formatMoney({price},"US")
-        //   }      */}
-        //   {`$ ${Intl.NumberFormat('es-ES').format(price)}`}
-        // </Card>
+        
     );
->>>>>>> Stashed changes
+
 }

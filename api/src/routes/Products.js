@@ -12,7 +12,7 @@ router.get('/products', async (req, res) => {
     if(name && category) {
         products = await Products.findAll({
             where: { name: {[Op.iLike]: `%${name}%`} },
-            includes: { model: Categories, where: {name: category} }
+            include: { model: Categories, where: {name: category} }
         })
     }
 
@@ -23,7 +23,7 @@ router.get('/products', async (req, res) => {
     }
 
     else if(category) {
-        products = await Products.findAll({includes: {
+        products = await Products.findAll({include: {
             model: Categories, where: {name: category}
         }})
     }

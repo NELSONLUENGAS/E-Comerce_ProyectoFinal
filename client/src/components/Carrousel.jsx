@@ -83,7 +83,7 @@ class Slides extends Component {
     });
 
     return (
-        <div style={{marginTop:"130px"}}>
+        <div style={{zIndex:"-1"}}>
       <Carousel
         activeIndex={activeIndex}
         next={this.next}

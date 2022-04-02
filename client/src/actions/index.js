@@ -10,6 +10,24 @@ export function getProducts(){
         })
     }
 }
+export function getCategories(categoryName){
+    return async function (dispatch){
+        const products = await axios.get('http://localhost:3001/categories')
+        return dispatch ({
+            type:"GET_CATEGORIES",
+            payload:products.data
+        })
+    }
+}
+export function getCategoriesByName(categoryName){
+    return async function (dispatch){
+        const products = await axios.get('http://localhost:3001/products?category=' + categoryName)
+        return dispatch ({
+            type:"GET_CATEGORIES_BY_NAME",
+            payload:products.data
+        })
+    }
+}
 
 export function getProductId(id){
     return async function (dispatch){
@@ -29,9 +47,16 @@ export function addToBasket(payload){
     }
 }
 
+
 export function RemoveToBasket(payload){
     return{
         type:"REMOVE_ITEM",
+        payload
+    }
+}
+export function substractQuantityItem (payload){
+    return{
+        type:"SUBSTRACT_QUANTITY",
         payload
     }
 }

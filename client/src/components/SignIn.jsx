@@ -66,9 +66,9 @@ export default function SignIn() {
   const classes = useStyles();
   const {isAuthenticated} = useAuth0();
 
-  return (
-    <Grid container component="main" className={classes.root}>
+  return (<>
       <NavBarGuest/>
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -144,5 +144,6 @@ export default function SignIn() {
         </div>
       </Grid>
     </Grid>
+    </>
   );
 }

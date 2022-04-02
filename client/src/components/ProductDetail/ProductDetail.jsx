@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductId} from "../../actions/index"
 import NavBarGuest from "../Guest/NavBarGuest";
 import "./ProductDetail.css"
 import Combi from '../../svg/delivery-svgrepo-com.svg'
+import { addToBasket } from "../../actions/index"
 
 export default function ProductDetail(){
     const prueba=[1,2,3,4,5,6,7]
@@ -12,6 +13,14 @@ export default function ProductDetail(){
     const dispatch = useDispatch();
     const {id} = useParams();
     const productDetail = useSelector((state) => state.productId);
+    const [item,setItem] = useState({
+        id: productDetail.id,
+        name: productDetail.name,
+        image: productDetail.image,
+        price: productDetail.price,
+        quantity:Number(1),
+        description:productDetail.description
+    });
     useEffect(() => {
         dispatch(getProductId(id));
         // return () => dispatch(cleanGetIdProduct())
@@ -23,8 +32,23 @@ export default function ProductDetail(){
             const star = document.getElementById(`${productDetail.name}${i}`);
             star.style.color = "orange";
         }
-    })
+        setItem({
+            id: productDetail.id,
+            name: productDetail.name,
+            image: productDetail.image,
+            price: productDetail.price,
+            quantity:Number(1),
+            description:productDetail.description
+        })
+        
+    },[productDetail])
+    
+    console.log("esto es el detail")
+    console.log(item);
 
+    const AddToBasket = () => {
+        dispatch(addToBasket(item));
+    };
 
     return(<>
         <NavBarGuest/>
@@ -79,7 +103,7 @@ export default function ProductDetail(){
                         
                         <div className="button-buy-product-detail">
                             <button className="button-primary-product-detail">Comprar ahora</button>
-                            <button className="button-secondary-product-detail">Agregar al carrito</button>
+                            <button onClick={AddToBasket} className="button-secondary-product-detail">Agregar al carrito</button>
                         </div>
                         <svg className="ui-pdp-icon ui-pdp-icon--protected ui-pdp-color--GRAY" xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15"><use href="#protected_buy"></use></svg><p style={{fontSize:"12px",textAlign:"left"}}>Compra Protegida, recibí el producto que esperabas o te devolvemos tu dinero.</p>
                         <p style={{fontSize:"12px",textAlign:"left"}}>Suma Puntos!Con esta compra sumás 107 puntos.</p>

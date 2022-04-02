@@ -13,7 +13,7 @@
         padding-left: 1rem;
         justify-content: left;
         align-items: center;
-        background-color: #a8dadc;
+        background-color: #023047
     }
     /* Element #2 */
     .cusElement2{
@@ -21,7 +21,7 @@
         display: flex;
         justify-content: left;
         align-items: center;
-        background-color: #a8dadc;
+        background-color: #023047
     }
     .cusElement2 input{
         margin-top: 1rem;
@@ -44,7 +44,7 @@
         justify-content: center;
         align-items: center;
         padding-right: 1rem;
-        background-color: #a8dadc;
+        background-color: #023047
     }
     .cusElement3 button{
         display: flex;
@@ -64,7 +64,7 @@
         0px 1px 3px 0px rgb(0 0 0 / 12%);
     }
     .cusElement3 button:hover{
-        background-color: #8eecf5;
+        background-color: #023047
     }
     .cusElement3 div {
         position: relative;
@@ -101,7 +101,7 @@
         display: flex;
         justify-content: left;
         align-items: flex-end;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     .cusElement4 label{
         border-style: none;
@@ -192,7 +192,7 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-auto-rows: auto;
-        position: absolute;
+        color:white;
         top:0;
         left:0;
         width: calc(100% );
@@ -202,10 +202,10 @@
     .cusElement1{
         grid-column: 1 / 3;
         display: flex;
-        padding-left: 2rem;
+        padding-left: 2rem; 
         justify-content: left;
         align-items: center;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     
     .cusElement2{
@@ -215,7 +215,7 @@
         align-items: flex-end;
         justify-content: left;
         align-items: flex-end;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     .cusElement2 input{
         border-radius: 0.2rem;
@@ -232,7 +232,7 @@
     .cusElement3{
         grid-column: 9 / 13;
         grid-row: 1 / 2;
-        background-color: #a8dadc;
+        background-color: #023047
     }
     .cusElement3 button{
         display: none;
@@ -246,7 +246,7 @@
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     .cusElement4 label{
         background-color: #023047;
@@ -280,25 +280,26 @@
         display: flex;
         justify-content: left;
         align-items: flex-end;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     .cusElement5{
         cursor: pointer;
     }
     .cusElement6{
+        z-index: 1;
         grid-column: 4 / 8;
         display: flex;
         justify-content: left;
         align-items: flex-end;
         gap: 10%;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     .cusElement7{
+        z-index: 1;
         grid-column: 11 / 13;
         display: flex;
-        justify-content: left;
-        align-items: flex-end;
-        background-color: #a8dadc;
+        justify-content: center;
+        background-color: #023047;
     }
     .cusElement7 label{
         cursor: pointer;
@@ -318,7 +319,7 @@
         justify-content: left;
         align-items: flex-end;
         gap: 10%;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     .cusElement8 span{
         cursor: pointer;
@@ -328,7 +329,7 @@
     }
     .cusElement8 span:hover{
         transform: scale(0.95);
-        background-color:#6fcbce ;
+        background-color: #023047;
         box-shadow: 
         0px 2px 1px -1px rgb(0 0 0 / 20%), 
         0px 1px 1px 0px rgb(0 0 0 / 14%), 
@@ -343,7 +344,7 @@
         align-items: flex-end;
         position: relative;
         padding-top: 0.2rem;
-        background-color: #a8dadc;
+        background-color: #023047;
     }
     
     .cusElement9  label{
@@ -357,13 +358,17 @@
         font-size: 2.5rem;
     }
     .cusElement9 span{
+        align-items: center;
+        height: 20px;
+        width: 20px;
         cursor: pointer;
+        color:black;
+        position: absolute;
         background-color: #fff;
         display: flex;
         justify-content: center;
         align-items: flex-end;
         padding: 0.12rem;
-        position: absolute;
         border-radius: 50%;
         font-size: 0.8rem;
         left: 1.5rem;
@@ -379,7 +384,7 @@
     .cusElement0{
         grid-column: 1 / 10;
         display: grid;
-        position: fixed;
+        z-index: 1;
         top: 6.2rem;
         left: 12%;
         grid-template-columns: repeat(12, 1fr);
@@ -390,7 +395,9 @@
         grid-column: 1 / 4;
         grid-row: 1 / 3;
         padding: 1rem;
-        background-color: goldenrod;
+        z-index: 1;
+        background-color: rgb(255, 255, 255);
+        color:black;
         border-style: none;
         box-shadow: 
         0px 2px 1px -1px rgb(0 0 0 / 20%), 
@@ -437,18 +444,18 @@
         0px 2px 1px -1px rgb(0 0 0 / 20%), 
         0px 1px 1px 0px rgb(0 0 0 / 14%), 
         0px 1px 3px 0px rgb(0 0 0 / 12%);
-        background-color: #023047;
+        background-color: #fff;
+        
     }
     .subcategories option{
         cursor: pointer;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
-        color: #fff;
+        color:black;
         margin-bottom: 0.8rem;
     }
     .subcategories option:hover{
         transform: scale(0.95);
-        background-color: #074868;
         box-shadow: 
         0px 2px 0px 0px rgb(0 0 0 / 20%), 
         0px 1px 0px 0px rgb(0 0 0 / 14%), 
@@ -462,18 +469,20 @@
         grid-template-rows: repeat(2, 1fr);
     }
     .cusElement01{
+        z-index: 1;
         grid-column: 11 / 13;
         position: fixed;
-        right: 2.5%;
-        top: 6rem;
+        right: 3.5%;
+        top: 10rem;
     }
     .guest{
+        background-color:#fff;
+        z-index: 1;
         border-radius: 0.3rem;
         padding-top: 0.8rem;
         padding-left: 1rem;
         padding-right: 1rem;
         padding-bottom: 0.5rem;
-        background-color: goldenrod;
         border-style: none;
         box-shadow: 
         0px 2px 1px -1px rgb(0 0 0 / 20%), 
@@ -481,6 +490,7 @@
         0px 1px 3px 0px rgb(0 0 0 / 12%);
     }
     .guest option {
+        z-index: 1;
         padding: 0.2rem;
         margin-bottom: 0.2rem;
         cursor: pointer;
@@ -498,7 +508,7 @@
     }
     .cusElement02{
         grid-column: 1 / 13;
-        background-color: #e63946;
+        background-color: #ffffff;
         min-height: 0.3rem;
     }
     .cusElement03{
@@ -507,6 +517,7 @@
         min-height: 10rem;
     }
     .modalLocation{
+        z-index: 1;
         width: 100vw;
         height: 100vh;
         position: fixed;
