@@ -11,17 +11,17 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
+//import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "../actions";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Rating } from "@mui/material";
-import { Link } from "react-router-dom";
-import Corazon from "../svg/heart-svgrepo-com.svg";
-import Cart from '../svg/shopping-cart.svg'
+//import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+//import { Rating } from "@mui/material";
+//import { Link } from "react-router-dom";
+//import Corazon from "../svg/heart-svgrepo-com.svg";
+//import Cart from '../svg/shopping-cart.svg'
 import "./Product.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +80,7 @@ export default function Product({
         Dispatch(addToBasket(item));
     };
 
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -124,58 +124,62 @@ export default function Product({
       }      */}
       {`$ ${Intl.NumberFormat('es-ES').format(price)}`}
     </Card>
-  );
-=======
-    return (
-        <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to={"/product/" + id}
-        >
-            <div className="container-card-product">
-                <img src={Corazon} className="heart" alt="" />
-                <img className="card-image" src={image} alt="" />
-                {price < 45000 ? (
-                    <button className="button-offer-product">
-                        OFERTA DEL DIA
-                    </button>
-                ) : null}
-                {stock < 13 ? (
-                    <button className="button-best-seller-product">
-                        MAS VENDIDO
-                    </button>
-                ) : null}
-                <div style={{ marginLeft: "1rem" }}>
-                    <p style={{ fontSize: "30px", marginTop: "1rem" }}>
-                        $ {Intl.NumberFormat("es-ES").format(price)}
-                    </p>
-                    <p
-                        style={{
-                            color: "green",
-                            fontSize: "12px",
-                            marginTop: "-1.5rem",
-                        }}
-                    >
-                        Hasta 12 cuotas sin interes
-                    </p>
-                    {name.length < 45 ? (
-                        <button className="button-fast-delivery-product">
-                            Llega gratis hoy{" "}
-                        </button>
-                    ) : (
-                        <p style={{ color: "green", fontSize: "14px" }}>
-                            Envio gratis
-                        </p>
-                    )}
-                </div>
-                <div style={{ marginLeft: "1rem" }}>
-                    <p style={{ fontSize: "15px", marginTop: "1rem" }}>
-                        {name}
-                    </p>
-                </div>
+  );}
 
-                <div className="add-to-cart-product">Agregar al carrito <img style={{height:"20px",marginLeft:"1rem"}} src={Cart}/></div>
-            </div>
-        </Link>
+
+
+
+//=======
+    // return (
+    //     <Link
+    //         style={{ textDecoration: "none", color: "black" }}
+    //         to={"/product/" + id}
+    //     >
+    //         <div className="container-card-product">
+    //             <img src={Corazon} className="heart" alt="" />
+    //             <img className="card-image" src={image} alt="" />
+    //             {price < 45000 ? (
+    //                 <button className="button-offer-product">
+    //                     OFERTA DEL DIA
+    //                 </button>
+    //             ) : null}
+    //             {stock < 13 ? (
+    //                 <button className="button-best-seller-product">
+    //                     MAS VENDIDO
+    //                 </button>
+    //             ) : null}
+    //             <div style={{ marginLeft: "1rem" }}>
+    //                 <p style={{ fontSize: "30px", marginTop: "1rem" }}>
+    //                     $ {Intl.NumberFormat("es-ES").format(price)}
+    //                 </p>
+    //                 <p
+    //                     style={{
+    //                         color: "green",
+    //                         fontSize: "12px",
+    //                         marginTop: "-1.5rem",
+    //                     }}
+    //                 >
+    //                     Hasta 12 cuotas sin interes
+    //                 </p>
+    //                 {name.length < 45 ? (
+    //                     <button className="button-fast-delivery-product">
+    //                         Llega gratis hoy{" "}
+    //                     </button>
+    //                 ) : (
+    //                     <p style={{ color: "green", fontSize: "14px" }}>
+    //                         Envio gratis
+    //                     </p>
+    //                 )}
+    //             </div>
+    //             <div style={{ marginLeft: "1rem" }}>
+    //                 <p style={{ fontSize: "15px", marginTop: "1rem" }}>
+    //                     {name}
+    //                 </p>
+    //             </div>
+
+    //             <div className="add-to-cart-product">Agregar al carrito <img style={{height:"20px",marginLeft:"1rem"}} src={Cart}/></div>
+    //         </div>
+    //     </Link>
 
         // <Card className={classes.root}>
         //   <CardHeader
@@ -221,6 +225,5 @@ export default function Product({
         //   }      */}
         //   {`$ ${Intl.NumberFormat('es-ES').format(price)}`}
         // </Card>
-    );
->>>>>>> Stashed changes
-}
+    
+//>>>>>>> Stashed changes
