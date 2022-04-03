@@ -31,7 +31,34 @@ export function SumItem(payload){
         payload
     }
 }
+export function getCategories(categoryName){
+    return async function (dispatch){
+        const products = await axios.get('http://localhost:3001/categories')
+        return dispatch ({
+            type:"GET_CATEGORIES",
+            payload:products.data
+        })
+    }
+}
+export function getCategoriesByName(categoryName){
+    return async function (dispatch){
+        const products = await axios.get('http://localhost:3001/products?category=' + categoryName)
+        return dispatch ({
+            type:"GET_CATEGORIES_BY_NAME",
+            payload:products.data
+        })
+    }
+}
 
+export function getProductId(id){
+    return async function (dispatch){
+        const products = await axios.get('http://localhost:3001/products/'+id);
+        return dispatch ({
+            type:"GET_ID_PRODUCTS",
+            payload:products.data
+        })
+    }
+}
 export function postProductos(payload) {
     return async function (dispatch) {
         const json = await axios.post('http://localhost:3001/createProduct', payload);
@@ -53,4 +80,11 @@ export function postProductos(payload) {
         })
     }
   }
-  
+
+export function substractQuantityItem (payload){
+    return{
+        type:"SUBSTRACT_QUANTITY",
+        payload
+    }
+}
+
