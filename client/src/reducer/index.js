@@ -5,7 +5,8 @@ const initialState = {
     ItemsAmount: 0,
     SumPrice: [0],
     productId: [],
-    categories: []
+    categories: [],
+    User:[]
 }
 // //==== Setear Reducers ======//
 function rootReducer(state = initialState, action) {
@@ -77,7 +78,10 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 SumPrice: sumatotal
+
+
             }
+
         case 'GET_PRODUCTS':
             return {
                 ...state,
@@ -107,7 +111,11 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state
             }
-
+        case 'GET_USER_SIGNING_IN':
+            return{
+                ...state,
+                User:action.payload
+            }
         default:
             return state
 

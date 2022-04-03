@@ -17,6 +17,12 @@ import  { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "./LoginButton";
 import { LogoutButton } from "./LogoutButton";
 import { Profile } from "./Profile";
+import { useDispatch } from 'react-redux';
+import {getUserSigningIn} from '../actions/index'
+import {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { useEffect } from 'react';
 
 function Copyright() {
   return (
@@ -63,8 +69,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const Navigate = useNavigate()
+  const dispatch = useDispatch()
   const classes = useStyles();
   const {isAuthenticated} = useAuth0();
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const user = useSelector((state) => state.User);
+
+  useEffect(()=>{
+    if (user.name){
+      Navigate("/")
+    }
+  },[user])
+
+  function handleEmail(e){
+    e.preventDefault()
+    setEmail(e.target.value)
+  }
+  
+  function handlePassword(e){
+    e.preventDefault()
+    setPassword(e.target.value)
+  }
+  function handleSignIn(e){
+    e.preventDefault();
+    dispatch(getUserSigningIn({
+      email:email,
+      password:password
+    }))
+}
 
   return (<>
       <NavBarGuest/>
@@ -90,6 +124,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleEmail}
             />
             <TextField
               variant="outlined"
@@ -101,6 +136,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handlePassword}
+              
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -112,6 +149,7 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={(e) => handleSignIn(e)}
             >
               Sign In
             </Button>

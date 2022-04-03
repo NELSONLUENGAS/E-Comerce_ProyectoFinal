@@ -10,27 +10,6 @@ export function getProducts(){
         })
     }
 }
-
-export function addToBasket(payload){
-    return{
-        type:"ADD_TO_BASKET",
-        payload
-    }
-}
-
-export function RemoveToBasket(payload){
-    return{
-        type:"REMOVE_ITEM",
-        payload
-    }
-}
-
-export function SumItem(payload){
-    return{
-        type:"SUM_ITEM",
-        payload
-    }
-}
 export function getCategories(categoryName){
     return async function (dispatch){
         const products = await axios.get('http://localhost:3001/categories')
@@ -59,6 +38,35 @@ export function getProductId(id){
         })
     }
 }
+
+
+export function addToBasket(payload){
+    return{
+        type:"ADD_TO_BASKET",
+        payload
+    }
+}
+
+
+export function RemoveToBasket(payload){
+    return{
+        type:"REMOVE_ITEM",
+        payload
+    }
+}
+export function substractQuantityItem (payload){
+    return{
+        type:"SUBSTRACT_QUANTITY",
+        payload
+    }
+}
+
+export function SumItem(payload){
+    return{
+        type:"SUM_ITEM",
+        payload
+    }
+}
 export function postProductos(payload) {
     return async function (dispatch) {
         const json = await axios.post('http://localhost:3001/createProduct', payload);
@@ -71,6 +79,7 @@ export function postProductos(payload) {
   }
 
   export function postCrearUsuario(payload) {
+      console.log(payload)
     return async function (dispatch) {
         const json = await axios.post('http://localhost:3001/createUser', payload);
         return dispatch({
@@ -79,12 +88,16 @@ export function postProductos(payload) {
   
         })
     }
-  }
-
-export function substractQuantityItem (payload){
-    return{
-        type:"SUBSTRACT_QUANTITY",
-        payload
-    }
 }
 
+export function getUserSigningIn(payload){
+    return async function (dispatch){
+        const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`);
+        console.log(json.data)
+        return dispatch ({
+            type:"GET_USER_SIGNING_IN",
+            payload:json.data
+        })
+    }
+
+}

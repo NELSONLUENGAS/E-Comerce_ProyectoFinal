@@ -6,6 +6,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { postCrearUsuario } from '../../actions';
 import { useDispatch } from 'react-redux';
 import Input from './InputForm'
+import NavBarGuest from '../Guest/NavBarGuest'
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -127,6 +128,7 @@ const RegistroForm= () => {
 
 	return ( <>
 		
+			<NavBarGuest/>
 		<main className={classes.main}>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input

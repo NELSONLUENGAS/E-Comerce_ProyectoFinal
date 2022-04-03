@@ -120,10 +120,9 @@ export default function NavBarGuest() {
             category: false,
         });
     }
-    console.log(carrito)
-    useEffect(() => {
-      
-    })
+    const user = useSelector((state) => state.User);
+    // useEffect(() => {
+    // },user)
 
     return (
         <>
@@ -172,7 +171,7 @@ export default function NavBarGuest() {
                 </div>
                 <div onMouseOver={modalDown} className="cusElement6"></div>
                 <div className="cusElement7">
-                    <Link to="/SignIn" style={{color:"white",textDecoration:"none"}}>Ingresa</Link>
+                    {user.name ? <div>{user.name}</div> : <Link to="/SignIn" style={{color:"white",textDecoration:"none"}}>Ingresa</Link> }
                     <label onMouseOver={profile}>
                         <AccountCircleIcon />
                     </label>
