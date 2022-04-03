@@ -7,7 +7,7 @@ import {Route, Routes } from 'react-router';
 import {BrowserRouter as Router} from 'react-router-dom'
 import SignIn from './components/SignIn';
 import RegistroForm from './components/Registro/Registro';
-
+import Categorias from './components/CrearNuevaCategorie/Categorias'
 import Categories from './components/Categories';
 import ProductDetail from "./components/ProductDetail/ProductDetail"
 import CrearProducto from './components/Agregar producto/CrearProducto';
@@ -26,6 +26,7 @@ function App() {
           <Route exact path="/checkout-card" element={<CheckoutCard/>}/>
           <Route exact path="/Categories" element={<Categories/>}/>
           <Route exact path="/product/:id" element={<ProductDetail/>}></Route>
+          <Route exact path="/categoriess" element={<Categorias/>}></Route>
         </Routes>
     </div>
     </Router>

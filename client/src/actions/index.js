@@ -101,3 +101,24 @@ export function getUserSigningIn(payload){
     }
 
 }
+
+export function postCrearCategoria(payload) {
+    return async function (dispatch) {
+        const json = await axios.post('http://localhost:3001/createCategory', payload);
+        return dispatch({
+            type: "POST_CATEGORIA",
+            payload: json.data
+  
+        })
+    }
+  }
+  export function DeleteCategoria(id) {
+    return async function (dispatch) {
+        const json = await axios.post('http://localhost:3001/categories/', id);
+        return dispatch({
+            type: "DELETE_CATEGORIA",
+            payload: json.data
+  
+        })
+    }
+  }
