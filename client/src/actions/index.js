@@ -76,6 +76,49 @@ export function SumItem(payload){
         payload
     }
 }
+
+export function filterToday(payload){
+    return{
+        type:"FILTER_TODAY",
+        payload
+    }
+}
+export function filterFreeShipping(payload){
+    return{
+        type:"FILTER_FREE_SHIPPING",
+        payload
+    }
+}
+export function filterMoreSeller(payload){
+    return{
+        type:"FILTER_MORE_SELLER",
+        payload
+    }
+}
+export function orderByPrice(payload){
+    return{
+        type:"ORDER_BY_PRICE",
+        payload
+    }
+}
+export function filterByPrice(payload){
+    return{
+        type:"FILTER_BY_PRICE",
+        payload
+    }
+}
+export function filterByCategory(payload){
+    return{
+        type:"FILTER_BY_CATEGORY",
+        payload
+    }
+}
+
+
+
+
+
+
 export function postProductos(payload) {
     return async function (dispatch) {
         const json = await axios.post('http://localhost:3001/createProduct', payload);

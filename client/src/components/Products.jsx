@@ -15,10 +15,11 @@ import { useSearchParams } from "react-router-dom";
 import {
     getProducts,
     getCategories,
-    getCategoriesByName,
+    getCategoriesByName,filterByCategory,filterFreeShipping,filterByPrice,filterMoreSeller,filterToday,orderByPrice
 } from "../actions/index";
 import Carrousel from "./Carrousel";
 import { useDispatch, useSelector } from "react-redux";
+import './Products.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,7 +39,7 @@ export default function Products() {
         payment_type: params.get("payment_type"),
         external_reference: params.get("external_reference"),
     }
-    console.log(queryParams);
+    // console.log(queryParams);
     /*------------------------------------ */
     /*------------------------------------ */
 
@@ -46,7 +47,6 @@ export default function Products() {
         dispatch(getProducts());
         dispatch(getCategories());
     }, [dispatch]);
-    const [categoryFilter, setCategoryFilter] = useState("Todas");
     const productos = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
     const [currentPage, setCurrentPage] = useState(1);
@@ -62,29 +62,45 @@ export default function Products() {
         setCurrentPage(pageNumber);
     }
 
+    
+
+    const [categoryFilter, setCategoryFilter] = useState("Todas");
+    const [checkFreeShipping,setCheckFreeShipping]=useState(false)
+    const [checkToday,setCheckToday]=useState(false)
+    const [checkMoreSeller,setCheckMoreSeller]=useState(false)
+    const [sortOf,SetsortOf]=useState('Relevant')
+
+
+    
+    function handleCategories(e) {
+        e.preventDefault();    
+        dispatch(filterByCategory(e.target.value))
+        dispatch(getProducts());
+    }
+    function handleToday(){
+        setCheckToday(!checkToday);
+        dispatch(filterToday(!checkToday))
+    } 
+    function handleMoreSeller(){
+        setCheckMoreSeller(!checkMoreSeller);
+        dispatch(filterMoreSeller(!checkMoreSeller))
+    }
+    function handleFreeShipping(){
+        setCheckFreeShipping(!checkFreeShipping);
+        dispatch(filterFreeShipping(!checkFreeShipping))
+    }
+    function handleOrder(e){
+        SetsortOf(e.target.value)
+        dispatch(orderByPrice(e.target.value))
+        setCurrentPage(1)
+    }
     useEffect(() => {
         setCurrentProducts(
             productos?.slice(indexOfFirstProduct, indexOfLastProduct)
         );
-        console.log(categories);
-    }, [productos, currentPage]);
+        // console.log(categories);
+    }, [productos, currentPage,categoryFilter,checkFreeShipping,checkToday,checkMoreSeller,sortOf]);
     const classes = useStyles();
-
-    function handleCategories(e) {
-        if(e.target.value ==='Todas'){
-            console.log("entre aca")
-            e.preventDefault();    
-            setCategoryFilter(e.target.value);
-            setCurrentPage(1);
-            dispatch(getProducts());
-        } else{
-        e.preventDefault();
-        setCategoryFilter(e.target.value);
-        setCurrentPage(1);
-        dispatch(getCategoriesByName(e.target.value));
-        console.log(e.target.value);
-    }
-    }
     return (
         <div style={{ backgroundColor: "#EBEBEB" }}>
             <NavBarGuest/>
@@ -130,10 +146,19 @@ export default function Products() {
                             borderRadius: "0.3em",
                             marginTop: "1em",
                             padding: "1em",
-                            textAlign:"left"
+                            textAlign:"left",
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"space-between"
+
                         }}
                     >
+
                     <p style={{marginBottom:"0"}}>Llegan hoy</p>
+                    <label className="switch">
+                        <input checked={checkToday} onChange={handleToday} type="checkbox"/>
+                        <span class="slider round"></span>
+                    </label>
                     </div>
                     <div
                         style={{
@@ -142,9 +167,16 @@ export default function Products() {
                             marginTop: "1em",
                             padding: "1em",
                             textAlign:"left",
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"space-between"
                         }}
                     >
                     <p style={{marginBottom:"0"}}>Mas vendidos</p>
+                    <label className="switch">
+                        <input checked={checkMoreSeller} onChange={handleMoreSeller} type="checkbox"/>
+                        <span class="slider round"></span>
+                    </label>
                     </div>
                     <div
                         style={{
@@ -152,10 +184,17 @@ export default function Products() {
                             borderRadius: "0.3em",
                             marginTop: "1em",
                             padding: "1em",
-                            textAlign:"left",                      
+                            textAlign:"left",
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"space-between"                     
                         }}
                     >
                     <p style={{marginBottom:"0"}}>Envio Gratis</p>
+                    <label className="switch">
+                        <input checked={checkFreeShipping} onChange={handleFreeShipping} type="checkbox"/>
+                        <span class="slider round"></span>
+                    </label>
                     </div>
                     <div
                         style={{
@@ -227,6 +266,8 @@ export default function Products() {
                         <select
                             name=""
                             id=""
+                            value={sortOf}
+                            onChange={(e) => handleOrder(e)}
                             style={{
                                 border: "transparent",
                                 marginLeft: "1rem",
@@ -234,9 +275,9 @@ export default function Products() {
                                 height: "25px",
                             }}
                         >
-                            <option> Mas relevantes</option>
-                            <option> Menor precio</option>
-                            <option> Mayor precio</option>
+                            <option value="Relevant"> Mas relevantes</option>
+                            <option value="asc"> Menor precio</option>
+                            <option value="desc"> Mayor precio</option>
                         </select>
                     </div>
                    { productos[0]? (
