@@ -6,6 +6,7 @@ const initialState = {
     SumPrice: [0],
     productId: [],
     categories: [],
+    mercadoPago: {},
     User:[]
 }
 // //==== Setear Reducers ======//
@@ -102,6 +103,11 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 products: action.payload
+            }
+        case 'GET_MERCADOPAGO':
+            return {
+                ...state,
+                mercadoPago: action.payload
             }
         case 'POST_USERS':
             return {

@@ -11,6 +11,7 @@ import Product from "./Product";
 import { useState } from "react";
 import Paginado from "../components/Paginado";
 import NavBarGuest from "./Guest/NavBarGuest";
+import { useSearchParams } from "react-router-dom";
 import {
     getProducts,
     getCategories,
@@ -28,6 +29,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Products() {
     const dispatch = useDispatch();
+    /*------------------------------------ */
+    /*------Datos de la compra------------ */
+    const [params] = useSearchParams();
+    const queryParams = {
+        payment_id: params.get("payment_id"),
+        status: params.get("status"),
+        payment_type: params.get("payment_type"),
+        external_reference: params.get("external_reference"),
+    }
+    console.log(queryParams);
+    /*------------------------------------ */
+    /*------------------------------------ */
 
     useEffect(() => {
         dispatch(getProducts());

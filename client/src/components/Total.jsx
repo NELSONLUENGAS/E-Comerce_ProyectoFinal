@@ -23,7 +23,7 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
-const Total = () => {
+const Total = ({onPay}) => {
     const classes = useStyle();
     const dispatch = useDispatch();
     const navigate = useNavigate(); 
@@ -38,7 +38,7 @@ const Total = () => {
       <div className={classes.root} > 
         <h5>Total item: {TotalItem}</h5>
         <h5>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h5>
-        <Link to="/checkout"><button style={{color:'white',backgroundColor:"#3483fa",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Continuar compra</button></Link>
+        <button onClick={(e) => onPay(e)} style={{color:'white',backgroundColor:"#3483fa",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Continuar compra</button>
 
      </div>
   )
