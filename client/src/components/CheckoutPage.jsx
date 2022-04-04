@@ -10,12 +10,34 @@ import { Grid } from "@material-ui/core";
 import CheckoutCard from "./CheckoutCard.jsx";
 import { useSelector } from "react-redux";
 import Total from "./Total";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import NavBarGuest from "./Guest/NavBarGuest.jsx";
+import { getMercadoPago } from "../actions/index.js";
 import "./CheckoutPage.css"
 
 export default function CheckoutPage() {
     const cartProducts = useSelector((state) => state.basket);
-    console.log(cartProducts);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    //console.log(cartProducts);
+
+    const products =  [
+        {"title": "nombre",
+        "unit_price": 2000,
+        "quantity": 2},
+        {"title": "nombre",
+        "unit_price": 2000,
+        "quantity": 2},
+        {"title": "nombre",
+        "unit_price": 2000,
+        "quantity": 2}
+        ]
+    function onPay(e){
+        e.preventDefault();
+        dispatch(getMercadoPago(products))
+        navigate('/Checkout/Payment')
+    }
 
     return (
         <>
@@ -37,7 +59,7 @@ export default function CheckoutPage() {
                         />
                     ))}
 
-                    <Total />
+                    <Total onPay={onPay}/>
                 </div>
                 ):<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>}                
                 

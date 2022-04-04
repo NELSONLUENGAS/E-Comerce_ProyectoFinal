@@ -12,6 +12,7 @@ import Categories from './components/Categories';
 import ProductDetail from "./components/ProductDetail/ProductDetail"
 import CrearProducto from './components/Agregar producto/CrearProducto';
 import Profile from './components/Profile'
+import Checkout from './components/Checkout';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/SignIn" element={<SignIn/>}/>
           <Route exact path="/SignUp" element={<RegistroForm/>}/>
           <Route exact path="/checkout-card" element={<CheckoutCard/>}/>
+          <Route exact path="/Checkout/Payment" element={<Checkout/>} />
           <Route exact path="/Categories" element={<Categories/>}/>
           <Route exact path="/product/:id" element={<ProductDetail/>}></Route>
           <Route exact path="/createCategory" element={<AddCategorie/>}></Route>
