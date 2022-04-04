@@ -128,7 +128,6 @@ function rootReducer(state = initialState, action) {
         case "DELETE_CATEGORIA":
                 return {
                     ...state,
-                    categories: action.payload
                 }
         case "SEARCH_PRODUCT":
             return{

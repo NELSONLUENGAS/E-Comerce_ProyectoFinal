@@ -118,8 +118,10 @@ export function postCrearCategoria(payload) {
     }
   }
   export function DeleteCategoria(id) {
+    console.log('este es el id'); 
+    console.log(id);
     return async function (dispatch) {
-        const json = await axios.post('http://localhost:3001/categories/', id);
+        const json = await axios.delete('http://localhost:3001/categories/'+id);
         return dispatch({
             type: "DELETE_CATEGORIA",
             payload: json.data

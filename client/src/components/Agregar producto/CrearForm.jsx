@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { 
 	    Formulario, 
 		Label, 
@@ -15,8 +15,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { postProductos } from '../../actions';
 import Input from './InputCrear'
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import NavBarGuest from '../Guest/NavBarGuest';
+import { getCategories } from '../../actions';
+
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -44,6 +46,14 @@ const CrearForm = () => {
 	const {campo} = description
 	const [terminos, cambiarTerminos] = useState(false);
 	const [formularioValido, cambiarFormularioValido] = useState(null);
+	const [category,setCategory] = useState('')
+	const categories= useSelector((state) => state.categories)
+
+
+    useEffect(() => {
+        dispatch(getCategories());
+    }, [dispatch]);
+
 	
 	const expresiones = {
 		Producto: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -103,7 +113,8 @@ const CrearForm = () => {
 				price: price.campo,
 				stock: stock.campo,
 				image:image.campo,
-				description: description.campo
+				description: description.campo,
+				categoryName:category
 			}
 			cambiarFormularioValido(true);
 			dispatch(postProductos(input))
@@ -118,10 +129,14 @@ const CrearForm = () => {
 			cambiarFormularioValido(false);
 		}
 	}
+	function handleSelectCategory(e){
+		setCategory(e.target.value)
+	}
 
 	return (<>
 		<NavBarGuest/>
-		<main className={classes.main}>
+		<main className={classes.main} style={{backgroundColor:"#C4C7BB", borderRadius:"2%",marginTop:"2rem"}}>
+			<h1>Crear Producto</h1>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input
 					estado={name}
@@ -164,6 +179,21 @@ const CrearForm = () => {
 					valido={description.valido}
 				// funcion={validarPassword2}
 				/>
+				<div style={{display:"flex",flexDirection:"column",margin:"auto"}}>
+					<h5>Categoria</h5>
+					<select onChange={(e) => handleSelectCategory(e)}>
+					{categories?.map((item, i) => {
+									return (
+										<option
+											value={item.nombre}
+											key={item.nombre}
+										>
+											{item.name}
+										</option>
+									);
+								})}
+					</select>
+				</div>
 				<ContenedorBotonCentrado>
 					<Label>Descripcion</Label>
 					<TextArea

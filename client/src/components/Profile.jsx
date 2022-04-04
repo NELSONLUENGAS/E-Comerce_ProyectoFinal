@@ -66,7 +66,8 @@ export default function Profile() {
                                     }}
                                 />
                             </div>
-                            </Link>
+                            </Link >
+                            <Link style={{color:"black", textDecoration:"none"}} to="/createCategory">
                             <div className="container-options-profile">
                                 <div className="container-img-profile">
                                     <img
@@ -92,8 +93,9 @@ export default function Profile() {
                                     }}
                                 ></img>
                             </div>
+                            </Link>
                         </>
-                    ) : null}
+                         ) : null}
                 </div>
 
                 <div className="container-div-data-profile">
