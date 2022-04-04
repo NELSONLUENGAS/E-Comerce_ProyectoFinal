@@ -99,7 +99,7 @@ export default function Products() {
                         <p>Categorias</p>
                         <select onChange={(e) => handleCategories(e)}>
                             <option value="Todas">Todas</option>
-                            {categories.map((item, i) => {
+                            {categories?.map((item, i) => {
                                 return (
                                     <option
                                         value={item.nombre}
@@ -226,7 +226,8 @@ export default function Products() {
                             <option> Mayor precio</option>
                         </select>
                     </div>
-                    {currentProducts.map((product) => (
+                   { productos[0]? (
+                       currentProducts?.map((product) => (
                         <Product
                             name={product.name}
                             image={product.image}
@@ -237,7 +238,7 @@ export default function Products() {
                             id={product.id}
                             stock={product.stock}
                         />
-                    ))}
+                    ))):<div>No se han encontrado productos relacionados a la busqueda</div>}
                 </div>
             </div>
             <Paginado

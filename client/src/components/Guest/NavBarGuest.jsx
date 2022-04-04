@@ -11,13 +11,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import {logOut} from '../../actions/index'
 import Logo from '../../svg/latcom1.png'
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import SearchBar from './SearchBar'
 import { products } from "./Products";
 
 export default function NavBarGuest() {
-
+    const dispatch= useDispatch()
     const carrito = useSelector(state=>state.ItemsAmount)
 
     //////////////__States__///////////////////
@@ -120,9 +121,17 @@ export default function NavBarGuest() {
             category: false,
         });
     }
+    function handleLogout(){
+        alert("Has cerrado sesion correctamente")
+        dispatch(logOut())
+    }
     const user = useSelector((state) => state.User);
     // useEffect(() => {
     // },user)
+    function capitalLetter(){
+        let capitalLetter = user.name;
+        return capitalLetter = capitalLetter[0].toUpperCase();
+    }
 
     return (
         <>
@@ -136,8 +145,8 @@ export default function NavBarGuest() {
                     <img src={Logo} style={{width:"200px"}} alt="Icono empresa" />
                     </Link>
                 </div>
-                <div onMouseOver={modalDown} className="cusElement2">
-                    <input type="search" placeholder="Buscar..." />
+                <div  className="cusElement2">
+                    <SearchBar/>
                 </div>
                 <div onMouseOver={modalDown} className="cusElement3">
                     <button onClick={mobileOpen}>
@@ -159,7 +168,7 @@ export default function NavBarGuest() {
                             <LocationOnIcon />
                         </label>
                     </Link>
-                    <div>
+                    <div> 
                         <span>Enviar a</span>
                         <span>Ciudad</span>
                     </div>
@@ -173,7 +182,19 @@ export default function NavBarGuest() {
                 <div className="cusElement7">
                     {user.name ? <div>{user.name}</div> : <Link to="/SignIn" style={{color:"white",textDecoration:"none"}}>Ingresa</Link> }
                     <label onMouseOver={profile}>
-                        <AccountCircleIcon />
+                        { user.name? ( <div style={{backgroundColor:"black",color:"white",borderRadius:"50%",
+                        border: "0.5px solid rgba(191, 191, 191, 0.719)",
+                        height:"40px",
+                        width:"40px",
+                        padding: "0.7rem",
+                        marginLeft:"1rem",
+                        marginRight:"1rem",
+                        display:"flex",
+                        justifyContent:"center",
+                        alignItems:"center",
+                        textAlign: "center",
+                        backgroundColor: "rgb(176, 54, 232)",
+                        fontSize: "1.5rem"}}>{capitalLetter()}</div>):<AccountCircleIcon />}
                     </label>
                 </div>
                 <div onMouseOver={modalDown} className="cusElement8">
@@ -283,7 +304,7 @@ export default function NavBarGuest() {
                     </div>
                 )}
                 <div className="cusElement01">
-                    {expand.profile && (
+                    {expand.profile && (!user.name? (
                         <div className="guest">
                             <Link
                                 to="/SignIn"
@@ -303,7 +324,28 @@ export default function NavBarGuest() {
                             >
                                 <option>Registrarse</option>
                             </Link>
+                        </div>):(
+                            <div className="guest">
+                            <Link
+                                to="/profile"
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black",
+                                }}
+                            >
+                                <option>Mi Perfil</option>
+                            </Link>
+                            <Link
+                                to="/"
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black",
+                                }}
+                            >
+                                <option onClick={handleLogout}>Log Out</option>
+                            </Link>
                         </div>
+                        )
                     )}
                 </div>
                 {expand.location && (

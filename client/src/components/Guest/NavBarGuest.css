@@ -18,24 +18,9 @@
     /* Element #2 */
     .cusElement2{
         grid-column: 4 / 13;
-        display: flex;
-        justify-content: left;
-        align-items: center;
         background-color: #023047
     }
-    .cusElement2 input{
-        margin-top: 1rem;
-        border-radius: 0.2rem;
-        border-style: none;
-        padding: 0.5rem;
-        width: 82%;
-        margin-left: 1rem;
-        font-size: 1rem;
-        box-shadow: 
-        0px 2px 1px -1px rgb(0 0 0 / 20%), 
-        0px 1px 1px 0px rgb(0 0 0 / 14%), 
-        0px 1px 3px 0px rgb(0 0 0 / 12%);
-    }
+
     /* Element #3 */
     .cusElement3{
         grid-column: 10 / 13;
@@ -211,14 +196,11 @@
     .cusElement2{
         grid-column: 3 / 9;
         display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        justify-content: left;
         align-items: flex-end;
         background-color: #023047;
     }
     .cusElement2 input{
-        border-radius: 0.2rem;
+        /* border-radius: 0.2rem;
         border-style: none;
         padding: 0.5rem;
         margin-top: 1rem;
@@ -227,7 +209,7 @@
         box-shadow: 
         0px 2px 1px -1px rgb(0 0 0 / 20%), 
         0px 1px 1px 0px rgb(0 0 0 / 14%), 
-        0px 1px 3px 0px rgb(0 0 0 / 12%);
+        0px 1px 3px 0px rgb(0 0 0 / 12%); */
     }
     .cusElement3{
         grid-column: 9 / 13;
@@ -299,6 +281,7 @@
         grid-column: 11 / 13;
         display: flex;
         justify-content: center;
+        align-items: center;
         background-color: #023047;
     }
     .cusElement7 label{
@@ -476,8 +459,8 @@
         top: 10rem;
     }
     .guest{
-        background-color:#fff;
         z-index: 1;
+        background-color:#fff;
         border-radius: 0.3rem;
         padding-top: 0.8rem;
         padding-left: 1rem;
@@ -497,6 +480,7 @@
     }
     
     .guest option:hover{
+        z-index: 1;
         transform: scale(0.95);
         box-shadow: 
         0px 2px 0px 0px rgb(0 0 0 / 20%), 

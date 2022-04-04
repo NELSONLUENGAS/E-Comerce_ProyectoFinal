@@ -16,6 +16,8 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { postProductos } from '../../actions';
 import Input from './InputCrear'
 import { useDispatch } from 'react-redux';
+import NavBarGuest from '../Guest/NavBarGuest';
+
 const useStyles = makeStyles((theme) => ({
 	main: {
 		maxWidth: "800px",
@@ -118,7 +120,7 @@ const CrearForm = () => {
 	}
 
 	return (<>
-
+		<NavBarGuest/>
 		<main className={classes.main}>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input

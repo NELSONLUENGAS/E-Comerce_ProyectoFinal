@@ -32,7 +32,7 @@ router.get('/products', async (req, res) => {
     
 
     if(products.length) res.send(products)
-    else res.send('Products not found')
+    else res.send([])
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////

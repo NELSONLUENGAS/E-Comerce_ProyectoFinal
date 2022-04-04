@@ -5,18 +5,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import NavBarGuest from './Guest/NavBarGuest'
 import { makeStyles } from '@material-ui/core/styles';
 import  { useAuth0 } from "@auth0/auth0-react";
-import { LoginButton } from "./LoginButton";
-import { LogoutButton } from "./LogoutButton";
-import { Profile } from "./Profile";
+import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import {getUserSigningIn} from '../actions/index'
 import {useState} from 'react'
@@ -24,18 +19,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useEffect } from 'react';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +62,7 @@ export default function SignIn() {
 
   useEffect(()=>{
     if (user.name){
+      alert("Ha iniciado sesion correctamente")
       Navigate("/")
     }
   },[user])
@@ -103,16 +87,15 @@ export default function SignIn() {
   return (<>
       <NavBarGuest/>
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+          
+          <h5>Iniciar Sesion</h5>
+          
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
@@ -153,31 +136,18 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-
-            {isAuthenticated ? 
-            <>
-            <Profile /> 
-            <LogoutButton /> 
-            </>
-
-            :<LoginButton />
-            }
-
+            
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+                <Link to="/forgotPassword" variant="body2">
+                 Olvidaste la contraseña?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Link to="/SignUp" >
+                  No tienes una cuenta? Registrate!             </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
         </div>
       </Grid>

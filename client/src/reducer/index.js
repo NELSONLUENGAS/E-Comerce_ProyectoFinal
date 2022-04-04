@@ -116,6 +116,25 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 User:action.payload
             }
+        case 'LOG_OUT':
+            return{
+                ...state,
+                User:[]
+            }
+        case 'POST_CATEGORIA':
+                return {
+                    ...state,
+                }
+        case "DELETE_CATEGORIA":
+                return {
+                    ...state,
+                    categories: action.payload
+                }
+        case "SEARCH_PRODUCT":
+            return{
+                ...state,
+                products:action.payload
+            }
         default:
             return state
 

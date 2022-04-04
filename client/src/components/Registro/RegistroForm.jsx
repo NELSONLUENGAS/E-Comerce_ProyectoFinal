@@ -7,6 +7,7 @@ import { postCrearUsuario } from '../../actions';
 import { useDispatch } from 'react-redux';
 import Input from './InputForm'
 import NavBarGuest from '../Guest/NavBarGuest'
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -40,7 +41,7 @@ const RegistroForm= () => {
 	const [nationality, cambiarnationality] = useState({campo: '', valido: null});
 	const [terminos, cambiarTerminos] = useState(false);
 	const [formularioValido, cambiarFormularioValido] = useState(null);
-
+	const Navigate = useNavigate()
 	const expresiones = {
 		nombre: /^[a-zA-ZÀ-ÿ]{4,10}$/, // Letras y espacios, pueden llevar acentos.
 		apéllido: /^[a-zA-ZÀ-ÿ]{4,10}$/,
@@ -107,6 +108,8 @@ const RegistroForm= () => {
 			}
 			dispatch(postCrearUsuario(input))
 			cambiarFormularioValido(true);
+			alert("Usuario creado correctamente")
+			Navigate('/SignIn')
 			cambiarNombre({campo: '', valido: null});
 			cambiarPassword({campo: '', valido: null});
 			cambiarPassword2({campo: '', valido: null});
@@ -120,6 +123,7 @@ const RegistroForm= () => {
 			cambiardirection({campo: '', valido: null});
 			cambiarpostalcode({campo: '', valido: null});
 
+
 			// ... 
 		} else {
 			cambiarFormularioValido(false);
@@ -130,6 +134,7 @@ const RegistroForm= () => {
 		
 			<NavBarGuest/>
 		<main className={classes.main}>
+			<h1>Registrate</h1>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input
 					estado={nombre}
