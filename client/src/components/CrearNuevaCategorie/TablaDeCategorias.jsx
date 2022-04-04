@@ -13,8 +13,6 @@ const TablaDeCategorias = () => {
   useEffect(() => {
     dispatch(getCategories())
 }, [dispatch])
-
-
   return (
     <table className="table">
       <thead>
