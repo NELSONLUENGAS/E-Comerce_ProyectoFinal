@@ -170,7 +170,7 @@ export default function NavBarGuest() {
                     </Link>
                     <div> 
                         <span>Enviar a</span>
-                        <span>Ciudad</span>
+                        {user.city? (<span>{user.city}</span>):<span>Ciudad</span>}
                     </div>
                 </div>
                 <div className="cusElement5">
@@ -353,9 +353,13 @@ export default function NavBarGuest() {
                         <div className="locModal0">
                             <h1>Decide el destino de tú pedido</h1>
                             <div className="locModal2">
-                                <h3>Destino</h3>
+                                <h3>Direcciones</h3>
+                                {!user.name? (<Link to="/SignIn"><h3>Por favor incia sesion</h3> </Link>):(<div>
                                 <div>
-                                    <select>
+                                    Direccion: {user.direction},{user.city},{user.province}
+                                </div>
+                                <div>
+                                    {/* <select>
                                         <option hidden disable="true" value="">
                                             Departamento
                                         </option>
@@ -375,18 +379,19 @@ export default function NavBarGuest() {
                                         <option value="">departamento</option>
                                         <option value="">departamento</option>
                                         <option value="">departamento</option>
-                                    </select>
-                                    <button onClick={modalOpen}>Aceptar</button>
+                                    </select> */}
+                                    {/* <button onClick={modalOpen}>Aceptar</button> */}
                                 </div>
-                                <div>
+                                {/* <div>
                                     <button onClick={moreDetails}>
                                         <span>
                                             <AddCircleIcon />
                                         </span>
                                         <span>Agregar más detalles</span>
                                     </button>
-                                </div>
-                                {expand.details && (
+                                </div> */}
+                                
+                                {/* {expand.details && (
                                     <div className="locModal1">
                                         <label>
                                             <input
@@ -419,7 +424,8 @@ export default function NavBarGuest() {
                                             />
                                         </label>
                                     </div>
-                                )}
+                                )} */}
+                                </div> )}
                             </div>
                             <div className="locModal3">
                                 <button onClick={modalOpen}>cancelar</button>

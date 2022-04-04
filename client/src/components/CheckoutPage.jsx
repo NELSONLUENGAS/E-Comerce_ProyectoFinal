@@ -18,25 +18,43 @@ import "./CheckoutPage.css"
 
 export default function CheckoutPage() {
     const cartProducts = useSelector((state) => state.basket);
+    const user = useSelector((state) => state.User);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    //console.log(cartProducts);
+    console.log(cartProducts);
 
-    const products =  [
-        {"title": "nombre",
-        "unit_price": 2000,
-        "quantity": 2},
-        {"title": "nombre",
-        "unit_price": 2000,
-        "quantity": 2},
-        {"title": "nombre",
-        "unit_price": 2000,
-        "quantity": 2}
-        ]
+    const products =  cartProducts?.map((element) =>{
+        return(
+            {
+                "title":element.name,
+                "unit_price":element.price,
+                "quantity":element.quantity
+            }
+        )
+    })
+    // const products=[
+    //     {"title": "nombre",
+    //     "unit_price": 2000,
+    //     "quantity": 2},
+    //     {"title": "nombre",
+    //     "unit_price": 2000,
+    //     "quantity": 2},
+    //     {"title": "un gel",
+    //     "unit_price": 3000,
+    //     "quantity": 1}
+    //     ]
+
+
+
     function onPay(e){
         e.preventDefault();
+        if(user.name){
         dispatch(getMercadoPago(products))
         navigate('/Checkout/Payment')
+        } else{
+            alert("Por Favor Inicie sesion")
+            navigate('/SignIn')
+        }
     }
 
     return (

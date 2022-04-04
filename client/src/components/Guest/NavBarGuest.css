@@ -513,7 +513,8 @@
         background: #02304771;
     }
     .locModal0{
-        background-color: #457b9d;
+        background-color: #ffffff;
+        color:#000;
         width: 40rem;
         display: block;
         flex-direction: column;
@@ -563,8 +564,9 @@
         display: block;
         margin-bottom: 2rem;
         padding: 1rem;
-        background-color: #02304765;
+        background-color: #ffffff;
         border-radius: 0.5rem;
+        border: 1px solid black;
     }
     .locModal2 h3{
         padding-bottom: 1rem;
