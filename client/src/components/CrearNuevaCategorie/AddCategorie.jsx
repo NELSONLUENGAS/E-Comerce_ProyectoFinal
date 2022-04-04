@@ -10,20 +10,24 @@ const AddCategorie = () => {
 
   const categories = useSelector((state) => state.categories);
   const dispatch= useDispatch()
-  const [refresh,setRefresh]=useState("")
+  const [refresh]=useState("")
   const [input, setData] = useState({
     name: "",
     description:""
   })
   const{name, description} = input
 
-  function handleDelete (e, id)  {
+  function handleDelete (e, id, name)  {
     e.preventDefault()
-    const fetchData = async () => {
+    var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+name)
+    if(opcion===true){
+      const fetchData = async () => {
       await dispatch(DeleteCategoria(id))
       await dispatch(getCategories()); ;
     }
     fetchData();
+    }
+    
   };
   const HandleSubmit =()=>{
     const fetchData = async () => {
@@ -101,7 +105,7 @@ const AddCategorie = () => {
               
                 <button
                 type="submit"
-                  onClick={(e) => handleDelete(e, item.id)}
+                  onClick={(e) => handleDelete(e, item.id, item.name)}
                   className="btn btn-danger"
                 >
                   Eliminar
