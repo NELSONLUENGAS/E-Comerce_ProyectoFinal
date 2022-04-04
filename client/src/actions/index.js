@@ -191,3 +191,23 @@ export function getSearch(search) {
         })
     }
 }
+export function UpdateProduct(id) {
+    return async function (dispatch) {
+        const json = await axios.put('http://localhost:3001/updateProduct/'+id);
+        return dispatch({
+            type: "UPDATE_PRODUCT",
+            payload: json.data
+
+        })
+    }
+}
+export function DeleteProduct(id) {
+    return async function (dispatch) {
+        const json = await axios.put('http://localhost:3001/deleteProduct/',id);
+        return dispatch({
+            type: "DELETE_PRODUCT",
+            payload: json.data
+
+        })
+    }
+}

@@ -184,6 +184,14 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 products:action.payload
             }
+        case "UPDATE_PRODUCT":
+                return{
+                    ...state
+                }
+        case "DELETE_PRODUCT":
+                return{
+                    ...state
+                }
         default:
             return state
 
