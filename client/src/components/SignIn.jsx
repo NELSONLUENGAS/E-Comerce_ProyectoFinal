@@ -18,6 +18,9 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useEffect } from 'react';
+import GoogleLogin from 'react-google-login';
+import LoginButton from "./GoogleAuth/Login";
+import LogoutButton from "./GoogleAuth/LogOut";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -136,6 +139,12 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+
+            <LoginButton/>
+
+
+
+
             
             <Grid container>
               <Grid item xs>
