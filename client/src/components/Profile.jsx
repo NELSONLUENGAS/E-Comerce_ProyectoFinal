@@ -64,6 +64,7 @@ export default function Profile() {
                                         top: "20%",
                                         right: "5%",
                                     }}
+                                    alt=""
                                 />
                             </div>
                             </Link>
@@ -90,6 +91,7 @@ export default function Profile() {
                                         top: "20%",
                                         right: "5%",
                                     }}
+                                    alt=""
                                 ></img>
                             </div>
                         </>
@@ -117,6 +119,7 @@ export default function Profile() {
                                 top: "20%",
                                 right: "5%",
                             }}
+                            alt=""
                         ></img>
                     </div>
                     <div className="container-options-profile">
@@ -141,6 +144,7 @@ export default function Profile() {
                                 top: "20%",
                                 right: "5%",
                             }}
+                            alt=""
                         ></img>
                     </div>
                     <div className="container-options-profile">
@@ -166,6 +170,7 @@ export default function Profile() {
                                 top: "20%",
                                 right: "5%",
                             }}
+                            alt=""
                         ></img>
                     </div>
                     <div className="container-options-profile">
@@ -188,6 +193,7 @@ export default function Profile() {
                                 top: "20%",
                                 right: "5%",
                             }}
+                            alt=""
                         ></img>
                     </div>
                     <div className="container-options-profile">
@@ -210,6 +216,7 @@ export default function Profile() {
                                 top: "20%",
                                 right: "5%",
                             }}
+                            alt=""
                         ></img>
                     </div>
                 </div>
