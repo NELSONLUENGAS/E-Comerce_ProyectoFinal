@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+//import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import NavBarGuest from './Guest/NavBarGuest'
 import { makeStyles } from '@material-ui/core/styles';
-import  { useAuth0 } from "@auth0/auth0-react";
+//import  { useAuth0 } from "@auth0/auth0-react";
 import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import {getUserSigningIn} from '../actions/index'
@@ -18,9 +18,9 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useEffect } from 'react';
-import GoogleLogin from 'react-google-login';
-import LoginButton from "./GoogleAuth/Login";
-import LogoutButton from "./GoogleAuth/LogOut";
+//import GoogleLogin from 'react-google-login';
+import Login from './GoogleAuth/Login';
+//import LogoutButton from "./GoogleAuth/LogOut";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +58,7 @@ export default function SignIn() {
   const Navigate = useNavigate()
   const dispatch = useDispatch()
   const classes = useStyles();
-  const {isAuthenticated} = useAuth0();
+  //const {isAuthenticated} = useAuth0();
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   const user = useSelector((state) => state.User);
@@ -67,7 +67,7 @@ export default function SignIn() {
     if (user.name){
       alert("Ha iniciado sesion correctamente")
       Navigate("/")
-    }
+    }// eslint-disable-next-line react-hooks/exhaustive-deps
   },[user])
 
   function handleEmail(e){
@@ -140,13 +140,9 @@ export default function SignIn() {
               Sign In
             </Button>
 
-            <LoginButton/>
-
-
-
-
+            <Login/>
             
-            <Grid container>
+             <Grid container>
               <Grid item xs>
                 <Link to="/forgotPassword" variant="body2">
                  Olvidaste la contraseña?
