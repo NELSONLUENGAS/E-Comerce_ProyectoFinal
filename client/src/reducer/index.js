@@ -60,8 +60,8 @@ export default function rootReducer(state = initialState, action) {
             if (indexToAdd >= 0) {
                 console.log(state.basket[indexToAdd].quantity)
                 console.log(state.basket)
-                state.basket[indexToAdd].quantity = state.basket[indexToAdd].quantity + action.payload.quantity
-                state.ItemsAmount = Number(state.ItemsAmount) + Number(action.payload.quantity)
+                state.basket[indexToAdd].quantity = Number(state.basket[indexToAdd].quantity) +Number( action.quantity)
+                state.ItemsAmount = Number(state.ItemsAmount) + Number(action.quantity)
 
                 console.log("este es item amount cuando sumamos")
                 console.log(state.ItemsAmount)
@@ -77,20 +77,29 @@ export default function rootReducer(state = initialState, action) {
                 }
             } else {
                 let sumatotal = 0
-                sumatotal = action.payload.price
+                sumatotal = (action.payload.price)*action.quantity
                 state.SumPrice = sumatotal
                 console.log("este es item amount la primera vez")
                 console.log(state.ItemsAmount)
-                state.ItemsAmount = Number(state.ItemsAmount) + Number(1)
+                console.log(action.payload)
+                state.ItemsAmount = Number(state.ItemsAmount) + Number(action.quantity)
+                const item ={
+                    id: action.payload.id,
+                    name: action.payload.name,
+                    image: action.payload.image,
+                    price: action.payload.price,
+                    quantity:action.quantity,
+                    description:action.payload.description
+                }
                 return {
                     ...state,
-                    basket: [...state.basket, action.payload]
+                    basket: [...state.basket, item]
                 }
             }
         case "SUBSTRACT_QUANTITY":
             const index1 = state.basket.findIndex(basketItem => basketItem.id === action.payload);
             if (index1 >= 0) {
-                state.ItemsAmount = state.ItemsAmount - 1
+                state.ItemsAmount = Number(state.ItemsAmount) -Number(1)
                 state.SumPrice = state.SumPrice - state.basket[index1].price
                 state.basket[index1].quantity = state.basket[index1].quantity - 1
             }

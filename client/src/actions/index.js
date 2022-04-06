@@ -49,10 +49,11 @@ export function getMercadoPago(payload){
     }
 }
 
-export function addToBasket(payload){
+export function addToBasket(payload,quantity){
     return{
         type:"ADD_TO_BASKET",
-        payload
+        payload,
+        quantity
     }
 }
 

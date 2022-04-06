@@ -40,16 +40,16 @@ export default function CheckoutCard({
 
     function subtractionQuantity(){
       if(quantityProduct>1){
-      setQuantityProduct(quantityProduct-1)
-      setPriceItem(price*(quantityProduct-1))
+      setQuantityProduct(Number(quantityProduct)-1)
+      setPriceItem(price*(Number(quantityProduct)-1))
       dispatch(substractQuantityItem(item.id));
       }
       
     }
     function addQuantity(){
-      setQuantityProduct(quantityProduct+1)
-      setPriceItem(price*(quantityProduct+1))
-      dispatch(addToBasket(item));
+      setQuantityProduct(Number(quantityProduct)+1)
+      setPriceItem(price*(Number(quantityProduct)+1))
+      dispatch(addToBasket(item,1));
     }
 
     return (
@@ -60,7 +60,7 @@ export default function CheckoutCard({
                     <div className="title-checkout-card">{name}</div>
                     <div className="quantity-checkout-card">
                         <button className="button-quantity-checkout-card" onClick={subtractionQuantity}>-</button>
-                        <div className="quantity-text-checkout-card">{quantityProduct}</div>
+                        <div className="quantity-text-checkout-card">{Number(quantityProduct)}</div>
                         <button className="button-quantity-checkout-card" onClick={addQuantity}>+</button>
                     </div>
                     

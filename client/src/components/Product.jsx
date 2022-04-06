@@ -77,7 +77,7 @@ export default function Product({
     };
 
     const AddToBasket = () => {
-        dispatch(addToBasket(item));
+        dispatch(addToBasket(item,1));
     };
 
 
