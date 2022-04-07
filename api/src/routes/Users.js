@@ -9,11 +9,19 @@ router.get('/users', async (req, res) => {
     else res.send('no hay usuarios')
 })
 
+<<<<<<< Updated upstream
 router.get('/users/:email', async (req, res) => {
     const {email} = req.params
     const user = await Users.findOne({where: {email}})
     if(user) res.send(true)
     else res.send(false)
+=======
+router.get('/login', async (req, res) => {
+    const {email, password} = req.query
+    const user = await Users.findOne({where: {email, password}})
+    if(user) res.send(user)
+    else res.status(404).send('El usuario o contraseña son incorrectos')
+>>>>>>> Stashed changes
 })
 
 router.post('/createUser', async (req, res) => {
@@ -23,10 +31,80 @@ router.post('/createUser', async (req, res) => {
         const user = {email, password, name, lastname, birthday, dni, nationality, province, city, postalcode, direction, phone}
         await Users.create(user)
         res.send('The user has been created successfully')
+<<<<<<< Updated upstream
     } catch {
         res.send('User already create')
+=======
+    } 
+    catch {
+        res.send('The e-mail is alreay been used')
+>>>>>>> Stashed changes
     }
     
+})
+
+router.post('/users/:email/addlocation', async (req, res) => {
+    const {province, city, postalcode, direction} = req.body, {email} = req.params
+
+    try{
+        const user = await Users.findOne({where: {email}})
+        
+        user.city = [...user.city, city]
+        user.province = [...user.province, province]
+        user.direction = [...user.direction, direction]
+        user.postalcode = [...user.postalcode, postalcode]
+        await user.save()
+
+        res.send('Add new location')
+    }
+    catch {
+        res.status(500).send('INVALID EMAIL')
+    }
+})
+
+router.delete('/users/:email/removelocation', async (req, res) => {
+    const {index} = req.body, {email} = req.params
+
+    try{
+        const user = await Users.findOne({where: {email}})
+        
+        if(user.postalcode.length > 1){
+            user.city = filterArray(user, "city", index)
+            user.province = filterArray(user, "province", index)
+            user.direction = filterArray(user, "direction", index)
+            user.postalcode = filterArray(user, "postalcode", index)
+            await user.save()
+
+            res.send('remove location')
+        }
+        else res.send('imposible remove location')
+    }
+    catch {
+        res.status(500).send('INVALID EMAIL')
+    }
+})
+
+router.put('/users/:email/update', async (req, res) => {
+    const {password, province, city, postalcode, direction, index, phone} = req.body, {email} = req.params
+
+    try{
+        const user = await Users.findOne({where: {email}})
+        
+        if(password === user.password){
+            if(phone) user.phone = phone
+            if(index+1 && city) user.city = updateArray(user, "city", city, index)
+            if(index+1 && province) user.province = updateArray(user, "province", province, index)
+            if(index+1 && direction) user.direction = updateArray(user, "direction", direction, index)
+            if(index+1 && postalcode) user.postalcode = updateArray(user, "postalcode", postalcode, index)
+    
+            await user.save()
+            res.send('Update user')
+        }
+        else res.send('The password that you entered is incorrect ')
+    }
+    catch {
+        res.status(500).send('INVALID EMAIL')
+    }
 })
 
 router.put('/changePassword/:email', async (req, res) => {
@@ -44,3 +122,15 @@ router.put('/changePassword/:email', async (req, res) => {
 })
 
 module.exports = router;
+
+
+function updateArray(user, property, newData, index) {
+    return user[property].map((oldData, i) => {
+        if(i === index) return newData
+        else return oldData
+    })
+}
+
+function filterArray(user, property, index) {
+    return user[property].filter((oldData, i) => i !== index)
+}
