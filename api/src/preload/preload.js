@@ -4,7 +4,7 @@ const belleza =  [[
       {
         name: "Cepillo Alisador Babyliss Pro Eléctrico Nano Titanium",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_658652-MCO43349304753_092020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_658652-MCO43349304753_092020-O.webp"],
         price: 148900,
         stock: 10,
         description:
@@ -13,7 +13,7 @@ const belleza =  [[
       {
         name: "Crema Aclarante Despigmentante Intimo Piel De Oro Grande",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_630108-MCO43682659107_102020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_630108-MCO43682659107_102020-O.webp"],
         price: 49900,
         stock: 10,
         description:
@@ -22,7 +22,7 @@ const belleza =  [[
       {
         name: "Aerosol Antibacterial Con Alcohol Y Glicerina Y Aloe Vera",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_843977-MCO43181272914_082020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_843977-MCO43181272914_082020-O.webp"],
         price: 9990,
         stock: 10,
         description:
@@ -31,7 +31,7 @@ const belleza =  [[
       {
         name: "Secador de cabello Remington D3190 violeta 125V",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_694898-MLA48957358407_012022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_694898-MLA48957358407_012022-O.webp"],
         price: 128000,
         stock: 10,
         description:
@@ -40,7 +40,7 @@ const belleza =  [[
       {
         name: "Labial Mate Studio Look – Cyzone",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_644558-MCO45828068953_052021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_644558-MCO45828068953_052021-O.webp"],
         price: 12900,
         stock: 10,
         description:
@@ -49,7 +49,7 @@ const belleza =  [[
       {
         name: "Paleta De Sombras Eye Pro Ésika",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_813596-MCO46729099363_072021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_813596-MCO46729099363_072021-O.webp"],
         price: 34900,
         stock: 10,
         description:
@@ -58,7 +58,7 @@ const belleza =  [[
       {
         name: "Paleta 56 Sombras Dolce Bella",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_997174-MCO40007027552_122019-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_997174-MCO40007027552_122019-O.webp"],
         price: 60900,
         stock: 10,
         description:
@@ -67,7 +67,7 @@ const belleza =  [[
       {
         name: "Serum Ácido Hialurónico Revital",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_674479-MCO47556716877_092021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_674479-MCO47556716877_092021-O.webp"],
         price: 58990,
         stock: 10,
         description:
@@ -76,7 +76,7 @@ const belleza =  [[
       {
         name: "Serum Express Aclara Antimancha",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_855452-MLA46194414342_052021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_855452-MLA46194414342_052021-O.webp"],
         price: 26915,
         stock: 10,
         description:
@@ -85,7 +85,7 @@ const belleza =  [[
       {
         name: "Cera Barbershop Moldeadora Y Fijadora",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_643585-MCO46520493141_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_643585-MCO46520493141_062021-O.webp"],
         price: 18900,
         stock: 10,
         description:
@@ -94,7 +94,7 @@ const belleza =  [[
       {
         name: "Rechiol - Hendel - Crema Facial Hidratante Y Rejuvenecedora",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_966905-MCO46430888421_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_966905-MCO46430888421_062021-O.webp"],
         price: 97500,
         stock: 10,
         description:
@@ -103,7 +103,7 @@ const belleza =  [[
       {
         name: "Maquina Afeitar Electrica Barbera Patillera Accesorios Prof.",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_918522-MCO49256699539_032022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_918522-MCO49256699539_032022-O.webp"],
         price: 100000,
         stock: 10,
         description:
@@ -112,7 +112,7 @@ const belleza =  [[
       {
         name: "Herbacol Flash Cubrecanas Tonic",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_649807-MCO47515954545_092021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_649807-MCO47515954545_092021-O.webp"],
         price: 20390,
         stock: 10,
         description:
@@ -121,7 +121,7 @@ const belleza =  [[
       {
         name: "Kit Keratina Keratimask Liso Brasileño ",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_648097-MCO44041488019_112020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_648097-MCO44041488019_112020-O.webp"],
         price: 52900,
         stock: 10,
         description:
@@ -130,7 +130,7 @@ const belleza =  [[
       {
         name: "Seda Dental Flossers X 100 Unid ",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_778385-MCO46485275678_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_778385-MCO46485275678_062021-O.webp"],
         price: 15900,
         stock: 10,
         description: "Recibes Hilo Dental Gum Flossers Fuerte 100 Unidades,",
@@ -138,7 +138,7 @@ const belleza =  [[
       {
         name: "Gel Aloe Vera Bacc Sábila Hidrata Humecta Acné Quemaduras",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_664569-MCO48994873555_022022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_664569-MCO48994873555_022022-O.webp"],
         price: 17900,
         stock: 10,
         description:
@@ -147,7 +147,7 @@ const belleza =  [[
       {
         name: "Maquina De Afeitar Clásica En Ace ",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_662251-MCO47251245154_082021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_662251-MCO47251245154_082021-O.webp"],
         price: 13490,
         stock: 10,
         description:
@@ -156,7 +156,7 @@ const belleza =  [[
       {
         name: "Dosificador De Jabón Liquido, Alcohol 500 Ml ",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_930089-MCO49086201308_022022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_930089-MCO49086201308_022022-O.webp"],
         price: 18000,
         stock: 10,
         description:
@@ -165,7 +165,7 @@ const belleza =  [[
       {
         name: "Shampo Y Tratamiento Frenchs Gold 500ml Libre De Sal",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_665747-MCO45061174889_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_665747-MCO45061174889_032021-O.webp"],
         price: 40000,
         stock: 10,
         description:
@@ -174,7 +174,7 @@ const belleza =  [[
       {
         name: "Copa Menstrual Certificada Fda + Vaso Esterilizador",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_831203-MCO46799783068_072021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_831203-MCO46799783068_072021-O.webp"],
         price: 25555,
         stock: 10,
         description:
@@ -186,7 +186,7 @@ const muebles =  [[
       {
         name: "Juego De Sala Con Sofacama + Poltrona + Puff + Mesa De Centr",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_999523-MCO48711147536_122021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_999523-MCO48711147536_122021-O.webp"],
         price: 2149900,
         stock: 10,
         description:
@@ -195,7 +195,7 @@ const muebles =  [[
       {
         name: "Closet Tera Wengue",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_771941-MCO44514878145_012021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_771941-MCO44514878145_012021-O.webp"],
         price: 353900,
         stock: 10,
         description:
@@ -204,7 +204,7 @@ const muebles =  [[
       {
         name: "Combo Cama Closet Y Mesas De Noche Maderkit 01163-prm",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_833109-MCO48209107611_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_833109-MCO48209107611_112021-O.webp"],
         price: 1199900,
         stock: 10,
         description:
@@ -214,7 +214,7 @@ const muebles =  [[
         name:
           "Silla de escritorio Ergonomus Sally negra con tapizado de mesh y cuero sintético",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_865004-MLA48009568948_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_865004-MLA48009568948_102021-O.webp"],
         price: 409200,
         stock: 10,
         description:
@@ -223,7 +223,7 @@ const muebles =  [[
       {
         name: "Silla Sillon Ejecutivo Oficina Reclinable Ergonomica",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_768076-MCO48198147831_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_768076-MCO48198147831_112021-O.webp"],
         price: 309900,
         stock: 10,
         description:
@@ -232,7 +232,7 @@ const muebles =  [[
       {
         name: "Sala Con Sofa Poliester + Mesa Centro + Juego De Comedor 4 P",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_922222-MCO48711065415_122021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_922222-MCO48711065415_122021-O.webp"],
         price: 2599900,
         stock: 10,
         description:
@@ -241,7 +241,7 @@ const muebles =  [[
       {
         name: "Silla Oficina Ergonómica Apoyacabezas Brazos Ajustables",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_986317-MCO41999916333_052020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_986317-MCO41999916333_052020-O.webp"],
         price: 409900,
         stock: 10,
         description:
@@ -250,7 +250,7 @@ const muebles =  [[
       {
         name: "Closet Bariloche Wengue",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_727618-MCO44347628385_122020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_727618-MCO44347628385_122020-O.webp"],
         price: 773900,
         stock: 10,
         description:
@@ -259,7 +259,7 @@ const muebles =  [[
       {
         name: "Natural - Combo: Cama + Mesas + Rack Tv Moderno",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_843146-MCO48269122509_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_843146-MCO48269122509_112021-O.webp"],
         price: 909900,
         stock: 10,
         description:
@@ -268,7 +268,7 @@ const muebles =  [[
       {
         name: "Escritorio Axis Wengue",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_945737-MCO45043633570_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_945737-MCO45043633570_032021-O.webp"],
         price: 220900,
         stock: 10,
         description:
@@ -277,7 +277,7 @@ const muebles =  [[
       {
         name: "Sala De Jardín Brienz",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_891475-MCO45307016196_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_891475-MCO45307016196_032021-O.webp"],
         price: 4429900,
         stock: 10,
         description:
@@ -286,7 +286,7 @@ const muebles =  [[
       {
         name: "Combo Sofacama Tapizado + Poltrona + Puff + Mesa Centro",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_680272-MCO48711654471_122021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_680272-MCO48711654471_122021-O.webp"],
         price: 2726400,
         stock: 10,
         description:
@@ -295,7 +295,7 @@ const muebles =  [[
       {
         name: "Mesa De Noche Otom 63x40x35 Blanco Nevado Y Rovere",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_820856-MCO47588707035_092021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_820856-MCO47588707035_092021-O.webp"],
         price: 179900,
         stock: 10,
         description: "Mesa De Noche Otom 63x40x35 Blanco Nevado y Rovere",
@@ -303,7 +303,7 @@ const muebles =  [[
       {
         name: "Cama Multifuncional 120 Cm Ancho Maderkit M01290-prm",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_624062-MCO48174391751_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_624062-MCO48174391751_112021-O.webp"],
         price: 1999900,
         stock: 10,
         description:
@@ -312,7 +312,7 @@ const muebles =  [[
       {
         name: "Combo Sofa En Tela Poliester + Poltrona",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_738529-MCO48710852327_122021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_738529-MCO48710852327_122021-O.webp"],
         price: 1629900,
         stock: 10,
         description:
@@ -321,7 +321,7 @@ const muebles =  [[
       {
         name: "Escritorio Gamer Max Color Wengue Neo",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_673510-MCO46923104934_072021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_673510-MCO46923104934_072021-O.webp"],
         price: 388900,
         stock: 10,
         description:
@@ -330,7 +330,7 @@ const muebles =  [[
       {
         name: "Cama Abatible Multifuncional 90cm Ancho Maderkit M01310-prm",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_965257-MCO47081846369_082021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_965257-MCO47081846369_082021-O.webp"],
         price: 1489900,
         stock: 10,
         description:
@@ -339,7 +339,7 @@ const muebles =  [[
       {
         name: "Juego De Sala Para Exterior",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_817839-MCO45303295007_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_817839-MCO45303295007_032021-O.webp"],
         price: 4774900,
         stock: 10,
         description:
@@ -348,7 +348,7 @@ const muebles =  [[
       {
         name: "Closet Entretenimiento Eco, Wengue",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_860122-MCO48196318025_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_860122-MCO48196318025_112021-O.webp"],
         price: 323900,
         stock: 10,
         description:
@@ -357,7 +357,7 @@ const muebles =  [[
       {
         name: "Combo Cama Doble + 2 Mesas De Noche + Rack De Tv",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_920229-MCO48270279083_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_920229-MCO48270279083_112021-O.webp"],
         price: 999900,
         stock: 10,
         description:
@@ -369,7 +369,7 @@ const deportes =  [[
       {
         name: "Kit De Pesas Ejercicio Mancuernas Juego De Pesas Termoforrad",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_745562-MCO48775539939_012022-V.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_745562-MCO48775539939_012022-V.webp"],
         price: 159900,
         stock: 10,
         description:
@@ -378,7 +378,7 @@ const deportes =  [[
       {
         name: "Banco Para Pesas Abdominales Sportfitness Plegable Multiposi",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_627753-MCO43156408639_082020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_627753-MCO43156408639_082020-O.webp"],
         price: 349900,
         stock: 10,
         description: "Banco Para Pesas Abdominales Plegable Multiposión",
@@ -386,7 +386,7 @@ const deportes =  [[
       {
         name: "Bicicleta estática Home Sale Spinning negra y roja",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_988811-MLA47962938252_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_988811-MLA47962938252_102021-O.webp"],
         price: 649900,
         stock: 10,
         description:
@@ -395,7 +395,7 @@ const deportes =  [[
       {
         name: "Kit De Pesas Ejercicio Mancuernas Juego De Pesas Termoforrad",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_722903-MCO49006414022_022022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_722903-MCO49006414022_022022-O.webp"],
         price: 184900,
         stock: 10,
         description:
@@ -404,7 +404,7 @@ const deportes =  [[
       {
         name: "Kit Bandas Resistencia Tela, Alta Calidad 3",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_831983-MCO47780159336_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_831983-MCO47780159336_102021-O.webp"],
         price: 38675,
         stock: 10,
         description:
@@ -413,7 +413,7 @@ const deportes =  [[
       {
         name: "Maquina Para Abdominales Ab Slimmer Soporte Abdominal Gym",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_663426-MCO47261447265_082021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_663426-MCO47261447265_082021-O.webp"],
         price: 119900,
         stock: 10,
         description:
@@ -422,7 +422,7 @@ const deportes =  [[
       {
         name: "Set Kit Mancuernas Pesas 2, 3 Y 5 Lbs Forro Neopreno Y Sopor",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_676364-MCO47695129914_092021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_676364-MCO47695129914_092021-O.webp"],
         price: 169900,
         stock: 10,
         description:
@@ -431,7 +431,7 @@ const deportes =  [[
       {
         name: "Lazo Cuerda Velocidad 3m Balinera Guaya Gym Crossfit Saltar",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_944742-MCO48246032783_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_944742-MCO48246032783_112021-O.webp"],
         price: 24900,
         stock: 10,
         description:
@@ -441,7 +441,7 @@ const deportes =  [[
         name:
           "Bicicleta estática plegable Home Sale X Bike tradicional gris y negra",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_901863-MLA47754578105_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_901863-MLA47754578105_102021-O.webp"],
         price: 474900,
         stock: 10,
         description:
@@ -450,7 +450,7 @@ const deportes =  [[
       {
         name: "Pesas Discos Kit Barra Recta Ó Curva Ó Roma+mancuerna 57llb",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_942098-MCO46724036375_072021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_942098-MCO46724036375_072021-O.webp"],
         price: 289900,
         stock: 10,
         description:
@@ -459,7 +459,7 @@ const deportes =  [[
       {
         name: "Banda Caminadora Trotadora Eléctrica Plegable Hp",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_793633-MCO49004099860_022022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_793633-MCO49004099860_022022-O.webp"],
         price: 1039900,
         stock: 10,
         description:
@@ -468,7 +468,7 @@ const deportes =  [[
       {
         name: "Set Kit De Bandas Elásticas Cerradas Pequeñas (juego 5)",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_883380-MCO44294247747_122020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_883380-MCO44294247747_122020-O.webp"],
         price: 24900,
         stock: 10,
         description: "Set de bandas elásticas (juego x 5) Material: Latex",
@@ -476,7 +476,7 @@ const deportes =  [[
       {
         name: "Rueda Abdomen Gym Rodillo Doble Ejercicio De Brazo Espalda",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_822279-MCO27830638026_072018-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_822279-MCO27830638026_072018-O.webp"],
         price: 23900,
         stock: 10,
         description:
@@ -485,7 +485,7 @@ const deportes =  [[
       {
         name: "Hand Grip Ejercitador Mano Muñeca Antebrazo Gradúa Rehabilit",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_621450-MCO43428070395_092020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_621450-MCO43428070395_092020-O.webp"],
         price: 16900,
         stock: 10,
         description:
@@ -494,7 +494,7 @@ const deportes =  [[
       {
         name: "Bandas De Poder Elasticas Pesas Uso Como Pesas Mancuernas",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_783352-MCO42467689326_072020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_783352-MCO42467689326_072020-O.webp"],
         price: 34900,
         stock: 10,
         description:
@@ -503,7 +503,7 @@ const deportes =  [[
       {
         name: "Banda Caminadora 4 En 1 Plegable Con Twister Y Escalador",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_750732-MCO48775726586_012022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_750732-MCO48775726586_012022-O.webp"],
         price: 759900,
         stock: 10,
         description: "-Estructura metálica de alta resistencia.",
@@ -511,7 +511,7 @@ const deportes =  [[
       {
         name: "Tabla Push Up Sistema Flexiones Pecho Hombro Brazo Espalada",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_719452-MCO45797645420_052021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_719452-MCO45797645420_052021-O.webp"],
         price: 39400,
         stock: 10,
         description:
@@ -520,7 +520,7 @@ const deportes =  [[
       {
         name: "Colchoneta Profesional Sportfitness Ejercicio Abdominal Gym",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_852002-MCO49404532101_032022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_852002-MCO49404532101_032022-O.webp"],
         price: 72900,
         stock: 10,
         description:
@@ -529,7 +529,7 @@ const deportes =  [[
       {
         name: "Banco Pesas Abdominales Ufc Deluxe Mancuernas Plegable Gym",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_757046-MCO47837417109_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_757046-MCO47837417109_102021-O.webp"],
         price: 925000,
         stock: 10,
         description:
@@ -538,7 +538,7 @@ const deportes =  [[
       {
         name: "Banda Elastica Fortalecimiento Mano Dedos X 2u ¡envio Ya¡",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_751604-MCO47863558883_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_751604-MCO47863558883_102021-O.webp"],
         price: 18549,
         stock: 10,
         description:
@@ -550,7 +550,7 @@ const electrodomesticos =  [[
       {
         name: "Estufa Romero Torre Haceb 50 Cms Gas Natural Negra",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_865191-MCO45241779530_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_865191-MCO45241779530_032021-O.webp"],
         price: 541112,
         stock: 10,
         description:
@@ -559,7 +559,7 @@ const electrodomesticos =  [[
       {
         name: "Nevera Haceb Siberia 240 Litros Manija Integrada Titanio",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_861351-MCO47311932385_082021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_861351-MCO47311932385_082021-O.webp"],
         price: 1307600,
         stock: 10,
         description:
@@ -568,7 +568,7 @@ const electrodomesticos =  [[
       {
         name: "Freidora De Aire Imusa Easy Fry Deluxe 4,2l Digital",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_859295-MCO47877846824_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_859295-MCO47877846824_102021-O.webp"],
         price: 389900,
         stock: 10,
         description:
@@ -577,7 +577,7 @@ const electrodomesticos =  [[
       {
         name: "Lavadora Semiautomática Electrolux Etb14m3msupw 14kg",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_659073-MCO44116425716_112020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_659073-MCO44116425716_112020-O.webp"],
         price: 999900,
         stock: 10,
         description:
@@ -586,7 +586,7 @@ const electrodomesticos =  [[
       {
         name: "Nevera Himalaya 404 Litros Haceb - Control Interno - Titanio",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_977862-MCO46567699495_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_977862-MCO46567699495_062021-O.webp"],
         price: 1828200,
         stock: 10,
         description:
@@ -595,7 +595,7 @@ const electrodomesticos =  [[
       {
         name: "Aspiradora Black+Decker Power Pro VCBD8530 2.5L verde 220V",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_982776-MLA47608794870_092021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_982776-MLA47608794870_092021-O.webp"],
         price: 399900,
         stock: 10,
         description:
@@ -604,7 +604,7 @@ const electrodomesticos =  [[
       {
         name: "Lonchera Eléctrica Kalley Porta Comida 1.1lt, Garantía 1 Año",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_641609-MCO46234428206_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_641609-MCO46234428206_062021-O.webp"],
         price: 54900,
         stock: 10,
         description:
@@ -614,7 +614,7 @@ const electrodomesticos =  [[
         name:
           "Plancha de cabello Remington Frizz Therapy Frizz Control S8510 morada 120V/240V",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_697043-MLA46429695491_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_697043-MLA46429695491_062021-O.webp"],
         price: 141550,
         stock: 10,
         description:
@@ -624,7 +624,7 @@ const electrodomesticos =  [[
         name:
           "Aspiradora trapeadora robot Eufy RoboVac G10 Hybrid negra 100V/240V",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_739390-MLA45993650271_052021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_739390-MLA45993650271_052021-O.webp"],
         price: 999995,
         stock: 10,
         description:
@@ -633,7 +633,7 @@ const electrodomesticos =  [[
       {
         name: "Lavadora Carga Superior Con Agitador Electrolux L17ac 17kg",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_745630-MCO42230787264_062020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_745630-MCO42230787264_062020-O.webp"],
         price: 1499900,
         stock: 10,
         description:
@@ -642,7 +642,7 @@ const electrodomesticos =  [[
       {
         name: "Pesa Balanza Inteligente Bluetooth Grasa Peso Corporal",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_740684-MCO48256255595_112021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_740684-MCO48256255595_112021-O.webp"],
         price: 41900,
         stock: 10,
         description:
@@ -651,7 +651,7 @@ const electrodomesticos =  [[
       {
         name: "Cafetera Italiana Aluminio Holstein Roja 6 Tazas",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_782967-MCO32547423511_102019-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_782967-MCO32547423511_102019-O.webp"],
         price: 54900,
         stock: 10,
         description:
@@ -660,7 +660,7 @@ const electrodomesticos =  [[
       {
         name: "Kit 3 Repuestos Para Filtro Purificador Ecotrade Filters",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_601569-MCO49160389419_022022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_601569-MCO49160389419_022022-O.webp"],
         price: 70000,
         stock: 10,
         description:
@@ -669,7 +669,7 @@ const electrodomesticos =  [[
       {
         name: "Ventilador Altezza 3 En 1 Aspa Tiburon Blanco",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_833798-MCO47004843804_082021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_833798-MCO47004843804_082021-O.webp"],
         price: 113900,
         stock: 10,
         description:
@@ -678,7 +678,7 @@ const electrodomesticos =  [[
       {
         name: "Licuadora Oster BEST02-E01 1.5 L gris con vaso de vidrio 120V",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_931606-MLA46238334742_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_931606-MLA46238334742_062021-O.webp"],
         price: 289900,
         stock: 10,
         description:
@@ -687,7 +687,7 @@ const electrodomesticos =  [[
       {
         name: "Plancha Para La Barba Y Pelo De Hombre Cepillo De Cabello",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_778426-MCO47753026552_102021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_778426-MCO47753026552_102021-O.webp"],
         price: 15900,
         stock: 10,
         description:
@@ -696,7 +696,7 @@ const electrodomesticos =  [[
       {
         name: "Mini Maquina Coser Portatil 2 Velocidades Control Pedal 4en1",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_932989-MCO32590764615_102019-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_932989-MCO32590764615_102019-O.webp"],
         price: 59800,
         stock: 10,
         description:
@@ -705,7 +705,7 @@ const electrodomesticos =  [[
       {
         name: "Waflera Hamilton Beach",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_898432-MCO43696506909_102020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_898432-MCO43696506909_102020-O.webp"],
         price: 123405,
         stock: 10,
         description:
@@ -714,7 +714,7 @@ const electrodomesticos =  [[
       {
         name: "Plancha Antiadherente Durathon Hamilton Beach",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_737869-MCO43696507613_102020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_737869-MCO43696507613_102020-O.webp"],
         price: 89910,
         stock: 10,
         description:
@@ -723,7 +723,7 @@ const electrodomesticos =  [[
       {
         name: "Horno de mesa eléctrico Kalley K-HE09B 9L blanco 110V-120V",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_894938-MLA46043486228_052021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_894938-MLA46043486228_052021-O.webp"],
         price: 114641,
         stock: 10,
         description:
@@ -735,7 +735,7 @@ const camping =  [[
       {
         name: "Carpa Coleman Doble Tendido 4 Personas Tienda De Campaña",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_710698-MCO45048021231_032021-V.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_710698-MCO45048021231_032021-V.webp"],
         price: 319900,
         stock: 10,
         description:
@@ -744,7 +744,7 @@ const camping =  [[
       {
         name: "Carpa Doble Tendido Coleman 4 Personas Tienda De Campaña",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_643971-MCO31537069095_072019-V.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_643971-MCO31537069095_072019-V.webp"],
         price: 379900,
         stock: 10,
         description:
@@ -753,7 +753,7 @@ const camping =  [[
       {
         name: "Combo Carpa 4 Personas Klimber+colchon+almohadas+inflador+..",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_903618-MCO49326131937_032022-V.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_903618-MCO49326131937_032022-V.webp"],
         price: 199927,
         stock: 10,
         description:
@@ -762,7 +762,7 @@ const camping =  [[
       {
         name: "Carpa Coleman Doble Tendido 4 Personas Tienda De Campaña",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_710698-MCO45048021231_032021-V.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_710698-MCO45048021231_032021-V.webp"],
         price: 319900,
         stock: 10,
         description:
@@ -771,7 +771,7 @@ const camping =  [[
       {
         name: "Carpa Doble Tendido Coleman 4 Personas Tienda De Campaña",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_643971-MCO31537069095_072019-V.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_643971-MCO31537069095_072019-V.webp"],
         price: 379900,
         stock: 10,
         description:
@@ -780,7 +780,7 @@ const camping =  [[
       {
         name: "Combo Carpa Camping 6 Personas Y Colchoneta Camping Confort",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_696567-MCO43918886613_102020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_696567-MCO43918886613_102020-O.webp"],
         price: 134900,
         stock: 10,
         description:
@@ -789,7 +789,7 @@ const camping =  [[
       {
         name: "Repuesto Varillas Camping Fibra De Vidrio X 2 Sets Asgard",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_939188-MCO40340362690_012020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_939188-MCO40340362690_012020-O.webp"],
         price: 29900,
         stock: 10,
         description:
@@ -798,7 +798,7 @@ const camping =  [[
       {
         name: "Carpa Coleman Doble Tendido 4 Personas Tienda De Campaña",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_655497-MCO48588529022_122021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_655497-MCO48588529022_122021-O.webp"],
         price: 408400,
         stock: 10,
         description:
@@ -807,7 +807,7 @@ const camping =  [[
       {
         name: "Carpa Coleman Doble Tendido 4 Personas Tienda De Campaña",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_710698-MCO48957087093_012022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_710698-MCO48957087093_012022-O.webp"],
         price: 332900,
         stock: 10,
         description:
@@ -816,7 +816,7 @@ const camping =  [[
       {
         name: "Colchon Inflable Doble Reforzado + Inflador + Parche Refor",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_659086-MCO47255325112_082021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_659086-MCO47255325112_082021-O.webp"],
         price: 89820,
         stock: 10,
         description:
@@ -825,7 +825,7 @@ const camping =  [[
       {
         name: "Carpa Camuflada Azul 2 Personas Asgard Camping 2x1.2",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_628430-MCO44022476622_112020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_628430-MCO44022476622_112020-O.webp"],
         price: 64900,
         stock: 10,
         description:
@@ -834,7 +834,7 @@ const camping =  [[
       {
         name: "Carpa 6 Personas Rain Forest Coleman",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_662423-MCO32688851036_102019-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_662423-MCO32688851036_102019-O.webp"],
         price: 489900,
         stock: 10,
         description:
@@ -843,7 +843,7 @@ const camping =  [[
       {
         name: "Catre Militar Camilla Plegable Camping Coleman",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_760160-MCO46188107584_052021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_760160-MCO46188107584_052021-O.webp"],
         price: 299900,
         stock: 10,
         description:
@@ -852,7 +852,7 @@ const camping =  [[
       {
         name: "Camping Lona Gruesa Aluminio Doble Capa Carpa Para 4 Persona",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_665937-MCO46452308697_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_665937-MCO46452308697_062021-O.webp"],
         price: 95450,
         stock: 10,
         description:
@@ -861,7 +861,7 @@ const camping =  [[
       {
         name: "Carpa Alpes 4 Personas Eco + Colchón Inflable + Inflador",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_811092-MCO31916354879_082019-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_811092-MCO31916354879_082019-O.webp"],
         price: 239900,
         stock: 10,
         description:
@@ -870,7 +870,7 @@ const camping =  [[
       {
         name: "Carpa Camping 6 Personas+colchoneta+lampara Para Camping",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_790155-MCO45387832453_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_790155-MCO45387832453_032021-O.webp"],
         price: 139900,
         stock: 10,
         description:
@@ -879,7 +879,7 @@ const camping =  [[
       {
         name: "Silla Plegable 30 Pulgadas - Truper 61025",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_634384-MCO48957864833_012022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_634384-MCO48957864833_012022-O.webp"],
         price: 57900,
         stock: 10,
         description:
@@ -888,7 +888,7 @@ const camping =  [[
       {
         name: "Mesa Plegable Portátil De Aluminio Para Camping Klatter",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_840830-MCO43989436067_112020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_840830-MCO43989436067_112020-O.webp"],
         price: 55900,
         stock: 10,
         description:
@@ -897,7 +897,7 @@ const camping =  [[
       {
         name: "Colchoneta Camping Multi Color Rayas",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_881160-MCO31005681881_062019-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_881160-MCO31005681881_062019-O.webp"],
         price: 32000,
         stock: 10,
         description:
@@ -906,7 +906,7 @@ const camping =  [[
       {
         name: "Carpa Toldo Armable Gazebo Normal De 2,4x2,4x3m En Rafia",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_982607-MCO48938124458_012022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_982607-MCO48938124458_012022-O.webp"],
         price: 189900,
         stock: 10,
         description:
@@ -919,7 +919,7 @@ const mascotas =  [[
         name:
           "Alimento Pro Plan OptiRenal Sterilized para gato adulto sabor salmón y arroz en bolsa de 3kg",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_992265-MLA48982270357_012022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_992265-MLA48982270357_012022-O.webp"],
         price: 119800,
         stock: 10,
         description:
@@ -928,7 +928,7 @@ const mascotas =  [[
       {
         name: "Tapete Alfombra Para Arenera Gato Recoge Arena",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_751996-MCO46758842922_072021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_751996-MCO46758842922_072021-O.webp"],
         price: 26500,
         stock: 10,
         description:
@@ -937,7 +937,7 @@ const mascotas =  [[
       {
         name: "Guante Quita Pelo Masajeador Silicona Perros Gatos Mascotas",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_650004-MCO45392272033_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_650004-MCO45392272033_032021-O.webp"],
         price: 7000,
         stock: 10,
         description:
@@ -946,7 +946,7 @@ const mascotas =  [[
       {
         name: "Hermosos Gimnasios Para Gato + Obsequio Juguete Envio Gratis",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_727736-MCO44300998032_122020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_727736-MCO44300998032_122020-O.webp"],
         price: 139900,
         stock: 10,
         description:
@@ -955,7 +955,7 @@ const mascotas =  [[
       {
         name: "Feliway Classic Spray 60 Ml Para Gato",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_888232-MCO42241453670_062020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_888232-MCO42241453670_062020-O.webp"],
         price: 88400,
         stock: 10,
         description:
@@ -965,7 +965,7 @@ const mascotas =  [[
         name:
           "Alimento Kirkland Signature Super Premium Maintenance Cat para gato adulto sabor pollo y arroz en bolsa de 25lb",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_923850-MLA46238178553_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_923850-MLA46238178553_062021-O.webp"],
         price: 147900,
         stock: 10,
         description:
@@ -974,7 +974,7 @@ const mascotas =  [[
       {
         name: "Repelente Para Gatos",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_797000-MCO43473967557_092020-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_797000-MCO43473967557_092020-O.webp"],
         price: 70900,
         stock: 10,
         description:
@@ -983,7 +983,7 @@ const mascotas =  [[
       {
         name: "Rascador Gato Pet Spa Divan Cartón",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_644765-MCO44935045470_022021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_644765-MCO44935045470_022021-O.webp"],
         price: 38437,
         stock: 10,
         description:
@@ -992,7 +992,7 @@ const mascotas =  [[
       {
         name: "Jeringa Dispensadora Dosificadora Pastillas Perros Y Gatos",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_813519-MCO45774471774_042021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_813519-MCO45774471774_042021-O.webp"],
         price: 13000,
         stock: 10,
         description: "Jeringa Dispensadora Dosificadora Pastillas Perros Y Gatos",
@@ -1000,7 +1000,7 @@ const mascotas =  [[
       {
         name: "Arenera Para Gatos Grande+filtro+pala +tapete+regalo",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_960319-MCO46714501656_072021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_960319-MCO46714501656_072021-O.webp"],
         price: 143079,
         stock: 10,
         description:
@@ -1010,7 +1010,7 @@ const mascotas =  [[
         name:
           "Alimento Hill's Prescription Diet Urinary Care c/d Multicare para perro senior todos los tamaños sabor pollo en bolsa de 8.5lb",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_920856-MLA46237810907_062021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_920856-MLA46237810907_062021-O.webp"],
         price: 147000,
         stock: 10,
         description:
@@ -1019,7 +1019,7 @@ const mascotas =  [[
       {
         name: "Renovapet Elimina El Sarro Y Mal Aliento De Tus Mascotas",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_635505-MCO49118612120_022022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_635505-MCO49118612120_022022-O.webp"],
         price: 84900,
         stock: 10,
         description:
@@ -1028,7 +1028,7 @@ const mascotas =  [[
       {
         name: "Pelota Mediana Maciza Irrompible Goma Caucho Para Perro 2x3",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_983626-MCO45688056924_042021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_983626-MCO45688056924_042021-O.webp"],
         price: 19000,
         stock: 10,
         description:
@@ -1037,7 +1037,7 @@ const mascotas =  [[
       {
         name: "Kong Classic - Juguete Interactivo Para Perro Talla M",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_947296-MCO31687065665_082019-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_947296-MCO31687065665_082019-O.webp"],
         price: 42950,
         stock: 10,
         description:
@@ -1046,7 +1046,7 @@ const mascotas =  [[
       {
         name: "Juguete Mordedor Para Perro Multifunc",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_805477-MCO45586347317_042021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_805477-MCO45586347317_042021-O.webp"],
         price: 57950,
         stock: 10,
         description:
@@ -1055,7 +1055,7 @@ const mascotas =  [[
       {
         name: "Peluche Mordedor Pollo Con Pito",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_605804-MCO45586678577_042021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_605804-MCO45586678577_042021-O.webp"],
         price: 34105,
         stock: 10,
         description:
@@ -1064,7 +1064,7 @@ const mascotas =  [[
       {
         name: "3 Juguetes Plasticos Medianos - Unidad a $6302",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_874754-MCO48941016716_012022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_874754-MCO48941016716_012022-O.webp"],
         price: 18905,
         stock: 10,
         description:
@@ -1073,7 +1073,7 @@ const mascotas =  [[
       {
         name: "Juguete Mascota Pollo Chillón De Hule Gallina De Goma",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_623971-MCO45344254622_032021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_623971-MCO45344254622_032021-O.webp"],
         price: 10900,
         stock: 10,
         description:
@@ -1082,7 +1082,7 @@ const mascotas =  [[
       {
         name: "Juguete Interactivo Perros Juguete Para Morder, Porta Comida",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_740111-MCO46157032111_052021-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_740111-MCO46157032111_052021-O.webp"],
         price: 46000,
         stock: 10,
         description:
@@ -1091,7 +1091,7 @@ const mascotas =  [[
       {
         name: "Juguete Perro Pelota Loca Interactiva Con Vibración Y Sonido",
         image:
-          "https://http2.mlstatic.com/D_NQ_NP_864123-MCO49127838963_022022-O.webp",
+          ["https://http2.mlstatic.com/D_NQ_NP_864123-MCO49127838963_022022-O.webp"],
         price: 104760,
         stock: 10,
         description:

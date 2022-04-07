@@ -8,7 +8,7 @@ const {
 } = process.env;
 
 //////////////////////////////////////////////////////////////////////////////////
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecommerce`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/E-Comerce1`, {
   logging: false, 
   native: false,
   define: {
@@ -36,12 +36,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {Categories, Products} = sequelize.models;
+const {Categories, Products, Orders, Users, Product_Line} = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Products.belongsToMany(Categories, {through: "products_categories"})
 Categories.belongsToMany(Products, {through: "products_categories"})
+
+Products.belongsToMany(Orders, {through: Product_Line})
+Orders.belongsToMany(Products, {through: Product_Line})
+
+Orders.belongsTo(Users)
 
 //////////////////////////////////////////////////////////////////////////////////
 module.exports = {
