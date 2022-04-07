@@ -4,7 +4,6 @@ const router = Router();
 
 router.get('/users', async (req, res) => {
     const users = await Users.findAll()
-
     if(users.length) res.send(users)
     else res.send('no hay usuarios')
 })

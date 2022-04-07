@@ -67,7 +67,8 @@ export default function SignIn() {
     if (user.name){
       alert("Ha iniciado sesion correctamente")
       Navigate("/")
-    }// eslint-disable-next-line react-hooks/exhaustive-deps
+    } else {
+    alert("El usuario y o contraseña son incorrectos")}// eslint-disable-next-line react-hooks/exhaustive-deps
   },[user])
 
   function handleEmail(e){
@@ -85,6 +86,7 @@ export default function SignIn() {
       email:email,
       password:password
     }))
+    alert("El usuario y o contraseña son incorrectos")
 }
 
   return (<>

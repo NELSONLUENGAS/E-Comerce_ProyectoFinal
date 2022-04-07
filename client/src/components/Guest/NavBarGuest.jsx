@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBarGuest.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -20,7 +20,7 @@ import { products } from "./Products";
 export default function NavBarGuest() {
     const dispatch= useDispatch()
     const carrito = useSelector(state=>state.ItemsAmount)
-
+    const navigate = useNavigate()
     //////////////__States__///////////////////
     const [expand, setExpand] = useState({
         profile: false,
@@ -124,6 +124,15 @@ export default function NavBarGuest() {
     function handleLogout(){
         alert("Has cerrado sesion correctamente")
         dispatch(logOut())
+    }
+
+    function addAdress(e) {
+        e.preventDefault();
+        setExpand({
+            ...expand,
+            location: false,
+        });
+        navigate('/addAdress')
     }
     const user = useSelector((state) => state.User);
     // useEffect(() => {
@@ -356,7 +365,18 @@ export default function NavBarGuest() {
                                 <h3>Direcciones</h3>
                                 {!user.name? (<Link to="/SignIn"><h3>Por favor incia sesion</h3> </Link>):(<div>
                                 <div>
-                                    Direccion: {user.direction},{user.city},{user.province}
+                                    
+                                    {user.direction.map((element,i) =>{
+                                        return (<div>
+                                                <input type="radio"/>
+                                                <label for={i} >
+                                                <h4>   {element.direction}, {element.city}, {element.province}, {element.postalcode}</h4>
+                                                </label>
+                                            </div>
+                                        )
+                                    })}
+                                    <button style={{margin:"auto",marginTop:"2rem"}}onClick={addAdress}> Agregar nueva direccion</button>
+
                                 </div>
                                 <div>
                                     {/* <select>

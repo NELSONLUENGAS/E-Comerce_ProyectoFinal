@@ -100,10 +100,10 @@ const RegistroForm= () => {
 				birthday: fechaDeNacimiento.campo,
 				dni: dni.campo,
 				nationality: nationality.campo,
-				province: province.campo,
-				city: city.campo,
-				postalcode: postalcode.campo,
-				direction: direction.campo,
+				// province: province.campo,
+				// city: city.campo,
+				// postalcode: postalcode.campo,
+				direction: [{"direction":direction.campo,"postalcode":postalcode.campo,"city":city.campo,"province":province.campo}],
 				phone: telefono.campo
 			}
 			dispatch(postCrearUsuario(input))

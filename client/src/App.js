@@ -31,6 +31,7 @@ function App() {
           <Route exact path="/createCategory" element={<AddCategorie/>}></Route>
           <Route exact path="/createProduct" element={<CrearProducto/>}></Route>
           <Route exact path="/profile" element={<Profile/>}></Route>
+          <Route exact path="/addAdress" element={<CrearProducto/>}></Route>
         </Routes>
     </div>
     </Router>

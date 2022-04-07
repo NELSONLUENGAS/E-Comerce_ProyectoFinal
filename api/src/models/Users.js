@@ -19,7 +19,7 @@ module.exports = sequelize => {
             allowNull: false
         },
         birthday: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         },
         dni: {
@@ -30,20 +30,8 @@ module.exports = sequelize => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        province: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
-        },
-        city: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
-        },
-        postalcode: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
-        },
         direction: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: DataTypes.ARRAY(DataTypes.JSON()),
             allowNull: false
         },
         phone: {
