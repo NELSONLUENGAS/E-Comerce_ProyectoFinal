@@ -8,7 +8,7 @@ const {
 } = process.env;
 
 //////////////////////////////////////////////////////////////////////////////////
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/E-Comerce1`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecommerce`, {
   logging: false, 
   native: false,
   define: {

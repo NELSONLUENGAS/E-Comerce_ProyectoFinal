@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
-    "dev": "nodemon api/"
+    "start": "nodemon -L"
   },
   "author": "Nelson",
   "license": "ISC",
@@ -21,6 +20,7 @@
     "express": "^4.17.3",
     "ioredis": "^4.28.5",
     "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.12",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
