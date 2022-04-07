@@ -9,19 +9,11 @@ router.get('/users', async (req, res) => {
     else res.send('no hay usuarios')
 })
 
-<<<<<<< Updated upstream
-router.get('/users/:email', async (req, res) => {
-    const {email} = req.params
-    const user = await Users.findOne({where: {email}})
-    if(user) res.send(true)
-    else res.send(false)
-=======
 router.get('/login', async (req, res) => {
     const {email, password} = req.query
     const user = await Users.findOne({where: {email, password}})
     if(user) res.send(user)
     else res.status(404).send('El usuario o contraseña son incorrectos')
->>>>>>> Stashed changes
 })
 
 router.post('/createUser', async (req, res) => {
@@ -31,14 +23,9 @@ router.post('/createUser', async (req, res) => {
         const user = {email, password, name, lastname, birthday, dni, nationality, province, city, postalcode, direction, phone}
         await Users.create(user)
         res.send('The user has been created successfully')
-<<<<<<< Updated upstream
-    } catch {
-        res.send('User already create')
-=======
     } 
     catch {
         res.send('The e-mail is alreay been used')
->>>>>>> Stashed changes
     }
     
 })
