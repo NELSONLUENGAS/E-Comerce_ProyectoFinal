@@ -201,6 +201,14 @@ export default function rootReducer(state = initialState, action) {
                 return{
                     ...state
                 }
+        case 'DELETE_CART':
+                return{
+                    ...state,
+                    basket: [],
+                    ItemsAmount: 0,
+                    SumPrice: [0],
+
+                }
         default:
             return state
 

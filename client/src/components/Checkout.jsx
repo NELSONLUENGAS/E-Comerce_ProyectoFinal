@@ -23,7 +23,7 @@ export default function Checkout(){
         <h1 style={{textAlign:"center"}}>Envio</h1>
         <h5>Contacto: {user.name} {user.lastname}</h5>
         <h5>Forma de envio: Envio a domicilio</h5>
-        <h5>Domicilio de entrega: {user.direction},{user.city},{user.province}</h5>
+        <h5>Domicilio de entrega: {user.direction.direction},{user.direction.city},{user.direction.province}</h5>
 
         </div>
         <div style={{display:"flex",flexDirection:"column",gap:"1rem",justifyContent:"center",width:"50%",margin:"auto",alignItems:"center"}}>

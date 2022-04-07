@@ -1,13 +1,13 @@
 /** @format */
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductId } from "../../actions/index";
 import NavBarGuest from "../Guest/NavBarGuest";
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket } from "../../actions/index";
+import { addToBasket,vaciarCarrito} from "../../actions/index";
 import Review from "./Review";
 import DoReview from "./DoReview";
 
@@ -35,6 +35,7 @@ export default function ProductDetail() {
         ],
     };
     console.log(productosdel);
+    const navigate=useNavigate();
     let [finalStock,setFinalStock] = useState([])
     const [promedioReview, setPromedioReview] = useState(0);
     const [quantity, setQuantity] = useState(1);
@@ -83,6 +84,14 @@ export default function ProductDetail() {
     const AddToBasket = () => {
         dispatch(addToBasket(item,quantity));
     };
+    function ShopNow (e){
+        var opcion = window.confirm("Esto vaciara tu carrito y te llevara directamente a la compra del producto, quieres continuar? ")
+        if(opcion===true){
+            dispatch(vaciarCarrito())
+            dispatch(addToBasket(item,quantity));
+            navigate('/checkout-page')
+        }
+    }
 
     function handleQuantity(e){
         e.preventDefault()
@@ -289,7 +298,7 @@ export default function ProductDetail() {
                             </p>
 
                             <div className="button-buy-product-detail">
-                                <button className="button-primary-product-detail">
+                                <button  onClick={ShopNow} className="button-primary-product-detail">
                                     Comprar ahora
                                 </button>
                                 <button

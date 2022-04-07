@@ -56,6 +56,11 @@ export function addToBasket(payload,quantity){
         quantity
     }
 }
+export function vaciarCarrito(){
+    return{
+        type:"DELETE_CART",
+    }
+}
 
 
 export function RemoveToBasket(payload){
@@ -114,11 +119,6 @@ export function filterByCategory(payload){
         payload
     }
 }
-
-
-
-
-
 
 export function postProductos(payload) {
     return async function (dispatch) {

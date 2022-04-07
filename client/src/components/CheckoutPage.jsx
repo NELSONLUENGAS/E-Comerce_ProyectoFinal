@@ -13,7 +13,7 @@ import Total from "./Total";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import NavBarGuest from "./Guest/NavBarGuest.jsx";
-import { getMercadoPago } from "../actions/index.js";
+import { getMercadoPago, vaciarCarrito } from "../actions/index.js";
 import "./CheckoutPage.css"
 
 export default function CheckoutPage() {
@@ -45,7 +45,12 @@ export default function CheckoutPage() {
     //     ]
 
 
-
+    function vaciarCarritoLocal(e){
+        let opcion = window.confirm("Esto vaciara tu carrito por completo, quieres continuar?")
+        if(opcion===true){
+            dispatch(vaciarCarrito())
+        }
+    }
     function onPay(e){
         e.preventDefault();
         if(user.name){
@@ -76,7 +81,7 @@ export default function CheckoutPage() {
                             description={product.description}
                         />
                     ))}
-
+                    <button onClick={vaciarCarritoLocal} style={{color:'white',backgroundColor:"red",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Vaciar carrito</button>
                     <Total onPay={onPay}/>
                 </div>
                 ):<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>}                
