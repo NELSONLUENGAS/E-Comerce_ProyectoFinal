@@ -30,17 +30,12 @@ router.post('/createUser', async (req, res) => {
 })
 
 router.post('/users/:email/addlocation', async (req, res) => {
-    const {province, city, postalcode, direction} = req.body, {email} = req.params
+    const {newAdress} = req.body, {email} = req.params
 
     try{
         const user = await Users.findOne({where: {email}})
-        
-        user.city = [...user.city, city]
-        user.province = [...user.province, province]
-        user.direction = [...user.direction, direction]
-        user.postalcode = [...user.postalcode, postalcode]
+        user.direction=[...user.direction,newAdress]
         await user.save()
-
         res.send('Add new location')
     }
     catch {
@@ -54,16 +49,12 @@ router.delete('/users/:email/removelocation', async (req, res) => {
     try{
         const user = await Users.findOne({where: {email}})
         
-        if(user.postalcode.length > 1){
-            user.city = filterArray(user, "city", index)
-            user.province = filterArray(user, "province", index)
-            user.direction = filterArray(user, "direction", index)
-            user.postalcode = filterArray(user, "postalcode", index)
+        if(user.direction.length > 1){
+            user.direction = user.direction.filter((d, i) => i !== index)
             await user.save()
-
             res.send('remove location')
         }
-        else res.send('imposible remove location')
+        else res.send('no se ha encontrado el usuario')
     }
     catch {
         res.status(500).send('INVALID EMAIL')

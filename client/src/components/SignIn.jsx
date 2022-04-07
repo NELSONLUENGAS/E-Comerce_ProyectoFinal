@@ -60,16 +60,23 @@ export default function SignIn() {
   const classes = useStyles();
   //const {isAuthenticated} = useAuth0();
   const [email,setEmail] = useState('')
-  const [password,setPassword] = useState('')
+  const [password,setPassword] = useState('');
+  const [validate,setValidate] = useState(0);
   const user = useSelector((state) => state.User);
 
+
   useEffect(()=>{
-    if (user.name){
-      alert("Ha iniciado sesion correctamente")
-      Navigate("/")
-    } else {
-    alert("El usuario y o contraseña son incorrectos")}// eslint-disable-next-line react-hooks/exhaustive-deps
-  },[user])
+    if(validate>0){
+      setTimeout(()=>{      
+        if (user.name){
+          alert("Ha iniciado sesion correctamente")
+          Navigate("/")
+        }else {
+         alert("El usuario y o contraseña son incorrectos")
+        }
+      });
+    }
+  },[validate,user])
 
   function handleEmail(e){
     e.preventDefault()
@@ -86,7 +93,7 @@ export default function SignIn() {
       email:email,
       password:password
     }))
-    alert("El usuario y o contraseña son incorrectos")
+    setValidate(validate+1)
 }
 
   return (<>
