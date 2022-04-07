@@ -367,7 +367,7 @@ export default function NavBarGuest() {
                                 <div>
                                     
                                     {user.direction.map((element,i) =>{
-                                        return (<div>
+                                        return (<div key={i}>
                                                 <input type="radio"/>
                                                 <label for={i} >
                                                 <h4>   {element.direction}, {element.city}, {element.province}, {element.postalcode}</h4>
