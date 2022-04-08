@@ -116,7 +116,7 @@ export default function Products() {
         );
         // console.log(categories);
     }, [productos, currentPage,categoryFilter,checkFreeShipping,checkToday,checkMoreSeller,sortOf]);
-    const classes = useStyles();
+    // const classes = useStyles();
     return (
         <div style={{ backgroundColor: "#EBEBEB" }}>
             <NavBarGuest/>
