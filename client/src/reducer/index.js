@@ -11,6 +11,11 @@ const initialState = {
     mercadoPago: {},
     basketBack:[],
     User:[],
+    Auth: {
+        isAdmin: true,
+        isLogin: false,
+        role: 'admin'
+    },
     orderAndFilter:{
         orderByPrice: "Relevant",
         filterByCategory: "Todas",
@@ -47,6 +52,20 @@ export default function rootReducer(state = initialState, action) {
             state.orderAndFilter.filterMoreSeller = action.payload
             return{...state,products:orderAndFilter(state, state.orderAndFilter.filterByCategory)}
             
+        }
+
+        case "FILTER_BY_2_PRICE":{
+            const min= action.payloadMin
+            const max= action.payloadMax
+            const product = state.allProducts
+            const filterPrice = product.filter(el=>{
+                if(el.price>=parseInt(min) && el.price<= parseInt(max)) return el.price
+            })
+            console.log(filterPrice)
+            return{
+                ...state,
+                products:filterPrice
+            }
         }
         case 'ORDER_BY_PRICE':
             state.orderAndFilter.orderByPrice = action.payload

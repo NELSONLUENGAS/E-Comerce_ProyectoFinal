@@ -16,6 +16,7 @@ import {
     getProducts,getBasket,
     getCategories,filterBy2Price,
     getCategoriesByName,getUserSigningIn,filterByCategory,filterFreeShipping,filterByPrice,filterMoreSeller,filterToday,orderByPrice
+
 } from "../actions/index";
 import Carrousel from "./Carrousel";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,34 +43,7 @@ export default function Products() {
     }
     console.log(queryParams)
     
-    const [localStorageVar,setLocalStorageVar] = useState('')
-    
-    // console.log(queryParams);
-    /*------------------------------------ */
-    /*------------------------------------ */
-    //  function brinUserLocalStorage (){
-    //      console.log(localStorage.getItem('userData'))
-    //      if (localStorage.getItem('userData')==='null'){
-    //          alert('entre')
-    //      } else{
-    //         var userLocalStorage = localStorage.getItem('userData');
-    //         userLocalStorage=JSON.parse(userLocalStorage)
-    //         console.log(userLocalStorage)
-    //         const email=userLocalStorage.email
-    //         const password=userLocalStorage.password
-    //         console.log(email)
-    //         console.log(password)
-    //             dispatch(getUserSigningIn({
-    //                 'email':email,
-    //                 'password':password
-    //             }))
-    //     }
-        
-        
-        
-    // }
-
-  
+    const [localStorageVar,setLocalStorageVar] = useState('')  
     const productos = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
     const [currentPage, setCurrentPage] = useState(1);
@@ -84,8 +58,6 @@ export default function Products() {
     function paginado(pageNumber) {
         setCurrentPage(pageNumber);
     }
-
-    
 
     const [categoryFilter, setCategoryFilter] = useState("Todas");
     const [checkFreeShipping,setCheckFreeShipping]=useState(false)
@@ -109,8 +81,6 @@ export default function Products() {
         e.preventDefault()
         dispatch(filterBy2Price(numberMin, numberMax))
     }
-
-
     
     function handleCategories(e) {
         e.preventDefault();
@@ -184,7 +154,8 @@ export default function Products() {
         );
         // console.log(categories);
     }, [productos, currentPage,categoryFilter,checkFreeShipping,checkToday,checkMoreSeller,sortOf]);
-    const classes = useStyles();
+    // const classes = useStyles();
+
     return (
         <div style={{ backgroundColor: "#EBEBEB" }}>
             <NavBarGuest/>
@@ -393,5 +364,6 @@ export default function Products() {
                 paginado={paginado}
             />
         </div>
-    );
+    )
 }
+

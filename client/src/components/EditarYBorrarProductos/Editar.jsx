@@ -1,4 +1,4 @@
-import React, {useEffect, useState}  from "react";
+import React, {Fragment, useEffect, useState}  from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,10 +18,12 @@ import { getProducts, UpdateProduct, DeleteProduct } from "../../actions";
 
 
 
+
 const Editar = () => {
     const dispatch = useDispatch()
     const Products = useSelector((state) => state.products);
     const[input, setstate]= useState({
+        id: "",
         name:"",
         price: "",
         stock: "",
@@ -35,6 +37,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
   
     const mostrarModalInsertar= (e)=> {
         setstate({
+            id: e.id,
             name: e.name,
             price: e.price,
             stock: e.stock,
@@ -64,7 +67,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
         e.preventDefault()
         var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+id)
         if(opcion===true){
-     
+      
           dispatch(DeleteProduct(id))
         }
     }
@@ -72,15 +75,20 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
 
     return (
         <>
+    
             <Container>
                 <br />
                 <h1>Productos en Venta</h1>
                 <br />
+                <Fragment>
+
+      </Fragment>
+     
                 <br />
                 <Table className="table">
                     <thead>
                         <tr>
-
+                        <th>id</th>
                             <th>Producto</th>
                             <th>Precio</th>
                             <th>Stock</th>
@@ -94,7 +102,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
                     <tbody>
                         {Products.map((el)=>(
                             <tr key={el.id}>
-
+                                <td>{el.id}</td>
                                 <td>{el.name}</td>
                                 <td>{el.price}</td>
                                 <td>{el.stock}</td>
@@ -212,7 +220,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
                 </ModalFooter>
                  </form>
             </Modal>
-           
+    
         </>
     );
 

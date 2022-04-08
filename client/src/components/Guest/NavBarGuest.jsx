@@ -16,7 +16,7 @@ import Logo from '../../svg/latcom1.png'
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
-import {getBasket} from '../../actions/index'
+import {getBasket,getCategoriesByName} from '../../actions/index'
 
 export default function NavBarGuest() {
     const dispatch= useDispatch()
@@ -29,7 +29,6 @@ export default function NavBarGuest() {
         subCategory: false,
         mobile: false,
         location: false,
-        filterCat: "",
         filterSub: "",
         details: false,
     });
@@ -45,9 +44,9 @@ export default function NavBarGuest() {
         e.preventDefault();
         setExpand({
             ...expand,
-            filterCat: e.target.value,
             subCategory: true,
         });
+        //dispatch(getCategoriesByName())
     }
     function handleSelect(e) {
         e.preventDefault();
@@ -156,7 +155,7 @@ export default function NavBarGuest() {
                     <img src={Logo} style={{width:"200px"}} alt="Icono empresa" />
                     </Link>
                 </div>
-                <div  className="cusElement2">
+                <div onMouseOver={modalDown} className="cusElement2">
                     <SearchBar/>
                 </div>
                 <div onMouseOver={modalDown} className="cusElement3">
@@ -223,7 +222,7 @@ export default function NavBarGuest() {
                 <div className="cusElement02"></div>
                 {/* <div onMouseOver={modalDown} className="cusElement03"></div> */}
                 {expand.category && (
-                    <div className="cusElement0">
+                    <div onMouseLeave={modalDown} className="cusElement0">
                         <div className="categories">
                             <div>
                                 <option
@@ -305,13 +304,13 @@ export default function NavBarGuest() {
                                 ))}
                             </div>
                         )}
-                        {/* {expand.subCategory && img && (
+                        {expand.subCategory && img && (
                             <div className="imgCat">
                                 {img?.map((img) => (
                                     <img key={img} src={img} alt="Imagen" />
                                 ))}
                             </div>
-                        )} */}
+                        )}
                     </div>
                 )}
                 <div className="cusElement01">
