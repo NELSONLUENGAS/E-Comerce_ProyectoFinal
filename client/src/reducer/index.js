@@ -9,6 +9,11 @@ const initialState = {
     categories: [],
     mercadoPago: {},
     User:[],
+    Auth: {
+        isAdmin: true,
+        isLogin: false,
+        role: 'admin'
+    },
     orderAndFilter:{
         orderByPrice: "Relevant",
         filterByCategory: "Todas",

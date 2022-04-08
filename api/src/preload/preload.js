@@ -1,6 +1,6 @@
 const {Products, Categories} = require('../db')
 
-const belleza =  [[
+const belleza =  [[ 
       {
         name: "Cepillo Alisador Babyliss Pro Eléctrico Nano Titanium",
         image:

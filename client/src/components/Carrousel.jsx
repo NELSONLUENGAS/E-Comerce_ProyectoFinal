@@ -83,7 +83,7 @@ class Slides extends Component {
     });
 
     return (
-        <div style={{zIndex:"-1"}}>
+        <div>
       <Carousel
         activeIndex={activeIndex}
         next={this.next}
@@ -91,7 +91,7 @@ class Slides extends Component {
       >
         <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
         {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+        <CarouselControl z-tabIndex={-1} direction="prev" directionText="Previous" onClickHandler={this.previous} />
         <CarouselControl  color="black" direction="next" directionText="Next" onClickHandler={this.next} />
       </Carousel>
       </div>
