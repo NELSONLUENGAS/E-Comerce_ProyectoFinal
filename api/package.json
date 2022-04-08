@@ -9,7 +9,7 @@
   "author": "Nelson",
   "license": "ISC",
   "engines": {
-    "node": ">=15.0.0",
+    "node": ">=12.18.3",
     "npm": ">=6.14.6"
   },
   "dependencies": {
