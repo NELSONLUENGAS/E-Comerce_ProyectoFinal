@@ -65,10 +65,10 @@ router.post('/createProduct', async (req, res) => {
     }
 })
 
-router.put('/updateProduct/:productId', async (req, res) => {
-    const {productId} = req.params, {name, price, stock, image, description} = req.body
+router.put('/updateProduct/', async (req, res) => {
+    const {id, name, price, stock, image, description} = req.body
 
-    const product = await Products.findOne({where: {id: productId}})
+    const product = await Products.findOne({where: {id: id}})
 
     if(name) product.name = name
     if(price) product.price = price
@@ -84,7 +84,7 @@ router.delete('/deleteProduct/:productId', async (req, res) => {
     const {productId} = req.params
 
     try {
-        const product = await Products.findOne({where: {id: productId}})
+        const product = await Products.findByPk(productId)
     
         if(product) {
             await product.destroy()
@@ -97,6 +97,7 @@ router.delete('/deleteProduct/:productId', async (req, res) => {
         res.status(500).send('INVALID ID')
     }
 })
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 

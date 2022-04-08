@@ -211,7 +211,7 @@ export function UpdateProduct(id) {
 }
 export function DeleteProduct(id) {
     return async function (dispatch) {
-        const json = await axios.put('http://localhost:3001/deleteProduct/',id);
+        const json = await axios.delete('http://localhost:3001/deleteProduct/',id);
         return dispatch({
             type: "DELETE_PRODUCT",
             payload: json.data
