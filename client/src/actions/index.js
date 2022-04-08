@@ -19,6 +19,13 @@ export function getCategories(categoryName){
         })
     }
 }
+export function filterBy2Price(payloadMin, payloadMax){
+    return{
+        type:"FILTER_BY_2_PRICE",
+        payloadMin,
+        payloadMax
+    }
+}
 export function getCategoriesByName(categoryName){
     return async function (dispatch){
         const products = await axios.get('http://localhost:3001/products?category=' + categoryName)
