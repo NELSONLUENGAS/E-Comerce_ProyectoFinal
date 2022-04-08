@@ -15,6 +15,7 @@ import { useSearchParams } from "react-router-dom";
 import {
     getProducts,
     getCategories,
+    filterBy2Price,
     getCategoriesByName,filterByCategory,filterFreeShipping,filterByPrice,filterMoreSeller,filterToday,orderByPrice
 } from "../actions/index";
 import Carrousel from "./Carrousel";
@@ -69,8 +70,23 @@ export default function Products() {
     const [checkToday,setCheckToday]=useState(false)
     const [checkMoreSeller,setCheckMoreSeller]=useState(false)
     const [sortOf,SetsortOf]=useState('Relevant')
+    const [Numberinput, setinputNumber]= useState({
+        numberMin: "",
+        numberMax: ""
+    })
+    const{numberMin, numberMax}= Numberinput
+    const onChange =(e)=>{
+        setinputNumber({
+            ...Numberinput,
+            [e.target.name]:e.target.value
+        })
+    }
+    
+    const onSubmitt= (e)=>{
+        e.preventDefault()
+        dispatch(filterBy2Price(numberMin, numberMax))
 
-
+    }
     
     function handleCategories(e) {
         e.preventDefault();    
@@ -215,7 +231,10 @@ export default function Products() {
                             paddingLeft:"0.5em"
                         }}
                         type="number"
+                        value={numberMin}
+                        name="numberMin"
                         placeholder="Minimo.."
+                        onChange={onChange}
                     />
                     <input
                         style={{
@@ -228,6 +247,9 @@ export default function Products() {
                         }}
                         type="number"
                         placeholder="Maximo.."
+                        value={numberMax}
+                        name="numberMax"
+                        onChange={onChange}
                     />
                     <button
                         style={{
@@ -236,6 +258,7 @@ export default function Products() {
                             fontSize: "12px",
                             borderRadius: "5px",
                         }}
+                        onClick={onSubmitt}
                     >
                         Enter
                     </button>
