@@ -41,7 +41,7 @@ const CrearForm = () => {
 	const [name, cambiarname] = useState({ campo: '', valido: null });
 	const [price, cambiarprice] = useState({ campo: '', valido: null });
 	const [stock, cambiarstock] = useState({ campo: '', valido: null });
-	const [image, cambiarimage] = useState({ campo: '', valido: null });
+	const [image, cambiarimage] = useState({ campo: [''], valido: null });
 	const [description, CambiarDescripcion] = useState({ campo: '', valido: null });
 	const {campo} = description
 	const [terminos, cambiarTerminos] = useState(false);

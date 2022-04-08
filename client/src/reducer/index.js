@@ -5,9 +5,11 @@ const initialState = {
     basket: [],
     ItemsAmount: 0,
     SumPrice: [0],
+    SumPriceBack: [0],
     productId: [],
     categories: [],
     mercadoPago: {},
+    basketBack:[],
     User:[],
     orderAndFilter:{
         orderByPrice: "Relevant",
@@ -15,7 +17,7 @@ const initialState = {
         filterToday: false,
         filterMoreSeller:false,
         filterFreeShipping:false,
-        filterByPrice:"",
+        filterByPrice:{min:0,max:""},
     }
 }
 // //==== Setear Reducers ======//
@@ -25,21 +27,25 @@ export default function rootReducer(state = initialState, action) {
             state.orderAndFilter.filterToday = action.payload
             return{
                 ...state,
-                products:orderAndFilter(state)
+                products:orderAndFilter(state, state.orderAndFilter.filterByCategory)
             }
         case 'FILTER_BY_CATEGORY':{
+            if(action.filter==='Todas'){
+            state.orderAndFilter.filterByCategory = state.allProducts
+                return{...state,products:state.allProducts}
+            }else{
             state.orderAndFilter.filterByCategory = action.payload
-            return{...state,products:orderAndFilter(state)}
+            return{...state,products:orderAndFilter(state,action.payload)}}
             
         }
         case 'FILTER_FREE_SHIPPING':{
             state.orderAndFilter.filterFreeShipping = action.payload
-            return{...state,products:orderAndFilter(state)}
+            return{...state,products:orderAndFilter(state, state.orderAndFilter.filterByCategory)}
             
         }
         case 'FILTER_MORE_SELLER':{
             state.orderAndFilter.filterMoreSeller = action.payload
-            return{...state,products:orderAndFilter(state)}
+            return{...state,products:orderAndFilter(state, state.orderAndFilter.filterByCategory)}
             
         }
         case 'ORDER_BY_PRICE':
@@ -47,13 +53,13 @@ export default function rootReducer(state = initialState, action) {
             console.log(state.products)
             return{
                 ...state,
-                products:orderAndFilter(state)
+                products:orderAndFilter(state, state.orderAndFilter.filterByCategory)
             }
         
-        case 'FILTER_BY_PRICE':{
-            state.orderAndFilter.filterByPrice = action.payload
-            return{...state,products:orderAndFilter(state)}
-            
+        case 'FILTER_BY_2_PRICE':{
+            state.orderAndFilter.filterByPrice = {min:action.payloadMin,max:action.payloadMax}
+            console.log(state.orderAndFilter)
+            return{...state,products:orderAndFilter(state, state.orderAndFilter.filterByCategory)}
         }
         case "ADD_TO_BASKET":
             const indexToAdd = state.basket.findIndex(basketItem => basketItem.id === action.payload.id);
@@ -158,6 +164,8 @@ export default function rootReducer(state = initialState, action) {
                 products: action.payload
             }
         case 'GET_MERCADOPAGO':
+            console.log("mercadopago reducer")
+            console.log(action.payload)
             return {
                 ...state,
                 mercadoPago: action.payload
@@ -209,6 +217,34 @@ export default function rootReducer(state = initialState, action) {
                     SumPrice: [0],
 
                 }
+        case 'GET_BASKET':
+            
+            state.basketBack=action.payload
+            console.log('este es el action payload de get basket')    
+            console.log(action.payload)
+            console.log(state.basketBack)
+            let sumatotalBack = 0
+                state.basketBack.Products.map((item) => {
+                    return (
+                        sumatotalBack = Number(sumatotalBack) + (Number(item.Product_Line.amount) * Number(item.Product_Line.price))
+                    )
+                })
+                console.log(sumatotalBack)
+                state.SumPriceBack = sumatotalBack
+                
+                let sumItemsBack = 0
+                state.basketBack.Products.map((item) => {
+                    return (
+                        sumItemsBack = Number(sumItemsBack) + (Number(item.Product_Line.amount))
+                    )
+                })
+                console.log(sumItemsBack)
+                state.SumItemsBack = sumItemsBack
+            
+                return{
+                    ...state,
+                    basketBack:action.payload
+                }
         default:
             return state
 
@@ -217,13 +253,24 @@ export default function rootReducer(state = initialState, action) {
 }
 
 
-    function orderAndFilter(state) {
-        const productsFilteredByCategory = filterByCategory(state)
+    function orderAndFilter(state,orderByPrice) {
+        const productsFilteredByCategory = filterByCategory(state,orderByPrice)
+        console.log("Este es el console log de la categoria")
+        console.log(productsFilteredByCategory)
         const productsFilteredByToday = filterByToday(state,productsFilteredByCategory)
+        console.log("Este es el console log del today")
+        console.log(productsFilteredByToday)
         const productsFilteredByFreeShipping =filterByFreeShipping(state,productsFilteredByToday)
+        console.log("Este es el console log de free shipping")
+        console.log(productsFilteredByFreeShipping)
         const productsFilteredByMoreSeller = filterByMoreSeller(state,productsFilteredByFreeShipping)
-        console.log(state.allProducts)
-        return orderBy(productsFilteredByMoreSeller, state.orderAndFilter.orderByPrice)
+        console.log("Este es el console log del ultimo filtro")
+        console.log(productsFilteredByMoreSeller)
+        const productsFilterByMin=filterByMin(state,productsFilteredByMoreSeller)
+        const productsFilterByMax=filterByMax(state,productsFilterByMin)
+        console.log("Este es el console log del filtro de precios")
+        console.log(productsFilterByMax)
+        return orderBy(productsFilterByMax, state.orderAndFilter.orderByPrice)
     }
     function orderBy(products, orderByPrice) {
         let orderedProducts
@@ -231,16 +278,18 @@ export default function rootReducer(state = initialState, action) {
             orderedProducts = products.sort((productA, productB) => productA['price']-(productB['price']))
         }
         if (orderByPrice ==='Relevant') {
-            orderedProducts = products.sort((productA, productB) => productA['price']-(productB['price']))
+            orderedProducts = products
         }
         if (orderByPrice === 'desc') {
             orderedProducts = products.sort((productA, productB) => productB['price']-(productA['price']))
         }
         return orderedProducts
     }
-    function filterByCategory(state) {
-        const categoryFiltered = state.orderAndFilter.filterByCategory === 'Todas' ? state.allProducts : state.allproducts.filter(obj => obj.category === state.orderAndFilter.filterByCategory)
-        return categoryFiltered
+    function filterByCategory(state,productFilteredByCategory) {
+        if(productFilteredByCategory==='Todas'){
+            return state.allProducts
+        }
+        return productFilteredByCategory
     }
     function filterByToday(state,products) {
         if(state.orderAndFilter.filterToday){
@@ -250,15 +299,37 @@ export default function rootReducer(state = initialState, action) {
     }
     function filterByFreeShipping(state,products) {
             if(state.orderAndFilter.filterToday){
-                const todayFiltered = products.filter(obj => obj.price < 45000)
-                return todayFiltered
+                const freeShippingProducts = products.filter(obj => obj.price < 999999)
+                return freeShippingProducts
             } else return products
         }
     function filterByMoreSeller(state,products) {
             if(state.orderAndFilter.filterToday){
-                const todayFiltered = products.filter(obj => obj.stock < 13)
-                return todayFiltered
+                const moreSellerProduct = products.filter(obj => obj.stock < 13)
+                return moreSellerProduct
             } else return products
         }
-
+    function filterByMin (state,products){
+        let minProducts=""
+        if(state.orderAndFilter.filterByPrice.min>0){
+            console.log('entre al chequeo del minimo')
+            minProducts = products.filter(obj => obj.price > state.orderAndFilter.filterByPrice.min)
+            return minProducts
+        }else{
+            return products
+        }
+    }
+    function filterByMax (state,products){
+        let maxProducts=""
+        if (state.orderAndFilter.filterByPrice.max >0){
+            console.log('entre al chequeo del max')
+            maxProducts = products.filter(obj => obj.price < state.orderAndFilter.filterByPrice.max)
+            return maxProducts
+        }   else {
+            return products    
+        }
+        // if (maxProducts.length>0 && maxProducts!==[]){
+        //     return maxProducts
+        // } else return products
+    }
         

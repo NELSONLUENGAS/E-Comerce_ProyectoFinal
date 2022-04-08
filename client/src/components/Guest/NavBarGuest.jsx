@@ -16,10 +16,11 @@ import Logo from '../../svg/latcom1.png'
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
+import {getBasket} from '../../actions/index'
 
 export default function NavBarGuest() {
     const dispatch= useDispatch()
-    const carrito = useSelector(state=>state.ItemsAmount)
+    const carrito = useSelector(state=>state.SumItemsBack)
     const navigate = useNavigate()
     //////////////__States__///////////////////
     const [expand, setExpand] = useState({
@@ -136,7 +137,8 @@ export default function NavBarGuest() {
     }
     const user = useSelector((state) => state.User);
     // useEffect(() => {
-    // },user)
+    //     dispatch(getBasket(user.email));    
+    // },[dispatch])
     function capitalLetter(){
         let capitalLetter = user.name;
         return capitalLetter = capitalLetter[0].toUpperCase();

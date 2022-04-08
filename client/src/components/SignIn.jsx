@@ -70,6 +70,7 @@ export default function SignIn() {
       setTimeout(()=>{      
         if (user.name){
           alert("Ha iniciado sesion correctamente")
+          localStorage.setItem('userData', JSON.stringify(user));          
           Navigate("/")
         }else {
          alert("El usuario y o contraseña son incorrectos")

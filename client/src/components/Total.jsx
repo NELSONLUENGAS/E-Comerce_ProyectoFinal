@@ -28,8 +28,8 @@ const Total = ({onPay}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate(); 
     
-    const TotalPrice = useSelector((state)=>state.SumPrice)
-    const TotalItem = useSelector((state)=>state.ItemsAmount)
+    const TotalPrice = useSelector((state)=>state.SumPriceBack)
+    const TotalItem = useSelector((state)=>state.SumItemsBack)
     useEffect(()=>{
         dispatch(SumItem())
     },[dispatch])

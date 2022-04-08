@@ -14,12 +14,12 @@ import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { useDispatch } from "react-redux";
-import { addToBasket } from "../actions";
+import { useSelector,useDispatch } from "react-redux";
+import { addToBasket,getBasket, addBasketBack} from "../actions";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Rating } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Corazon from "../svg/heart-svgrepo-com.svg";
 import Cart from '../svg/shopping-cart.svg'
 import "./Product.css";
@@ -61,6 +61,7 @@ export default function Product({
     description,
 }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [item] = useState({
@@ -72,12 +73,28 @@ export default function Product({
         description:description
     });
 
+    const user = useSelector((state) => state.User);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     const AddToBasket = () => {
-        dispatch(addToBasket(item,1));
+        if(user.email){
+            const fetchData = async () => {
+                await dispatch(addBasketBack({"productId":id,"amount":1},user.email));
+                await dispatch(getBasket(user.email));
+              }
+            fetchData()
+            
+            alert('El producto se agrego correctamente')            
+            console.log(id)  
+
+        }else{
+            alert('Inicia sesion por favor')
+            navigate("/SignIn")
+            // dispatch(addToBasket(item,1));
+        }
     };
 
 

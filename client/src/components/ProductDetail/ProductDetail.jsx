@@ -7,7 +7,7 @@ import { getProductId } from "../../actions/index";
 import NavBarGuest from "../Guest/NavBarGuest";
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket,vaciarCarrito} from "../../actions/index";
+import { addToBasket,vaciarCarrito,addBasketBack,getBasket,vaciarCarritoBack} from "../../actions/index";
 import Review from "./Review";
 import DoReview from "./DoReview";
 
@@ -42,6 +42,7 @@ export default function ProductDetail() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const productDetail = useSelector((state) => state.productId);
+    const user = useSelector((state) => state.User);
     const [item, setItem] = useState({
         id: productDetail.id,
         name: productDetail.name,
@@ -64,7 +65,7 @@ export default function ProductDetail() {
         
        
         setFinalStock([])
-        for (let i = 1; i <= productDetail.stock ; i++) {
+        for (let i = 2; i <= productDetail.stock ; i++) {
             setFinalStock(oldArray => [...oldArray,i])
         }
 
@@ -82,14 +83,36 @@ export default function ProductDetail() {
     console.log(item);
 
     const AddToBasket = () => {
-        dispatch(addToBasket(item,quantity));
+        
+        if(user.name){
+            const fetchData = async () => {
+                await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
+                await dispatch(getBasket(user.email));
+              }
+            fetchData()
+            
+        } else{
+            alert("Por favor incia sesion")
+            navigate('/SignIn')
+        }
     };
     function ShopNow (e){
-        var opcion = window.confirm("Esto vaciara tu carrito y te llevara directamente a la compra del producto, quieres continuar? ")
-        if(opcion===true){
-            dispatch(vaciarCarrito())
-            dispatch(addToBasket(item,quantity));
-            navigate('/checkout-page')
+        if(user.name){
+            var opcion = window.confirm("Esto vaciara tu carrito y te llevara directamente a la compra del producto, quieres continuar? ")
+            if(opcion===true){
+                const fetchData = async () => {
+                    await dispatch(vaciarCarritoBack(user.email))
+                    await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
+                    await dispatch(getBasket(user.email));
+                  }
+                fetchData()
+                // dispatch(vaciarCarrito())
+                // dispatch(addToBasket(item,quantity));
+                navigate('/checkout-page')
+            }
+        }else{
+            alert("Por favor incia sesion")
+            navigate('/SignIn')
         }
     }
 

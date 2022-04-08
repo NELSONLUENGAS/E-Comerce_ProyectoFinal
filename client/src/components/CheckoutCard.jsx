@@ -8,8 +8,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useDispatch } from "react-redux";
-import { RemoveToBasket,addToBasket,substractQuantityItem } from "../actions";
+import { useDispatch,useSelector } from "react-redux";
+import { RemoveToBasket,putBasketBack,getBasket,addToBasket,substractQuantityItem,addBasketBack } from "../actions";
 import "./CheckoutCard.css";
 
 export default function CheckoutCard({
@@ -33,24 +33,50 @@ export default function CheckoutCard({
       quantity:1,
       description:description
   });
-  // useEffect(() =>{
-
-  // },[quantityProduct])
+    const user = useSelector((state) => state.User);
+    const basketBack = useSelector((state) => state.basketBack);
     const [quantityProduct,setQuantityProduct] = useState(quantity);
 
     function subtractionQuantity(){
-      if(quantityProduct>1){
-      setQuantityProduct(Number(quantityProduct)-1)
-      setPriceItem(price*(Number(quantityProduct)-1))
-      dispatch(substractQuantityItem(item.id));
-      }
       
+    //   setQuantityProduct(Number(quantityProduct)-1)
+    //   setPriceItem(price*(Number(quantityProduct)-1))
+    //   dispatch(substractQuantityItem(item.id));
+        //   dispatch(addBasketBack(item.id,-1))
+        if(quantityProduct>1){
+            const fetchData = async () => {
+                await dispatch(putBasketBack({"productId":id,"amount":Number(-1)},user.email));   
+                await dispatch(getBasket(user.email));
+              }
+            fetchData()
+              
+            setQuantityProduct(quantityProduct-1)
+            setPriceItem(price*(quantityProduct-1))
+        }
     }
     function addQuantity(){
-      setQuantityProduct(Number(quantityProduct)+1)
-      setPriceItem(price*(Number(quantityProduct)+1))
-      dispatch(addToBasket(item,1));
+
+    //   setQuantityProduct(Number(quantityProduct)+1)
+    //   setPriceItem(price*(Number(quantityProduct)+1))
+        //   dispatch(addToBasket(item,1));
+        console.log(item.id)
+        console.log(user.email)
+        const fetchData = async () => {
+            await dispatch(putBasketBack({"productId":id,"amount":Number(1)},user.email));
+            await dispatch(getBasket(user.email));
+          }
+        fetchData()
+      setQuantityProduct(quantityProduct+1)
+      setPriceItem(price*(quantityProduct+1))
     }
+
+    useEffect(()=>{
+        
+        console.log('se disparo el get')
+        // const item = basketBack.Products.Product_Line.filter(product=> product.ProductId===item.id)
+        // setQuantityProduct(item.amount)
+
+    },[quantityProduct])
 
     return (
         <>

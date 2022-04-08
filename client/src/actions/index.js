@@ -10,6 +10,42 @@ export function getProducts(){
         })
     }
 }
+export function getBasket(email){
+    return async function (dispatch){
+        const products = await axios.get(`http://localhost:3001/users/${email}/cart`)
+        return dispatch ({
+            type:"GET_BASKET",
+            payload:products.data
+        })
+    }
+}
+
+export function addBasketBack(payload,email){
+    return async function (dispatch){
+        const products = await axios.post(`http://localhost:3001/users/${email}/cart`,payload)
+        return dispatch ({
+            type:"ADD_BASKET_BACK",
+            payload:products.data
+        })
+    }
+}
+export function filterBy2Price(payloadMin, payloadMax){
+    return{
+        type:"FILTER_BY_2_PRICE",
+        payloadMin,
+        payloadMax
+    }
+}
+
+export function putBasketBack(payload,email){
+    return async function (dispatch){
+        const products = await axios.put(`http://localhost:3001/users/${email}/cart`,payload)
+        return dispatch ({
+            type:"PUT_BASKET_BACK",
+            payload:products.data
+        })
+    }
+}
 export function getCategories(categoryName){
     return async function (dispatch){
         const products = await axios.get('http://localhost:3001/categories')
@@ -42,6 +78,8 @@ export function getProductId(id){
 export function getMercadoPago(payload){
     return async(dispatch) => {
         const mercadopago = await axios.post('http://localhost:3001/mercadopago', payload);
+        console.log("mercadopago url")
+        console.log(mercadopago.data)
         return dispatch({
             type:"GET_MERCADOPAGO",
             payload: mercadopago.data
@@ -59,6 +97,14 @@ export function addToBasket(payload,quantity){
 export function vaciarCarrito(){
     return{
         type:"DELETE_CART",
+    }
+}
+export function vaciarCarritoBack(email){
+    return async function (dispatch){
+        const products = await axios.delete(`http://localhost:3001/users/${email}/emptycart`)
+        return dispatch ({
+            type:"DELET_CART_BACK",
+        })
     }
 }
 
@@ -113,10 +159,18 @@ export function filterByPrice(payload){
         payload
     }
 }
-export function filterByCategory(payload){
-    return{
-        type:"FILTER_BY_CATEGORY",
-        payload
+
+export function filterByCategory(filter){
+    return async function (dispatch){
+        const json = await axios.get(`http://localhost:3001/products?category=${filter}`);
+        console.log("Entre al filterBycATEGORY")
+        console.log(json.data)
+        console.log(filter)
+        return dispatch ({
+            type:"FILTER_BY_CATEGORY",
+            payload:json.data,
+            filter:filter
+        })
     }
 }
 
