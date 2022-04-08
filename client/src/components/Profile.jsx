@@ -40,7 +40,7 @@ export default function Profile() {
 
                     {user.name === "Agustin" ? (
                         <>
-                            <Link style={{color:"black", textDecoration:"none"}} to="/createProduct">
+                            <Link style={{color:"black", textDecoration:"none"}} to="/admin/createProduct">
                             <div className="container-options-profile">
                                 <div className="container-img-profile">
                                     <img
@@ -50,9 +50,36 @@ export default function Profile() {
                                     />
                                 </div>
                                 <div className="text-div-profile">
-                                    <h4>CRUD producto</h4>
+                                    <h4>Crear producto</h4>
                                     <h6>
-                                        Permite la creacion,edicion,o
+                                        Permite la creacion de un producto
+                                    </h6>
+                                </div>
+                                <img
+                                    src={Next}
+                                    style={{
+                                        position: "absolute",
+                                        width: "15px",
+                                        top: "20%",
+                                        right: "5%",
+                                    }}
+                                    alt=""
+                                />
+                            </div>
+                            </Link >
+                            <Link style={{color:"black", textDecoration:"none"}} to="/admin/createProduct">
+                            <div className="container-options-profile">
+                                <div className="container-img-profile">
+                                    <img
+                                        src={UserLogo}
+                                        className="img-div-profile"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="text-div-profile">
+                                    <h4>Editar y eliminar producto</h4>
+                                    <h6>
+                                        Permite la edicion,o
                                         eliminacion de un producto
                                     </h6>
                                 </div>
@@ -68,7 +95,7 @@ export default function Profile() {
                                 />
                             </div>
                             </Link >
-                            <Link style={{color:"black", textDecoration:"none"}} to="/createCategory">
+                            <Link style={{color:"black", textDecoration:"none"}} to="/admin/createCategory">
                             <div className="container-options-profile">
                                 <div className="container-img-profile">
                                     <img
@@ -96,6 +123,35 @@ export default function Profile() {
                                 ></img>
                             </div>
                             </Link>
+                            <Link style={{color:"black", textDecoration:"none"}} to="/admin/orderDetails">
+                            <div className="container-options-profile">
+                                <div className="container-img-profile">
+                                    <img
+                                        src={UserLogo}
+                                        className="img-div-profile"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="text-div-profile">
+                                    <h4>Ver Ordenes</h4>
+                                    <h6>
+                                        Permite ver, editar,o
+                                        eliminar ordenes
+                                    </h6>
+                                </div>
+                                <img
+                                    src={Next}
+                                    style={{
+                                        position: "absolute",
+                                        width: "15px",
+                                        top: "20%",
+                                        right: "5%",
+                                    }}
+                                    alt=""
+                                />
+                            </div>
+                            </Link >
+                            
                         </>
                          ) : null}
                 </div>

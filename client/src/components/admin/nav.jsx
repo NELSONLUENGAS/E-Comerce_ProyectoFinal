@@ -3,6 +3,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Order from './order';
 import './nav.css';
+import NavBarGuest from '../Guest/NavBarGuest';
 
 export default function PreNavAdmin(){ 
     const [open, setOpen] = useState({
@@ -21,6 +22,7 @@ export default function PreNavAdmin(){
     }
     return (
         <>
+        <NavBarGuest/>
         <div className='tableGrid'>
             <div className='tableContainer1'>
                 <input placeholder='Search...' type="search" name="" id="" />

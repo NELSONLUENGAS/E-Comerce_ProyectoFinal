@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import CheckoutPage from "./CheckoutPage";
 import NavBarGuest from "./Guest/NavBarGuest";
 import { useDispatch } from "react-redux";
-import { getMercadoPago, getBasket } from "../actions/index";
+import { getMercadoPago,getUserSigningIn, getBasket } from "../actions/index";
 import { useEffect } from "react";
 
 export default function Checkout() {
@@ -28,6 +28,21 @@ export default function Checkout() {
     useEffect(() => {
         dispatch(getBasket(user.email));
     }, [dispatch]);
+    
+    useEffect(() => {
+        let inicioSesion =JSON.parse(localStorage.getItem('userData'))
+        if(inicioSesion){
+            console.log(inicioSesion)
+            const fetchData = async () => {
+                await   dispatch(getUserSigningIn({
+                    'email':inicioSesion.email,
+                    'password':inicioSesion.password
+                }))
+                await dispatch(getBasket(inicioSesion.email))
+            }
+            fetchData()
+        }
+    }, []);
 
     return (
         <>

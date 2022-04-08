@@ -173,13 +173,6 @@ export function filterByCategory(filter){
         })
     }
 }
-export function filterBy2Price(payloadMin, payloadMax){
-    return{
-        type:"FILTER_BY_2_PRICE",
-        payloadMin,
-        payloadMax
-    }
-}
 
 export function postProductos(payload) {
     return async function (dispatch) {

@@ -40,7 +40,7 @@ function App() {
             <Route path='/admin/orderDetails' element={<PreNavAdmin/>}></Route>   
             <Route exact path="/admin/createCategory" element={<AddCategorie/>}></Route>
             <Route exact path="/admin/createProduct" element={<CrearProducto/>}></Route>
-            <Route exact path='/edit' element={<Editar/>}/>
+            <Route exact path="/admin/edit" element={<Editar/>}></Route>
           </Route>
         </Routes>
     </div>

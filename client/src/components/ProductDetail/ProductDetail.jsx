@@ -7,7 +7,7 @@ import { getProductId } from "../../actions/index";
 import NavBarGuest from "../Guest/NavBarGuest";
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket,vaciarCarrito,addBasketBack,getBasket,vaciarCarritoBack} from "../../actions/index";
+import { addToBasket,vaciarCarrito,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
 import Review from "./Review";
 import DoReview from "./DoReview";
 
@@ -171,6 +171,21 @@ export default function ProductDetail() {
             }
         }
     },[productosdel.reviews])
+
+    useEffect(() => {
+        let inicioSesion =JSON.parse(localStorage.getItem('userData'))
+        if(inicioSesion){
+            console.log(inicioSesion)
+            const fetchData = async () => {
+                await   dispatch(getUserSigningIn({
+                    'email':inicioSesion.email,
+                    'password':inicioSesion.password
+                }))
+                await dispatch(getBasket(inicioSesion.email))
+            }
+            fetchData()
+        }
+    }, []);
     return (
         <>
             <NavBarGuest />

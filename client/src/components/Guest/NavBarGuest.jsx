@@ -36,8 +36,8 @@ export default function NavBarGuest() {
     ////////___Aux___/////////////////////
     let filter = expand.filterCat;
     const category = products.map((categ) => filter && categ[filter]);
-    const subCate = category[0].subCate;
-    const img = category[0].image;
+    const subCate = category[0]?.subCate;
+    const img = category[0]?.image;
 
     ///////____Functions___////////////
     function categoryFilter(e) {
@@ -132,7 +132,7 @@ export default function NavBarGuest() {
             ...expand,
             location: false,
         });
-        navigate('/addAdress')
+        navigate('/user/addAdress')
     }
     const user = useSelector((state) => state.User);
     // useEffect(() => {
@@ -180,7 +180,7 @@ export default function NavBarGuest() {
                     </Link>
                     <div> 
                         <span>Enviar a</span>
-                        {user.city? (<span>{user.city}</span>):<span>Ciudad</span>}
+                        {user.name? (<span>{user.direction[0]?.city}</span>):<span>Ciudad</span>}
                     </div>
                 </div>
                 <div className="cusElement5">
@@ -337,7 +337,7 @@ export default function NavBarGuest() {
                         </div>):(
                             <div className="guest">
                             <Link
-                                to="/profile"
+                                to="/user/profile"
                                 style={{
                                     textDecoration: "none",
                                     color: "black",

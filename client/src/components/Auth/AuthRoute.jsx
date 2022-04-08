@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 function AuthRoute(){
     const isLogin = useSelector(state => state.Auth.isLogin);
-    const isAdmin = useSelector(state => state.Auth.isAdmin);
     const role = useSelector(state => state.Auth.role);
 
 
@@ -16,7 +15,7 @@ function AuthRoute(){
         }
     }
     if(role === 'admin') {
-        if(isLogin && isAdmin) {
+        if(isLogin) {
             return <Outlet />
         } else {
             return <Navigate to="/" replace />

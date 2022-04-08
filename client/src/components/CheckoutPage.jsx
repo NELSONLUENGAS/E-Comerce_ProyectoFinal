@@ -108,7 +108,7 @@ export default function CheckoutPage() {
                 
                 <h1>Carrito</h1>
 
-                {cartProducts.Products? (
+                {cartProducts.Products?.length ? (
                     <div>
                         {cartProducts.Products.map((element) => {
                             return(

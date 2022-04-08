@@ -13,6 +13,7 @@ import {
     ModalFooter,
 } from "reactstrap";
 import { getProducts, UpdateProduct, DeleteProduct } from "../../actions";
+import NavBarGuest from "../Guest/NavBarGuest";
 
 
 
@@ -75,17 +76,18 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
 
     return (
         <>
-    
-            <Container>
+        <NavBarGuest/>
+            <div style={{width:"100%"}}>
                 <br />
                 <h1>Productos en Venta</h1>
                 <br />
                 <Fragment>
 
-      </Fragment>
+                </Fragment>
      
                 <br />
-                <Table className="table">
+                
+                <Table style={{width:"50%"}}className="table">
                     <thead>
                         <tr>
                         <th>id</th>
@@ -128,7 +130,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
                         ))}
                     </tbody>
                 </Table>
-            </Container>
+                </div>
 
             <Modal isOpen={modalInsertar} onRequestClose={()=>setStateModalInsectar(false)}>
                 <ModalHeader>
