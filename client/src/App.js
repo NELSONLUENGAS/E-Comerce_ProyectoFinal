@@ -15,6 +15,7 @@ import Profile from './components/Profile'
 import Checkout from './components/Checkout';
 import PreNavAdmin from './components/admin/nav';
 import AuthRoute from './components/Auth/AuthRoute';
+import Editar from './components/EditarYBorrarProductos/Editar';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path='/admin/orderDetails' element={<PreNavAdmin/>}></Route>   
             <Route exact path="/admin/createCategory" element={<AddCategorie/>}></Route>
             <Route exact path="/admin/createProduct" element={<CrearProducto/>}></Route>
+            <Route exact path='/edit' element={<Editar/>}/>
           </Route>
         </Routes>
     </div>
