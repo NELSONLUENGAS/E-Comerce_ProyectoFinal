@@ -11,6 +11,7 @@ const initialState = {
     mercadoPago: {},
     basketBack: [],
     User: [],
+    conectado,
     Auth: {
         isLogin: true,
         role: 'admin'
@@ -186,7 +187,8 @@ export default function rootReducer(state = initialState, action) {
         case 'GET_USER_SIGNING_IN':
             return {
                 ...state,
-                User: action.payload
+                User: action.payload,
+                conectado: action.payload
             }
         case 'LOG_OUT':
             return {
