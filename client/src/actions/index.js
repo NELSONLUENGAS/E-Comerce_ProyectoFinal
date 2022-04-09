@@ -10,6 +10,42 @@ export function getProducts(){
         })
     }
 }
+export function getBasket(email){
+    return async function (dispatch){
+        const products = await axios.get(`http://localhost:3001/users/${email}/cart`)
+        return dispatch ({
+            type:"GET_BASKET",
+            payload:products.data
+        })
+    }
+}
+
+export function addBasketBack(payload,email){
+    return async function (dispatch){
+        const products = await axios.post(`http://localhost:3001/users/${email}/cart`,payload)
+        return dispatch ({
+            type:"ADD_BASKET_BACK",
+            payload:products.data
+        })
+    }
+}
+export function filterBy2Price(payloadMin, payloadMax){
+    return{
+        type:"FILTER_BY_2_PRICE",
+        payloadMin,
+        payloadMax
+    }
+}
+
+export function putBasketBack(payload,email){
+    return async function (dispatch){
+        const products = await axios.put(`http://localhost:3001/users/${email}/cart`,payload)
+        return dispatch ({
+            type:"PUT_BASKET_BACK",
+            payload:products.data
+        })
+    }
+}
 export function getCategories(categoryName){
     return async function (dispatch){
         const products = await axios.get('http://localhost:3001/categories')
@@ -39,11 +75,36 @@ export function getProductId(id){
     }
 }
 
+export function getMercadoPago(payload){
+    return async(dispatch) => {
+        const mercadopago = await axios.post('http://localhost:3001/mercadopago', payload);
+        console.log("mercadopago url")
+        console.log(mercadopago.data)
+        return dispatch({
+            type:"GET_MERCADOPAGO",
+            payload: mercadopago.data
+        })
+    }
+}
 
-export function addToBasket(payload){
+export function addToBasket(payload,quantity){
     return{
         type:"ADD_TO_BASKET",
-        payload
+        payload,
+        quantity
+    }
+}
+export function vaciarCarrito(){
+    return{
+        type:"DELETE_CART",
+    }
+}
+export function vaciarCarritoBack(email){
+    return async function (dispatch){
+        const products = await axios.delete(`http://localhost:3001/users/${email}/emptycart`)
+        return dispatch ({
+            type:"DELET_CART_BACK",
+        })
     }
 }
 
@@ -67,6 +128,52 @@ export function SumItem(payload){
         payload
     }
 }
+
+export function filterToday(payload){
+    return{
+        type:"FILTER_TODAY",
+        payload
+    }
+}
+export function filterFreeShipping(payload){
+    return{
+        type:"FILTER_FREE_SHIPPING",
+        payload
+    }
+}
+export function filterMoreSeller(payload){
+    return{
+        type:"FILTER_MORE_SELLER",
+        payload
+    }
+}
+export function orderByPrice(payload){
+    return{
+        type:"ORDER_BY_PRICE",
+        payload
+    }
+}
+export function filterByPrice(payload){
+    return{
+        type:"FILTER_BY_PRICE",
+        payload
+    }
+}
+
+export function filterByCategory(filter){
+    return async function (dispatch){
+        const json = await axios.get(`http://localhost:3001/products?category=${filter}`);
+        console.log("Entre al filterBycATEGORY")
+        console.log(json.data)
+        console.log(filter)
+        return dispatch ({
+            type:"FILTER_BY_CATEGORY",
+            payload:json.data,
+            filter:filter
+        })
+    }
+}
+
 export function postProductos(payload) {
     return async function (dispatch) {
         const json = await axios.post('http://localhost:3001/createProduct', payload);
@@ -118,8 +225,10 @@ export function postCrearCategoria(payload) {
     }
   }
   export function DeleteCategoria(id) {
+    console.log('este es el id'); 
+    console.log(id);
     return async function (dispatch) {
-        const json = await axios.post('http://localhost:3001/categories/', id);
+        const json = await axios.delete('http://localhost:3001/categories/'+id);
         return dispatch({
             type: "DELETE_CATEGORIA",
             payload: json.data
@@ -132,6 +241,26 @@ export function getSearch(search) {
         const json = await axios.get('http://localhost:3001/products?name='+ search);
         return dispatch({
             type: "SEARCH_PRODUCT",
+            payload: json.data
+
+        })
+    }
+}
+export function UpdateProduct(id) {
+    return async function (dispatch) {
+        const json = await axios.put('http://localhost:3001/updateProduct/'+id);
+        return dispatch({
+            type: "UPDATE_PRODUCT",
+            payload: json.data
+
+        })
+    }
+}
+export function DeleteProduct(id) {
+    return async function (dispatch) {
+        const json = await axios.delete('http://localhost:3001/deleteProduct/',id);
+        return dispatch({
+            type: "DELETE_PRODUCT",
             payload: json.data
 
         })

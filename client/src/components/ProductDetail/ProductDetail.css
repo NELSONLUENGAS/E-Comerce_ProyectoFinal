@@ -103,8 +103,42 @@ background-color: #fff;
     margin-bottom: 2em;
     border-bottom: #EBEBEB 2px solid;
 }
+.review-product-detail{
+    width: 75%;
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+    border-bottom: #EBEBEB 2px solid;
+
+}
 .select-quantity-product-detail{
     width: 40%;
     margin-left: 20px;
     border: transparent;
+}
+.div-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 3rem;
+    gap:5px
+}
+.button-product-detail{
+    border: transparent;
+    background-color: #fff;
+
+    width: 33%;
+    border-bottom: 0.2rem solid rgba(198, 186, 186, 0.729);
+
+}
+.button-active-product-detail{
+    border: transparent;
+    background-color: #fff;
+    color:#3483fa;
+    width: 33%;
+    border-bottom: 0.3rem solid #3483fa;
+
+}
+.container-review-product-detail{
+    text-align: Left;
+    margin-left: 3rem;
 }

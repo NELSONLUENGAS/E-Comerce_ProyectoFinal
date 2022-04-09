@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBarGuest.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -16,11 +16,12 @@ import Logo from '../../svg/latcom1.png'
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
+import {getBasket,getCategoriesByName} from '../../actions/index'
 
 export default function NavBarGuest() {
     const dispatch= useDispatch()
-    const carrito = useSelector(state=>state.ItemsAmount)
-
+    const carrito = useSelector(state=>state.SumItemsBack)
+    const navigate = useNavigate()
     //////////////__States__///////////////////
     const [expand, setExpand] = useState({
         profile: false,
@@ -28,7 +29,6 @@ export default function NavBarGuest() {
         subCategory: false,
         mobile: false,
         location: false,
-        filterCat: "",
         filterSub: "",
         details: false,
     });
@@ -36,17 +36,17 @@ export default function NavBarGuest() {
     ////////___Aux___/////////////////////
     let filter = expand.filterCat;
     const category = products.map((categ) => filter && categ[filter]);
-    const subCate = category[0].subCate;
-    const img = category[0].image;
+    const subCate = category[0]?.subCate;
+    const img = category[0]?.image;
 
     ///////____Functions___////////////
     function categoryFilter(e) {
         e.preventDefault();
         setExpand({
             ...expand,
-            filterCat: e.target.value,
             subCategory: true,
         });
+        //dispatch(getCategoriesByName())
     }
     function handleSelect(e) {
         e.preventDefault();
@@ -125,9 +125,19 @@ export default function NavBarGuest() {
         alert("Has cerrado sesion correctamente")
         dispatch(logOut())
     }
+
+    function addAdress(e) {
+        e.preventDefault();
+        setExpand({
+            ...expand,
+            location: false,
+        });
+        navigate('/user/addAdress')
+    }
     const user = useSelector((state) => state.User);
     // useEffect(() => {
-    // },user)
+    //     dispatch(getBasket(user.email));    
+    // },[dispatch])
     function capitalLetter(){
         let capitalLetter = user.name;
         return capitalLetter = capitalLetter[0].toUpperCase();
@@ -145,7 +155,7 @@ export default function NavBarGuest() {
                     <img src={Logo} style={{width:"200px"}} alt="Icono empresa" />
                     </Link>
                 </div>
-                <div  className="cusElement2">
+                <div onMouseOver={modalDown} className="cusElement2">
                     <SearchBar/>
                 </div>
                 <div onMouseOver={modalDown} className="cusElement3">
@@ -170,7 +180,7 @@ export default function NavBarGuest() {
                     </Link>
                     <div> 
                         <span>Enviar a</span>
-                        <span>Ciudad</span>
+                        {user.name? (<span>{user.direction[0]?.city}</span>):<span>Ciudad</span>}
                     </div>
                 </div>
                 <div className="cusElement5">
@@ -212,7 +222,7 @@ export default function NavBarGuest() {
                 <div className="cusElement02"></div>
                 {/* <div onMouseOver={modalDown} className="cusElement03"></div> */}
                 {expand.category && (
-                    <div className="cusElement0">
+                    <div onMouseLeave={modalDown} className="cusElement0">
                         <div className="categories">
                             <div>
                                 <option
@@ -294,13 +304,13 @@ export default function NavBarGuest() {
                                 ))}
                             </div>
                         )}
-                        {/* {expand.subCategory && img && (
+                        {expand.subCategory && img && (
                             <div className="imgCat">
                                 {img?.map((img) => (
                                     <img key={img} src={img} alt="Imagen" />
                                 ))}
                             </div>
-                        )} */}
+                        )}
                     </div>
                 )}
                 <div className="cusElement01">
@@ -327,7 +337,7 @@ export default function NavBarGuest() {
                         </div>):(
                             <div className="guest">
                             <Link
-                                to="/profile"
+                                to="/user/profile"
                                 style={{
                                     textDecoration: "none",
                                     color: "black",
@@ -353,9 +363,24 @@ export default function NavBarGuest() {
                         <div className="locModal0">
                             <h1>Decide el destino de tú pedido</h1>
                             <div className="locModal2">
-                                <h3>Destino</h3>
+                                <h3>Direcciones</h3>
+                                {!user.name? (<Link to="/SignIn"><h3>Por favor incia sesion</h3> </Link>):(<div>
                                 <div>
-                                    <select>
+                                    
+                                    {user.direction.map((element,i) =>{
+                                        return (<div key={i}>
+                                                <input type="radio"/>
+                                                <label for={i} >
+                                                <h4>   {element.direction}, {element.city}, {element.province}, {element.postalcode}</h4>
+                                                </label>
+                                            </div>
+                                        )
+                                    })}
+                                    <button style={{margin:"auto",marginTop:"2rem"}}onClick={addAdress}> Agregar nueva direccion</button>
+
+                                </div>
+                                <div>
+                                    {/* <select>
                                         <option hidden disable="true" value="">
                                             Departamento
                                         </option>
@@ -375,18 +400,19 @@ export default function NavBarGuest() {
                                         <option value="">departamento</option>
                                         <option value="">departamento</option>
                                         <option value="">departamento</option>
-                                    </select>
-                                    <button onClick={modalOpen}>Aceptar</button>
+                                    </select> */}
+                                    {/* <button onClick={modalOpen}>Aceptar</button> */}
                                 </div>
-                                <div>
+                                {/* <div>
                                     <button onClick={moreDetails}>
                                         <span>
                                             <AddCircleIcon />
                                         </span>
                                         <span>Agregar más detalles</span>
                                     </button>
-                                </div>
-                                {expand.details && (
+                                </div> */}
+                                
+                                {/* {expand.details && (
                                     <div className="locModal1">
                                         <label>
                                             <input
@@ -419,7 +445,8 @@ export default function NavBarGuest() {
                                             />
                                         </label>
                                     </div>
-                                )}
+                                )} */}
+                                </div> )}
                             </div>
                             <div className="locModal3">
                                 <button onClick={modalOpen}>cancelar</button>

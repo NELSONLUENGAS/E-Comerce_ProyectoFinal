@@ -6,11 +6,17 @@ const router = Router();
 const productsRoute = require('./Products');
 const categoriesRoute = require('./Categories');
 const usersRoute = require('./Users');
+const mercadoPagoRoute = require('./Mercadopago');
+const ordersRoute = require('./Orders')
+
 
 //////////////////////////////////////////////////////////////////////////////////
 router.use('/', usersRoute);
 router.use('/', productsRoute);
 router.use('/', categoriesRoute);
+router.use('/', mercadoPagoRoute);
+router.use('/', ordersRoute)
+
 
 //////////////////////////////////////////////////////////////////////////////////
 module.exports = router;

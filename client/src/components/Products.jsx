@@ -11,13 +11,17 @@ import Product from "./Product";
 import { useState } from "react";
 import Paginado from "../components/Paginado";
 import NavBarGuest from "./Guest/NavBarGuest";
+import { useSearchParams } from "react-router-dom";
 import {
-    getProducts,
-    getCategories,
-    getCategoriesByName,
+    getProducts,getBasket,
+    getCategories,filterBy2Price,
+    getCategoriesByName,getUserSigningIn,filterByCategory,filterFreeShipping,filterByPrice,filterMoreSeller,filterToday,orderByPrice
+
 } from "../actions/index";
 import Carrousel from "./Carrousel";
 import { useDispatch, useSelector } from "react-redux";
+import './Products.css'
+import { useLocalStorage } from "../useLocalStorage";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,12 +32,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Products() {
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getProducts());
-        dispatch(getCategories());
-    }, [dispatch]);
-    const [categoryFilter, setCategoryFilter] = useState("Todas");
+    /*------------------------------------ */
+    /*------Datos de la compra------------ */
+    const [params] = useSearchParams();
+    const queryParams = {
+        payment_id: params.get("payment_id"),
+        status: params.get("status"),
+        payment_type: params.get("payment_type"),
+        external_reference: params.get("external_reference"),
+    }
+    console.log(queryParams)
+    
+    const [localStorageVar,setLocalStorageVar] = useState('')  
     const productos = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,34 +59,108 @@ export default function Products() {
         setCurrentPage(pageNumber);
     }
 
+    const [categoryFilter, setCategoryFilter] = useState("Todas");
+    const [checkFreeShipping,setCheckFreeShipping]=useState(false)
+    const [checkToday,setCheckToday]=useState(false)
+    const [checkMoreSeller,setCheckMoreSeller]=useState(false)
+    const [sortOf,SetsortOf]=useState('Relevant')
+    const [Numberinput, setinputNumber]= useState({
+        numberMin: "",
+        numberMax: ""
+    })
+    const{numberMin, numberMax}= Numberinput
+    const onChange =(e)=>{
+        setinputNumber({
+            ...Numberinput,
+            [e.target.name]:e.target.value
+        })
+    }
+
+    const onSubmitt= (e)=>{
+        console.log("entre al boton de precio")
+        e.preventDefault()
+        dispatch(filterBy2Price(numberMin, numberMax))
+    }
+    
+    function handleCategories(e) {
+        e.preventDefault();
+        setCategoryFilter(e.target.value)    
+        dispatch(filterByCategory(e.target.value))
+    }
+    function handleToday(){
+        setCheckToday(!checkToday);
+        dispatch(filterToday(!checkToday))
+    } 
+    function handleMoreSeller(){
+        setCheckMoreSeller(!checkMoreSeller);
+        dispatch(filterMoreSeller(!checkMoreSeller))
+    }
+    function handleFreeShipping(){
+        setCheckFreeShipping(!checkFreeShipping);
+        dispatch(filterFreeShipping(!checkFreeShipping))
+    }
+    function handleOrder(e){
+        SetsortOf(e.target.value)
+        dispatch(orderByPrice(e.target.value))
+        setCurrentPage(1)
+    }
+
+    // useEffect(()=>{
+    //     setLocalStorageVar(localStorage.getItem('userData'))
+    //     dispatch(getUserSigningIn({
+    //                         'email':localStorage.email,
+    //                         'password':localStorage.password
+    //                     }))
+    // })
+    function traeLocal (){
+        let inicioSesion =JSON.parse(localStorage.getItem('userData'))
+        console.log(inicioSesion)
+        const fetchData = async () => {
+            await   dispatch(getUserSigningIn({
+                'email':inicioSesion.email,
+                'password':inicioSesion.password
+            }))
+            await dispatch(getBasket(inicioSesion.email))
+          }
+        fetchData()
+    }
+    useEffect(() => {
+        dispatch(getProducts());
+        dispatch(getCategories());
+    }, [dispatch]);
+
+    useEffect(() => {
+        let inicioSesion =JSON.parse(localStorage.getItem('userData'))
+        if(inicioSesion){
+            console.log(inicioSesion)
+            const fetchData = async () => {
+                await   dispatch(getUserSigningIn({
+                    'email':inicioSesion.email,
+                    'password':inicioSesion.password
+                }))
+                await dispatch(getBasket(inicioSesion.email))
+            }
+            fetchData()
+        }
+        if(queryParams.status==='approved'){
+            alert('El pago ha sido completado')
+            //El llamado al back para cambiar el status de la orden y vaciar el carrito
+        }
+    }, []);
+
     useEffect(() => {
         setCurrentProducts(
             productos?.slice(indexOfFirstProduct, indexOfLastProduct)
         );
-        console.log(categories);
-    }, [productos, currentPage]);
-    const classes = useStyles();
+        // console.log(categories);
+    }, [productos, currentPage,categoryFilter,checkFreeShipping,checkToday,checkMoreSeller,sortOf]);
+    // const classes = useStyles();
 
-    function handleCategories(e) {
-        if(e.target.value ==='Todas'){
-            console.log("entre aca")
-            e.preventDefault();    
-            setCategoryFilter(e.target.value);
-            setCurrentPage(1);
-            dispatch(getProducts());
-        } else{
-        e.preventDefault();
-        setCategoryFilter(e.target.value);
-        setCurrentPage(1);
-        dispatch(getCategoriesByName(e.target.value));
-        console.log(e.target.value);
-    }
-    }
     return (
         <div style={{ backgroundColor: "#EBEBEB" }}>
             <NavBarGuest/>
             <Carrousel />
-
+        
             <div
                 style={{
                     display: "flex",
@@ -97,7 +181,7 @@ export default function Products() {
                         }}
                     >
                         <p>Categorias</p>
-                        <select onChange={(e) => handleCategories(e)}>
+                        <select value={categoryFilter} onChange={(e) => handleCategories(e)}>
                             <option value="Todas">Todas</option>
                             {categories?.map((item, i) => {
                                 return (
@@ -117,10 +201,19 @@ export default function Products() {
                             borderRadius: "0.3em",
                             marginTop: "1em",
                             padding: "1em",
-                            textAlign:"left"
+                            textAlign:"left",
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"space-between"
+
                         }}
                     >
+
                     <p style={{marginBottom:"0"}}>Llegan hoy</p>
+                    <label className="switch">
+                        <input checked={checkToday} onChange={handleToday} type="checkbox"/>
+                        <span className="slider round"></span>
+                    </label>
                     </div>
                     <div
                         style={{
@@ -129,9 +222,16 @@ export default function Products() {
                             marginTop: "1em",
                             padding: "1em",
                             textAlign:"left",
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"space-between"
                         }}
                     >
                     <p style={{marginBottom:"0"}}>Mas vendidos</p>
+                    <label className="switch">
+                        <input checked={checkMoreSeller} onChange={handleMoreSeller} type="checkbox"/>
+                        <span className="slider round"></span>
+                    </label>
                     </div>
                     <div
                         style={{
@@ -139,10 +239,17 @@ export default function Products() {
                             borderRadius: "0.3em",
                             marginTop: "1em",
                             padding: "1em",
-                            textAlign:"left",                      
+                            textAlign:"left",
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"space-between"                     
                         }}
                     >
                     <p style={{marginBottom:"0"}}>Envio Gratis</p>
+                    <label className="switch">
+                        <input checked={checkFreeShipping} onChange={handleFreeShipping} type="checkbox"/>
+                        <span className="slider round"></span>
+                    </label>
                     </div>
                     <div
                         style={{
@@ -163,7 +270,10 @@ export default function Products() {
                             paddingLeft:"0.5em"
                         }}
                         type="number"
+                        value={numberMin}
+                        name="numberMin"
                         placeholder="Minimo.."
+                        onChange={onChange}
                     />
                     <input
                         style={{
@@ -176,6 +286,9 @@ export default function Products() {
                         }}
                         type="number"
                         placeholder="Maximo.."
+                        value={numberMax}
+                        name="numberMax"
+                        onChange={onChange}
                     />
                     <button
                         style={{
@@ -184,6 +297,7 @@ export default function Products() {
                             fontSize: "12px",
                             borderRadius: "5px",
                         }}
+                        onClick={onSubmitt}
                     >
                         Enter
                     </button>
@@ -214,6 +328,8 @@ export default function Products() {
                         <select
                             name=""
                             id=""
+                            value={sortOf}
+                            onChange={(e) => handleOrder(e)}
                             style={{
                                 border: "transparent",
                                 marginLeft: "1rem",
@@ -221,9 +337,9 @@ export default function Products() {
                                 height: "25px",
                             }}
                         >
-                            <option> Mas relevantes</option>
-                            <option> Menor precio</option>
-                            <option> Mayor precio</option>
+                            <option value="Relevant"> Mas relevantes</option>
+                            <option value="asc"> Menor precio</option>
+                            <option value="desc"> Mayor precio</option>
                         </select>
                     </div>
                    { productos[0]? (
@@ -248,5 +364,6 @@ export default function Products() {
                 paginado={paginado}
             />
         </div>
-    );
+    )
 }
+
