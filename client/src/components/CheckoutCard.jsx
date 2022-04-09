@@ -13,6 +13,7 @@ import { RemoveToBasket,putBasketBack,getBasket,addToBasket,substractQuantityIte
 import "./CheckoutCard.css";
 
 export default function CheckoutCard({
+    buttonQuantity,
     id,
     name,
     image,
@@ -85,16 +86,16 @@ export default function CheckoutCard({
                     <div><img src={image} alt="imagen de producto"/></div>
                     <div className="title-checkout-card">{name}</div>
                     <div className="quantity-checkout-card">
-                        <button className="button-quantity-checkout-card" onClick={subtractionQuantity}>-</button>
+                        {buttonQuantity? (<button className="button-quantity-checkout-card" onClick={subtractionQuantity}>-</button>):null}
                         <div className="quantity-text-checkout-card">{Number(quantityProduct)}</div>
-                        <button className="button-quantity-checkout-card" onClick={addQuantity}>+</button>
+                        {buttonQuantity? ( <button className="button-quantity-checkout-card" onClick={addQuantity}>+</button>):null}
                     </div>
                     
                     <div className="price-text-checkout-card">${Intl.NumberFormat("es-ES").format(priceItem)}</div>
                 
-                <IconButton fontSize="large" onClick={removeItems}>
+                    {buttonQuantity? (<IconButton fontSize="large" onClick={removeItems}>
                     <DeleteIcon/>
-                </IconButton>
+                </IconButton>):null}
             </div>
         </>
     );
