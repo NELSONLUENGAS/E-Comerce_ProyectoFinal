@@ -11,7 +11,7 @@ const initialState = {
     mercadoPago: {},
     basketBack: [],
     User: [],
-    conectado,
+    conectado: [],
     Auth: {
         isLogin: true,
         role: 'admin'
