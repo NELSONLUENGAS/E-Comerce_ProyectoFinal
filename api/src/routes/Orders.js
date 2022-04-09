@@ -87,7 +87,7 @@ router.put('/users/:email/cart', async (req, res) => {
                 default: return res.status(500).send('An unknown value was entered')
             }
         await productLine.save()
-        res.send('Amount'+amount)
+        res.send(productLine)
         } else res.status(404).send('Relation not Found')
 
     //     if(amount>0){
@@ -109,19 +109,28 @@ router.put('/users/:email/changeStatusCart', async (req, res) => {
     const {email} = req.params
 
     try {
-        const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
-        if(cart){
-            cart.status = 'In progress'
-            await cart.save()
-            await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart'}})
-            return res.send('El status ha cambiado correctamente')
-        } else res.status(404).send('Cart not found')
-    }
-    catch(e){
-        res.status(500).send(`${e}`)
-    }
+        const cart = await Orders.findOne({
+            where: {UserEmail: email, status: 'Cart'},
+            include:{model: Products}
+            })
+        
 
-})
+            if(cart){
+                cart.Products.map( async product => {
+                    product.stock = product.stock - product.Product_Line.amount
+                    await product.save()
+                })
+                cart.status = 'In progress'
+                await cart.save()
+                await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart'}})
+                return res.send('El status ha cambiado correctamente')
+            } else res.status(404).send('Cart not found')
+        }
+        catch(e){
+            res.status(500).send(`${e}`)
+        }
+    
+    })
 
 router.delete('/users/:email/cart', async (req, res) => {
     const {productId} = req.body, {email} = req.params

@@ -51,6 +51,7 @@ export default function Checkout() {
     return (
         <>
         <NavBarGuest/>
+        {Url ? ( <>
         <div className="container-cart">
             <br/>
             <h1>Tu pedido</h1>
@@ -74,6 +75,7 @@ export default function Checkout() {
                     ):<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>
             }
             </div>
+            
             <div
                 style={{
                     backgroundColor: "white",
@@ -135,7 +137,7 @@ export default function Checkout() {
                 >
                     Volver
                 </button>
-            </div>
+            </div></>):<h1>Cargando...</h1>}
         </>
     );
 }
