@@ -206,7 +206,7 @@ export function getUserSigningIn(payload){
             payload:json.data
         })
     }
-
+    
 }
 export function logOut(payload){
     return{
@@ -219,6 +219,18 @@ export function postCrearCategoria(payload) {
         const json = await axios.post('http://localhost:3001/createCategory', payload);
         return dispatch({
             type: "POST_CATEGORIA",
+            payload: json.data
+
+        })
+    }
+  }
+
+
+export function PostDirection(payload, email) {
+    return async function (dispatch) {
+        const json = await axios.post(`http://localhost:3001/users/${email}/addlocation`, payload);
+        return dispatch({
+            type: "POST_DIRECTION",
             payload: json.data
 
         })
@@ -266,3 +278,4 @@ export function DeleteProduct(id) {
         })
     }
 }
+
