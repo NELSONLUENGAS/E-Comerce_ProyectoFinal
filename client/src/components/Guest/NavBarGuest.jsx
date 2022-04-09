@@ -122,8 +122,10 @@ export default function NavBarGuest() {
         });
     }
     function handleLogout(){
-        alert("Has cerrado sesion correctamente")
+        localStorage.removeItem('userData');    
         dispatch(logOut())
+        alert("Has cerrado sesion correctamente")
+        navigate("/SignIn")
     }
 
     function addAdress(e) {
@@ -217,7 +219,7 @@ export default function NavBarGuest() {
                             <ShoppingCartIcon />
                         </Link>
                     </label>
-                    { carrito>0 ? <span>{carrito}</span>:null}
+                    { carrito>0 && user.name ? <span>{carrito}</span>:null}
                 </div>
                 <div className="cusElement02"></div>
                 {/* <div onMouseOver={modalDown} className="cusElement03"></div> */}

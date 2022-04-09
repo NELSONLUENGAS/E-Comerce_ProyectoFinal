@@ -346,7 +346,7 @@ export default function Products() {
                             <option value="desc"> Mayor precio</option>
                         </select>
                     </div>
-                   { productos[0]? (
+                   { currentProducts[0]?.name ? (
                        currentProducts?.map((product) => (
                         <Product
                             name={product.name}

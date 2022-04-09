@@ -8,12 +8,16 @@ import NavBarGuest from "./Guest/NavBarGuest";
 import { useDispatch } from "react-redux";
 import { getMercadoPago,getUserSigningIn, getBasket } from "../actions/index";
 import { useEffect } from "react";
+import CheckoutCard from "./CheckoutCard";
+import { Navbar } from "reactstrap";
+import Total from "./Total";
 
 export default function Checkout() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const Url = useSelector((state) => state.mercadoPago.url);
     const user = useSelector((state) => state.User);
+    const cartProducts = useSelector((state) => state.basketBack);
     
     function onFinishPay(e) {
         e.preventDefault();
@@ -46,7 +50,30 @@ export default function Checkout() {
 
     return (
         <>
-            <CheckoutPage />
+        <NavBarGuest/>
+        <div className="container-cart">
+            <br/>
+            <h1>Tu pedido</h1>
+            <br/>
+            {cartProducts.Products?.length && user.name ? (
+                    <div>
+                        {cartProducts.Products.map((element) => {
+                            return(
+                            <CheckoutCard
+                                key={element.Product_Line.ProductId}
+                                id={element.Product_Line.ProductId}
+                                name= {element.name}
+                                image= {element.image}
+                                price= {element.Product_Line.price}
+                                quantity={element.Product_Line.amount}
+                                description={element.description}
+                            />)
+                        })}
+                        <Total buttonContinue={false}/>
+                    </div>
+                    ):<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>
+            }
+            </div>
             <div
                 style={{
                     backgroundColor: "white",

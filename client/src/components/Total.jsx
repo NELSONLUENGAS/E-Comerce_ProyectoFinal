@@ -23,8 +23,7 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
-const Total = ({onPay}) => {
-    const classes = useStyle();
+const Total = ({onPay,buttonContinue,emptyCart}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate(); 
     
@@ -35,10 +34,17 @@ const Total = ({onPay}) => {
     },[dispatch])
 
   return (
-      <div className={classes.root} > 
-        <h5>Total item: {TotalItem}</h5>
-        <h5>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h5>
-        <button onClick={(e) => onPay(e)} style={{color:'white',backgroundColor:"#3483fa",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Continuar compra</button>
+      <div> 
+        <div style={{display:"flex",justifyContent:"flex-end",flexDirection:"row",gap:"3rem",padding:"1rem",marginRight:"1rem"}}>
+            {/* <h3>Total items: {TotalItem}</h3> */}
+            <h3>Total a pagar:</h3>
+            <h3>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h3>
+        </div>
+        {buttonContinue ? (<div style={{gap:"2rem",display:"flex",justifyContent:"flex-end",marginRight:"2rem",marginBottom:"2rem"}}>
+            <button onClick={(e) => emptyCart(e)} style={{color:'white',backgroundColor:"red",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Vaciar carrito</button>
+            <button onClick={(e) => onPay(e)} style={{color:'white',backgroundColor:"#3483fa",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Continuar compra</button>
+            </div>
+        ):null}
 
      </div>
   )
