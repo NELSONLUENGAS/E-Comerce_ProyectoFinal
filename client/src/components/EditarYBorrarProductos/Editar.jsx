@@ -12,8 +12,10 @@ import {
     FormGroup,
     ModalFooter,
 } from "reactstrap";
-import { getProducts, UpdateProduct, DeleteProduct } from "../../actions";
+import { getProducts, UpdateProduct, DeleteProduct,getUserSigningIn,getSearch } from "../../actions";
 import NavBarGuest from "../Guest/NavBarGuest";
+import SearchIcon from '../../svg/search.svg'
+import { products } from "../Guest/Products";
 
 
 
@@ -21,6 +23,8 @@ import NavBarGuest from "../Guest/NavBarGuest";
 
 
 const Editar = () => {
+
+    const [busqueda,setBusqueda] = useState('')
     const dispatch = useDispatch()
     const Products = useSelector((state) => state.products);
     const[input, setstate]= useState({
@@ -47,7 +51,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
         })
         setStateModalInsectar({
             modalInsertar:true,
-        });
+        })  ;
       };
       const handleChange = (e) => {
 
@@ -61,33 +65,76 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch, refresh])
-    const handleSubmit = ()=>{
-        dispatch(UpdateProduct(input))
+
+    const handleSubmit = (e)=>{
+        e.preventDefault()
+        const fetchData = async () => {
+            await dispatch(UpdateProduct(input))
+            await dispatch(getProducts())
+        }
+        fetchData()
+        alert("Elemento actualizado correctamente")
+        setStateModalInsectar(false);
+        
     }
     const handleDelete = (e, id) => {
         e.preventDefault()
         var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+id)
         if(opcion===true){
-      
-          dispatch(DeleteProduct(id))
+            const fetchData = async () => {
+                await dispatch(DeleteProduct(id))
+                await dispatch(getProducts())
+            }
+            fetchData()
+            
         }
     }
-
-
+    function editProduct(){
+        alert("estaba aqui")
+        setStateModalInsectar(false);
+    }
+    useEffect(() => {
+        let inicioSesion =JSON.parse(localStorage.getItem('userData'))
+        if(inicioSesion){
+            console.log(inicioSesion)
+            const fetchData = async () => {
+                await   dispatch(getUserSigningIn({
+                    'email':inicioSesion.email,
+                    'password':inicioSesion.password
+                }))
+            }
+            fetchData()
+        }
+    }, []);
+    function handleSearch(e){
+        e.preventDefault()
+        
+    }
+    function handleInputSearch(e){
+        e.preventDefault()
+        setBusqueda(e.target.value)
+        dispatch(getSearch(e.target.value))
+        console.log(Products)
+    }
     return (
         <>
         <NavBarGuest/>
             <div style={{width:"100%"}}>
+            
                 <br />
                 <h1>Productos en Venta</h1>
                 <br />
+                <form onSubmit={(e)=> handleSearch(e)} style={{display:"flex",backgroundColor:"#fff",width:"30%",justifyContent:"flex-end",alignItems:"center",flexDirection:"row",height:"50px",borderRadius:"0.5rem",margin:"auto"}}>
+            <input style={{height:"100%",width:"100%",marginTop:"0"}} value={busqueda} onChange={(e) => handleInputSearch(e)} type="search" placeholder="Buscar..." />
+            <button type="submit" style={{height:"100%",backgroundColor:"#fff",border:"transparent",borderLeft:"1px solid grey"}} > <img style={{height:"15px",marginLeft:"1rem",marginRight:"1rem"}} src={SearchIcon}/></button>
+        </form>
                 <Fragment>
 
                 </Fragment>
      
                 <br />
                 
-                <Table style={{width:"50%"}}className="table">
+                <Table style={{width:"50%",backgroundColor:"#fff", borderRadius:"1rem",marginLeft:"8rem"}}className="table">
                     <thead>
                         <tr>
                         <th>id</th>
@@ -100,16 +147,16 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
                             <th>Eliminar</th>
                         </tr>
                     </thead>
-
+                    {Products[0].id ? (
                     <tbody>
-                        {Products.map((el)=>(
+                        {Products?.map((el)=>(
                             <tr key={el.id}>
                                 <td>{el.id}</td>
                                 <td>{el.name}</td>
                                 <td>{el.price}</td>
                                 <td>{el.stock}</td>
                                 <td style={{minWidth:"80vh"}}>{el.description}</td>
-                                <td>{el.image}</td>
+                                <td><img style={{height:"100px"}} src={el.image} alt="imagen"/></td>
                                 <td>
                                     <Button
                                         color="primary"
@@ -128,7 +175,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
                                 </td>
                             </tr>
                         ))}
-                    </tbody>
+                    </tbody>):"No hay productos con esa busqueda"}
                 </Table>
                 </div>
 
@@ -178,11 +225,17 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
 
                         />
                     </FormGroup>
-                    <FormGroup>
+                    <div style={{display:"flex",flexDirection:"column",marginBottom:"1rem"}}>
                         <label>
-                            Descripcion:
+                                Descripcion:
                         </label>
-                        <input
+                        <textarea style={{height:"200px",resize:"none"}} name="" id="" cols="30" rows="10"value={description}
+                                onChange={handleChange}></textarea>
+                    </div>
+                    {/* <FormGroup>
+                        
+                        <textarea
+                            style={{height:"200px",display: "flex",flexWrap:"wrap",textAlign:"left",alignItems:"center"}}
                             className="form-control"
                             name="description"
                             type="text"
@@ -190,7 +243,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
                             onChange={handleChange}
 
                         />
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                         <label>
                             Imagen:
@@ -208,7 +261,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
                 <ModalFooter>
                     <Button
                         color="primary"
-                        onClick={() => setStateModalInsectar(false)}
+                        onClick={() => editProduct}
                         type="submit"
                     >
                         Editar
