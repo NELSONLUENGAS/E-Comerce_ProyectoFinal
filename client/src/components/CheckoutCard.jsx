@@ -46,7 +46,7 @@ export default function CheckoutCard({
         //   dispatch(addBasketBack(item.id,-1))
         if(quantityProduct>1){
             const fetchData = async () => {
-                await dispatch(putBasketBack({"productId":id,"amount":Number(-1)},user.email));   
+                await dispatch(putBasketBack({productId:id,amount:'Decrement'},user.email));   
                 await dispatch(getBasket(user.email));
               }
             fetchData()
@@ -63,7 +63,7 @@ export default function CheckoutCard({
         console.log(item.id)
         console.log(user.email)
         const fetchData = async () => {
-            await dispatch(putBasketBack({"productId":id,"amount":Number(1)},user.email));
+            await dispatch(putBasketBack({productId:id,amount:'Increment'},user.email));
             await dispatch(getBasket(user.email));
           }
         fetchData()

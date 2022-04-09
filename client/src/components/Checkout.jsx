@@ -21,6 +21,7 @@ export default function Checkout() {
     
     function onFinishPay(e) {
         e.preventDefault();
+        if(!Url) return navigate('/checkout-page')
         window.location.href = Url;
     }
 
@@ -42,7 +43,6 @@ export default function Checkout() {
                     'email':inicioSesion.email,
                     'password':inicioSesion.password
                 }))
-                await dispatch(getBasket(inicioSesion.email))
             }
             fetchData()
         }
