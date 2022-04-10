@@ -26,8 +26,32 @@ router.get('/users/orders', async (req, res) => {
     else res.status(404).send('No hay ordenes creadas')
 })
 
+router.get('/orders', async (req, res, next)=> {
+    try{
+        const orders = await Orders.findAll({
+            include: {model: Products}
+        })
+        res.send(orders)
+    }catch(err){
+        next(err);
+    }
+})
 
 router.get('/users/:email/orders', async (req, res) => {
+    const {email} = req.params
+
+    const history = await Orders.findAll({where:  
+        { UserEmail: {
+            [Op.iLike]:`%${email}%`
+            }
+        }, 
+        include: {model: Products}
+    })
+    if(history.length) res.send(history)
+    else res.status(404).send('History not found')
+})
+
+router.get('/users/:email/order', async (req, res) => {
     const {email} = req.params
 
     const history = await Orders.findAll({where: 

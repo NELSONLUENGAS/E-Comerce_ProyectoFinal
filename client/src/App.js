@@ -37,8 +37,8 @@ function App() {
             <Route exact path="/user/addAdress" element={<CrearProducto/>}></Route>
           </Route>
 
-          <Route element={<AuthRoute/>}>
             <Route path='/admin/orderDetails' element={<PreNavAdmin/>}></Route>   
+          <Route element={<AuthRoute/>}>
             <Route exact path="/admin/createCategory" element={<AddCategorie/>}></Route>
             <Route exact path="/admin/createProduct" element={<CrearProducto/>}></Route>
             <Route exact path="/admin/edit" element={<Editar/>}></Route>

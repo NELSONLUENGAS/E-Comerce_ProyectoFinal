@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './Products.css'
 import { useLocalStorage } from "../useLocalStorage";
 import Advertising from "./Advertising";
+import { putOrderState } from "../actions/index";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -145,6 +146,7 @@ export default function Products() {
             fetchData()
         }
         if(queryParams.status==='approved'){
+            dispatch(putOrderState(inicioSesion?.email))
             alert('El pago ha sido completado')
             //El llamado al back para cambiar el status de la orden y vaciar el carrito
         }
@@ -191,7 +193,7 @@ export default function Products() {
                                 return (
                                     <option
                                         value={item.nombre}
-                                        key={item.nombre}
+                                        key={i}
                                     >
                                         {item.name}
                                     </option>

@@ -4,47 +4,70 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import accounting from 'accounting';
 import './order.css';
 
-export default function Order(){
+export default function Order({UserEmail, total, status, id , Products, date, direction}){
     const [order, setOrder] = useState({
         history: false,
         description: false,
-        sentStatus: false,
-        deliveredStatus: false,
+        sentStatus: status,
     });
-    function handleClick(e){
-        const { name } = e.target;
-        console.log(name)
+    function handleClickHistory(e){
         e.preventDefault();
         setOrder({
             ...order,
-            [name]: !order[name]
+            history: !order.history,
+        });
+    }
+    function handleClickDescription(e){
+        e.preventDefault();
+        setOrder({
+            ...order,
+            description: !order.description,
         });
     }
     
     return (
         <div className='tableGrid1'>
                 <div className='tableContent1'>
-                    <div>
-                        <button onClick={handleClick} name='history'>
-                            <span>123456789</span>
+                    <div  onClick={handleClickHistory}>
+                        <button>
+                            <span>{UserEmail}</span>
                             {order.history ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
                         </button>
                     </div>
-                    <div> 02-Abril-2022</div>
-                    <div>$120000</div>
+                    <div>{date}</div>
+                    <div>{accounting.formatMoney(total, '$')}</div>
                     <div>
-                        {
-                            order.sentStatus ?
-                            <button onClick={handleClick} name='sentStatus' className='sentOrder'>
-                            <CheckCircleIcon />
-                            sent
+                    {       order.sentStatus === 'Rejected' ?
+                            <button  className='rejectOrder'>
+                            <ErrorOutlineIcon />
+                            Rejected
+                            </button>
+                            : order.sentStatus === 'In progress' ?
+                            <button className='progresOrder'>
+                            <CurrencyExchangeIcon />
+                            In Progres
+                            </button>
+                            : order.sentStatus === 'Complete' ?
+                            <button className='sentOrder'>
+                            <CheckCircleOutlineIcon />
+                            In Progres
+                            </button>
+                            : order.sentStatus === 'Cart' ?
+                            <button className='sentOrder'>
+                            <ShoppingCartCheckoutIcon />
+                            Cart
                             </button>
                             :
-                            <button onClick={handleClick} name='sentStatus' className='pendingOrder'>
-                            <HourglassBottomIcon />
-                            pending
+                            <button className='cartOrder'>
+                            <ShoppingCartCheckoutIcon />
+                            Cart
                             </button>
                         }
                     </div>
@@ -53,8 +76,8 @@ export default function Order(){
                     <>
                     <div className='tbody'>
                     <h2>Order Details</h2>
-                    <div>
-                        <button onClick={handleClick} name='description'>
+                    <div  onClick={handleClickDescription}>
+                        <button>
                         ID
                         <span>
                         {order.description ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
@@ -66,20 +89,35 @@ export default function Order(){
                     <div>DELIVERED</div>
                 </div>
                 <div className='tbodyContent'>
-                    <div>12</div>
+                    <div>{id}</div>
                     <div>Compra en tienda</div>
-                    <div>Colombia_Calle12 - #12-23</div>
+                    <div>{direction}</div>
                     <div>
-                        { order.deliveredStatus ?
-                        <button onClick={handleClick} className='sentOrder' name='deliveredStatus'>
-                            <CheckCircleIcon />
-                            sent
-                        </button>
-                        :
-                        <button onClick={handleClick} className='pendingOrder' name='deliveredStatus'>
-                            <HourglassBottomIcon />
-                            pending
-                        </button>
+                    {       order.sentStatus === 'Rejected' ?
+                            <button  className='rejectOrder'>
+                            <ErrorOutlineIcon />
+                            Rejected
+                            </button>
+                            : order.sentStatus === 'In progress' ?
+                            <button className='progresOrder'>
+                            <CurrencyExchangeIcon />
+                            In Progres
+                            </button>
+                            : order.sentStatus === 'Complete' ?
+                            <button className='sentOrder'>
+                            <CheckCircleOutlineIcon />
+                            In Progres
+                            </button>
+                            : order.sentStatus === 'Cart' ?
+                            <button className='sentOrder'>
+                            <ShoppingCartCheckoutIcon />
+                            Cart
+                            </button>
+                            :
+                            <button className='cartOrder'>
+                            <ShoppingCartCheckoutIcon />
+                            Cart
+                            </button>
                         }
                     </div>
                 </div>
@@ -87,12 +125,18 @@ export default function Order(){
                     order.description &&
                     <>
                     <div className='empty'></div>
-                <div className='description'>
-                    <div>producto name</div>
-                    <div>price unit</div>
-                    <div>quantity</div>
-                    <div>Total price</div>
-                </div>
+                    {
+                        Products?.map((product, index) => {
+                            return (
+                                <div key={index} className='description'>
+                                    <div>{product.name}</div>
+                                    <div>{accounting.formatMoney(product.price, '$')}</div>
+                                    <div>{product.Product_Line.amount}</div>
+                                    <div>{accounting.formatMoney(product.price * product.Product_Line.amount, '$')}</div>
+                                </div>
+                            )
+                        })
+                    }
                 <div className='end'></div>
                     </>
                 }
