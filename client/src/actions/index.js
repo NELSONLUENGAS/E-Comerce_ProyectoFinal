@@ -20,6 +20,35 @@ export function getBasket(email){
     }
 }
 
+export  function getOrders(){
+    return async function (dispatch){
+        const orders = await axios('http://localhost:3001/orders')
+        return dispatch({
+            type: 'GET_ORDERS',
+            payload: orders.data
+        })
+    }
+}
+
+export function getOrdersUser(email){
+    return async function(dispatch){
+        const ordersUser = await axios(`http://localhost:3001/users/${email}/orders`)
+        return dispatch({
+            type: 'GET_ORDERS_USER',
+            payload: ordersUser.data
+        })
+    }
+}
+export function putOrderState(email){
+    return async function(dispatch){
+        const stateOrder = await axios.put(`http://localhost:3001/users/${email}/changeStatusCart`);
+        return dispatch({
+            type: 'PUT_ORDER_STATE',
+            payload: stateOrder.data
+        })
+    }
+}
+
 export function addBasketBack(payload,email){
     return async function (dispatch){
         const products = await axios.post(`http://localhost:3001/users/${email}/cart`,payload)

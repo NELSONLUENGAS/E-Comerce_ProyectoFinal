@@ -11,6 +11,7 @@ const initialState = {
     mercadoPago: {},
     basketBack: [],
     User: [],
+    Orders: [],
     Auth: {
         isLogin: true,
         role: 'admin'
@@ -145,7 +146,18 @@ export default function rootReducer(state = initialState, action) {
 
 
             }
-
+        case 'GET_ORDERS': {
+            return {
+                ...state,
+                Orders: action.payload
+            }
+        }
+        case 'GET_ORDERS_USER': {
+            return {
+                ...state,
+                Orders: action.payload
+            }
+        }
         case 'GET_PRODUCTS':
             return {
                 ...state,
