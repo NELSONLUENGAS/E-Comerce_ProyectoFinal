@@ -67,7 +67,7 @@ export default function Profile() {
                                 />
                             </div>
                             </Link >
-                            <Link style={{color:"black", textDecoration:"none"}} to="/admin/createProduct">
+                            <Link style={{color:"black", textDecoration:"none"}} to="/admin/edit">
                             <div className="container-options-profile">
                                 <div className="container-img-profile">
                                     <img

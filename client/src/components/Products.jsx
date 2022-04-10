@@ -18,10 +18,12 @@ import {
     getCategoriesByName,getUserSigningIn,filterByCategory,filterFreeShipping,filterByPrice,filterMoreSeller,filterToday,orderByPrice
 
 } from "../actions/index";
+import Ofertas from './Ofertas'
 import Carrousel from "./Carrousel";
 import { useDispatch, useSelector } from "react-redux";
 import './Products.css'
 import { useLocalStorage } from "../useLocalStorage";
+import Advertising from "./Advertising";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -160,7 +162,9 @@ export default function Products() {
         <div style={{ backgroundColor: "#EBEBEB" }}>
             <NavBarGuest/>
             <Carrousel />
-        
+            <Ofertas/>           
+            <Advertising img={['https://http2.mlstatic.com/D_NQ_961158-MLA49576115480_042022-C.webp','https://http2.mlstatic.com/D_NQ_628830-MLA49448744109_032022-C.webp']}/>
+             
             <div
                 style={{
                     display: "flex",
@@ -342,7 +346,7 @@ export default function Products() {
                             <option value="desc"> Mayor precio</option>
                         </select>
                     </div>
-                   { productos[0]? (
+                   { currentProducts[0]?.name ? (
                        currentProducts?.map((product) => (
                         <Product
                             name={product.name}

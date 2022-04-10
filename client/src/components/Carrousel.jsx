@@ -1,7 +1,3 @@
-
-
-
-
 import React, { Component } from 'react';
 import {
   Carousel,
@@ -11,20 +7,24 @@ import {
   CarouselCaption
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Carrousel.css';
 
 const items = [
   {
     src: 'https://http2.mlstatic.com/D_NQ_943534-MLA49357104694_032022-OO.webp',
+    className: 'adaptar',
     altText: 'Slide 1',
     caption: ' '
   },
   {
     src: 'https://http2.mlstatic.com/D_NQ_977635-MLA49448974486_032022-OO.webp',
+    className: 'adaptar',
     altText: 'Slide 2',
     caption: ' '
   },
   {
     src: 'https://http2.mlstatic.com/D_NQ_722488-MLA49531513472_032022-OO.webp  ',
+    className: 'adaptar',
     altText: 'Slide 3',
     caption: ' '
   }
@@ -76,7 +76,7 @@ class Slides extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img  src={item.src} alt={item.altText} />
+          <img  src={item.src} alt={item.altText} className={item.className} />
           <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );

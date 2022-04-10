@@ -108,11 +108,12 @@ export default function CheckoutPage() {
                 
                 <h1>Carrito</h1>
 
-                {cartProducts.Products?.length ? (
+                {cartProducts.Products?.length && user.name ? (
                     <div>
                         {cartProducts.Products.map((element) => {
                             return(
                             <CheckoutCard
+                                buttonQuantity={true}
                                 key={element.Product_Line.ProductId}
                                 id={element.Product_Line.ProductId}
                                 name= {element.name}
@@ -122,8 +123,7 @@ export default function CheckoutPage() {
                                 description={element.description}
                             />)
                         })}
-                        <button onClick={vaciarCarritoLocal} style={{color:'white',backgroundColor:"red",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Vaciar carrito</button>
-                        <Total onPay={onPay}/>
+                        <Total buttonContinue={true} emptyCart={vaciarCarritoLocal}onPay={onPay}/>
                     </div>
                     ):<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>
                 }

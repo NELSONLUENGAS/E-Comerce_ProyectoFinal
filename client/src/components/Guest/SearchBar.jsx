@@ -15,8 +15,12 @@ export default function SearchBar(){
     }
     function handleSearch(e){
         e.preventDefault()
-        navigate('/')
-        dispatch(getSearch(busqueda))
+        const fetchData = async () => {
+            await navigate('/')
+            await dispatch(getSearch(busqueda))
+        }
+        fetchData()
+       
     }
 
     return(
