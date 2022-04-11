@@ -6,7 +6,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { PostDirection } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from './inputEnvio'
-import NavBarGuest from '../Guest/NavBarGuest'
+import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +79,7 @@ const EnvioForm= () => {
 
 	return ( <>
 		
-			<NavBarGuest/>
+			<NavBar/>
 		<main className={classes.main}>
 			<h1>Direccion De Envio</h1>
 			<Formulario action="" onSubmit={onSubmit}>

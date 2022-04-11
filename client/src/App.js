@@ -1,6 +1,5 @@
 import './App.css';
 import Products from './components/Products';
-import NavBarUser from './components/User/NavBarUser'
 import CheckoutPage from './components/CheckoutPage';
 import CheckoutCard from './components/CheckoutCard';
 import {Route, Routes } from 'react-router';
@@ -13,10 +12,15 @@ import ProductDetail from "./components/ProductDetail/ProductDetail"
 import CrearProducto from './components/Agregar producto/CrearProducto';
 import Profile from './components/Profile'
 import Checkout from './components/Checkout';
-import PreNavAdmin from './components/admin/nav';
+import Order from './components/Orders/Order';
 import AuthRoute from './components/Auth/AuthRoute';
 import Editar from './components/EditarYBorrarProductos/Editar';
 import Envio from './components/EnvioFormu/Envio'
+import Compras from './components/MyShop/Compras'
+import Favorites from './components/Favorites/Favorites';
+import { UserData } from './components/UserData/UserData';
+import AdminRoles from './components/AdminRoles/AdminRoles';
+import ChangePassword from './components/ChangePassword/ChangePassword';
 
 function App() {
   return (
@@ -31,18 +35,27 @@ function App() {
           <Route exact path="/Checkout/Payment" element={<Checkout/>} />
           <Route exact path="/Categories" element={<Categories/>}/>
           <Route exact path="/product/:id" element={<ProductDetail/>}></Route>
+          <Route exact path="/review/:id" element={<ProductDetail/>}></Route>
 
           <Route element={<AuthRoute/>}>
             <Route  path="/user/profile" element={<Profile/>}></Route>
             <Route exact path="/user/addAdress" element={<CrearProducto/>}></Route>
+            <Route exact path="/user/myShop" element={<Compras/>}></Route>
+            <Route exact path="/user/favorites" element={<Favorites/>}></Route>
+            <Route exact path="/user/myData" element={<UserData/>}></Route>
+            <Route exact path="/user/changePassword" element={<ChangePassword/>}></Route>
+            
           </Route>
+          
 
-            <Route path='/admin/orderDetails' element={<PreNavAdmin/>}></Route>   
           <Route element={<AuthRoute/>}>
+            <Route path='/admin/orders' element={<Order/>}></Route>   
             <Route exact path="/admin/createCategory" element={<AddCategorie/>}></Route>
             <Route exact path="/admin/createProduct" element={<CrearProducto/>}></Route>
             <Route exact path="/admin/edit" element={<Editar/>}></Route>
             <Route exact path="/admin/direction/edit" element={<Envio/>}></Route>
+            <Route exact path="/admin/roles" element={<AdminRoles/>}></Route>
+            
           </Route>
         </Routes>
     </div>

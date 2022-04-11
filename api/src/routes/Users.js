@@ -12,7 +12,7 @@ router.get('/login', async (req, res) => {
     const {email, password} = req.query
     const user = await Users.findOne({where: {email, password}})
     if(user) res.send(user)
-    else res.status(404).send('El usuario o contraseña son incorrectos')
+    else res.send('El usuario o contraseña son incorrectos')
 })
 
 router.post('/createUser', async (req, res) => {

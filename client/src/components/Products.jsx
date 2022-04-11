@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Product from "./Product";
 import { useState } from "react";
 import Paginado from "../components/Paginado";
-import NavBarGuest from "./Guest/NavBarGuest";
+import NavBar from './NavBar/NavBar'
 import { useSearchParams } from "react-router-dom";
 import {
     getProducts,getBasket,
@@ -44,7 +44,6 @@ export default function Products() {
         payment_type: params.get("payment_type"),
         external_reference: params.get("external_reference"),
     }
-    console.log(queryParams)
     
     const [localStorageVar,setLocalStorageVar] = useState('')  
     const productos = useSelector((state) => state.products);
@@ -162,7 +161,7 @@ export default function Products() {
 
     return (
         <div style={{ backgroundColor: "#EBEBEB" }}>
-            <NavBarGuest/>
+            <NavBar/>
             <Carrousel />
             <Ofertas/>           
             <Advertising img={['https://http2.mlstatic.com/D_NQ_961158-MLA49576115480_042022-C.webp','https://http2.mlstatic.com/D_NQ_628830-MLA49448744109_032022-C.webp']}/>
