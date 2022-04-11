@@ -30,7 +30,11 @@ module.exports = sequelize => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        direction: {
+        directions: {
+            type: DataTypes.ARRAY(DataTypes.JSON()),
+            allowNull: false
+        },
+        principalDirection: {
             type: DataTypes.ARRAY(DataTypes.JSON()),
             allowNull: false
         },

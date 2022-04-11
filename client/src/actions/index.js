@@ -307,16 +307,17 @@ export  function getOrdersComplete(){
 
 export function getOrdersUser(email){
     return async function(dispatch){
-        const ordersUser = await axios.get(`http://localhost:3001/users/${email}/orders`)
+        const ordersUser = await axios.get(`http://localhost:3001/users/${email}/order`)
         return dispatch({
             type: 'GET_ORDERS_USER',
             payload: ordersUser.data
         })
     }
 }
-export function putOrderState(email){
+export function putOrderState(email,userData){
+    console.log(userData)
     return async function(dispatch){
-        const stateOrder = await axios.put(`http://localhost:3001/users/${email}/changeStatusCart`);
+        const stateOrder = await axios.put(`http://localhost:3001/users/${email}/changeStatusCart`,userData);
         return dispatch({
             type: 'PUT_ORDER_STATE',
             payload: stateOrder.data

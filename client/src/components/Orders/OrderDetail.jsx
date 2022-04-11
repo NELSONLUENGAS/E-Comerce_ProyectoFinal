@@ -15,9 +15,11 @@ import accounting from "accounting";
 import {changeStatusToComplete} from '../../actions/index'
 import "./OrderDetail.css";
 
-export default function OrderDetail({UserEmail,total, status,id,Products,date,direction,handleChangeStatus}) {
-    const [order, setOrder] = useState({history: false,description: false,sentStatus: status})
+export default function OrderDetail({UserEmail,total, status,id,Products,date,direction,handleChangeStatus,updatedAt,name,lastname}) {
     
+    const [order, setOrder] = useState({history: false,description: false,sentStatus: status})
+    const fecha = updatedAt.slice(0,10)
+    const hora = updatedAt.slice(11,16)
     const dispatch = useDispatch()
 
     function handleClickHistory(e) {
@@ -39,18 +41,18 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
     return (
         <div className="container-finish-order">
             <div className="order-details-1" >
-                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>11 abril 2022</h6></div> 
+                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>{fecha} a las {hora}</h6></div> 
                 
                 <div>
-                {order.sentStatus === 'Complete' ? (
-                <h6 style={{color:"green"}}>Estado: {order.sentStatus}</h6>
-                ):<h6 style={{color:"#F3A712"}}>Estado: {order.sentStatus}</h6>
+                {status === 'Complete' ? (
+                <h6 style={{color:"green"}}>Estado: {status}</h6>
+                ):<h6 style={{color:"#F3A712"}}>Estado: {status}</h6>
                 }
                 </div>
                 
                 <div style={{display:"flex",gap:"2rem"}}>
                     <div style={{textAlign:"center",display:"flex",flexDirection:"column",justifyContent:"center"}}>
-                        <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>Agustin Bruno</h6>
+                        <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{name} {lastname}</h6>
                         <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{UserEmail}</h6>
                     </div>
                     {order.history ? (<button className="button-more-details-order" onClick={handleClickHistory}>
@@ -68,8 +70,18 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
             {order.history ? (<>
             <div className="order-details-2">
                 <h5>Total: $650.000</h5>
-                    {order.sentStatus === 'In progress' ? (<div>
-                    <button onClick={(e)=>handleChangeStatus(e,id)} className="button-status-order">Cambiar a Finalizada</button>
+                <div style={{marginRight:"2rem"}}>
+                <h5 >Envio a: </h5>
+                    
+                    {/* <h6>{direction[0]?.direction},
+                {direction[0]?.city},
+                {direction[0]?.province},
+                {direction[0]?.postalcode}  </h6> */}
+                
+                
+                </div>
+                    {status=== 'In progress' ? (<div>
+                    <button onClick={(e)=>handleChangeStatus(e,id,UserEmail)} className="button-status-order">Cambiar a Finalizada</button>
                 </div>):null
                 }          
             </div>

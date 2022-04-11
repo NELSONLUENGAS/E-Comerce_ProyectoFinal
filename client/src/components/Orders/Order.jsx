@@ -30,13 +30,15 @@ export default function Order(){
             [name]: !open[name],
         });
     }
-    function handleChangeStatus(e,id){
+    function handleChangeStatus(e,id,email){
         e.preventDefault()
         const fetchData = async () => {
-            await dispatch(changeStatusToComplete(user.email,{orderId:id}))
+            await dispatch(changeStatusToComplete(email,{orderId:id}))
             await dispatch(getOrders());
           }
         fetchData()
+        dispatch(getOrders());
+        
     }
     function handleGetOrders(e,type){
         e.preventDefault()
@@ -58,8 +60,8 @@ export default function Order(){
 
     useEffect(() => {
         dispatch(getOrders());
+
     } , [dispatch]);
-    
 
     return (
         <>
@@ -75,7 +77,7 @@ export default function Order(){
         <div className="div-buscador-order">
                 
                 <img style={{height:"18.5px",position:"absolute",left:"10px",bottom:"3px"}} src={SearchIcon} alt='busqueda'></img>
-                <input placeholder="Buscar orden por # " className='input-buscador-order'/>
+                <input onChange={onChange} type='search' placeholder="Buscar por mail " className='input-buscador-order'/>
         </div>
         <div className='div-filters-order'>
             <h6 style={{marginBottom:"0.4rem"}}>Filtrar y ordenar</h6>
@@ -90,7 +92,7 @@ export default function Order(){
             {Orders.length ? 
                     Orders?.map((order) => {
                         return (
-                        <OrderDetail key={order.id} UserEmail={user.email} total={order.total} status={order.status} id={order.id} Products={order.Products} direction={order.direction} handleChangeStatus={handleChangeStatus} />
+                        <OrderDetail key={order.id} updatedAt={order.updatedAt} UserEmail={order.UserEmail} total={order.total} status={order.status} id={order.id} Products={order.Products} direction={order.direction} name={order.name} lastname={order.lastname} handleChangeStatus={handleChangeStatus} />
                         )
                     }) : <div>No hay ordenes creadas</div>}
             </div>

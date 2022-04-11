@@ -16,12 +16,12 @@ router.get('/login', async (req, res) => {
 })
 
 router.post('/createUser', async (req, res) => {
-    const {email, password, name, lastname, birthday, dni, nationality, province, city, postalcode, direction, phone} = req.body
+    const {email, password, name, lastname, birthday, dni, nationality,direction, phone,direccion} = req.body
 
     try {
-        const user = {email, password, name, lastname, birthday, dni, nationality, province, city, postalcode, direction, phone}
+        const user = {email, password, name, lastname, birthday, dni, nationality,principalDirection:direction, directions:direction, phone}
         await Users.create(user)
-        await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart'}})
+        await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart',name:name,lastname:lastname}})
         res.send('The user has been created successfully')
     } 
     catch(e) {
@@ -31,11 +31,12 @@ router.post('/createUser', async (req, res) => {
 })
 
 router.post('/users/:email/addlocation', async (req, res) => {
-    const {newAdress} = req.body, {email} = req.params
+    const {direction,postalcode,city,province} = req.body, {email} = req.params
+    const newAdress={direction,postalcode,city,province}
 
     try{
         const user = await Users.findOne({where: {email}})
-        user.direction=[...user.direction,newAdress]
+        user.directions=[...user.directions,newAdress]
         await user.save()
         res.send('Add new location')
     }

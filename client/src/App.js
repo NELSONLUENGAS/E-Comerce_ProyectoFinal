@@ -15,7 +15,7 @@ import Checkout from './components/Checkout';
 import Order from './components/Orders/Order';
 import AuthRoute from './components/Auth/AuthRoute';
 import Editar from './components/EditarYBorrarProductos/Editar';
-import Envio from './components/EnvioFormu/Envio'
+import EnvioForm from './components/EnvioFormu/EnvioForm'
 import Compras from './components/MyShop/Compras'
 import Favorites from './components/Favorites/Favorites';
 import { UserData } from './components/UserData/UserData';
@@ -40,7 +40,7 @@ function App() {
 
           <Route element={<AuthRoute/>}>
             <Route  path="/user/profile" element={<Profile/>}></Route>
-            <Route exact path="/user/addAdress" element={<CrearProducto/>}></Route>
+            <Route exact path="/user/addAdress" element={<EnvioForm/>}></Route>
             <Route exact path="/user/myShop" element={<Compras/>}></Route>
             <Route exact path="/user/favorites" element={<Favorites/>}></Route>
             <Route exact path="/user/myData" element={<UserData/>}></Route>
@@ -54,7 +54,6 @@ function App() {
             <Route exact path="/admin/createCategory" element={<AddCategorie/>}></Route>
             <Route exact path="/admin/createProduct" element={<CrearProducto/>}></Route>
             <Route exact path="/admin/edit" element={<Editar/>}></Route>
-            <Route exact path="/admin/direction/edit" element={<Envio/>}></Route>
             <Route exact path="/admin/roles" element={<AdminRoles/>}></Route>
             
           </Route>

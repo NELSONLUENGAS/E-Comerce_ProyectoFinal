@@ -196,7 +196,7 @@ export default function NavBar() {
                     </Link>
                     <div> 
                         <span>Enviar a</span>
-                        {user.name? (<span>{user.direction[0]?.city}</span>):<span>Ciudad</span>}
+                        {user.name? (<span>{user.directions[0]?.city}</span>):<span>Ciudad</span>}
                     </div>
                 </div>
                 <div className="cusElement5">
@@ -383,7 +383,7 @@ export default function NavBar() {
                                 {!user.name? (<Link to="/SignIn"><h3>Por favor incia sesion</h3> </Link>):(<div>
                                 <div>
                                     
-                                    {user.direction.map((element,i) =>{
+                                    {user.directions.map((element,i) =>{
                                         return (<div key={i}>
                                                 <input type="radio"/>
                                                 <label for={i} >

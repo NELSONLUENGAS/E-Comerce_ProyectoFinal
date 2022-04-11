@@ -10,12 +10,12 @@ import SearchIcon from '../../svg/search.svg'
 
 export default function Compras(){
     const dispatch = useDispatch();
-    
+    const user = useSelector((state)=>state.User)
     const Orders = useSelector((state) => state.Orders);
     console.log(Orders)
     //Orders.length && console.log(Orders, 'primero')
     useEffect(() => {
-        dispatch(getOrders());
+        dispatch(getOrdersUser(user.email));
     } , [dispatch]);
 
     const [open, setOpen] = useState({
@@ -48,10 +48,10 @@ export default function Compras(){
                 <img style={{height:"18.5px",position:"absolute",left:"10px"}} src={SearchIcon} alt='busqueda'></img>
                 <input placeholder="Buscar producto comprado..." className='input-buscador-compras'/>
             </div>
-        
+            {Orders.length? (
             <div className="container-compras-detail" >
                 {Orders.length ? Orders.map((order) => <ComprasDetail key={order.id} {...order} />) : <div>No hay ordenes creadas</div>}
-            </div>
+            </div>):<div>No hay ordenes para mostrar</div>}
         </div>
         </>
     )

@@ -27,6 +27,7 @@ const EnvioForm= () => {
 	const classes = useStyles();
 	const dispatch = useDispatch()
 	const conectado = useSelector((state) => state.conectado);
+	const user = useSelector((state) => state.User);
 	const [direction, cambiardirection] = useState({campo: '', valido: null});
 	const [postalcode, cambiarpostalcode] = useState({campo: '', valido: null});
 	const [province, cambiarprovince] = useState({campo: '', valido: null});
@@ -47,7 +48,7 @@ const EnvioForm= () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-
+		alert("entre")
 		if(
 	
 			direction.valido === 'true' &&
@@ -56,17 +57,16 @@ const EnvioForm= () => {
 			city.valido === 'true' &&
 			terminos
 		){
-		    let input = {
+		    let newAdress = {
 				province: province.campo,
 				city: city.campo,
 				postalcode: postalcode.campo,
 				direction: direction.campo,
 			}
-			let email= conectado.email
-			dispatch(PostDirection(input, email))
+			console.log(newAdress)
+			dispatch(PostDirection(newAdress, user.email))
 			cambiarFormularioValido(true);
-			alert("Usuario creado correctamente")
-			Navigate('/SignIn')
+			alert("Direccion agregada correctamente")
 			cambiarprovince({campo: '', valido: null});
 			cambiarcity({campo: '', valido: null});
 			cambiardirection({campo: '', valido: null});

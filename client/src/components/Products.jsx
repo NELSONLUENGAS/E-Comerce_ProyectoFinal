@@ -44,7 +44,7 @@ export default function Products() {
         payment_type: params.get("payment_type"),
         external_reference: params.get("external_reference"),
     }
-    
+    const user =useSelector((state) => state.User);
     const [localStorageVar,setLocalStorageVar] = useState('')  
     const productos = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
@@ -107,13 +107,6 @@ export default function Products() {
         setCurrentPage(1)
     }
 
-    // useEffect(()=>{
-    //     setLocalStorageVar(localStorage.getItem('userData'))
-    //     dispatch(getUserSigningIn({
-    //                         'email':localStorage.email,
-    //                         'password':localStorage.password
-    //                     }))
-    // })
     function traeLocal (){
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         console.log(inicioSesion)
@@ -141,14 +134,17 @@ export default function Products() {
                     'password':inicioSesion.password
                 }))
                 await dispatch(getBasket(inicioSesion.email))
+                if(queryParams.status==='approved'){
+                    const userData={name:inicioSesion.name,lastname:inicioSesion.lastname}
+                    console.log(userData)
+                    await dispatch(putOrderState(inicioSesion?.email,userData))
+                    alert('El pago ha sido completado')
+                    //El llamado al back para cambiar el status de la orden y vaciar el carrito
+                }
             }
             fetchData()
         }
-        if(queryParams.status==='approved'){
-            dispatch(putOrderState(inicioSesion?.email))
-            alert('El pago ha sido completado')
-            //El llamado al back para cambiar el status de la orden y vaciar el carrito
-        }
+       
     }, []);
 
     useEffect(() => {

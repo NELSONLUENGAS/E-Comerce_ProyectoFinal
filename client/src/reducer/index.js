@@ -159,6 +159,12 @@ export default function rootReducer(state = initialState, action) {
             }
         }
         case 'GET_ORDERS_USER': {
+            if(action.payload ==='History not found'){
+                return{
+                    ...state,
+                    Orders:[]
+                }
+            } else
             return {
                 ...state,
                 Orders: action.payload

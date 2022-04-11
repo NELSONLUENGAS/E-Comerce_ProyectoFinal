@@ -92,8 +92,8 @@ export default function Checkout() {
                 </h5>
                 <h5>Forma de envio: Envio a domicilio</h5>
                 <h5>
-                    Domicilio de entrega: {user?.direction[0].direction},
-                    {user?.direction[0].city},{user?.direction[0].province}
+                    Domicilio de entrega: {user?.principalDirection[0].direction},
+                    {user?.principalDirection[0].city},{user?.principalDirection[0].province},{user?.principalDirection[0].postalcode},
                 </h5>
             </div>
             <div

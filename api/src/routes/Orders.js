@@ -151,6 +151,7 @@ router.put('/users/:email/cart', async (req, res) => {
 })
 router.put('/users/:email/changeStatusCart', async (req, res) => {
     const {email} = req.params
+    const {name,lastname} = req.body
 
     try {
         const cart = await Orders.findOne({
@@ -166,7 +167,7 @@ router.put('/users/:email/changeStatusCart', async (req, res) => {
                 })
                 cart.status = 'In progress'
                 await cart.save()
-                await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart'}})
+                await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart',name:name,lastname:lastname}})
                 return res.send('El status ha cambiado correctamente')
             } else res.status(404).send('Cart not found')
         }
