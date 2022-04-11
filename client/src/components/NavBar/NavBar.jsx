@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./NavBarGuest.css";
+import "./NavBar.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -16,9 +16,9 @@ import Logo from '../../svg/latcom1.png'
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
-import {getBasket,getCategoriesByName} from '../../actions/index'
+import {getBasket,getCategoriesByName,getUserSigningIn} from '../../actions/index'
 
-export default function NavBarGuest() {
+export default function NavBar() {
     const dispatch= useDispatch()
     const carrito = useSelector(state=>state.SumItemsBack)
     const navigate = useNavigate()
@@ -144,6 +144,20 @@ export default function NavBarGuest() {
         let capitalLetter = user.name;
         return capitalLetter = capitalLetter[0].toUpperCase();
     }
+    useEffect(() => {
+        let inicioSesion =JSON.parse(localStorage.getItem('userData'))
+        if(inicioSesion){
+            console.log(inicioSesion)
+            const fetchData = async () => {
+                await   dispatch(getUserSigningIn({
+                    'email':inicioSesion.email,
+                    'password':inicioSesion.password
+                }))
+                await dispatch(getBasket(inicioSesion.email))
+            }
+            fetchData()
+        }
+    }, []);
 
     return (
         <>
@@ -182,13 +196,13 @@ export default function NavBarGuest() {
                     </Link>
                     <div> 
                         <span>Enviar a</span>
-                        {user.name? (<span>{user.direction[0]?.city}</span>):<span>Ciudad</span>}
+                        {user.name? (<span>{user.directions[0]?.city}</span>):<span>Ciudad</span>}
                     </div>
                 </div>
                 <div className="cusElement5">
-                    <span onMouseOver={modal}>
+                    {/* <span onMouseOver={modal}>
                         <Link style={{color:"white",textDecoration:"none"}} to="/Categories">Categorías </Link>
-                    </span>
+                    </span> */}
                 </div>
                 <div onMouseOver={modalDown} className="cusElement6"></div>
                 <div className="cusElement7">
@@ -210,8 +224,8 @@ export default function NavBarGuest() {
                     </label>
                 </div>
                 <div onMouseOver={modalDown} className="cusElement8">
-                    <span>Mis Compras</span>
-                    <span>Favoritos</span>
+                    <Link to="/user/myShop" style={{textDecoration:"none",color:"#fff"}}>Mis Compras</Link>
+                    <Link to="/user/favorites" style={{textDecoration:"none",color:"#fff"}}>Favoritos</Link>
                 </div>
                 <div onMouseOver={modalDown} className="cusElement9">
                     <label>
@@ -369,7 +383,7 @@ export default function NavBarGuest() {
                                 {!user.name? (<Link to="/SignIn"><h3>Por favor incia sesion</h3> </Link>):(<div>
                                 <div>
                                     
-                                    {user.direction.map((element,i) =>{
+                                    {user.directions.map((element,i) =>{
                                         return (<div key={i}>
                                                 <input type="radio"/>
                                                 <label for={i} >

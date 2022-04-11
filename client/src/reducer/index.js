@@ -11,6 +11,7 @@ const initialState = {
     mercadoPago: {},
     basketBack: [],
     User: [],
+    Orders: [],
     Auth: {
         isLogin: true,
         role: 'admin'
@@ -145,7 +146,54 @@ export default function rootReducer(state = initialState, action) {
 
 
             }
-
+        case 'GET_ORDERS': {
+            if(action.payload ==='No hay ordenes creadas'){
+                return{
+                    ...state,
+                    Orders:[]
+                }
+            }else 
+            return {
+                ...state,
+                Orders: action.payload
+            }
+        }
+        case 'GET_ORDERS_USER': {
+            if(action.payload ==='History not found'){
+                return{
+                    ...state,
+                    Orders:[]
+                }
+            } else
+            return {
+                ...state,
+                Orders: action.payload
+            }
+        }
+        case 'GET_ORDERS_IN_PROGRESS':{
+            if(action.payload ==='No hay ordenes en progreso'){
+                return{
+                    ...state,
+                    Orders:[]
+                }
+            }else 
+            return {
+                ...state,
+                Orders: action.payload
+            }
+        }
+        case 'GET_ORDERS_COMPLETE':{
+            if(action.payload ==='No hay ordenes completadas'){
+            return{
+                ...state,
+                Orders:[]
+            }
+        }else 
+        return {
+            ...state,
+            Orders: action.payload
+        }
+        }
         case 'GET_PRODUCTS':
             return {
                 ...state,
@@ -230,16 +278,16 @@ export default function rootReducer(state = initialState, action) {
         case 'GET_BASKET':
 
             state.basketBack = action.payload
-            console.log('este es el action payload de get basket')
-            console.log(action.payload)
-            console.log(state.basketBack)
+            // console.log('este es el action payload de get basket')
+            // console.log(action.payload)
+            // console.log(state.basketBack)
             let sumatotalBack = 0
             state.basketBack.Products.map((item) => {
                 return (
                     sumatotalBack = Number(sumatotalBack) + (Number(item.Product_Line.amount) * Number(item.Product_Line.price))
                 )
             })
-            console.log(sumatotalBack)
+            // console.log(sumatotalBack)
             state.SumPriceBack = sumatotalBack
 
             let sumItemsBack = 0
@@ -248,7 +296,7 @@ export default function rootReducer(state = initialState, action) {
                     sumItemsBack = Number(sumItemsBack) + (Number(item.Product_Line.amount))
                 )
             })
-            console.log(sumItemsBack)
+            // console.log(sumItemsBack)
             state.SumItemsBack = sumItemsBack
 
             return {
@@ -265,21 +313,21 @@ export default function rootReducer(state = initialState, action) {
 
 function orderAndFilter(state, orderByPrice) {
     const productsFilteredByCategory = filterByCategory(state, orderByPrice)
-    console.log("Este es el console log de la categoria")
-    console.log(productsFilteredByCategory)
+    // console.log("Este es el console log de la categoria")
+    // console.log(productsFilteredByCategory)
     const productsFilteredByToday = filterByToday(state, productsFilteredByCategory)
-    console.log("Este es el console log del today")
-    console.log(productsFilteredByToday)
+    // console.log("Este es el console log del today")
+    // console.log(productsFilteredByToday)
     const productsFilteredByFreeShipping = filterByFreeShipping(state, productsFilteredByToday)
-    console.log("Este es el console log de free shipping")
-    console.log(productsFilteredByFreeShipping)
+    // console.log("Este es el console log de free shipping")
+    // console.log(productsFilteredByFreeShipping)
     const productsFilteredByMoreSeller = filterByMoreSeller(state, productsFilteredByFreeShipping)
-    console.log("Este es el console log del ultimo filtro")
-    console.log(productsFilteredByMoreSeller)
+    // console.log("Este es el console log del ultimo filtro")
+    // console.log(productsFilteredByMoreSeller)
     const productsFilterByMin = filterByMin(state, productsFilteredByMoreSeller)
     const productsFilterByMax = filterByMax(state, productsFilterByMin)
-    console.log("Este es el console log del filtro de precios")
-    console.log(productsFilterByMax)
+    // console.log("Este es el console log del filtro de precios")
+    // console.log(productsFilterByMax)
     return orderBy(productsFilterByMax, state.orderAndFilter.orderByPrice)
 }
 function orderBy(products, orderByPrice) {

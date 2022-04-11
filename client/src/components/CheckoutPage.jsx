@@ -5,14 +5,12 @@
 //Mapeo De Los Productos Comprados
 ////////////////////////
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
 import CheckoutCard from "./CheckoutCard.jsx";
 import { useSelector } from "react-redux";
 import Total from "./Total";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import NavBarGuest from "./Guest/NavBarGuest.jsx";
+import NavBar from './NavBar/NavBar'
 import { getMercadoPago, vaciarCarritoBack,getBasket,getUserSigningIn } from "../actions/index.js";
 import "./CheckoutPage.css"
 
@@ -103,7 +101,7 @@ export default function CheckoutPage() {
 
     return (
         <>
-            <NavBarGuest />
+            <NavBar />
             <div className="container-cart">
                 
                 <h1>Carrito</h1>

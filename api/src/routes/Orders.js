@@ -15,7 +15,6 @@ router.get('/users/:email/cart', async (req, res) => {
     else res.status(404).send('Cart not found')
 })
 router.get('/users/orders', async (req, res) => {
-    const {email} = req.params
 
     const history = await Orders.findAll({where: 
         { status: { [Op.ne]: 'Cart' } }, 
@@ -25,9 +24,54 @@ router.get('/users/orders', async (req, res) => {
     if(history.length) res.send(history)
     else res.status(404).send('No hay ordenes creadas')
 })
+router.get('/users/orders/InProgress', async (req, res) => {
+
+    const history = await Orders.findAll({where: 
+        { status: 'In progress'}, 
+        include: {model: Products}
+    })
+
+    if(history.length) res.send(history)
+    else res.status(404).send('No hay ordenes en progreso')
+})
+router.get('/users/orders/Complete', async (req, res) => {
+    const history = await Orders.findAll({where: 
+        { status: 'Complete'}, 
+        include: {model: Products}
+    })
+
+    if(history.length) res.send(history)
+    else res.status(404).send('No hay ordenes completadas')
+})
+
+router.get('/orders', async (req, res, next)=> {
+    try{
+        const orders = await Orders.findAll({
+            include: {model: Products}
+        })
+        res.send(orders)
+    }catch(err){
+        next(err);
+    }
+})
+
 
 
 router.get('/users/:email/orders', async (req, res) => {
+    const {email} = req.params
+
+    const history = await Orders.findAll({where:  
+        { UserEmail: {
+            [Op.iLike]:`%${email}%`
+            }
+        }, 
+        include: {model: Products}
+    })
+    if(history.length) res.send(history)
+    else res.status(404).send('History not found')
+})
+
+router.get('/users/:email/order', async (req, res) => {
     const {email} = req.params
 
     const history = await Orders.findAll({where: 
@@ -107,6 +151,7 @@ router.put('/users/:email/cart', async (req, res) => {
 })
 router.put('/users/:email/changeStatusCart', async (req, res) => {
     const {email} = req.params
+    const {name,lastname} = req.body
 
     try {
         const cart = await Orders.findOne({
@@ -122,7 +167,7 @@ router.put('/users/:email/changeStatusCart', async (req, res) => {
                 })
                 cart.status = 'In progress'
                 await cart.save()
-                await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart'}})
+                await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart',name:name,lastname:lastname}})
                 return res.send('El status ha cambiado correctamente')
             } else res.status(404).send('Cart not found')
         }
@@ -131,6 +176,28 @@ router.put('/users/:email/changeStatusCart', async (req, res) => {
         }
     
     })
+router.put('/users/:email/changeToComplete', async (req, res) => {
+        const {email} = req.params
+        const {orderId}=req.body
+        console.log(orderId)
+        try {
+            const cart = await Orders.findOne({
+                where: {UserEmail: email, status: 'In progress',id:orderId},
+                include:{model: Products}
+                })
+            
+    
+                if(cart){
+                    cart.status = 'Complete'
+                    await cart.save()
+                    return res.send('El status ha cambiado correctamente')
+                } else res.status(404).send('Cart not found')
+            }
+            catch(e){
+                res.status(500).send(`${e}`)
+            }
+        
+})
 
 router.delete('/users/:email/cart', async (req, res) => {
     const {productId} = req.body, {email} = req.params

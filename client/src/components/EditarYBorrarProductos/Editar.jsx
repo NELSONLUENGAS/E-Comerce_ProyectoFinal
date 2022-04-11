@@ -13,9 +13,8 @@ import {
     ModalFooter,
 } from "reactstrap";
 import { getProducts, UpdateProduct, DeleteProduct,getUserSigningIn,getSearch } from "../../actions";
-import NavBarGuest from "../Guest/NavBarGuest";
+import NavBar from '../NavBar/NavBar';
 import SearchIcon from '../../svg/search.svg'
-import { products } from "../Guest/Products";
 
 
 
@@ -118,7 +117,7 @@ const [modalInsertar, setStateModalInsectar] = useState(false)
     }
     return (
         <>
-        <NavBarGuest/>
+        <NavBar/>
             <div style={{width:"100%"}}>
             
                 <br />

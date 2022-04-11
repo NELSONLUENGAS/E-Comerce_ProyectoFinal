@@ -16,7 +16,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { postProductos } from '../../actions';
 import Input from './InputCrear'
 import { useDispatch,useSelector } from 'react-redux';
-import NavBarGuest from '../Guest/NavBarGuest';
+import NavBar from '../NavBar/NavBar';
 import { getCategories } from '../../actions';
 
 
@@ -134,7 +134,7 @@ const CrearForm = () => {
 	}
 
 	return (<>
-		<NavBarGuest/>
+		<NavBar/>
 		<main className={classes.main} style={{backgroundColor:"#C4C7BB", borderRadius:"2%",marginTop:"2rem"}}>
 			<h1>Crear Producto</h1>
 			<Formulario action="" onSubmit={onSubmit}>

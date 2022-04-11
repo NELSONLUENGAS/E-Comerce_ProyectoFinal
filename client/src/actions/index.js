@@ -200,7 +200,6 @@ export function postProductos(payload) {
 export function getUserSigningIn(payload){
     return async function (dispatch){
         const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`);
-        console.log(json.data)
         return dispatch ({
             type:"GET_USER_SIGNING_IN",
             payload:json.data
@@ -278,4 +277,65 @@ export function DeleteProduct(id) {
         })
     }
 }
+export  function getOrders(){
+    return async function (dispatch){
+        const orders = await axios.get('http://localhost:3001/users/orders')
+        return dispatch({
+            type: 'GET_ORDERS',
+            payload: orders.data
+        })
+    }
+}
+export  function getOrdersInProgress(){
+    return async function (dispatch){
+        const orders = await axios.get('http://localhost:3001/users/orders/InProgress')
+        return dispatch({
+            type: 'GET_ORDERS_IN_PROGRESS',
+            payload: orders.data
+        })
+    }
+}
+export  function getOrdersComplete(){
+    return async function (dispatch){
+        const orders = await axios.get('http://localhost:3001/users/orders/Complete')
+        return dispatch({
+            type: 'GET_ORDERS_COMPLETE',
+            payload: orders.data
+        })
+    }
+}
+
+export function getOrdersUser(email){
+    return async function(dispatch){
+        const ordersUser = await axios.get(`http://localhost:3001/users/${email}/order`)
+        return dispatch({
+            type: 'GET_ORDERS_USER',
+            payload: ordersUser.data
+        })
+    }
+}
+export function putOrderState(email,userData){
+    console.log(userData)
+    return async function(dispatch){
+        const stateOrder = await axios.put(`http://localhost:3001/users/${email}/changeStatusCart`,userData);
+        return dispatch({
+            type: 'PUT_ORDER_STATE',
+            payload: stateOrder.data
+        })
+    }
+}
+
+export function changeStatusToComplete(email,orderId){
+    return async function (dispatch) {
+        console.log(orderId)
+        const json = await axios.put(`http://localhost:3001/users/${email}/changeToComplete`,orderId);
+        return dispatch({
+            type: "CHANGE_ORDER_TO_COMPLETE",
+            payload: json.data
+
+        })
+    }
+
+}
+
 

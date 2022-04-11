@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import NavBarGuest from "./Guest/NavBarGuest";
+import NavBar from './NavBar/NavBar'
 
 export default function Categories() {
     const categories = [
@@ -47,7 +47,7 @@ export default function Categories() {
     ];
     return (
         <>
-        <NavBarGuest/>
+        <NavBar/>
         
         <div
             style={{

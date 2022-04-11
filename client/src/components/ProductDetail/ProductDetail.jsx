@@ -4,12 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductId } from "../../actions/index";
-import NavBarGuest from "../Guest/NavBarGuest";
+import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
 import { addToBasket,vaciarCarrito,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
 import Review from "./Review";
-import DoReview from "./DoReview";
 
 export default function ProductDetail() {
     const productosdel = {
@@ -188,7 +187,7 @@ export default function ProductDetail() {
     }, []);
     return (
         <>
-            <NavBarGuest />
+            <NavBar/>
             <div style={{ marginTop: "5rem" }}>
                 <div className="container-product-detail">
                     <div className="container-div-important-info-product-detail">
@@ -429,7 +428,6 @@ export default function ProductDetail() {
                         </div>
                         </> )}
                     </div>
-                        <DoReview name={productDetail.name} image={productDetail.image}/>
                    
                 </div>
             </div>

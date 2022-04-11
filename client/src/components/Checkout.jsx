@@ -3,13 +3,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CheckoutPage from "./CheckoutPage";
-import NavBarGuest from "./Guest/NavBarGuest";
 import { useDispatch } from "react-redux";
-import { getMercadoPago,getUserSigningIn, getBasket } from "../actions/index";
+import { getUserSigningIn, getBasket } from "../actions/index";
 import { useEffect } from "react";
 import CheckoutCard from "./CheckoutCard";
-import { Navbar } from "reactstrap";
+import NavBar from './NavBar/NavBar'
 import Total from "./Total";
 
 export default function Checkout() {
@@ -50,7 +48,7 @@ export default function Checkout() {
 
     return (
         <>
-        <NavBarGuest/>
+        <NavBar/>
         {Url ? ( <>
         <div className="container-cart">
             <br/>
@@ -94,8 +92,8 @@ export default function Checkout() {
                 </h5>
                 <h5>Forma de envio: Envio a domicilio</h5>
                 <h5>
-                    Domicilio de entrega: {user?.direction[0].direction},
-                    {user?.direction[0].city},{user?.direction[0].province}
+                    Domicilio de entrega: {user?.principalDirection[0].direction},
+                    {user?.principalDirection[0].city},{user?.principalDirection[0].province},{user?.principalDirection[0].postalcode},
                 </h5>
             </div>
             <div

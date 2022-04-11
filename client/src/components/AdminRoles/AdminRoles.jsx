@@ -6,7 +6,7 @@ import { getCategories } from "../../actions";
 import { useEffect } from "react";
 import { postCrearCategoria } from "../../actions";
 
-const AddCategorie = () => {
+const AdminRoles = () => {
 
   const categories = useSelector((state) => state.categories);
   const dispatch= useDispatch()
@@ -53,21 +53,10 @@ const AddCategorie = () => {
   return (<>
     <NavBar/>
     <div style={{width:"50%",margin:"auto"}}>
-      <h1>Crear Categoria</h1>
+      <h1>Administrar Roles</h1>
       <div className="container">
         <label className="mx-3 d-grid gap-2">
-          Nombre de Categoria
-          <input
-            onChange={handleChange}
-            name="name"
-            value={name}
-            type="text"
-            className="form-control"
-  
-          />
-        </label>
-        <label className="mx-3 d-grid gap-2">
-          Descripcion
+          Ingrese E-mail para agregar como administrador
           <input
             onChange={handleChange}
             name="description"
@@ -87,8 +76,8 @@ const AddCategorie = () => {
       <thead>
         <tr>
           <th>ID</th>
-          <th>Categoria</th>
-          <th>Descripcion</th>
+          <th>Email</th>
+          <th>Rol</th>
           <th>Eliminar</th>
         </tr>
       </thead>
@@ -121,4 +110,4 @@ const AddCategorie = () => {
   );
 };
 
-export default AddCategorie;
+export default AdminRoles;

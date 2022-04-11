@@ -1,5 +1,5 @@
 import { Navbar } from "reactstrap"
-import NavBarGuest from "./Guest/NavBarGuest"
+import NavBar from './NavBar/NavBar'
 import { useNavigate } from "react-router-dom"
 
 export default function ForgotPassword(){
@@ -12,7 +12,7 @@ export default function ForgotPassword(){
     
     return(
         <div>
-            <NavBarGuest/>
+            <NavBar/>
             <div>
                 Has olvidado la contraseña?
                 <div>

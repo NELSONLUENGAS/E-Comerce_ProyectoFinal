@@ -8,7 +8,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import NavBarGuest from './Guest/NavBarGuest'
 import { makeStyles } from '@material-ui/core/styles';
 //import  { useAuth0 } from "@auth0/auth0-react";
 import {Link} from 'react-router-dom'
@@ -18,6 +17,7 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useEffect } from 'react';
+import NavBar from './NavBar/NavBar'
 //import GoogleLogin from 'react-google-login';
 import Login from './GoogleAuth/Login';
 //import LogoutButton from "./GoogleAuth/LogOut";
@@ -67,17 +67,18 @@ export default function SignIn() {
 
   useEffect(()=>{
     if(validate>0){
-      setTimeout(()=>{      
+      setTimeout(()=>{
+        console.log(user)      
         if (user.name){
           alert("Ha iniciado sesion correctamente")
           localStorage.setItem('userData', JSON.stringify(user));          
           Navigate("/")
         }else {
-         alert("El usuario y o contraseña son incorrectos")
+         alert("El usuario y o contraseña son incorrectos");
         }
       });
     }
-  },[validate,user])
+  },[validate])
 
   function handleEmail(e){
     e.preventDefault()
@@ -90,15 +91,20 @@ export default function SignIn() {
   }
   function handleSignIn(e){
     e.preventDefault();
-    dispatch(getUserSigningIn({
-      email:email,
-      password:password
-    }))
-    setValidate(validate+1)
+    const fetchData = async () => {
+      await   dispatch(getUserSigningIn({
+        email:email,
+        password:password
+      }))
+      await setValidate(validate+1)
+    }
+  fetchData()
+    
+    
 }
 
   return (<>
-      <NavBarGuest/>
+      <NavBar/>
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
