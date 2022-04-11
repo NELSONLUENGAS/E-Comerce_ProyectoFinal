@@ -21,6 +21,7 @@ import Favorites from './components/Favorites/Favorites';
 import { UserData } from './components/UserData/UserData';
 import AdminRoles from './components/AdminRoles/AdminRoles';
 import ChangePassword from './components/ChangePassword/ChangePassword';
+import ReviewProduct from './components/MyShop/ReviewProduct';
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
           <Route exact path="/Checkout/Payment" element={<Checkout/>} />
           <Route exact path="/Categories" element={<Categories/>}/>
           <Route exact path="/product/:id" element={<ProductDetail/>}></Route>
-          <Route exact path="/review/:id" element={<ProductDetail/>}></Route>
+          <Route exact path="/review/:id" element={<ReviewProduct/>}></Route>
 
           <Route element={<AuthRoute/>}>
             <Route  path="/user/profile" element={<Profile/>}></Route>

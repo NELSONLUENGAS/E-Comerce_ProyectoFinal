@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import {getOrders, getOrdersUser,changeStatusToComplete} from '../../actions/index';
+import {getOrders,getOrdersInProgress,getOrdersComplete, getOrdersUser,changeStatusToComplete} from '../../actions/index';
 import {useSelector, useDispatch} from 'react-redux';
 import OrderDetail from './OrderDetail';
 import './Order.css';
 import NavBar from '../NavBar/NavBar';
+import SearchIcon from '../../svg/search.svg'
 
 export default function Order(){
     const dispatch = useDispatch();
@@ -34,29 +35,65 @@ export default function Order(){
         const fetchData = async () => {
             await dispatch(changeStatusToComplete(user.email,{orderId:id}))
             await dispatch(getOrders());
-
           }
         fetchData()
+    }
+    function handleGetOrders(e,type){
+        e.preventDefault()
+        switch(type){
+            case 'All':{ 
+                return dispatch(getOrders());            
+            }
+            case 'InProcess':{
+                return dispatch(getOrdersInProgress())    
+            }
+            case 'Complete':{
+                    return dispatch(getOrdersComplete())
+            }
+            default: return
+        }
+            
+
     }
 
     useEffect(() => {
         dispatch(getOrders());
     } , [dispatch]);
+    
 
     return (
         <>
-        <NavBar/>
-        <div style={{display:"flex",flexDirection:"row", justifyContent:"space-around",fontSize:"36px",gap:'3rem',backgroundColor:"#fff",width:"50%",margin:"auto",borderRadius:"0.5rem", marginTop:"2rem",borderTop:"5px solid #3483fa ",height:"5rem"}}>
-            <button style={{border:"transparent",backgroundColor:"#fff"}}>Todas</button>
-            <button style={{border:"transparent",backgroundColor:"#fff"}}>En proceso</button>
-            <button style={{border:"transparent",backgroundColor:"#fff"}}>Finalizada</button>
+        <NavBar/><div style={{width:"50%",margin:"auto"}}>
+        <div style={{display:"flex",flexDirection:"row", justifyContent:"space-around",fontSize:"24px",gap:'3rem',backgroundColor:"#fff",margin:"auto",borderRadius:"0.5rem", marginTop:"2rem",borderTop:"5px solid #3483fa ",height:"5rem"}}>
+            <button onClick={(e)=>handleGetOrders(e,'All')}style={{border:"transparent",backgroundColor:"#fff"}}>Todas</button>
+            <button onClick={(e)=>handleGetOrders(e,'InProcess')} style={{border:"transparent",backgroundColor:"#fff"}}>En proceso</button>
+            <button onClick={(e)=>handleGetOrders(e,'Complete')} style={{border:"transparent",backgroundColor:"#fff"}}>Finalizada</button>
         </div>
-        <div>
-            Filtrar y ordenar 
-            <input/>
+        <div className="container-filters-order">
+           
+
+        <div className="div-buscador-order">
+                
+                <img style={{height:"18.5px",position:"absolute",left:"10px",bottom:"3px"}} src={SearchIcon} alt='busqueda'></img>
+                <input placeholder="Buscar orden por # " className='input-buscador-order'/>
         </div>
-            <div style={{width:"50%",margin:"auto",gap:"2rem"}}>
-            {Orders.length ? Orders.map((order) => <OrderDetail key={order.id} UserEmail={user.email} total={order.total} status={order.status} id={order.id} Products={order.Products} direction={order.direction} handleChangeStatus={handleChangeStatus} />) : <div>No hay ordenes creadas</div>}
+        <div className='div-filters-order'>
+            <h6 style={{marginBottom:"0.4rem"}}>Filtrar y ordenar</h6>
+            <select>
+                <option>Por fecha mas recientes primero</option>
+                <option>Por fecha mas antiguos primero</option>
+                
+            </select>
+            </div>
+        </div>
+            <div style={{margin:"auto",gap:"2rem"}}>
+            {Orders.length ? 
+                    Orders?.map((order) => {
+                        return (
+                        <OrderDetail key={order.id} UserEmail={user.email} total={order.total} status={order.status} id={order.id} Products={order.Products} direction={order.direction} handleChangeStatus={handleChangeStatus} />
+                        )
+                    }) : <div>No hay ordenes creadas</div>}
+            </div>
             </div>
         </>
     )

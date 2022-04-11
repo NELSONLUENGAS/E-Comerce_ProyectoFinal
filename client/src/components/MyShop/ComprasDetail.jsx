@@ -17,6 +17,7 @@ export default function ComprasDetail({
     date,
     direction,
 }) {
+    console.log(Products)
 
     return (
         <div className="container-finish-shop">
@@ -30,7 +31,7 @@ export default function ComprasDetail({
             
             <div className="shop-details-2">
                 <div>
-                <h6 style={{color:"green"}}>Estado: Finalizada</h6>
+                {status==='Complete' ? (<h6 style={{color:"green"}}>Estado: {status}</h6>): (<h6 style={{color:"#F3A712"}}>Estado: {status}</h6>)}
                 </div>                            
             </div>
             <div className="shop-details-3">
@@ -41,7 +42,7 @@ export default function ComprasDetail({
                                         <h6>{product.name}</h6> 
                                         <div style={{width:"200px"}}>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
                                         <div>{product.Product_Line.amount } u.</div>
-                                        <Link  to={"/review/" + product.Product_Line.id} style={{ textDecoration:"none"}}className="button-status-shop">Opinar de este producto</Link>
+                                        {status==='Complete' ? (<Link  to={"/review/" + product.id} style={{ textDecoration:"none"}}className="button-status-shop">Opinar de este producto</Link>):null}
                                     </div>
                                     );
                                     })}                           

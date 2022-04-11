@@ -200,9 +200,9 @@ export default function NavBar() {
                     </div>
                 </div>
                 <div className="cusElement5">
-                    <span onMouseOver={modal}>
+                    {/* <span onMouseOver={modal}>
                         <Link style={{color:"white",textDecoration:"none"}} to="/Categories">Categorías </Link>
-                    </span>
+                    </span> */}
                 </div>
                 <div onMouseOver={modalDown} className="cusElement6"></div>
                 <div className="cusElement7">

@@ -147,6 +147,12 @@ export default function rootReducer(state = initialState, action) {
 
             }
         case 'GET_ORDERS': {
+            if(action.payload ==='No hay ordenes creadas'){
+                return{
+                    ...state,
+                    Orders:[]
+                }
+            }else 
             return {
                 ...state,
                 Orders: action.payload
@@ -157,6 +163,30 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 Orders: action.payload
             }
+        }
+        case 'GET_ORDERS_IN_PROGRESS':{
+            if(action.payload ==='No hay ordenes en progreso'){
+                return{
+                    ...state,
+                    Orders:[]
+                }
+            }else 
+            return {
+                ...state,
+                Orders: action.payload
+            }
+        }
+        case 'GET_ORDERS_COMPLETE':{
+            if(action.payload ==='No hay ordenes completadas'){
+            return{
+                ...state,
+                Orders:[]
+            }
+        }else 
+        return {
+            ...state,
+            Orders: action.payload
+        }
         }
         case 'GET_PRODUCTS':
             return {

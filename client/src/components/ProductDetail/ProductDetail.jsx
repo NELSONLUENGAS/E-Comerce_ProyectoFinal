@@ -9,7 +9,6 @@ import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
 import { addToBasket,vaciarCarrito,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
 import Review from "./Review";
-import DoReview from "./DoReview";
 
 export default function ProductDetail() {
     const productosdel = {
@@ -429,7 +428,6 @@ export default function ProductDetail() {
                         </div>
                         </> )}
                     </div>
-                        <DoReview name={productDetail.name} image={productDetail.image}/>
                    
                 </div>
             </div>

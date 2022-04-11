@@ -5,6 +5,7 @@
     box-shadow: 0 6px 16px rgb(0 0 0 / 10%);
     width: 615px;
     height: 500px;
+    margin-top: 2rem;
 }
 .top-do-review{
     display: flex;
@@ -15,8 +16,9 @@
 }
 .top-do-review img{
    border-radius: 50%;
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
+    padding: 1rem;    object-fit: cover;
     border: 1px solid rgba(0,0,0,.1);
 }
 .bottom-do-review{

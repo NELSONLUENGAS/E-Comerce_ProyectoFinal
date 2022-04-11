@@ -6,6 +6,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import ComprasDetail from './ComprasDetail';
 import './Compras.css';
 import NavBar from '../NavBar/NavBar';
+import SearchIcon from '../../svg/search.svg'
 
 export default function Compras(){
     const dispatch = useDispatch();
@@ -44,6 +45,7 @@ export default function Compras(){
                 <h3 style={{textAlign:"left"}}>Compras</h3>
             </div>
             <div className="div-buscador-compras">
+                <img style={{height:"18.5px",position:"absolute",left:"10px"}} src={SearchIcon} alt='busqueda'></img>
                 <input placeholder="Buscar producto comprado..." className='input-buscador-compras'/>
             </div>
         

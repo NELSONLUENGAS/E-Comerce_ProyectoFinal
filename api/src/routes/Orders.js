@@ -15,7 +15,6 @@ router.get('/users/:email/cart', async (req, res) => {
     else res.status(404).send('Cart not found')
 })
 router.get('/users/orders', async (req, res) => {
-    const {email} = req.params
 
     const history = await Orders.findAll({where: 
         { status: { [Op.ne]: 'Cart' } }, 
@@ -26,7 +25,6 @@ router.get('/users/orders', async (req, res) => {
     else res.status(404).send('No hay ordenes creadas')
 })
 router.get('/users/orders/InProgress', async (req, res) => {
-    const {email} = req.params
 
     const history = await Orders.findAll({where: 
         { status: 'In progress'}, 
@@ -37,8 +35,6 @@ router.get('/users/orders/InProgress', async (req, res) => {
     else res.status(404).send('No hay ordenes en progreso')
 })
 router.get('/users/orders/Complete', async (req, res) => {
-    const {email} = req.params
-
     const history = await Orders.findAll({where: 
         { status: 'Complete'}, 
         include: {model: Products}
