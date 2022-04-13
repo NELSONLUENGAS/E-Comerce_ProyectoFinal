@@ -45,7 +45,7 @@ export default function Compras(){
                 <h3 style={{textAlign:"left"}}>Compras</h3>
             </div>
             <div className="div-buscador-compras">
-                <img style={{height:"18.5px",position:"absolute",left:"10px"}} src={SearchIcon} alt='busqueda'></img>
+                <img className='lupa-buscador-compras' src={SearchIcon} alt='busqueda'></img>
                 <input placeholder="Buscar producto comprado..." className='input-buscador-compras'/>
             </div>
             {Orders.length? (

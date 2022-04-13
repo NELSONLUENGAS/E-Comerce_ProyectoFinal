@@ -1,0 +1,71 @@
+.container-pay-total{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 3rem;
+    padding: 1rem;
+    margin-right: 1rem;
+}
+.empty-cart-button-total{
+    color:#fff;
+    background-color: red;
+    border: transparent;
+    border-radius: 0.5em;
+    height: 50px;
+    padding: 0.5rem;
+}
+.continue-button-total{
+    color:#fff;
+    background-color: #3483fa;
+    border: transparent;
+    border-radius: 0.5em;
+    height: 50px;
+    padding: 0.5rem;
+}
+.div-buttons-total{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+@media (max-width: 700px){
+    .container-total{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        gap: 3rem;
+        padding: 1rem;
+        margin-right: 1rem;
+    }
+    .empty-cart-button-total{
+        color:#fff;
+        background-color: red;
+        border: transparent;
+        border-radius: 0.5em;
+        height: 50px;
+        padding: 0.5rem;
+        font-size: 15px;
+    }
+    .continue-button-total{
+        color:#fff;
+        background-color: #3483fa;
+        border: transparent;
+        border-radius: 0.5em;
+        font-size: 15px;
+        height: 50px;
+        padding: 0.5rem;
+    }
+    .container-total{
+        width: 100%;
+        margin: auto;
+    }
+    .div-buttons-total{
+        display: flex;
+        justify-content: space-around;
+        margin-right: 2rem;
+        margin-bottom: 2rem;
+        gap: 0px;
+        width: 100%;
+    }
+}

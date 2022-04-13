@@ -12,14 +12,14 @@ import { makeStyles } from '@material-ui/core/styles';
 //import  { useAuth0 } from "@auth0/auth0-react";
 import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import {getUserSigningIn} from '../actions/index'
+import {getUserSigningIn} from '../../actions/index'
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useEffect } from 'react';
-import NavBar from './NavBar/NavBar'
+import NavBar from '../NavBar/NavBar'
 //import GoogleLogin from 'react-google-login';
-import Login from './GoogleAuth/Login';
+import Login from '../GoogleAuth/Login';
 //import LogoutButton from "./GoogleAuth/LogOut";
 
 

@@ -5,7 +5,7 @@ const initialState = {
     basket: [],
     ItemsAmount: 0,
     SumPrice: [0],
-    SumPriceBack: [0],
+    SumPriceBack: 0,
     productId: [],
     categories: [],
     mercadoPago: {},

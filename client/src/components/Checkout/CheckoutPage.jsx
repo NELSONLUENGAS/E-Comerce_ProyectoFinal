@@ -7,11 +7,11 @@
 import React, { useEffect } from "react";
 import CheckoutCard from "./CheckoutCard.jsx";
 import { useSelector } from "react-redux";
-import Total from "./Total";
+import Total from "../Total/Total";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import NavBar from './NavBar/NavBar'
-import { getMercadoPago, vaciarCarritoBack,getBasket,getUserSigningIn } from "../actions/index.js";
+import NavBar from '../NavBar/NavBar'
+import { getMercadoPago, vaciarCarritoBack,getBasket,getUserSigningIn } from "../../actions/index.js";
 import "./CheckoutPage.css"
 
 export default function CheckoutPage() {
@@ -102,12 +102,13 @@ export default function CheckoutPage() {
     return (
         <>
             <NavBar />
+            <h1>Carrito</h1>
             <div className="container-cart">
                 
-                <h1>Carrito</h1>
+
 
                 {cartProducts.Products?.length && user.name ? (
-                    <div>
+                    <div style={{width:"100%"}}>
                         {cartProducts.Products.map((element) => {
                             return(
                             <CheckoutCard
