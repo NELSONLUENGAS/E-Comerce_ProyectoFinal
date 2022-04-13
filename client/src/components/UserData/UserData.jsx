@@ -1,24 +1,22 @@
-import NavBar from '../NavBar/NavBar';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import RegistroForm from './UserForm';
 
-export function UserData(){
-    return(
-        <>
-            <NavBar/>
+const useStyles = makeStyles((theme) => ({
+  container: {
+    minHeight: '100vh',
+    background: "#e5e5e5",
+},
+}));
 
-            <div>
-                Tus Datos
-                Datos de cuenta
-                E-mail
-                Datos Personales
-                Nombre 
-                Documento 
-                Telefono 
-                Nacionalidad
-                Provincia 
-                Ciudad
-
-
-            </div>
-        </>
-    )
+function UserData() {
+  const classes = useStyles();
+  return (
+        <div className= {classes.container}>
+          
+          <RegistroForm/>
+        </div>
+  )
 }
+
+export default UserData

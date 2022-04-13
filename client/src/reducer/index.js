@@ -44,6 +44,11 @@ export default function rootReducer(state = initialState, action) {
             }
 
         }
+        case "PUT_PASSWORD": {
+            return{
+                ...state,
+            }
+        }
         case 'FILTER_FREE_SHIPPING': {
             state.orderAndFilter.filterFreeShipping = action.payload
             return { ...state, products: orderAndFilter(state, state.orderAndFilter.filterByCategory) }
