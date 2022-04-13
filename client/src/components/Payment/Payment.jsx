@@ -4,11 +4,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUserSigningIn, getBasket } from "../actions/index";
+import { getUserSigningIn, getBasket } from "../../actions/index";
 import { useEffect } from "react";
-import CheckoutCard from "./CheckoutCard";
-import NavBar from './NavBar/NavBar'
-import Total from "./Total";
+import CheckoutCard from "../Checkout/CheckoutCard";
+import NavBar from '../NavBar/NavBar'
+import Total from "../Total/Total";
+import './Payment.css'
 
 export default function Checkout() {
     const navigate = useNavigate();
@@ -50,9 +51,10 @@ export default function Checkout() {
         <>
         <NavBar/>
         {Url ? ( <>
+            <h1>Tu pedido</h1>
         <div className="container-cart">
             <br/>
-            <h1>Tu pedido</h1>
+            
             <br/>
             {cartProducts.Products?.length && user.name ? (
                     <div>
@@ -74,63 +76,24 @@ export default function Checkout() {
             }
             </div>
             
-            <div
-                style={{
-                    backgroundColor: "white",
-                    textAlign: "left",
-                    width: "50%",
-                    margin: "auto",
-                    borderRadius: "1rem",
-                    marginTop: "1rem",
-                    padding: "1rem",
-                    marginBottom: "1rem",
-                }}
-            >
+            <div className="container-delivery-payment">
                 <h1 style={{ textAlign: "center" }}>Envio</h1>
-                <h5>
+                <p>
                     Contacto: {user.name} {user.lastname}
-                </h5>
-                <h5>Forma de envio: Envio a domicilio</h5>
-                <h5>
-                    Domicilio de entrega: {user?.principalDirection[0].direction},
+                </p>
+                <p>Forma de envio: Envio a domicilio</p>
+                <p>Domicilio de entrega:</p>
+                <p> {user?.principalDirection[0].direction},
                     {user?.principalDirection[0].city},{user?.principalDirection[0].province},{user?.principalDirection[0].postalcode},
-                </h5>
+                    </p>
+                
             </div>
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                    justifyContent: "center",
-                    width: "50%",
-                    margin: "auto",
-                    alignItems: "center",
-                }}
-            >
-                <button
-                    style={{
-                        color: "white",
-                        backgroundColor: "#3483fa",
-                        border: "transparent",
-                        borderRadius: "0.5em",
-                        height: "50px",
-                        padding: "0.5rem",
-                        width: "30%",
-                    }}
-                    onClick={onFinishPay}
-                >
+            <div className="div-buttons-payment">
+                <button className="button-mercadopago-payment" onClick={onFinishPay}>
                     Pagar con Mercadopago
                 </button>
-                <button
-                    style={{
-                        color: "#3483fa",
-                        backgroundColor: "rgba(65,137,230,.15)",
-                        border: "transparent",
-                        borderRadius: "0.5em",
-                        height: "50px",
-                        padding: "0.5rem",
-                        width: "10%",
-                    }}
+                <button className="button-back-payment"
+                   
                     onClick={returnToCheckout}
                 >
                     Volver

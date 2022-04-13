@@ -1,17 +1,17 @@
 import './App.css';
-import Products from './components/Products';
-import CheckoutPage from './components/CheckoutPage';
-import CheckoutCard from './components/CheckoutCard';
+import Products from './components/Products/Products';
+import CheckoutPage from './components/Checkout/CheckoutPage';
+import CheckoutCard from './components/Checkout/CheckoutCard';
 import {Route, Routes } from 'react-router';
 import {BrowserRouter as Router} from 'react-router-dom'
-import SignIn from './components/SignIn';
+import SignIn from './components/SignIn/SignIn';
 import RegistroForm from './components/Registro/Registro';
 import AddCategorie from './components/CrearNuevaCategorie/AddCategorie'
 import Categories from './components/Categories';
 import ProductDetail from "./components/ProductDetail/ProductDetail"
 import CrearProducto from './components/Agregar producto/CrearProducto';
-import Profile from './components/Profile'
-import Checkout from './components/Checkout';
+import Profile from './components/Profile/Profile'
+import Checkout from './components/Payment/Payment';
 import Order from './components/Orders/Order';
 import AuthRoute from './components/Auth/AuthRoute';
 import Editar from './components/EditarYBorrarProductos/Editar';

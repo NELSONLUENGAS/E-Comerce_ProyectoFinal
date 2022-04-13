@@ -1,11 +1,11 @@
 /** @format */
 
-import NavBar from './NavBar/NavBar'
+import NavBar from '../NavBar/NavBar'
 import { useSelector, useDispatch } from "react-redux";
 import "./Profile.css";
-import UserIcon from "../svg/user.svg";
-import Heart from "../svg/heart-svgrepo-com.svg";
-import Next from "../svg/next.svg";
+import UserIcon from "../../svg/user.svg";
+import Heart from "../../svg/heart-svgrepo-com.svg";
+import Next from "../../svg/next.svg";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
@@ -63,13 +63,8 @@ export default function Profile() {
                                         </h6>
                                     </div>
                                     <img
+                                        className='button-next-profile'
                                         src={Next}
-                                        style={{
-                                            position: "absolute",
-                                            width: "15px",
-                                            top: "20%",
-                                            right: "5%",
-                                        }}
                                         alt=""
                                     />
                                 </div>
@@ -98,12 +93,7 @@ export default function Profile() {
                                     </div>
                                     <img
                                         src={Next}
-                                        style={{
-                                            position: "absolute",
-                                            width: "15px",
-                                            top: "20%",
-                                            right: "5%",
-                                        }}
+                                        className='button-next-profile'
                                         alt=""
                                     />
                                 </div>
@@ -132,12 +122,7 @@ export default function Profile() {
                                     </div>
                                     <img
                                         src={Next}
-                                        style={{
-                                            position: "absolute",
-                                            width: "15px",
-                                            top: "20%",
-                                            right: "5%",
-                                        }}
+                                        className='button-next-profile'
                                         alt=""
                                     ></img>
                                 </div>
@@ -166,12 +151,7 @@ export default function Profile() {
                                     </div>
                                     <img
                                         src={Next}
-                                        style={{
-                                            position: "absolute",
-                                            width: "15px",
-                                            top: "20%",
-                                            right: "5%",
-                                        }}
+                                        className='button-next-profile'
                                         alt=""
                                     />
                                 </div>
@@ -199,12 +179,7 @@ export default function Profile() {
                                     </div>
                                     <img
                                         src={Next}
-                                        style={{
-                                            position: "absolute",
-                                            width: "15px",
-                                            top: "20%",
-                                            right: "5%",
-                                        }}
+                                        className='button-next-profile'
                                         alt=""
                                     />
                                 </div>
@@ -234,12 +209,7 @@ export default function Profile() {
 
                             <img
                                 src={Next}
-                                style={{
-                                    position: "absolute",
-                                    width: "15px",
-                                    top: "20%",
-                                    right: "5%",
-                                }}
+                                className='button-next-profile'
                                 alt=""
                             ></img>
                         </div>
@@ -265,12 +235,7 @@ export default function Profile() {
                             </div>
                             <img
                                 src={Next}
-                                style={{
-                                    position: "absolute",
-                                    width: "15px",
-                                    top: "20%",
-                                    right: "5%",
-                                }}
+                                className='button-next-profile'
                                 alt=""
                             ></img>
                         </div>
@@ -296,12 +261,7 @@ export default function Profile() {
                             </div>
                             <img
                                 src={Next}
-                                style={{
-                                    position: "absolute",
-                                    width: "15px",
-                                    top: "20%",
-                                    right: "5%",
-                                }}
+                                className='button-next-profile'
                                 alt=""
                             ></img>
                         </div>
@@ -324,12 +284,7 @@ export default function Profile() {
                             </div>
                             <img
                                 src={Next}
-                                style={{
-                                    position: "absolute",
-                                    width: "15px",
-                                    top: "20%",
-                                    right: "5%",
-                                }}
+                                className='button-next-profile'
                                 alt=""
                             ></img>
                         </div>
@@ -352,12 +307,7 @@ export default function Profile() {
                             </div>
                             <img
                                 src={Next}
-                                style={{
-                                    position: "absolute",
-                                    width: "15px",
-                                    top: "20%",
-                                    right: "5%",
-                                }}
+                                className='button-next-profile'
                                 alt=""
                             ></img>
                         </div>

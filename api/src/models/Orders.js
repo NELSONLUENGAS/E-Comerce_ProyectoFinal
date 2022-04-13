@@ -14,6 +14,9 @@ module.exports = sequelize => {
         lastname:{
             type: DataTypes.STRING,
         },
+        direction:{
+            type:DataTypes.JSON(),
+        },
         total: {
             type: DataTypes.INTEGER,
             defaultValue: 0

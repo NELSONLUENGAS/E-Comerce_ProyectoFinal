@@ -21,14 +21,14 @@ export default function Favorites(){
     return (
         <>
         <NavBar/>
-        <div className="container-compras">
-            <div className="container-title-compras">
+        <div className="container-favorites">
+            <div className="container-title-favorites">
                 <h3 style={{textAlign:"left"}}>Favoritos</h3>
             </div>
         
-            <div className="container-compras-detail" >
+            
                 {currentProducts.length ? currentProducts.map((product) => <FavoritesDetail key={product.id} price={product.price} image={product.image} id={product.id} name={product.name} />) : <div>No hay ordenes creadas</div>}
-            </div>
+            
         </div>
         </>
     )

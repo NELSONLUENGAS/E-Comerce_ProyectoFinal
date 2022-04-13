@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../actions";
 import { useEffect } from "react";
 import { postCrearCategoria } from "../../actions";
-
-const AdminRoles = () => {
+import './AdminRoles.css'
+const AddCategorie = () => {
 
   const categories = useSelector((state) => state.categories);
   const dispatch= useDispatch()
@@ -52,17 +52,18 @@ const AdminRoles = () => {
 
   return (<>
     <NavBar/>
-    <div style={{width:"50%",margin:"auto"}}>
-      <h1>Administrar Roles</h1>
+    <div style={{width:"90%",margin:"auto"}}>
+      <h1>Administrar roles</h1>
       <div className="container">
         <label className="mx-3 d-grid gap-2">
-          Ingrese E-mail para agregar como administrador
+          Ingrese el e-mail para hacer administrador
           <input
             onChange={handleChange}
-            name="description"
-            value={description}
+            name="name"
+            value={name}
             type="text"
             className="form-control"
+  
           />
         </label>
         <div className="mx-1 d-grid gap-2">
@@ -71,13 +72,13 @@ const AdminRoles = () => {
           </button>
         </div>
       </div>
-    
-      <table className="table">
+    <div className='container-table-categorie' >
+      <table className="table-categorie" >
       <thead>
         <tr>
           <th>ID</th>
-          <th>Email</th>
-          <th>Rol</th>
+          <th>Categoria</th>
+          <th>Descripcion</th>
           <th>Eliminar</th>
         </tr>
       </thead>
@@ -95,7 +96,7 @@ const AdminRoles = () => {
                 <button
                 type="submit"
                   onClick={(e) => handleDelete(e, item.id, item.name)}
-                  className="btn btn-danger"
+                  className="button-delete"
                 >
                   Eliminar
                 </button>
@@ -106,8 +107,9 @@ const AdminRoles = () => {
       </tbody>
     </table>
     </div>
+    </div>
     </>
   );
 };
 
-export default AdminRoles;
+export default AddCategorie;

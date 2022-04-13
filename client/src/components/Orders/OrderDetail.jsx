@@ -73,10 +73,10 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                 <div style={{marginRight:"2rem"}}>
                 <h5 >Envio a: </h5>
                     
-                    {/* <h6>{direction[0]?.direction},
+                    <h6>{direction[0]?.direction},
                 {direction[0]?.city},
                 {direction[0]?.province},
-                {direction[0]?.postalcode}  </h6> */}
+                {direction[0]?.postalcode}  </h6>
                 
                 
                 </div>

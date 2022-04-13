@@ -35,7 +35,7 @@ module.exports = sequelize => {
             allowNull: false
         },
         principalDirection: {
-            type: DataTypes.ARRAY(DataTypes.JSON()),
+            type: DataTypes.JSON(),
             allowNull: false
         },
         phone: {

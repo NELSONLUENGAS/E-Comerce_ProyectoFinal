@@ -14,14 +14,14 @@ import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { useSelector,useDispatch } from "react-redux";
-import { addToBasket,getBasket, addBasketBack} from "../actions";
+import { useSelector, useDispatch } from "react-redux";
+import { addToBasket, getBasket, addBasketBack } from "../../actions";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Rating } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import Corazon from "../svg/heart-svgrepo-com.svg";
-import Cart from '../svg/shopping-cart.svg'
+import Corazon from "../../svg/heart-svgrepo-com.svg";
+import Cart from "../../svg/shopping-cart.svg";
 import "./Product.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,8 +69,8 @@ export default function Product({
         name: name,
         image: image,
         price: price,
-        quantity:Number(1),
-        description:description
+        quantity: Number(1),
+        description: description,
     });
 
     const user = useSelector((state) => state.User);
@@ -80,34 +80,37 @@ export default function Product({
     };
 
     const AddToBasket = () => {
-        if(user.email){
+        if (user.email) {
             const fetchData = async () => {
-                await dispatch(addBasketBack({"productId":id,"amount":1},user.email));
+                await dispatch(
+                    addBasketBack({ productId: id, amount: 1 }, user.email)
+                );
                 await dispatch(getBasket(user.email));
-              }
-            fetchData()
-            
-            alert('El producto se agrego correctamente')            
-            console.log(id)  
+            };
+            fetchData();
 
-        }else{
-            alert('Inicia sesion por favor')
-            navigate("/SignIn")
+            alert("El producto se agrego correctamente");
+            console.log(id);
+        } else {
+            alert("Inicia sesion por favor");
+            navigate("/SignIn");
             // dispatch(addToBasket(item,1));
         }
     };
 
-
-  
-    return (
-       
-            <div className="container-card-product">
-                 <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to={"/product/" + id}
-        >
-                <img src={Corazon} className="heart" alt="" />
-                <img className="card-image" src={image} alt="" />
+    return (<>
+        
+        <Link 
+                style={{ textDecoration: "none", color: "black"}}
+                to={"/product/" + id}
+            >
+        <div className="container-card-product">
+            
+                <div className="div-img-card-product">
+                    <img src={Corazon} className="heart" alt="" />
+                    <img className="card-image" src={image} alt="" />
+                </div>
+                <div className="div-info-card-product">
                 {price < 45000 ? (
                     <button className="button-offer-product">
                         OFERTA DEL DIA
@@ -119,16 +122,10 @@ export default function Product({
                     </button>
                 ) : null}
                 <div style={{ marginLeft: "1rem" }}>
-                    <p style={{ fontSize: "30px", marginTop: "1rem" }}>
+                    <p className="price-product">
                         $ {Intl.NumberFormat("es-ES").format(price)}
                     </p>
-                    <p
-                        style={{
-                            color: "green",
-                            fontSize: "12px",
-                            marginTop: "-1.5rem",
-                        }}
-                    >
+                    <p className="cuotas-product">
                         Hasta 12 cuotas sin interes
                     </p>
                     {name.length < 45 ? (
@@ -136,20 +133,24 @@ export default function Product({
                             Llega gratis hoy{" "}
                         </button>
                     ) : (
-                        <p style={{ color: "green", fontSize: "14px" }}>
+                        <p className="free-delivery-product">
                             Envio gratis
                         </p>
                     )}
                 </div>
-                <div style={{ marginLeft: "1rem" }}>
-                    <p style={{ fontSize: "15px", marginTop: "1rem" }}>
-                        {name}
-                    </p>
+                <div className="div-name-product">
+                    <p className="name-product">{name}</p>
                 </div>
-                </Link>
-                <div className="add-to-cart-product" onClick={AddToBasket}>Agregar al carrito <img style={{height:"20px",marginLeft:"1rem"}} src={Cart}/></div>
+            <div className="add-to-cart-product" onClick={AddToBasket}>
+                Agregar al carrito{" "}
+                <img
+                    style={{ height: "20px", marginLeft: "1rem" }}
+                    src={Cart}
+                    />
             </div>
-        
+            </div>
+        </div>
+        </Link>
+        </>
     );
-
 }

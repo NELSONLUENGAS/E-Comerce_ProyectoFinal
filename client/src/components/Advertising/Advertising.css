@@ -1,0 +1,129 @@
+.container-advertising{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 7rem;
+}
+.container-div-advertising{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    position: relative
+}
+.container-div-advertising h2{
+    text-align: left;
+    position: absolute;
+    top: -4rem;
+    font-family: arial;
+}
+.container-div-offer-advertising{
+    width: 48%;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    height: 300px;
+    border-radius: 0.5rem;
+}
+.container-left-div-offer-advertising{
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.button-view-details-offer-advertising{
+    background-color: #3483fa;
+    color: white;
+    border: transparent;
+    height: 50px;
+    border-radius: 0.2em;
+    width: 8em;
+}
+.container-right-div-offer-advertising{
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.img-div-offer-advertising{
+    height: 250px;
+}
+.sub-title-advertising{
+    font-size: 20px;
+}
+.title-advertising{
+    margin-top: -0.5em;
+    font-size: 26px;
+}
+
+@media (max-width: 700px){
+    .container-advertising{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 3rem;
+    }
+    .container-div-advertising{
+        display: flex;
+        justify-items: center;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative
+    }
+    .container-div-advertising h2{
+        top:0px;
+        position: relative;
+        margin:auto;
+        display: flex;
+        font-family: arial;
+    }
+    .container-div-offer-advertising{
+        
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        height: 150px;
+        border-radius: 0.5rem;
+        margin:auto;
+        width: 100%;
+    }
+    .container-left-div-offer-advertising{
+        width: 50%;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .sub-title-advertising{
+        font-size: 12px;
+    }
+    .title-advertising{
+        margin-top: -0.5em;
+        font-size: 16px;
+    }
+    .button-view-details-offer-advertising{
+        background-color: #3483fa;
+        color: white;
+        border: transparent;
+        font-size: 12px;
+        height: 30px;
+        border-radius: 0.2em;
+        width: 6em;
+    }
+    .container-right-div-offer-advertising{
+        width: 50%;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .img-div-offer-advertising{
+        height: 100px;
+    }
+
+
+
+
+
+}

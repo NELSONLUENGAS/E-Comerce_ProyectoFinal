@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../actions";
 import { useEffect } from "react";
 import { postCrearCategoria } from "../../actions";
-
+import './AddCategorie.css'
 const AddCategorie = () => {
 
   const categories = useSelector((state) => state.categories);
@@ -52,7 +52,7 @@ const AddCategorie = () => {
 
   return (<>
     <NavBar/>
-    <div style={{width:"50%",margin:"auto"}}>
+    <div style={{width:"90%",margin:"auto"}}>
       <h1>Crear Categoria</h1>
       <div className="container">
         <label className="mx-3 d-grid gap-2">
@@ -82,8 +82,8 @@ const AddCategorie = () => {
           </button>
         </div>
       </div>
-    
-      <table className="table">
+    <div className='container-table-categorie' >
+      <table className="table-categorie" >
       <thead>
         <tr>
           <th>ID</th>
@@ -106,7 +106,7 @@ const AddCategorie = () => {
                 <button
                 type="submit"
                   onClick={(e) => handleDelete(e, item.id, item.name)}
-                  className="btn btn-danger"
+                  className="button-delete"
                 >
                   Eliminar
                 </button>
@@ -116,6 +116,7 @@ const AddCategorie = () => {
         })}
       </tbody>
     </table>
+    </div>
     </div>
     </>
   );

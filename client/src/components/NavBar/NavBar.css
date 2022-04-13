@@ -13,7 +13,7 @@
         padding-left: 1rem;
         justify-content: left;
         align-items: center;
-        background-color: #023047
+        background-color: #023047;
     }
     /* Element #2 */
     .cusElement2{
@@ -42,14 +42,14 @@
         cursor: pointer;
         border-radius: 50%;
         color: #023047;
-        background-color: transparent;
+        background-color: #fff;;
         box-shadow: 
         0px 2px 1px -1px rgb(0 0 0 / 20%), 
         0px 1px 1px 0px rgb(0 0 0 / 14%), 
         0px 1px 3px 0px rgb(0 0 0 / 12%);
     }
     .cusElement3 button:hover{
-        background-color: #023047
+        background-color: #fff;
     }
     .cusElement3 div {
         position: relative;
@@ -68,9 +68,11 @@
     .cusElement3 span{
         cursor: pointer;
         background-color: #fff;
+        height: 15px;
+        width: 15px;
         display: flex;
         justify-content: center;
-        align-items: flex-end;
+        align-items: center;
         padding: 0.12rem;
         position: absolute;
         border-radius: 50%;
@@ -87,6 +89,7 @@
         justify-content: left;
         align-items: flex-end;
         background-color: #023047;
+        color:#fff;
     }
     .cusElement4 label{
         border-style: none;

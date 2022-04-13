@@ -12,16 +12,15 @@ export default function ComprasDetail({
 }) {  
 
     return (
-        <div className="container-favorites">
-            <div key={id} className="product-favorites">
-                <div className="div-img-product-favorite"><img src={image} alt="hola"></img></div>
-                <div className="div-product-details-favorite">
+        
+            <div key={id} className="product-favorites-detail">
+                <div className="div-img-product-favorite-detail"><img src={image} alt="hola"></img></div>
+                <div className="div-product-details-favorite-detail">
                     <h4>{name}</h4>
                     <h3>{accounting.formatMoney(price,"$")}</h3>
                     <h5 style={{color:"green"}}>Envio gratis</h5>
-                    <button className="button-delete-favorite">Eliminar</button>
+                    <button className="button-delete-favorite-detail">Eliminar</button>
                 </div>
             </div> 
-        </div>
     );
 }
