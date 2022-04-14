@@ -66,18 +66,18 @@ export default function SignIn() {
 
 
   useEffect(()=>{
-    if(validate>0){
-      setTimeout(()=>{
+    if(validate>0){// if user is logged in
+      setTimeout(()=>{// wait for 2 seconds
         console.log(user)      
-        if (user.name){
+        if (user.name){// if user is logged in
           alert("Ha iniciado sesion correctamente")
-          localStorage.setItem('userData', JSON.stringify(user));          
+          localStorage.setItem('userData', JSON.stringify(user)); // stringify se usa para convertir un objeto en un string          
           Navigate("/")
         }else {
          alert("El usuario y o contraseña son incorrectos");
         }
       });
-    }
+    }// eslint-disable-next-line
   },[validate])
 
   function handleEmail(e){
@@ -90,13 +90,13 @@ export default function SignIn() {
     setPassword(e.target.value)
   }
   function handleSignIn(e){
-    e.preventDefault();
-    const fetchData = async () => {
-      await   dispatch(getUserSigningIn({
+    e.preventDefault();// previene el comportamiento por defecto del formulario
+    const fetchData = async () => {// fetch data from server
+      await   dispatch(getUserSigningIn({// dispatch action
         email:email,
         password:password
       }))
-      await setValidate(validate+1)
+      await setValidate(validate+1)// para que no se ejecute el useEffect
     }
   fetchData()
     
@@ -151,7 +151,7 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={(e) => handleSignIn(e)}
+              onClick={(e) => handleSignIn(e)}// al dar click en el boton se ejecuta la funcion,en este caso handleSignIn
             >
               Sign In
             </Button>
