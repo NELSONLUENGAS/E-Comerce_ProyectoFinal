@@ -10,6 +10,15 @@ export function getProducts(){
         })
     }
 }
+export function putPassword(payload,email){
+    return async function (dispatch){
+        const json = await axios.put(`http://localhost:3001/changePassword/${email}`,payload)
+        return dispatch ({
+            type:"PUT_PASSWORD",
+            payload:json.data
+        })
+    }
+}
 export function getBasket(email){
     return async function (dispatch){
         const products = await axios.get(`http://localhost:3001/users/${email}/cart`)
