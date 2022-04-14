@@ -22,7 +22,7 @@ const inputEnvio = ({estado, cambiarEstado, tipo, label, placeholder, name, leye
 	}
 
 	return (
-		<div>
+		<div style={{zIndex:"0"}}>
 			<Label htmlFor={name} valido={estado.valido}>{label}</Label>
 			<GrupoInput>
 				<Input 

@@ -48,7 +48,6 @@ const EnvioForm= () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		alert("entre")
 		if(
 	
 			direction.valido === 'true' &&

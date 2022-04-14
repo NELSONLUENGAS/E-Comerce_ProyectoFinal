@@ -15,14 +15,18 @@ export default function ComprasDetail({
     id,
     Products,
     date,
-    direction,
+    direction,updatedAt
 }) {
     console.log(Products)
+    const dia = updatedAt.slice(8,10)
+    const mes = updatedAt.slice(5,7)
+    const año = updatedAt.slice(0,4)
+    const hora = updatedAt.slice(11,16)
 
     return (
         <div className="container-finish-shop">
             <div className="shop-details-1" >
-                <div style={{display:"flex",gap:"2rem"}}><h6>11 abril 2022</h6></div> 
+                <div style={{display:"flex",gap:"2rem"}}><h6>{dia}-{mes}-{año} a las {hora}</h6></div> 
                 <div>
                 {status==='Complete' ? (<h6 style={{color:"green"}}>Estado: {status}</h6>): (<h6 style={{color:"#F3A712"}}>Estado: {status}</h6>)}
                 </div>

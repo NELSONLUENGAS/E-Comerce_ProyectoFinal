@@ -52,7 +52,7 @@ const AddCategorie = () => {
 
   return (<>
     <NavBar/>
-    <div style={{width:"90%",margin:"auto"}}>
+    <div style={{width:"90%",margin:"auto",zIndex:"0"}}>
       <h1>Crear Categoria</h1>
       <div className="container">
         <label className="mx-3 d-grid gap-2">

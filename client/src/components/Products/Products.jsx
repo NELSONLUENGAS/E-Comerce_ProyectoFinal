@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Product from "../Product/Product";
 import { useState } from "react";
 import Paginado from "../Paginado/Paginado";
-import NavBar from "../NavBar/NavBar";
+import NavBarTwo from "../NavBar/NavBar";
 import { useSearchParams } from "react-router-dom";
 import {
     getProducts,
@@ -174,7 +174,7 @@ export default function Products() {
 
     return (
         <div style={{ backgroundColor: "#EBEBEB" }}>
-            <NavBar />
+            <NavBarTwo />
             <Carrousel />
             <Ofertas />
             <Advertising

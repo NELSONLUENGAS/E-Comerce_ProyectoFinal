@@ -135,7 +135,7 @@ const CrearForm = () => {
 
 	return (<>
 		<NavBar/>
-		<main className={classes.main} style={{backgroundColor:"#C4C7BB", borderRadius:"2%",marginTop:"2rem"}}>
+		<main className={classes.main} style={{backgroundColor:"#C4C7BB", borderRadius:"2%",marginTop:"2rem",zIndex:"0"}}>
 			<h1>Crear Producto</h1>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input

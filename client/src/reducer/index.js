@@ -12,6 +12,7 @@ const initialState = {
     basketBack: [],
     User: [],
     Orders: [],
+    myOrders: [],
     Auth: {
         isLogin: true,
         role: 'admin'
@@ -162,12 +163,12 @@ export default function rootReducer(state = initialState, action) {
             if(action.payload ==='History not found'){
                 return{
                     ...state,
-                    Orders:[]
+                    myOrders:[]
                 }
             } else
             return {
                 ...state,
-                Orders: action.payload
+                myOrders: action.payload
             }
         }
         case 'GET_ORDERS_IN_PROGRESS':{
