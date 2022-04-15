@@ -24,7 +24,7 @@ export default function Products(){
 
   return (
     <div className={classes.root}>
-      <h1>TE AMO YAILEN FELIZ ANIVERSARIO</h1>
+      <h1>Hola</h1>
       <Grid container spacing={2}>
         {
           productos.map(product=>(
