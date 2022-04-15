@@ -9,6 +9,7 @@ const initialState = {
     productId: [],
     categories: [],
     mercadoPago: {},
+    editAdmin: [],
     basketBack: [],
     User: [],
     Orders: [],
@@ -48,6 +49,12 @@ export default function rootReducer(state = initialState, action) {
         case "PUT_PASSWORD": {
             return{
                 ...state,
+            }
+        }
+        case "GET_EDIT":{
+            return{
+                ...state,
+                editAdmin: [action.payload]
             }
         }
         case 'FILTER_FREE_SHIPPING': {
