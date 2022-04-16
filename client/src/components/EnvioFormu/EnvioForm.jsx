@@ -66,6 +66,7 @@ const EnvioForm= () => {
 			dispatch(PostDirection(newAdress, user.email))
 			cambiarFormularioValido(true);
 			alert("Direccion agregada correctamente")
+			Navigate('/')
 			cambiarprovince({campo: '', valido: null});
 			cambiarcity({campo: '', valido: null});
 			cambiardirection({campo: '', valido: null});
@@ -88,7 +89,6 @@ const EnvioForm= () => {
 					cambiarEstado={cambiarprovince}
 					tipo="text"
 					label="Provincia"
-					placeholder="Buenos Aires"
 					name="province"
 					leyendaError="Ingresa tu provincia, correctamente para que el pedido este echo correctamente"
 					expresionRegular={expresiones.ProvinciaNacionalidadCiudad}
@@ -98,7 +98,6 @@ const EnvioForm= () => {
 					cambiarEstado={cambiarcity}
 					tipo="text"
 					label="Ciudad"
-					placeholder="Buenos Aires"
 					name="city"
 					leyendaError="Ingrese tu ciudad correctamente"
 					expresionRegular={expresiones.ProvinciaNacionalidadCiudad}
@@ -108,7 +107,6 @@ const EnvioForm= () => {
 					cambiarEstado={cambiardirection}
 					tipo="text"
 					label="Direccion"
-					placeholder="Bartolome Mitre 250"
 					name="direction"
 					leyendaError="Ingrese tu direccion para cualquier pedido a domicilio, o entrega"
 					expresionRegular={expresiones.direccion}
@@ -118,7 +116,7 @@ const EnvioForm= () => {
 					cambiarEstado={cambiarpostalcode}
 					tipo="text"
 					label="Codigo Postal"
-					placeholder="2900"
+			
 					name="postalcode"
 					leyendaError="ingrese tu codigo postal correctamente"
 					expresionRegular={expresiones.codigoPostal}
