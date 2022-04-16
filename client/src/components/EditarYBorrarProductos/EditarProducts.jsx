@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     marginTop: "1rem",
     marginBottom: "1rem",
-    marginLeft: "100px",
-    marginRight: "100px",
+    marginLeft: "30px",
     [theme.breakpoints.down("sm")]: {
       marginTop: "0.5rem",
       marginBottom: "0.5rem",
@@ -119,7 +118,7 @@ export default function Products() {
 
       <Grid container spacing={2}>
         {productos.map((product) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+          <Grid item xs={12} sm={6} md={4} lg={4} key={product.id}>
             <EditarProduct
               name={product.name}
               image={product.image}
