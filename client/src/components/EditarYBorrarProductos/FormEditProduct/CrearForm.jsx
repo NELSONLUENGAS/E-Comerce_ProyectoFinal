@@ -51,7 +51,7 @@ const CrearForm = () => {
 	const [terminos, cambiarTerminos] = useState(false);
 	const [formularioValido, cambiarFormularioValido] = useState(null);
 	const navigate = useNavigate()
-	
+
 	const expresiones = {
 		Producto: /^[a-zA-Z0-9À-ÿ\s]{4,1000}$/, // Letras y espacios, pueden llevar acentos.
 		Precio: /^\d{1,10}$/, // 4 a 12 digitos.
@@ -63,9 +63,9 @@ const CrearForm = () => {
 		CambiarDescripcion({
 			...description,
 			campo: e.target.value,
-			
+
 		});
-	
+
 	}
 	//Validad Descripcion
 	const[descriptionInput, ChangeDescription] = useState({
@@ -103,12 +103,12 @@ const CrearForm = () => {
 				stock: stock.campo,
 				image:image.campo,
 				description: description.campo,
-	
+
 			}
 		if (
 			name.valido === 'true'
 		) {
-			
+
 			cambiarFormularioValido(true);
 			dispatch(UpdateProduct(input))
 			navigate('/admin/edit')
@@ -168,9 +168,9 @@ const CrearForm = () => {
 			cambiarFormularioValido(false);
 		}
 	}
-	function handleSelectCategory(e){
-		setCategory(e.target.value)
-	}
+	// function handleSelectCategory(e){
+	// 	setCategory(e.target.value)
+	// }
 
 	return (<>
 		<NavBar/>
@@ -218,7 +218,7 @@ const CrearForm = () => {
 					valido={description.valido}
 				// funcion={validarPassword2}
 				/>
-				
+
 				<ContenedorBotonCentrado>
 					<Label>Descripcion</Label>
 					<TextArea
