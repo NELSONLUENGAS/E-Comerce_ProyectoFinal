@@ -18,6 +18,7 @@ import Input from './InputCrear'
 import { useDispatch,useSelector } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
 import { getCategories } from '../../actions';
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CrearForm = () => {
 	const dispatch = useDispatch()
-
+	const navigate = useNavigate()
 	const classes = useStyles();
 	const [name, cambiarname] = useState({ campo: '', valido: null });
 	const [price, cambiarprice] = useState({ campo: '', valido: null });
 	const [stock, cambiarstock] = useState({ campo: '', valido: null });
-	const [image, cambiarimage] = useState({ campo: [''], valido: null });
+	const [image, cambiarimage] = useState({ campo: '', valido: null });
 	const [description, CambiarDescripcion] = useState({ campo: '', valido: null });
 	const {campo} = description
 	const [terminos, cambiarTerminos] = useState(false);
@@ -112,12 +113,14 @@ const CrearForm = () => {
 				name: name.campo,
 				price: price.campo,
 				stock: stock.campo,
-				image:image.campo,
+				image:[`${image.campo}`],
 				description: description.campo,
 				categoryName:category
 			}
+			console.log(input)
 			cambiarFormularioValido(true);
 			dispatch(postProductos(input))
+			navigate('/admin/edit')
 			cambiarname({ campo: '', valido: '' });
 			cambiarprice({ campo: '', valido: null });
 			cambiarstock({ campo: '', valido: null });
