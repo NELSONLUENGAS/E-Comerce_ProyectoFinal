@@ -3,8 +3,8 @@ import { useEffect } from "react";
 export default function Pintado ({review}){
 
     useEffect(()=> {
-        for (let i = 1; i <= review.quantity; i++) {
-            const star = document.getElementById(`${review.description}${i}`);
+        for (let i = 1; i <= review.rate; i++) {
+            const star = document.getElementById(`${review.content}${i}`);
             star.style.color = "#3483fa";
         }
     },[review])
@@ -14,32 +14,32 @@ export default function Pintado ({review}){
 <div className="rating-product-detail" style={{marginLeft:"0",fontSize:"24px"}}>
 
 <label
-                                        id={`${review.description}${1}`}
+                                        id={`${review.content}${1}`}
                                     >
                                         ★
                                     </label>
                                     <label
-                                        id={`${review.description}${2}`}
+                                        id={`${review.content}${2}`}
                                     >
                                         ★
                                     </label>
                                     <label
-                                        id={`${review.description}${3}`}
+                                        id={`${review.content}${3}`}
                                     >
                                         ★
                                     </label>
                                     <label
-                                        id={`${review.description}${4}`}
+                                        id={`${review.content}${4}`}
                                     >
                                         ★
                                     </label>
                                     <label
-                                        id={`${review.description}${5}`}
+                                        id={`${review.content}${5}`}
                                     >
                                         ★
                                     </label></div>
                                         <h4>{review.title}</h4>
-                                        <h6>{review.description}</h6>
+                                        <h6>{review.content}</h6>
                                         </div>
     </>
     )

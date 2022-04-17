@@ -386,4 +386,36 @@ export function changeStatusToComplete(email,orderId){
 
 }
 
+export function getProductReview(id){
+    return async function(dispatch){
+        const productReview = await axios.get(`http://localhost:3001/${id}/review`)
+        return dispatch({
+            type: 'GET_PRODUCT_REVIEW',
+            payload: productReview.data
+        })
+    }
+}
+export function postProductReview(email,id,productReviewData){
+    return async function(dispatch){
+        const productReview = await axios.post(`http://localhost:3001/${id}/${email}/review`,productReviewData)
+        
+        return dispatch({
+            type: 'POST_PRODUCT_REVIEW',
+            payload: productReview.data
+        })
+    }
+}
+export function getProductReviewByEmail(email,id){
+    return async function(dispatch){
+        const productReview = await axios.get(`http://localhost:3001/${id}/review/${email}`)
+        return dispatch({
+            type: 'GET_PRODUCT_REVIEW_BY_EMAIL',
+            payload: productReview.data
+        })
+    }
+}
+
+
+
+
 

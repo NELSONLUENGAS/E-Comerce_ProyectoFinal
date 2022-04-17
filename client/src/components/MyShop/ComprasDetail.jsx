@@ -1,12 +1,14 @@
 /** @format */
 
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import accounting from "accounting";
+import { useDispatch,useSelector } from "react-redux";
 import "./ComprasDetail.css";
 import { Link, useParams } from "react-router-dom";
+import {getProductReviewByEmail} from '../../actions/index'
 
 export default function ComprasDetail({
     UserEmail,
@@ -17,11 +19,18 @@ export default function ComprasDetail({
     date,
     direction,updatedAt
 }) {
+    const dispatch=useDispatch();
     console.log(Products)
     const dia = updatedAt.slice(8,10)
     const mes = updatedAt.slice(5,7)
     const año = updatedAt.slice(0,4)
     const hora = updatedAt.slice(11,16)
+    const productReviewByUser = useSelector((state) => state.productReviewByEmail);
+    const user = useSelector((state) => state.User);
+    
+    // useEffect(() => {
+    //     dispatch(getProductReviewByEmail(user.email,id));
+    // }, [dispatch]);
 
     return (
         <div className="container-finish-shop">
@@ -45,7 +54,7 @@ export default function ComprasDetail({
                                             <h6>{product.name}</h6> 
                                             <div style={{width:"200px"}}>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
                                             <div style={{width:"50px"}}>{product.Product_Line.amount } u.</div>
-                                            {status==='Complete' ? (<Link  to={"/review/" + product.id} style={{ textDecoration:"none"}}><button className="button-status-shop">Opinar de este producto</button></Link>):null}
+                                            {status==='Complete' && !productReviewByUser ? (<Link  to={"/review/" + product.id} style={{ textDecoration:"none"}}><button className="button-status-shop">Opinar de este producto</button></Link>):null}
                                             </div>
                                         </div>
                                     );

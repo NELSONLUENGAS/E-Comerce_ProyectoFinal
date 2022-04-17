@@ -10,6 +10,8 @@ const initialState = {
     categories: [],
     mercadoPago: {},
     basketBack: [],
+    productReviewByEmail:false,
+    productReview:[],
     User: [],
     favorites:[],
     Orders: [],
@@ -321,6 +323,29 @@ export default function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 favorites:action.payload
+            }
+        case 'GET_PRODUCT_REVIEW':
+            if(action.payload==='El producto no tiene reviews'){
+                return{
+                    ...state,
+                    productReview:[]
+                }
+            }
+            return{
+                ...state,
+                productReview:action.payload
+            }
+        case 'GET_PRODUCT_REVIEW_BY_EMAIL':
+            if(action.payload==='El usuario no ha hecho review de este producto'){
+                return{
+                    ...state,
+                    productReviewByEmail:false
+                }
+            } else{
+                return{
+                    ...state,
+                    productReviewByEmail:true
+                }
             }
         default:
             return state
