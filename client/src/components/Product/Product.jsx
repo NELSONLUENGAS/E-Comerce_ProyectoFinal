@@ -3,26 +3,15 @@
 /////////////////
 //Card de los productos
 ////////////
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
-import { addToBasket, getBasket, addBasketBack } from "../../actions";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Rating } from "@mui/material";
+import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFavorite} from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Cart from "../../svg/shopping-cart.svg";
 import "./Product.css";
+import Corazonlleno from "../../svg/heart-full.svg";
 
 const useStyles = makeStyles((theme) => ({
     formatoDescription: {
@@ -72,9 +61,26 @@ export default function Product({
         quantity: Number(1),
         description: description,
     });
-
+    function addfavorite(e){
+        e.preventDefault()
+        if(user.email){
+            const userData={productId:id}
+            dispatch(addFavorite(user.email,userData))
+            setProductInFavorites(true);
+        } else{
+            alert('Para agregar a favoritos por favor inicie sesion'
+            )
+            navigate('/SignIn')
+        }
+    }
+    function deletefavorite(e){
+        e.preventDefault()
+        dispatch(deleteFavorite(user.email,id))
+        setProductInFavorites(false);
+    }
     const user = useSelector((state) => state.User);
-
+    const favorites = useSelector((state) => state.favorites);
+    const [productInFavorites, setProductInFavorites] = useState(false)
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -97,60 +103,87 @@ export default function Product({
             // dispatch(addToBasket(item,1));
         }
     };
+    
+    useEffect(()=>{
+        if(user.email){
+            dispatch(getFavorites(user.email))
+        }
+    },[user])
+
+    useEffect(()=>{
+        favorites.map((item)=>{
+            if (item.wishlist.ProductId=== id){
+                setProductInFavorites(true)
+            }
+        })
+    },[favorites])
 
     return (<>
         
-        <Link 
+        
+        <div className="container-card-product">
+        
+                <div className="div-img-heart-product">
+                {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>)}
+                </div>
+                <div className="div-img-card-product">
+                <Link 
                 style={{ textDecoration: "none", color: "black"}}
                 to={"/product/" + id}
             >
-        <div className="container-card-product">
-            
-                <div className="div-img-card-product">
-                    <img src={Corazon} className="heart" alt="" />
                     <img className="card-image" src={image} alt="" />
-                </div>
+                 </Link></div>
+                <Link className="link-description"
+                style={{ textDecoration: "none", color: "black"}}
+                to={"/product/" + id}
+            >
                 <div className="div-info-card-product">
-                {price < 45000 ? (
-                    <button className="button-offer-product">
-                        OFERTA DEL DIA
-                    </button>
-                ) : null}
-                {stock < 13 ? (
-                    <button className="button-best-seller-product">
-                        MAS VENDIDO
-                    </button>
-                ) : null}
-                <div style={{ marginLeft: "1rem" }}>
-                    <p className="price-product">
-                        $ {Intl.NumberFormat("es-ES").format(price)}
-                    </p>
-                    <p className="cuotas-product">
-                        Hasta 12 cuotas sin interes
-                    </p>
-                    {name.length < 45 ? (
-                        <button className="button-fast-delivery-product">
-                            Llega gratis hoy{" "}
+                    {price < 45000 ? (
+                        <button className="button-offer-product">
+                            OFERTA DEL DIA
                         </button>
-                    ) : (
-                        <p className="free-delivery-product">
-                            Envio gratis
+                    ) : null}
+                    {stock < 13 ? (
+                        <button className="button-best-seller-product">
+                            MAS VENDIDO
+                        </button>
+                    ) : null}
+                    <div style={{ marginLeft: "1rem" }}>
+                        <p className="price-product">
+                            $ {Intl.NumberFormat("es-ES").format(price)}
                         </p>
-                    )}
+                        <p className="cuotas-product">
+                            Hasta 12 cuotas sin interes
+                        </p>
+                        {name.length < 45 ? (
+                            <button className="button-fast-delivery-product">
+                                Llega gratis hoy{" "}
+                            </button>
+                        ) : (
+                            <p className="free-delivery-product">
+                                Envio gratis
+                            </p>
+                        )}
+                    </div>
+                    
+                   
+                    <div className="div-name-product">
+                        <p className="name-product">{name}</p>
+                    </div>
+                    
                 </div>
-                <div className="div-name-product">
-                    <p className="name-product">{name}</p>
-                </div>
-            <div className="add-to-cart-product" onClick={AddToBasket}>
+                </Link>
+                
+               
+                <div className="add-to-cart-product" onClick={AddToBasket}>
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
                     src={Cart}
                     />
             </div>
-            </div>
         </div>
-        </Link>
+        
         </>
     );
 }

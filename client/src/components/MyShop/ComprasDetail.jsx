@@ -44,8 +44,8 @@ export default function ComprasDetail({
                                         <div className="div-product-info-shop">
                                             <h6>{product.name}</h6> 
                                             <div style={{width:"200px"}}>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
-                                            <div>{product.Product_Line.amount } u.</div>
-                                            {status==='Complete' ? (<Link  to={"/review/" + product.id} style={{ textDecoration:"none"}}className="button-status-shop">Opinar de este producto</Link>):null}
+                                            <div style={{width:"50px"}}>{product.Product_Line.amount } u.</div>
+                                            {status==='Complete' ? (<Link  to={"/review/" + product.id} style={{ textDecoration:"none"}}><button className="button-status-shop">Opinar de este producto</button></Link>):null}
                                             </div>
                                         </div>
                                     );

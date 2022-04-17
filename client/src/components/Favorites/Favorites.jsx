@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import {getProducts, getOrdersUser} from '../../actions/index';
+import {getFavorites, getOrdersUser,deleteFavorite} from '../../actions/index';
 import {useSelector, useDispatch} from 'react-redux';
 import FavoritesDetail from './FavoritesDetail';
 import './Favorites.css';
@@ -9,15 +9,14 @@ import NavBar from '../NavBar/NavBar';
 
 export default function Favorites(){
     const dispatch = useDispatch();
-    
-    const products = useSelector((state) => state.products);
-    const currentProducts=products.slice(1,4)
-    console.log(products)
+    const user = useSelector((state) => state.User);
+    const currentProducts = useSelector((state) => state.favorites);
 
     useEffect(() => {
-        dispatch(getProducts());
+       dispatch(getFavorites(user.email));
+            
     } , [dispatch]);
-
+   
     return (
         <>
         <NavBar/>
@@ -27,7 +26,7 @@ export default function Favorites(){
             </div>
         
             
-                {currentProducts.length ? currentProducts.map((product) => <FavoritesDetail key={product.id} price={product.price} image={product.image} id={product.id} name={product.name} />) : <div>No hay ordenes creadas</div>}
+                {currentProducts.length ? currentProducts.map((product) => <FavoritesDetail key={product.wishlist.ProductId} price={product.price} image={product.image} id={product.wishlist.ProductId} name={product.name} />) : <div>No hay productos agregados a favoritos</div>}
             
         </div>
         </>

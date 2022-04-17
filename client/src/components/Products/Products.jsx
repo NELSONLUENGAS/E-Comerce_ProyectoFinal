@@ -90,37 +90,32 @@ export default function Products() {
     const onSubmitt = (e) => {
         console.log("entre al boton de precio");
         e.preventDefault();
-        setCurrentPage(1);
         dispatch(filterBy2Price(numberMin, numberMax));
     };
 
     function handleCategories(e) {
         e.preventDefault();
-        setCurrentPage(1);
         setCategoryFilter(e.target.value);
         dispatch(filterByCategory(e.target.value));
     }
     function handleToday() {
-        setCurrentPage(1);
         setCheckToday(!checkToday);
         dispatch(filterToday(!checkToday));
     }
     function handleMoreSeller() {
-        setCurrentPage(1);
         setCheckMoreSeller(!checkMoreSeller);
         dispatch(filterMoreSeller(!checkMoreSeller));
     }
     function handleFreeShipping() {
-        setCurrentPage(1);
         setCheckFreeShipping(!checkFreeShipping);
         dispatch(filterFreeShipping(!checkFreeShipping));
     }
     function handleOrder(e) {
-        setCurrentPage(1);
         SetsortOf(e.target.value);
         dispatch(orderByPrice(e.target.value));
-        
+        setCurrentPage(1);
     }
+
 
     useEffect(() => {
         dispatch(getProducts());

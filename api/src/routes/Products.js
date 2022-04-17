@@ -62,7 +62,6 @@ router.post('/createProduct', async (req, res) => {
         res.send('Products Create')
     } catch (e){
         res.status(500).send('INVALID ARGUMENT')
-        console.log(e)
     }
 })
 

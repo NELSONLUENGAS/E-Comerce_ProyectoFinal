@@ -9,7 +9,7 @@ import { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch,useSelector } from "react-redux";
-import { RemoveToBasket,putBasketBack,getBasket,addToBasket,substractQuantityItem,addBasketBack } from "../../actions";
+import { RemoveToBasket,putBasketBack,getBasket,addToBasket,substractQuantityItem,addBasketBack,removeItemBasket} from "../../actions";
 import "./CheckoutCard.css";
 
 export default function CheckoutCard({
@@ -23,7 +23,15 @@ export default function CheckoutCard({
 }) {
     const dispatch = useDispatch();
     const removeItems = () => {
-        dispatch(RemoveToBasket(id));
+        const fetchData = async () => {
+            const dataId={productId:id}
+            await  dispatch(removeItemBasket(user.email,dataId)) 
+            await dispatch(getBasket(user.email));
+          }
+        fetchData()
+        
+       
+        // dispatch(RemoveToBasket(id));
     };
     const [priceItem,setPriceItem] = useState(price*quantity)
     const [item] = useState({

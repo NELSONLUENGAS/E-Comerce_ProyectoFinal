@@ -66,7 +66,7 @@ export default function NavBar() {
     }
     function locationMobile(e) {
         e.preventDefault();
-       navigate('/user/profile')
+       navigate('/user/adress')
     }
     
     function modal(e) {
@@ -184,23 +184,25 @@ export default function NavBar() {
                                                 <span style={{color:"#fff"}}>{user.name}</span>
                                                  </div>
                                         
-                                            </>):<>
+                                            </>):(<>
                                                 <Link to="/SignIn" style={{textDecoration:"none",color:"#fff"}}><div className="sign-mobile-navbar"><h4>Ingresar</h4></div></Link>
                                                 <Link to="/SignUp" style={{textDecoration:"none",color:"#fff"}}><div className="sign-mobile-navbar"><h4>Registrarse</h4></div></Link>
-                                            </>}
+                                            </>)}
                                             <button onClick={mobileOpen}> <CloseIcon style={{position:"absolute",top:"1.7rem",left:"2.5rem"}}/>     </button>
 
                                         </div>
                                         
                                         <div style={{display:"flex",alignItems:"flex-start",flexDirection:"column",width:"100%",height:"80%",backgroundColor:"rgb(235, 235, 235)",justifyContent:"flex-start"}}>
-                                        {user.name ? (
+                                        
                                             <div style={{marginTop:"2rem",textAlign:"left"}}>
                                                 <Link to="/" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Inicio</h5></div></Link>
+                                                {user.name ? (<>
                                                 <Link to="/user/profile" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Mi Perfil</h5></div></Link>
                                                 <Link to="/user/myShop" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Mis Compras</h5></div></Link>
-                                                <Link to="/user/favorite" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Favoritos</h5></div></Link>
+                                                <Link to="/user/favorites" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Favoritos</h5></div></Link>
                                                 <Link to="/" onClick={handleLogout}style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Log Out</h5></div></Link>
-                                            </div>):null}
+                                                </>):null}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -223,15 +225,19 @@ export default function NavBar() {
                 <div className="div-container-2-navbar">
                     <div>
                         <div onMouseOver={modalDown} className="div-container-1-bottom-location-navbar">
-                        {user.name ? ( <><button className="button-location-navbar" onClick={location}>
+                        {user.name ? ( <><button className="button-location-navbar" onClick={(e)=> navigate('/user/adress')}>
                                 <LocationOnIcon />
                             </button>
                             <button className="button-location-mobile-navbar" onClick={locationMobile}>
                             <LocationOnIcon />
                         </button>
-                        </>):(<button className="button-location-navbar" onClick={(e)=> navigate('/SignIn')}>
+                        </>):(<><button className="button-location-mobile-navbar" onClick={(e)=> navigate('/SignIn')}>
                                 <LocationOnIcon />
-                            </button>)}
+                            </button>
+                            <button className="button-location-navbar" onClick={(e)=> navigate('/SignIn')}>
+                                <LocationOnIcon />
+                            </button>
+                            </>)}
                            
                             <div className="div-text-direction-navbar"> 
                                 <div>

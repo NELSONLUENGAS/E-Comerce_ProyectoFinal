@@ -124,7 +124,7 @@ export default function CheckoutPage() {
                         })}
                         <Total buttonContinue={true} emptyCart={vaciarCarritoLocal}onPay={onPay}/>
                     </div>
-                    ):<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>
+                    ):<div style={{fontSize:"24px",margin:"auto",height:"300px",display:"flex",flexDirection:"row",justifyContent:"center",marginTop:"5rem"}}>El carrito se encuentra vacio</div>
                 }
                  {/* (cartProductsLocal[0] ? (
                      <div>

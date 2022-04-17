@@ -3,12 +3,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductId } from "../../actions/index";
+import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actions/index";
 import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
 import { addToBasket,vaciarCarrito,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
 import Review from "./Review";
+import Corazon from "../../svg/heart-svgrepo-com.svg";
+import Corazonlleno from "../../svg/heart-full.svg";
 
 export default function ProductDetail() {
     const productosdel = {
@@ -33,7 +35,6 @@ export default function ProductDetail() {
             },
         ],
     };
-    console.log(productosdel);
     const navigate=useNavigate();
     let [finalStock,setFinalStock] = useState([])
     const [promedioReview, setPromedioReview] = useState(0);
@@ -41,7 +42,9 @@ export default function ProductDetail() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const productDetail = useSelector((state) => state.productId);
+    const favorites = useSelector((state) => state.favorites);
     const user = useSelector((state) => state.User);
+    const [productInFavorites,setProductInFavorites]=useState(false)
     const [item, setItem] = useState({
         id: productDetail.id,
         name: productDetail.name,
@@ -52,11 +55,28 @@ export default function ProductDetail() {
     });
     useEffect(() => {
         dispatch(getProductId(id));
+        
         // return () => dispatch(cleanGetIdProduct())
     }, [dispatch]);
-    console.log(productDetail);
 
+   
 
+    function addfavorite(e){
+        e.preventDefault()
+        if(user.name){
+            const userData={productId:id}
+            dispatch(addFavorite(user.email,userData))
+            setProductInFavorites(true);
+        } else{
+            alert('Para agregar a favoritos por favor inicie sesion')
+            navigate('/SignIn')
+         }
+    }
+    function deletefavorite(e){
+        e.preventDefault()
+        dispatch(deleteFavorite(user.email,id))
+        setProductInFavorites(false);
+    }
 
    
 
@@ -77,9 +97,6 @@ export default function ProductDetail() {
             description: productDetail.description,
         });
     }, [productDetail]);
-
-    console.log("esto es el detail");
-    console.log(item);
 
     const AddToBasket = () => {
         
@@ -170,7 +187,17 @@ export default function ProductDetail() {
             }
         }
     },[productosdel.reviews])
+    useEffect(()=>{
+        dispatch(getFavorites(user.email))
+    },[user])
 
+    useEffect(()=>{
+        favorites.map((item)=>{
+            if (item.wishlist.ProductId=== id){
+                setProductInFavorites(true)
+            }
+        })
+    },[favorites])
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
@@ -181,10 +208,21 @@ export default function ProductDetail() {
                     'password':inicioSesion.password
                 }))
                 await dispatch(getBasket(inicioSesion.email))
+                await dispatch(getFavorites(inicioSesion.email));
             }
             fetchData()
         }
     }, []);
+    useEffect(()=>{
+        for (let i=0;i++;i<favorites.length){
+            if(favorites.wishlist.ProductId === id){
+                setProductInFavorites(true);
+                alert('esta en favoritos')
+            }   
+            alert('entre en for') 
+        }
+        
+    },[favorites])
     return (
         <>
             <NavBar/>
@@ -208,8 +246,18 @@ export default function ProductDetail() {
                         <div className="title-product-detail">
                         {!productosdel.reviews.length ? null:(
                         <>
-                        
+                            <div className="title-with-favorite-product-detail">
+                            Nuevo
+                            {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>
+                           
+                            )}
+                            
+                            
+                    
+                            </div>
                             <h4>{productDetail.name}</h4>
+                           
+                            
                             <div className="rating-product-detail">
                                 <label id={`${productDetail.name}${1}`}>
                                     ★

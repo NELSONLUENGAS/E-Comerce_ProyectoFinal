@@ -9,9 +9,9 @@ const initialState = {
     productId: [],
     categories: [],
     mercadoPago: {},
-    editAdmin: [],
     basketBack: [],
     User: [],
+    favorites:[],
     Orders: [],
     myOrders: [],
     Auth: {
@@ -49,12 +49,6 @@ export default function rootReducer(state = initialState, action) {
         case "PUT_PASSWORD": {
             return{
                 ...state,
-            }
-        }
-        case "GET_EDIT":{
-            return{
-                ...state,
-                editAdmin: [action.payload]
             }
         }
         case 'FILTER_FREE_SHIPPING': {
@@ -315,6 +309,18 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 basketBack: action.payload
+            }
+        case 'GET_FAVORITES':
+            if(action.payload === 'No hay productos en la wishlist'){
+                return{
+                    ...state,
+                    favorites:[]
+                }
+            }
+            
+            return{
+                ...state,
+                favorites:action.payload
             }
         default:
             return state

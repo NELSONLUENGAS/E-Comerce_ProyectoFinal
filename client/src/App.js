@@ -14,7 +14,7 @@ import Profile from './components/Profile/Profile'
 import Checkout from './components/Payment/Payment';
 import Order from './components/Orders/Order';
 import AuthRoute from './components/Auth/AuthRoute';
-import Editar from './components/EditarYBorrarProductos/EditarProducts';
+import Editar from './components/EditarYBorrarProductos/Editar';
 import EnvioForm from './components/EnvioFormu/EnvioForm'
 import Compras from './components/MyShop/Compras'
 import Favorites from './components/Favorites/Favorites';
@@ -22,7 +22,7 @@ import  UserData  from './components/UserData/UserData';
 import AdminRoles from './components/AdminRoles/AdminRoles';
 import ChangePassword from './components/ChangePassword/ChangePassword';
 import ReviewProduct from './components/MyShop/ReviewProduct';
-import EditarFormProduct from './components/EditarYBorrarProductos/FormEditProduct/CrearProducto'
+import Adress from './components/Adress/Adress';
 
 function App() {
   return (
@@ -46,6 +46,7 @@ function App() {
             <Route exact path="/user/favorites" element={<Favorites/>}></Route>
             <Route exact path="/user/myData" element={<UserData/>}></Route>
             <Route exact path="/user/changePassword" element={<ChangePassword/>}></Route>
+            <Route exact path="/user/adress" element={<Adress/>}></Route>
             
           </Route>
           
@@ -55,7 +56,6 @@ function App() {
             <Route exact path="/admin/createCategory" element={<AddCategorie/>}></Route>
             <Route exact path="/admin/createProduct" element={<CrearProducto/>}></Route>
             <Route exact path="/admin/edit" element={<Editar/>}></Route>
-            <Route exact path="/admin/edit/form/" element={<EditarFormProduct/>}></Route>
             <Route exact path="/admin/roles" element={<AdminRoles/>}></Route>
             
           </Route>

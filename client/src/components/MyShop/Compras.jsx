@@ -51,7 +51,7 @@ export default function Compras(){
             {myOrders.length? (
             <div className="container-compras-detail" >
                 {myOrders.length ? myOrders.map((order) => <ComprasDetail key={order.id} {...order} />) : <div>No hay ordenes creadas</div>}
-            </div>):<div>No hay ordenes para mostrar</div>}
+            </div>):<div style={{marginTop:"2rem"}}>No hay ordenes para mostrar</div>}
         </div>
         </>
     )

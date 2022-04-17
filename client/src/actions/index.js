@@ -10,13 +10,6 @@ export function getProducts(){
         })
     }
 }
-
-export function getEdit(payload){
-    return {
-        type:"GET_EDIT",
-        payload
-    }
-}
 export function putPassword(payload,email){
     return async function (dispatch){
         const json = await axios.put(`http://localhost:3001/changePassword/${email}`,payload)
@@ -31,6 +24,35 @@ export function getBasket(email){
         const products = await axios.get(`http://localhost:3001/users/${email}/cart`)
         return dispatch ({
             type:"GET_BASKET",
+            payload:products.data
+        })
+    }
+}
+export function getFavorites(email){
+    return async function (dispatch){
+        const products = await axios.get(`http://localhost:3001/users/${email}/wishlist`)
+        return dispatch ({
+            type:"GET_FAVORITES",
+            payload:products.data
+        })
+    }
+}
+export function addFavorite(email,payload){
+    return async function (dispatch){
+        const products = await axios.post(`http://localhost:3001/users/${email}/wishlist`,payload)
+        console.log(products.data)
+        return dispatch ({
+            type:"ADD_FAVORITE",
+            payload:products.data
+        })
+    }
+}
+export function deleteFavorite(email,productId){
+    return async function (dispatch){
+        const products = await axios.delete(`http://localhost:3001/users/${email}/wishlist/${productId}`)
+        console.log(products.data)
+        return dispatch ({
+            type:"DELETE_FAVORITE",
             payload:products.data
         })
     }
@@ -89,6 +111,16 @@ export function getProductId(id){
             payload:products.data
         })
     }
+}
+export function removeItemBasket(email,id){
+    return async function (dispatch){
+        const products = await axios.delete(`http://localhost:3001/users/${email}/cart`,id);
+        return dispatch ({
+            type:"DELETE_PRODUCT_FROM_ID",
+            payload:products.data
+        })
+    }
+
 }
 
 export function getMercadoPago(payload){
