@@ -10,6 +10,12 @@ export function getProducts(){
         })
     }
 }
+export function getEdit(payload){
+    return {
+        type:"GET_EDIT",
+        payload
+    }
+}
 export function putPassword(payload,email){
     return async function (dispatch){
         const json = await axios.put(`http://localhost:3001/changePassword/${email}`,payload)

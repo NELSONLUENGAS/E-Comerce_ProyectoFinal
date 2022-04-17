@@ -63,6 +63,12 @@ export default function rootReducer(state = initialState, action) {
             return { ...state, products: orderAndFilter(state, state.orderAndFilter.filterByCategory) }
 
         }
+        case "GET_EDIT":{
+            return{
+                ...state,
+                editAdmin: [action.payload]
+            }
+        }
         case 'ORDER_BY_PRICE':
             state.orderAndFilter.orderByPrice = action.payload
             console.log(state.products)
