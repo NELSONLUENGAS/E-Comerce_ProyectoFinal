@@ -9,28 +9,48 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Carrousel.css';
 
+
+
 const items = [
+  
   {
     src: 'https://http2.mlstatic.com/D_NQ_943534-MLA49357104694_032022-OO.webp',
     className: 'adaptar',
     altText: 'Slide 1',
-    caption: ' '
+    caption: ' ',
+    link:'https://us.vaio.com/'
+    
+    
   },
   {
     src: 'https://http2.mlstatic.com/D_NQ_977635-MLA49448974486_032022-OO.webp',
     className: 'adaptar',
     altText: 'Slide 2',
-    caption: ' '
+    caption: ' ',
+    link:'http://localhost:3000/'
+    
   },
   {
-    src: 'https://http2.mlstatic.com/D_NQ_722488-MLA49531513472_032022-OO.webp  ',
+    src: 'https://http2.mlstatic.com/D_NQ_722488-MLA49531513472_032022-OO.webp',
     className: 'adaptar',
     altText: 'Slide 3',
-    caption: ' '
-  }
+    caption: ' ',
+    link:'http://localhost:3000/'
+    
+  },
+  {
+    src: 'https://i.imgur.com/Pj5ylro.jpg',
+    className: 'adaptar',
+    altText: 'Slide 4',
+    caption: ' ',
+    link: 'https://www.soyhenry.com/'
+  },
+  
+  
 ];
 
-class Slides extends Component {
+
+class Carrousel extends Component {
   constructor(props) {
     super(props);
     this.state = { activeIndex: 0 };
@@ -76,29 +96,30 @@ class Slides extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img  src={item.src} alt={item.altText} className={item.className} />
+          <img src={item.src} alt={item.altText} className={item.className} // insertar hipervinculo en una pestaña nueva
+            onClick={() => window.open(item.link, '_blank')}
+          />
+            
           <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );
     });
 
     return (
-        <div style={{zIndex:"0"}}>
       <Carousel
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}
       >
-        
+        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler
+          goToIndex={this.goToIndex} />
         {slides}
-        <CarouselControl z-tabIndex={-1} direction="prev" directionText="Previous" onClickHandler={this.previous} />
-        <CarouselControl  color="black" direction="next" directionText="Next" onClickHandler={this.next} />
+        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
       </Carousel>
-      </div>
     );
   }
 }
 
 
-
-export default Slides;
+export default Carrousel;
