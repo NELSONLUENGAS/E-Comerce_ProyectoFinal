@@ -52,7 +52,7 @@
 .card-image{
     height: 285px;
     width: 285px;
-    object-fit: cover;
+    object-fit: contain;
 
 }
 .filters-of-products{
@@ -166,12 +166,12 @@
     .card-image{
         height: 100%;
         width: 100%;
-        object-fit: cover;
+        object-fit: contain;
         margin-top: 10px;
     
     }
     .name-product{
-         width: 250px;
+         width: 230px;
         padding-right: 50px;
         padding-right: 50px;
         font-size: 12px;

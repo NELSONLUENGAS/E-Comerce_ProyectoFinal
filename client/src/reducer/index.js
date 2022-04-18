@@ -116,7 +116,8 @@ export default function rootReducer(state = initialState, action) {
                     image: action.payload.image,
                     price: action.payload.price,
                     quantity: action.quantity,
-                    description: action.payload.description
+                    description: action.payload.description,
+                    stock:action.payload.stock
                 }
                 return {
                     ...state,

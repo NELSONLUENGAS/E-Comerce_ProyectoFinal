@@ -13,28 +13,6 @@ import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
 
 export default function ProductDetail() {
-    const productosdel = {
-        reviews: [
-            {
-                quantity: 3,
-                title: "Recomendable",
-                description:
-                    "Me encantó! trato de cuidarlo del agua y de limpiarle los pelos, así que hace un mes que lo vengo usando y es genial!.",
-            },
-            {
-                quantity: 4,
-                title: "Excelente",
-                description:
-                    "Muy bueno, lo recomiendo. Perdio un par de piquitos en 2 cepilladas pero mi esposa tiene el pelo dificil. Notó una diferencia positiva.",
-            },
-            {
-                quantity: 1,
-                title: "Malo",
-                description:
-                    "Siento que no me peina bien, me llevo mejor con el cepillo que compre en isadora, con eso digo todo.",
-            },
-        ],
-    };
     const navigate=useNavigate();
     let [finalStock,setFinalStock] = useState([])
     const [promedioReview, setPromedioReview] = useState(0);
@@ -53,6 +31,7 @@ export default function ProductDetail() {
         price: productDetail.price,
         quantity: Number(1),
         description: productDetail.description,
+        stock:productDetail.stock
     });
     useEffect(() => {
         dispatch(getProductId(id));
@@ -97,6 +76,7 @@ export default function ProductDetail() {
             price: productDetail.price,
             quantity: Number(1),
             description: productDetail.description,
+            stock:productDetail.stock
         });
     }, [productDetail]);
 
@@ -110,8 +90,9 @@ export default function ProductDetail() {
             fetchData()
             
         } else{
-            alert("Por favor incia sesion")
-            navigate('/SignIn')
+            dispatch(addToBasket(item,quantity));
+            // alert("Por favor incia sesion")
+            // navigate('/SignIn')
         }
     };
     function ShopNow (e){
@@ -129,8 +110,10 @@ export default function ProductDetail() {
                 navigate('/checkout-page')
             }
         }else{
-            alert("Por favor incia sesion")
-            navigate('/SignIn')
+            dispatch(addToBasket(item,quantity));
+            navigate('/checkout-page')
+            // alert("Por favor incia sesion")
+            // navigate('/SignIn')
         }
     }
 
@@ -246,8 +229,8 @@ export default function ProductDetail() {
                             </div>
                         </div>
                         <div className="title-product-detail">
-                        {!productosdel.reviews.length ? null:(
-                        <>
+                        
+                        
                             <div className="title-with-favorite-product-detail">
                             Nuevo
                             {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>
@@ -278,7 +261,7 @@ export default function ProductDetail() {
                                 </label>
                             </div>
                             ):null}
-                            </>)}
+                            
 
                             <h2>
                                 $
@@ -367,6 +350,7 @@ export default function ProductDetail() {
                             >
                                 Tenés 30 días desde que lo recibís.
                             </p>
+                            {productDetail.stock>0 ? ( <>
                             <p>Stock Disponible</p>
                             <p>
                                 Cantidad:
@@ -396,6 +380,7 @@ export default function ProductDetail() {
                                     Agregar al carrito
                                 </button>
                             </div>
+                            </>):(<p style={{color:"red"}}>No hay stock Disponible</p>)}
                             <svg
                                 className="ui-pdp-icon ui-pdp-icon--protected ui-pdp-color--GRAY"
                                 xmlns="http://www.w3.org/2000/svg"

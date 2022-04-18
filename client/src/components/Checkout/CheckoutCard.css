@@ -43,7 +43,7 @@
 .container-checkout-card img{
     height: 50px;
     width: 50px;
-    object-fit: cover;
+    object-fit: contain;
 }
 .price-text-checkout-card{
     font-size: 2rem;
@@ -91,7 +91,7 @@
     .container-checkout-card img{
         height: 80px;
         width: 80px;
-        object-fit: cover;
+        object-fit: contain;
     }
     .price-text-checkout-card{
         font-size:18px;

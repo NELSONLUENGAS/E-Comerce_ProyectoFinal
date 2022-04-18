@@ -60,6 +60,7 @@ export default function Product({
         price: price,
         quantity: Number(1),
         description: description,
+        stock:stock
     });
     function addfavorite(e){
         e.preventDefault()
@@ -86,7 +87,7 @@ export default function Product({
     };
 
     const AddToBasket = () => {
-        if (user.email) {
+        if (user.email ) {
             const fetchData = async () => {
                 await dispatch(
                     addBasketBack({ productId: id, amount: 1 }, user.email)
@@ -98,9 +99,11 @@ export default function Product({
             alert("El producto se agrego correctamente");
             console.log(id);
         } else {
-            alert("Inicia sesion por favor");
-            navigate("/SignIn");
-            // dispatch(addToBasket(item,1));
+
+            // alert("Inicia sesion por favor");
+            // navigate("/SignIn");
+            dispatch(addToBasket(item,1));
+            alert("El producto se agrego correctamente");
         }
     };
     
@@ -153,10 +156,10 @@ export default function Product({
                             $ {Intl.NumberFormat("es-ES").format(price)}
                         </p>
                         
-                        <button className="button-best-seller-stock">
+                        {/* <button className="button-best-seller-stock">
                             
                             STOCK: {stock} {stock > 1 ? "unidades" : "unidad"}
-                        </button>
+                        </button> */}
                         <p className="cuotas-product">
                             Hasta 12 cuotas sin interes
                         </p>

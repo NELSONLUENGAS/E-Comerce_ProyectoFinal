@@ -34,6 +34,7 @@ export function getBasket(email){
         })
     }
 }
+
 export function getFavorites(email){
     return async function (dispatch){
         const products = await axios.get(`http://localhost:3001/users/${email}/wishlist`)
@@ -251,9 +252,9 @@ export function postProductos(payload) {
     }
 }
 
-export function getUserSigningIn(payload){
+export function getUserSigningIn(payload,guestCart){
     return async function (dispatch){
-        const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`);
+        const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`,guestCart);
         return dispatch ({
             type:"GET_USER_SIGNING_IN",
             payload:json.data

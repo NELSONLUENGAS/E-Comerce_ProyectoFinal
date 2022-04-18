@@ -26,8 +26,10 @@ const useStyle = makeStyles((theme) => ({
 const Total = ({onPay,buttonContinue,emptyCart}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate(); 
-    
+
+    const user = useSelector((state)=>state.User)
     const TotalPrice = useSelector((state)=>state.SumPriceBack)
+    const TotalPriceLocal= useSelector((state)=>state.SumPrice)
     const TotalItem = useSelector((state)=>state.SumItemsBack)
     useEffect(()=>{
         dispatch(SumItem())
@@ -38,7 +40,7 @@ const Total = ({onPay,buttonContinue,emptyCart}) => {
         <div className="container-pay-total">
             {/* <h3>Total items: {TotalItem}</h3> */}
             <h3>Total a pagar:</h3>
-            <h3>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h3>
+            {user.email ? (<h3>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h3>):(<h3>{`$${Intl.NumberFormat("es-ES").format(TotalPriceLocal)}`}</h3>)}
         </div>
         {buttonContinue ? (<div className="div-buttons-total">
             <button onClick={(e) => emptyCart(e)} className="empty-cart-button-total">Vaciar carrito</button>

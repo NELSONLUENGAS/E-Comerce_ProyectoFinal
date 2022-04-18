@@ -63,6 +63,7 @@ export default function SignIn() {
   const [password,setPassword] = useState('');
   const [validate,setValidate] = useState(0);
   const user = useSelector((state) => state.User);
+  const guestCart = useSelector((state) => state.basket);
 
 
   useEffect(()=>{
@@ -94,8 +95,8 @@ export default function SignIn() {
     const fetchData = async () => {
       await   dispatch(getUserSigningIn({
         email:email,
-        password:password
-      }))
+        password:password,
+      },guestCart))
       await setValidate(validate+1)
     }
   fetchData()

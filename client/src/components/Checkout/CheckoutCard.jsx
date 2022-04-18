@@ -14,7 +14,7 @@ import "./CheckoutCard.css";
 
 export default function CheckoutCard({
     buttonQuantity,
-    id,
+    id,stock,
     name,
     image,
     price,
@@ -23,15 +23,19 @@ export default function CheckoutCard({
 }) {
     const dispatch = useDispatch();
     const removeItems = () => {
-        const fetchData = async () => {
-            const dataId={productId:id}
-            await  dispatch(removeItemBasket(user.email,dataId)) 
-            await dispatch(getBasket(user.email));
-          }
-        fetchData()
+        if(user.email){
+           const fetchData = async () => {
+                const dataId={productId:id}
+                await  dispatch(removeItemBasket(user.email,dataId)) 
+                await dispatch(getBasket(user.email));
+            }
+            fetchData()
+        } else {
+            dispatch(RemoveToBasket(id));
+        }
         
        
-        // dispatch(RemoveToBasket(id));
+        
     };
     const [priceItem,setPriceItem] = useState(price*quantity)
     const [item] = useState({
@@ -40,7 +44,8 @@ export default function CheckoutCard({
       image: image,
       price: price,
       quantity:1,
-      description:description
+      description:description,
+      stock:stock
   });
     const user = useSelector((state) => state.User);
     const basketBack = useSelector((state) => state.basketBack);
@@ -56,6 +61,7 @@ export default function CheckoutCard({
     //   dispatch(substractQuantityItem(item.id));
         //   dispatch(addBasketBack(item.id,-1))
         if(quantityProduct>1){
+            if(user.email){
             const fetchData = async () => {
                 await dispatch(putBasketBack({productId:id,amount:'Decrement'},user.email));   
                 await dispatch(getBasket(user.email));
@@ -64,7 +70,11 @@ export default function CheckoutCard({
               
             setQuantityProduct(quantityProduct-1)
             setPriceItem(price*(quantityProduct-1))
-        }
+            } else{
+                dispatch(substractQuantityItem(item.id));
+                setQuantityProduct(quantityProduct-1)
+                setPriceItem(price*(quantityProduct-1))}
+            }
     }
     function addQuantity(){
 
@@ -73,18 +83,25 @@ export default function CheckoutCard({
         //   dispatch(addToBasket(item,1));
         console.log(item.id)
         console.log(user.email)
-        const fetchData = async () => {
-            await dispatch(putBasketBack({productId:id,amount:'Increment'},user.email));
-            await dispatch(getBasket(user.email));
-          }
-        fetchData()
-      setQuantityProduct(quantityProduct+1)
-      setPriceItem(price*(quantityProduct+1))
-    }
+        if(user.email){
+            const fetchData = async () => {
+                await dispatch(putBasketBack({productId:id,amount:'Increment'},user.email));
+                await dispatch(getBasket(user.email));
+            }
+             fetchData()
+             setQuantityProduct(quantityProduct+Number(1))
+             setPriceItem(price*(quantityProduct+Number(1)))
+        }else {
+          dispatch(addToBasket(item,1));
+          setQuantityProduct(quantityProduct+Number(1))
+          setPriceItem(price*(quantityProduct+Number(1)))
+
+        }
+ }
 
     useEffect(()=>{
         
-        console.log('se disparo el get')
+        // console.log('se disparo el get')
         // const item = basketBack.Products.Product_Line.filter(product=> product.ProductId===item.id)
         // setQuantityProduct(item.amount)
 
@@ -101,7 +118,7 @@ export default function CheckoutCard({
                             <div className="title-desktop-checkout-card">{name}</div>
                         </div>
                         <div className="div-container-2-checkout-card">
-                            <div className="quantity-checkout-card">
+                             <div className="quantity-checkout-card">
                                 {buttonQuantity? (<button className="button-quantity-checkout-card" onClick={subtractionQuantity}>-</button>):null}
                                 <div className="quantity-text-checkout-card">{Number(quantityProduct)}</div>
                                 {buttonQuantity? ( <button className="button-quantity-checkout-card" onClick={addQuantity}>+</button>):null}

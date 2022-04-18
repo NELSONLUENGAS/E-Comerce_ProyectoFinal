@@ -9,9 +9,29 @@ router.get('/users', async (req, res) => {
 })
 
 router.get('/login', async (req, res) => {
-    const {email, password} = req.query
+     const {email, password} = req.query, {guestCart} = req.body
+
     const user = await Users.findOne({where: {email, password}})
-    if(user) res.send(user)
+    
+    if(user) {
+    
+        if(guestCart){
+            
+            const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
+
+            guestCart.forEach(async (product) => {
+                const relation = await Product_Line.findOne({where: {OrderId: cart.id, ProductId: product.id}})
+
+                if(!relation){
+                    const currentProduct = await Products.findOne({where: {id}})
+                    await cart.addProduct(currentProduct, {through: {amount: product.amount, price: currentProduct.price}})
+                }
+            })
+        }
+    
+        res.send(user)
+    }
+
     else res.send('El usuario o contraseña son incorrectos')
 })
 

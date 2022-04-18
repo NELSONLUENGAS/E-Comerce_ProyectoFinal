@@ -21,6 +21,7 @@ import {getBasket,getCategoriesByName,getUserSigningIn} from '../../actions/inde
 export default function NavBar() {
     const dispatch= useDispatch()
     const carrito = useSelector(state=>state.SumItemsBack)
+    const ItemsAmount = useSelector(state=>state.ItemsAmount)
     const navigate = useNavigate()
     //////////////__States__///////////////////
     const [expand, setExpand] = useState({
@@ -192,7 +193,7 @@ export default function NavBar() {
 
                                         </div>
                                         
-                                        <div style={{display:"flex",alignItems:"flex-start",flexDirection:"column",width:"100%",height:"80%",backgroundColor:"rgb(235, 235, 235)",justifyContent:"flex-start"}}>
+                                        <div style={{display:"flex",alignItems:"flex-start",flexDirection:"column",width:"100%",height:"80%",backgroundColor:"#C0C0C0",justifyContent:"flex-start"}}>
                                         
                                             <div style={{marginTop:"2rem",textAlign:"left"}}>
                                                 <Link to="/" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Inicio</h5></div></Link>
@@ -364,7 +365,7 @@ export default function NavBar() {
                                 <ShoppingCartIcon />
                             </Link>
                         </label>
-                        { carrito>0 && user.name ? <span>{carrito}</span>:null}
+                        { carrito>0 && user.email ? <span>{carrito}</span>: ItemsAmount>0 && !user.email ? <span>{ItemsAmount}</span>:null}
                         </div>
                     </div>    
                 </div>
