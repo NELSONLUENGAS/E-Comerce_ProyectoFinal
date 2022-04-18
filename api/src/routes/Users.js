@@ -106,10 +106,11 @@ router.put('/users/:email/update', async (req, res) => {
     }
 })
 
+
 router.put('/changePassword/:email', async (req, res) => {
     const {email} = req.params, {password, newPassword} = req.body
 
-    const user = await Users.findOne({email})
+    const user = await Users.findByPk(email)
 
     if(password === user.password) {
         user.password = newPassword
