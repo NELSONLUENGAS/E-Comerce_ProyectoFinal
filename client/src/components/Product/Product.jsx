@@ -152,6 +152,11 @@ export default function Product({
                         <p className="price-product">
                             $ {Intl.NumberFormat("es-ES").format(price)}
                         </p>
+                        
+                        <button className="button-best-seller-stock">
+                            
+                            STOCK: {stock} {stock > 1 ? "unidades" : "unidad"}
+                        </button>
                         <p className="cuotas-product">
                             Hasta 12 cuotas sin interes
                         </p>
@@ -180,7 +185,8 @@ export default function Product({
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
                     src={Cart}
-                    />
+                    alt="agregar al carrito"
+                />
             </div>
         </div>
         
