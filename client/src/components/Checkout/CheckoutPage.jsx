@@ -33,7 +33,7 @@ export default function CheckoutPage() {
     },[dispatch])
 
     function vaciarCarritoLocal(e){
-        let opcion = window.confirm("Esto vaciara tu carrito por completo, quieres continuar?")
+  
 
             if(user.email){
             const fetchData = async () => {
@@ -97,6 +97,7 @@ export default function CheckoutPage() {
         <>
             <NavBar />
             <h1>Carrito</h1>
+            
             <div className="container-cart">
                 
 
@@ -140,6 +141,11 @@ export default function CheckoutPage() {
                     </div>
                     ):(<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>)
                     )}
+                    <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
             </div>
         </>
     );

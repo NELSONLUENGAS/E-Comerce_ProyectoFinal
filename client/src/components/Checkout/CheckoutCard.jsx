@@ -22,7 +22,15 @@ import {
     FormGroup,
     ModalFooter,
   } from "reactstrap";
+  import { makeStyles } from "@material-ui/core/styles";
+  import toast, { Toaster } from 'react-hot-toast';
 
+  const useStyles = makeStyles((theme) => ({
+    image: {
+      with: "200px",
+      height: "70px"
+    },
+  }));
 export default function CheckoutCard({
     buttonQuantity,
     id,stock,
@@ -36,20 +44,18 @@ export default function CheckoutCard({
     const Sacar = () => toast.success(`Has sacado de tu carrito ${names(name)}: ${name}`, {duration: 4000,})
     const Eliminar = () => toast.success(`Has eliminado de tu carrito ${DeleteCompra(name)}: ${name}`, {duration: 4000,})
     const dispatch = useDispatch();
+    const classes = useStyles();
+    const [modalInsertar, setStateModalInsectar] = useState(false)
     const removeItems = () => {
-        if(user.email){
+        
            const fetchData = async () => {
                 const dataId={productId:id}
+                Eliminar()
                 await  dispatch(removeItemBasket(user.email,dataId)) 
                 await dispatch(getBasket(user.email));
+                setStateModalInsectar(false)
             }
             fetchData()
-        } else {
-            dispatch(RemoveToBasket(id));
-        }
-        
-       
-        
     };
     const [priceItem,setPriceItem] = useState(price*quantity)
     const [item] = useState({
@@ -134,6 +140,12 @@ export default function CheckoutCard({
 
         }
  }
+ const mostrarModalInsertar= (id)=> {
+
+    setStateModalInsectar({
+      modalInsertar:true,
+  })  ;
+  }
 
     useEffect(()=>{
         
