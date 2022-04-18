@@ -10,8 +10,12 @@ const initialState = {
     categories: [],
     mercadoPago: {},
     basketBack: [],
+    productReviewByEmail:false,
+    productReview:[],
     User: [],
+    favorites:[],
     Orders: [],
+    myOrders: [],
     Auth: {
         isLogin: true,
         role: 'admin'
@@ -44,6 +48,11 @@ export default function rootReducer(state = initialState, action) {
             }
 
         }
+        case "PUT_PASSWORD": {
+            return{
+                ...state,
+            }
+        }
         case 'FILTER_FREE_SHIPPING': {
             state.orderAndFilter.filterFreeShipping = action.payload
             return { ...state, products: orderAndFilter(state, state.orderAndFilter.filterByCategory) }
@@ -53,6 +62,12 @@ export default function rootReducer(state = initialState, action) {
             state.orderAndFilter.filterMoreSeller = action.payload
             return { ...state, products: orderAndFilter(state, state.orderAndFilter.filterByCategory) }
 
+        }
+        case "GET_EDIT":{
+            return{
+                ...state,
+                editAdmin: [action.payload]
+            }
         }
         case 'ORDER_BY_PRICE':
             state.orderAndFilter.orderByPrice = action.payload
@@ -162,12 +177,12 @@ export default function rootReducer(state = initialState, action) {
             if(action.payload ==='History not found'){
                 return{
                     ...state,
-                    Orders:[]
+                    myOrders:[]
                 }
             } else
             return {
                 ...state,
-                Orders: action.payload
+                myOrders: action.payload
             }
         }
         case 'GET_ORDERS_IN_PROGRESS':{
@@ -302,6 +317,41 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 basketBack: action.payload
+            }
+        case 'GET_FAVORITES':
+            if(action.payload === 'No hay productos en la wishlist'){
+                return{
+                    ...state,
+                    favorites:[]
+                }
+            }
+            
+            return{
+                ...state,
+                favorites:action.payload
+            }
+        case 'GET_PRODUCT_REVIEW':
+            if(action.payload==='El producto no tiene reviews'){
+                return{
+                    ...state,
+                    productReview:[]
+                }
+            }
+            return{
+                ...state,
+                productReview:action.payload
+            }
+        case 'GET_PRODUCT_REVIEW_BY_EMAIL':
+            if(action.payload==='El usuario no ha hecho review de este producto'){
+                return{
+                    ...state,
+                    productReviewByEmail:false
+                }
+            } else{
+                return{
+                    ...state,
+                    productReviewByEmail:true
+                }
             }
         default:
             return state

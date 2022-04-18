@@ -13,12 +13,15 @@ import {
 } from './ElementsCrear';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { postProductos } from '../../actions';
+
 import Input from './InputCrear'
 import { useDispatch,useSelector } from 'react-redux';
-import NavBar from '../NavBar/NavBar';
-import { getCategories } from '../../actions';
-import { useNavigate } from 'react-router-dom';
+import NavBar from '../../NavBar/NavBar';
+import { UpdateProduct } from '../../../actions';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,39 +40,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CrearForm = () => {
 	const dispatch = useDispatch()
-	const navigate = useNavigate()
+	const editAdmin =useSelector((state) => state.editAdmin);
 	const classes = useStyles();
-	const [name, cambiarname] = useState({ campo: '', valido: null });
-	const [price, cambiarprice] = useState({ campo: '', valido: null });
-	const [stock, cambiarstock] = useState({ campo: '', valido: null });
-	const [image, cambiarimage] = useState({ campo: '', valido: null });
-	const [description, CambiarDescripcion] = useState({ campo: '', valido: null });
+	const [name, cambiarname] = useState({ campo: editAdmin[0].name , valido: null });
+	const [price, cambiarprice] = useState({ campo: editAdmin[0].price, valido: null });
+	const [stock, cambiarstock] = useState({ campo: editAdmin[0].stock, valido: null });
+	const [image, cambiarimage] = useState({ campo: editAdmin[0].image, valido: null });
+	const [description, CambiarDescripcion] = useState({ campo: editAdmin[0].description, valido: null });
 	const {campo} = description
 	const [terminos, cambiarTerminos] = useState(false);
 	const [formularioValido, cambiarFormularioValido] = useState(null);
-	const [category,setCategory] = useState('')
-	const categories= useSelector((state) => state.categories)
+	const navigate = useNavigate()
 
-
-    useEffect(() => {
-        dispatch(getCategories());
-    }, [dispatch]);
-
-	
 	const expresiones = {
-		Producto: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+		Producto: /^[a-zA-Z0-9À-ÿ\s]{4,1000}$/, // Letras y espacios, pueden llevar acentos.
 		Precio: /^\d{1,10}$/, // 4 a 12 digitos.
 		Stock: /^\d{1,10}$/, // 4 a 12 digitos.
-		Imagen: /(jpg|png|gif)$/i,
-		Descripcionn: /^[a-zA-ZÀ-ÿ\s]{4,200}$/,// 7 a 14 numeros.
+		Imagen: /^[a-zA-Z0-9À-ÿ\s][^]{4,1000}$$/,
+		Descripcionn: /^[a-zA-Z0-9À-ÿ\s][^]{4,1000}$/,// 7 a 14 numeros.
 	}
 	const CambiarEstado = (e) => {
 		CambiarDescripcion({
 			...description,
 			campo: e.target.value,
-			
+
 		});
-	
+
 	}
 	//Validad Descripcion
 	const[descriptionInput, ChangeDescription] = useState({
@@ -100,26 +96,21 @@ const CrearForm = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-
-		if (
-			name.valido === 'true' &&
-			price.valido === 'true' &&
-			stock.valido === 'true' &&
-			image.valido === 'true' &&
-			descripcionValidada ==="true" &&
-			terminos
-		) {
-			var input= {
+		var input= {
+				id: editAdmin[0].id,
 				name: name.campo,
 				price: price.campo,
 				stock: stock.campo,
-				image:[`${image.campo}`],
+				image:image.campo,
 				description: description.campo,
-				categoryName:category
+
 			}
-			console.log(input)
+		if (
+			name.valido === 'true'
+		) {
+
 			cambiarFormularioValido(true);
-			dispatch(postProductos(input))
+			dispatch(UpdateProduct(input))
 			navigate('/admin/edit')
 			cambiarname({ campo: '', valido: '' });
 			cambiarprice({ campo: '', valido: null });
@@ -128,18 +119,63 @@ const CrearForm = () => {
 			CambiarDescripcion({ campo: '', valido: null });
 
 			// ... 
-		} else {
+		} else if(price.valido === 'true') {
+			cambiarFormularioValido(true);
+			dispatch(UpdateProduct(input))
+			navigate('/admin/edit')
+			cambiarname({ campo: '', valido: '' });
+			cambiarprice({ campo: '', valido: null });
+			cambiarstock({ campo: '', valido: null });
+			cambiarimage({ campo: '', valido: null });
+			CambiarDescripcion({ campo: '', valido: null });
+		} else if(stock.valido === 'true'){
+			cambiarFormularioValido(true);
+			dispatch(UpdateProduct(input))
+			navigate('/admin/edit')
+			cambiarname({ campo: '', valido: '' });
+			cambiarprice({ campo: '', valido: null });
+			cambiarstock({ campo: '', valido: null });
+			cambiarimage({ campo: '', valido: null });
+			CambiarDescripcion({ campo: '', valido: null });
+		}else if(image.valido === 'true'){
+			cambiarFormularioValido(true);
+			dispatch(UpdateProduct(input))
+			navigate('/admin/edit')
+			cambiarname({ campo: '', valido: '' });
+			cambiarprice({ campo: '', valido: null });
+			cambiarstock({ campo: '', valido: null });
+			cambiarimage({ campo: '', valido: null });
+			CambiarDescripcion({ campo: '', valido: null });
+		}else if(descripcionValidada ==="true"){
+			cambiarFormularioValido(true);
+			dispatch(UpdateProduct(input))
+			navigate('/admin/edit')
+			cambiarname({ campo: '', valido: '' });
+			cambiarprice({ campo: '', valido: null });
+			cambiarstock({ campo: '', valido: null });
+			cambiarimage({ campo: '', valido: null });
+			CambiarDescripcion({ campo: '', valido: null });
+		}else if(name.campo.length >0 && price.campo>0 && stock.campo>0&& image.campo.length>0&&description.campo.length>0){
+			cambiarFormularioValido(true);
+			dispatch(UpdateProduct(input))
+			navigate('/admin/edit')
+			cambiarname({ campo: '', valido: '' });
+			cambiarprice({ campo: '', valido: null });
+			cambiarstock({ campo: '', valido: null });
+			cambiarimage({ campo: '', valido: null });
+			CambiarDescripcion({ campo: '', valido: null });
+		}else{
 			cambiarFormularioValido(false);
 		}
 	}
-	function handleSelectCategory(e){
-		setCategory(e.target.value)
-	}
+	// function handleSelectCategory(e){
+	// 	setCategory(e.target.value)
+	// }
 
 	return (<>
 		<NavBar/>
-		<main className={classes.main} style={{backgroundColor:"#C4C7BB", borderRadius:"2%",marginTop:"2rem",zIndex:"0"}}>
-			<h1>Crear Producto</h1>
+		<main className={classes.main} style={{backgroundColor:"#C4C7BB", borderRadius:"2%",marginTop:"2rem"}}>
+			<h1>Editar Producto</h1>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input
 					estado={name}
@@ -182,21 +218,7 @@ const CrearForm = () => {
 					valido={description.valido}
 				// funcion={validarPassword2}
 				/>
-				<div style={{display:"flex",flexDirection:"column",margin:"auto"}}>
-					<h5>Categoria</h5>
-					<select onChange={(e) => handleSelectCategory(e)}>
-					{categories?.map((item, i) => {
-									return (
-										<option
-											value={item.nombre}
-											key={item.nombre}
-										>
-											{item.name}
-										</option>
-									);
-								})}
-					</select>
-				</div>
+
 				<ContenedorBotonCentrado>
 					<Label>Descripcion</Label>
 					<TextArea

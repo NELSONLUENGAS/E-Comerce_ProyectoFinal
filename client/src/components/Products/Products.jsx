@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Product from "../Product/Product";
 import { useState } from "react";
 import Paginado from "../Paginado/Paginado";
-import NavBar from "../NavBar/NavBar";
+import NavBarTwo from "../NavBar/NavBar";
 import { useSearchParams } from "react-router-dom";
 import {
     getProducts,
@@ -90,23 +90,28 @@ export default function Products() {
     const onSubmitt = (e) => {
         console.log("entre al boton de precio");
         e.preventDefault();
+        setCurrentPage(1);
         dispatch(filterBy2Price(numberMin, numberMax));
     };
 
     function handleCategories(e) {
         e.preventDefault();
+        setCurrentPage(1);
         setCategoryFilter(e.target.value);
         dispatch(filterByCategory(e.target.value));
     }
     function handleToday() {
+        setCurrentPage(1);
         setCheckToday(!checkToday);
         dispatch(filterToday(!checkToday));
     }
     function handleMoreSeller() {
+        setCurrentPage(1);
         setCheckMoreSeller(!checkMoreSeller);
         dispatch(filterMoreSeller(!checkMoreSeller));
     }
     function handleFreeShipping() {
+        setCurrentPage(1);
         setCheckFreeShipping(!checkFreeShipping);
         dispatch(filterFreeShipping(!checkFreeShipping));
     }
@@ -115,6 +120,7 @@ export default function Products() {
         dispatch(orderByPrice(e.target.value));
         setCurrentPage(1);
     }
+
 
     useEffect(() => {
         dispatch(getProducts());
@@ -174,7 +180,7 @@ export default function Products() {
 
     return (
         <div style={{ backgroundColor: "#EBEBEB" }}>
-            <NavBar />
+            <NavBarTwo />
             <Carrousel />
             <Ofertas />
             <Advertising

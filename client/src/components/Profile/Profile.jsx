@@ -291,7 +291,7 @@ export default function Profile() {
                     </Link>
                     <Link
                         style={{ color: "black", textDecoration: "none" }}
-                        to="/"
+                        to="/user/adress"
                     >
                         <div className="container-options-profile">
                             <div className="container-img-profile">

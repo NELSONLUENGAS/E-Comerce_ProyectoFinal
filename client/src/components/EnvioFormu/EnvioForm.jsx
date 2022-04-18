@@ -34,7 +34,7 @@ const EnvioForm= () => {
 	const [city, cambiarcity] = useState({campo: '', valido: null});
 	const [terminos, cambiarTerminos] = useState(false);
 	const [formularioValido, cambiarFormularioValido] = useState(null);
-	const Navigate = useNavigate()
+	const navigate = useNavigate()
 	const expresiones = {
 		ProvinciaNacionalidadCiudad: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
 		direccion: /^[a-zA-Z1-9\s]{4,40}$/,
@@ -48,7 +48,6 @@ const EnvioForm= () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		alert("entre")
 		if(
 	
 			direction.valido === 'true' &&
@@ -67,6 +66,7 @@ const EnvioForm= () => {
 			dispatch(PostDirection(newAdress, user.email))
 			cambiarFormularioValido(true);
 			alert("Direccion agregada correctamente")
+			navigate('/user/adress')
 			cambiarprovince({campo: '', valido: null});
 			cambiarcity({campo: '', valido: null});
 			cambiardirection({campo: '', valido: null});

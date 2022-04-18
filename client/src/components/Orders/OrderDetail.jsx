@@ -18,7 +18,9 @@ import "./OrderDetail.css";
 export default function OrderDetail({UserEmail,total, status,id,Products,date,direction,handleChangeStatus,updatedAt,name,lastname}) {
     
     const [order, setOrder] = useState({history: false,description: false,sentStatus: status})
-    const fecha = updatedAt.slice(0,10)
+    const dia = updatedAt.slice(8,10)
+    const mes = updatedAt.slice(5,7)
+    const año = updatedAt.slice(0,4)
     const hora = updatedAt.slice(11,16)
     const dispatch = useDispatch()
 
@@ -41,7 +43,7 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
     return (
         <div className="container-finish-order">
             <div className="order-details-1" >
-                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>{fecha} a las {hora}</h6></div> 
+                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>{dia}-{mes}-{año} a las {hora}</h6></div> 
                 
                 <div>
                 {status === 'Complete' ? (
@@ -51,7 +53,7 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                 </div>
                 
                 <div style={{display:"flex",gap:"2rem"}}>
-                    <div style={{textAlign:"center",display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                    <div className="name-email-order-details">
                         <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{name} {lastname}</h6>
                         <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{UserEmail}</h6>
                     </div>

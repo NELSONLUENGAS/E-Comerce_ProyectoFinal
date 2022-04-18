@@ -21,10 +21,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    gap: 1.2rem;
 
 }
 .title-desktop-checkout-card{
-    width: 500px;
+    display: flex;
+    width: 300px;
 }
 .title-mobile-checkout-card{
     display: none;

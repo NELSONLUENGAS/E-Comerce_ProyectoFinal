@@ -1,8 +1,8 @@
 import React from 'react';
-import {Input, Label, GrupoInput, LeyendaError, IconoValidacion} from '../Registro/ElementsForm';
+import {Input, Label, GrupoInput, LeyendaError, IconoValidacion} from './ElementsCrear';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
-const inputEnvio = ({estado, cambiarEstado, tipo, label, placeholder, name, leyendaError, expresionRegular, funcion}) => {
+const InputCrear = ({estado, cambiarEstado, tipo, label, placeholder, name, leyendaError, expresionRegular, funcion}) => {
 	const onChange = (e) => {
 		cambiarEstado({...estado, campo: e.target.value});
 	}
@@ -22,7 +22,7 @@ const inputEnvio = ({estado, cambiarEstado, tipo, label, placeholder, name, leye
 	}
 
 	return (
-		<div style={{zIndex:"0"}}>
+		<div>
 			<Label htmlFor={name} valido={estado.valido}>{label}</Label>
 			<GrupoInput>
 				<Input 
@@ -45,4 +45,4 @@ const inputEnvio = ({estado, cambiarEstado, tipo, label, placeholder, name, leye
 	);
 }
  
-export default inputEnvio;
+export default InputCrear;

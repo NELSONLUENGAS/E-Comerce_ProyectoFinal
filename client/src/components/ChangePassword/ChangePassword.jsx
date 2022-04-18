@@ -1,14 +1,22 @@
-import NavBar from '../NavBar/NavBar';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import ChangePasswordForms from './ChangePasswordForms';
 
-export default function ChangePassword(){
-    return(<>
-        <NavBar/>
-        <div>
-        Seguridad
-        E-mail
-        Modificar Clave
+const useStyles = makeStyles((theme) => ({
+  container: {
+    minHeight: '100vh',
+    background: "#e5e5e5",
+},
+}));
 
+function ChangePassword() {
+  const classes = useStyles();
+  return (
+        <div className= {classes.container}>
+          
+          <ChangePasswordForms/>
         </div>
-        </>
-    )
+  )
 }
+
+export default ChangePassword

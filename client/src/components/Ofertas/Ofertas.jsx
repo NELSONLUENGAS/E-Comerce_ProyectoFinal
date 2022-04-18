@@ -5,7 +5,7 @@ import './Ofertas.css'
 
 export default function Ofertas(){
     let productos = useSelector((state) => state.allProducts);
-    productos = productos.slice(33,39)
+    productos = productos.slice(33,36)
     return(<>
     <div className="container-sale" >
             <h2>Ofertas</h2>

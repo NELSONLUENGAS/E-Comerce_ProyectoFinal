@@ -31,13 +31,14 @@ export default function NavBar() {
         location: false,
         filterSub: "",
         details: false,
+        mobileNav:false,
     });
 
     ////////___Aux___/////////////////////
     let filter = expand.filterCat;
     const category = products.map((categ) => filter && categ[filter]);
     const subCate = category[0]?.subCate;
-    const img = category[0]?.image;
+    const imgCate= category[0]?.image;
 
     ///////____Functions___////////////
     function categoryFilter(e) {
@@ -63,6 +64,11 @@ export default function NavBar() {
             location: true,
         });
     }
+    function locationMobile(e) {
+        e.preventDefault();
+       navigate('/user/adress')
+    }
+    
     function modal(e) {
         e.preventDefault();
         setExpand({
@@ -159,321 +165,209 @@ export default function NavBar() {
         }
     }, []);
 
-    return (
-        <>
-            <div className="customerGrid">
-                <div onMouseOver={modalDown} className="cusElement1">
-                    <Link
-                        to="/"
-                        style={{ textDecoration: "none", color: "black" }}
-                    >
-                        
-                    <img src={Logo} style={{width:"200px"}} alt="Icono empresa" />
-                    </Link>
-                </div>
-                <div onMouseOver={modalDown} className="cusElement2">
-                    <SearchBar/>
-                </div>
-                <div onMouseOver={modalDown} className="cusElement3">
-                    <button onClick={mobileOpen}>
-                        {expand.mobile ? <CloseIcon /> : <MenuIcon />}
-                    </button>
-                    <div>
-                        <label>
-                            <ShoppingCartIcon />
-                        </label>
-                        <span>1</span>
-                    </div>
-                </div>
-                <div onMouseOver={modalDown} className="cusElement4">
-                    <button onClick={location}>
-                        <LocationOnIcon />
-                    </button>
-                    <Link to="/Location">
-                        <label>
-                            <LocationOnIcon />
-                        </label>
-                    </Link>
-                    <div> 
-                        <span>Enviar a</span>
-                        {user.name? (<span>{user.directions[0]?.city}</span>):<span>Ciudad</span>}
-                    </div>
-                </div>
-                <div className="cusElement5">
-                    {/* <span onMouseOver={modal}>
-                        <Link style={{color:"white",textDecoration:"none"}} to="/Categories">Categorías </Link>
-                    </span> */}
-                </div>
-                <div onMouseOver={modalDown} className="cusElement6"></div>
-                <div className="cusElement7">
-                    {user.name ? <div>{user.name}</div> : <Link to="/SignIn" style={{color:"white",textDecoration:"none"}}>Ingresa</Link> }
-                    <label onMouseOver={profile}>
-                        { user.name? ( <div style={{backgroundColor:"black",color:"white",borderRadius:"50%",
-                        border: "0.5px solid rgba(191, 191, 191, 0.719)",
-                        height:"40px",
-                        width:"40px",
-                        padding: "0.7rem",
-                        marginLeft:"1rem",
-                        marginRight:"1rem",
-                        display:"flex",
-                        justifyContent:"center",
-                        alignItems:"center",
-                        textAlign: "center",
-                        backgroundColor: "rgb(176, 54, 232)",
-                        fontSize: "1.5rem"}}>{capitalLetter()}</div>):<AccountCircleIcon />}
-                    </label>
-                </div>
-                <div onMouseOver={modalDown} className="cusElement8">
-                    <Link to="/user/myShop" style={{textDecoration:"none",color:"#fff"}}>Mis Compras</Link>
-                    <Link to="/user/favorites" style={{textDecoration:"none",color:"#fff"}}>Favoritos</Link>
-                </div>
-                <div onMouseOver={modalDown} className="cusElement9">
-                    <label>
-                        <Link to="/checkout-page">
-                            <ShoppingCartIcon />
-                        </Link>
-                    </label>
-                    { carrito>0 && user.name ? <span>{carrito}</span>:null}
-                </div>
-                <div className="cusElement02"></div>
-                {/* <div onMouseOver={modalDown} className="cusElement03"></div> */}
-                {expand.category && (
-                    <div onMouseLeave={modalDown} className="cusElement0">
-                        <div className="categories">
-                            <div>
-                                <option
-                                    onMouseOver={categoryFilter}
-                                    onClick={handleSelect}
-                                    value="Belleza"
-                                >
-                                    Belleza y Cuidado
-                                </option>
-                                <ArrowRightIcon />
-                            </div>
-                            <div>
-                                <option
-                                    onMouseOver={categoryFilter}
-                                    onClick={handleSelect}
-                                    value="Hogar"
-                                >
-                                    Cocina y Hogar
-                                </option>
-                                <ArrowRightIcon />
-                            </div>
-                            <div>
-                                <option
-                                    onMouseOver={categoryFilter}
-                                    onClick={handleSelect}
-                                    value="Deporte"
-                                >
-                                    Deportes{" "}
-                                </option>
-                                <ArrowRightIcon />
-                            </div>
-                            <div>
-                                <option
-                                    onMouseOver={categoryFilter}
-                                    onClick={handleSelect}
-                                    value="Herramientas"
-                                >
-                                    Herramientas
-                                </option>
-                                <ArrowRightIcon />
-                            </div>
-                            <div>
-                                <option
-                                    onMouseOver={categoryFilter}
-                                    onClick={handleSelect}
-                                    value="Mascotas"
-                                >
-                                    Mascotas
-                                </option>
-                                <ArrowRightIcon />
-                            </div>
-                            <div>
-                                <option
-                                    onMouseOver={categoryFilter}
-                                    onClick={handleSelect}
-                                    value="Tecnologia"
-                                >
-                                    Tecnología
-                                </option>
-                                <ArrowRightIcon />
-                            </div>
-                            <div>
-                                <option
-                                    onMouseOver={categoryFilter}
-                                    onClick={handleSelect}
-                                    value="Videojuegos"
-                                >
-                                    Videojuegos
-                                </option>
-                                <ArrowRightIcon />
-                            </div>
-                        </div>
-                        {expand.subCategory && subCate && (
-                            <div className="subcategories">
-                                {subCate?.map((el) => (
-                                    <option key={el} onClick={subCategory}>
-                                        {el}
-                                    </option>
-                                ))}
-                            </div>
-                        )}
-                        {expand.subCategory && img && (
-                            <div className="imgCat">
-                                {img?.map((img) => (
-                                    <img key={img} src={img} alt="Imagen" />
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                )}
-                <div className="cusElement01">
-                    {expand.profile && (!user.name? (
-                        <div className="guest">
-                            <Link
-                                to="/SignIn"
-                                style={{
-                                    textDecoration: "none",
-                                    color: "black",
-                                }}
-                            >
-                                <option>Iniciar Sesion</option>
-                            </Link>
-                            <Link
-                                to="/SignUp"
-                                style={{
-                                    textDecoration: "none",
-                                    color: "black",
-                                }}
-                            >
-                                <option>Registrarse</option>
-                            </Link>
-                        </div>):(
-                            <div className="guest">
-                            <Link
-                                to="/user/profile"
-                                style={{
-                                    textDecoration: "none",
-                                    color: "black",
-                                }}
-                            >
-                                <option>Mi Perfil</option>
-                            </Link>
-                            <Link
-                                to="/"
-                                style={{
-                                    textDecoration: "none",
-                                    color: "black",
-                                }}
-                            >
-                                <option onClick={handleLogout}>Log Out</option>
-                            </Link>
-                        </div>
-                        )
-                    )}
-                </div>
-                {expand.location && (
-                    <div className="modalLocation">
-                        <div className="locModal0">
-                            <h1>Decide el destino de tú pedido</h1>
-                            <div className="locModal2">
-                                <h3>Direcciones</h3>
-                                {!user.name? (<Link to="/SignIn"><h3>Por favor incia sesion</h3> </Link>):(<div>
-                                <div>
-                                    
-                                    {user.directions.map((element,i) =>{
-                                        return (<div key={i}>
-                                                <input type="radio"/>
-                                                <label for={i} >
-                                                <h4>   {element.direction}, {element.city}, {element.province}, {element.postalcode}</h4>
-                                                </label>
-                                            </div>
-                                        )
-                                    })}
-                                    <button style={{margin:"auto",marginTop:"2rem"}}onClick={addAdress}> Agregar nueva direccion</button>
-
-                                </div>
-                                <div>
-                                    {/* <select>
-                                        <option hidden disable="true" value="">
-                                            Departamento
-                                        </option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                    </select>
-                                    <select>
-                                        <option hidden disable="true" value="">
-                                            Ciudad
-                                        </option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                        <option value="">departamento</option>
-                                    </select> */}
-                                    {/* <button onClick={modalOpen}>Aceptar</button> */}
-                                </div>
-                                {/* <div>
-                                    <button onClick={moreDetails}>
-                                        <span>
-                                            <AddCircleIcon />
-                                        </span>
-                                        <span>Agregar más detalles</span>
-                                    </button>
-                                </div> */}
+    return (<>
+            <div className="container-global-navbar">
+                <div className="div-container-1-navbar">
+                                             
+                        {expand.mobile ? (
+                                <>
                                 
-                                {/* {expand.details && (
-                                    <div className="locModal1">
-                                        <label>
-                                            <input
-                                                type="text"
-                                                placeholder="Nombre y Apellido"
-                                            />
-                                        </label>
-                                        <label>
-                                            <input
-                                                type="text"
-                                                placeholder="Número de contacto"
-                                            />
-                                        </label>
-                                        <label>
-                                            <input
-                                                type="text"
-                                                placeholder="Barrio(Opcinal)"
-                                            />
-                                        </label>
-                                        <label>
-                                            <input
-                                                type="text"
-                                                placeholder="Dirrección"
-                                            />
-                                        </label>
-                                        <label>
-                                            <input
-                                                type="text"
-                                                placeholder="Datos Adicionales(Opcinal)"
-                                            />
-                                        </label>
+                                <div className="container-mobile-menu-navbar">
+                                    <div style={{display:"flex",marginTop:"5rem",flexDirection:'column',justifyContent:"flex-start",alignItems:"flex-start",height:"100%",width:"100%"}}>
+                                        <div style={{display:"flex",flexDirection:"column",height:"15%",backgroundColor:"#023047",width:"100%",alignItems:'flex-start'}}>
+                                        
+                                            {user.name ? ( <>
+                                                <div style={{display:"flex",flexDirection:"row",alignItems:"center",marginLeft:"2rem"}}>
+                                                    <div className="profile-icon-navbar">
+                                                        {capitalLetter()}
+                                                    </div>  
+                                                <span style={{color:"#fff"}}>{user.name}</span>
+                                                 </div>
+                                        
+                                            </>):(<>
+                                                <Link to="/SignIn" style={{textDecoration:"none",color:"#fff"}}><div className="sign-mobile-navbar"><h4>Ingresar</h4></div></Link>
+                                                <Link to="/SignUp" style={{textDecoration:"none",color:"#fff"}}><div className="sign-mobile-navbar"><h4>Registrarse</h4></div></Link>
+                                            </>)}
+                                            <button onClick={mobileOpen}> <CloseIcon style={{position:"absolute",top:"1.7rem",left:"2.5rem"}}/>     </button>
+
+                                        </div>
+                                        
+                                        <div style={{display:"flex",alignItems:"flex-start",flexDirection:"column",width:"100%",height:"80%",backgroundColor:"rgb(235, 235, 235)",justifyContent:"flex-start"}}>
+                                        
+                                            <div style={{marginTop:"2rem",textAlign:"left"}}>
+                                                <Link to="/" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Inicio</h5></div></Link>
+                                                {user.name ? (<>
+                                                <Link to="/user/profile" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Mi Perfil</h5></div></Link>
+                                                <Link to="/user/myShop" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Mis Compras</h5></div></Link>
+                                                <Link to="/user/favorites" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Favoritos</h5></div></Link>
+                                                <Link to="/" onClick={handleLogout}style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Log Out</h5></div></Link>
+                                                </>):null}
+                                            </div>
+                                        </div>
                                     </div>
-                                )} */}
-                                </div> )}
+                                </div>
+                                
+                                
+                                
+                                
+                                </>    ): <div className="container-mobile-open-menu-navbar"><button onClick={mobileOpen}><MenuIcon /></button></div>}
+                                
+                            
+                    <div className="logo-navbar">
+                        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                            <img src={Logo} style={{width:"200px"}} alt="Icono empresa" />
+                        </Link>
+                    </div>
+                    {!expand.mobile ?(
+                    <SearchBar/>
+                    ):null}
+                </div>
+                <div className="div-container-2-navbar">
+                    <div>
+                        <div onMouseOver={modalDown} className="div-container-1-bottom-location-navbar">
+                        {user.name ? ( <><button className="button-location-navbar" onClick={(e)=> navigate('/user/adress')}>
+                                <LocationOnIcon />
+                            </button>
+                            <button className="button-location-mobile-navbar" onClick={locationMobile}>
+                            <LocationOnIcon />
+                        </button>
+                        </>):(<><button className="button-location-mobile-navbar" onClick={(e)=> navigate('/SignIn')}>
+                                <LocationOnIcon />
+                            </button>
+                            <button className="button-location-navbar" onClick={(e)=> navigate('/SignIn')}>
+                                <LocationOnIcon />
+                            </button>
+                            </>)}
+                           
+                            <div className="div-text-direction-navbar"> 
+                                <div>
+                                    {user.name? (<span>Enviar a {user.name}</span>):(<span>Enviar a </span>)}
+                                </div>
+                                
+                                {user.name? (<span>Calle {user.principalDirection[0]?.direction}</span>):<span>Capital Federal</span>}
                             </div>
-                            <div className="locModal3">
-                                <button onClick={modalOpen}>cancelar</button>
-                                <button onClick={modalOpen}>
-                                    Guardar cambios
-                                </button>
-                            </div>
+                            
+                                {expand.location && (
+
+                                    !expand.mobile ?(
+
+                                    <div className="modal-container-adress-navbar">
+                                        <h5>Elegí dónde recibir tus compras</h5>
+                                        <h6>En una de tus direcciones:</h6>
+                                        <div className="modal-div-adress-navbar">
+                                            {!user.name? (<Link to="/SignIn"><h5>Por favor incia sesion</h5> </Link>):(<div>
+                                            <div className="container-adress-navbar">
+                                                
+                                                {user.directions.map((element,i) =>{
+                                                    return (<div className="div-adress-navbar" key={i}>
+                                                                <input className="radio-adress-navbar" type="radio" />
+                                                                <div>
+                                                                 <label for={i} >
+                                                                    <h4>Calle: {element.direction}</h4>
+                                                                    <h6>CP: {element.postalcode}-{element.city},{element.province} </h6>
+                                                                </label>
+                                                                </div>
+                                                            </div>
+                                                    )
+                                                })}
+                                                <div className="div-adress-navbar" style={{color:"#3483fa",padding:"1rem",cursor:'pointer'}} onClick={addAdress}> + Agregar nueva direccion</div>
+                                                <div className="div-final-buttons-add-adress-navbar">
+                                                     <button className="cancel-adress-navbar"onClick={modalOpen}>Cancelar</button>
+                                                     <button className="save-changes-adress-navbar"onClick={modalOpen}>Guardar cambios</button>
+                                                </div>
+                                        
+                                            </div>
+                                            </div> )}
+                                           
+                                        </div>
+                                        
+                                    </div>):(null)
+                            )}
                         </div>
                     </div>
-                )}
+                    <div className="space-between-location-profile-navbar"></div>
+                    <div className="div-container-profile-divs-navbar">
+                        <div className="div-container-3-bottom-profile-navbar">
+                        {user.name ? ( <>
+                            <span>{user.name}</span>
+                            <label onMouseOver={profile} >
+                                { user.name? ( 
+                                    <div className="profile-icon-navbar">
+                                        {capitalLetter()}
+                                    </div>
+                                ):<AccountCircleIcon />}
+                            </label>
+   
+                        
+                            {expand.profile && (!user.name? (
+                                <div className="expand-profile-navbar">
+                                    <Link
+                                        to="/SignIn"
+                                        style={{
+                                            textDecoration: "none",
+                                            color: "black",
+                                        }}
+                                    >
+                                        <option>Iniciar Sesion</option>
+                                    </Link>
+                                    <Link
+                                        to="/SignUp"
+                                        style={{
+                                            textDecoration: "none",
+                                            color: "black",
+                                        }}
+                                    >
+                                        <option>Registrarse</option>
+                                    </Link>
+                                </div>):(
+                                <div className="expand-profile-navbar">
+                                    <Link
+                                        to="/user/profile"
+                                        style={{
+                                            textDecoration: "none",
+                                            color: "black",
+                                        }}
+                                    >
+                                        <option>Mi Perfil</option>
+                                    </Link>
+                                    <Link
+                                        to="/"
+                                        style={{
+                                            textDecoration: "none",
+                                            color: "black",
+                                        }}
+                                    >
+                                        <option onClick={handleLogout}>Log Out</option>
+                                    </Link>
+                                </div>
+                                )
+                            )}
+                            </>):null}
+                        </div>
+                        <div onMouseOver={modalDown} className="div-container-2-bottom-links-navbar">
+                            
+                            {user.name ? (
+                            <>
+                            <Link to="/user/myShop" style={{textDecoration:"none",color:"#fff"}}>Mis Compras</Link>
+                            <Link to="/user/favorites" style={{textDecoration:"none",color:"#fff"}}>Favoritos</Link>
+                            </>
+                            ): (
+                                <>
+                                <Link to="/SignUp" style={{color:"white",textDecoration:"none"}}>Creá tu cuenta</Link> 
+                                <Link to="/SignIn" style={{color:"white",textDecoration:"none"}}>Ingresá</Link>
+                                </> 
+                            )}
+                        </div>
+                        <div className="div-container-4-bottom-basket-navbar">
+                        <label>
+                            <Link to="/checkout-page">
+                                <ShoppingCartIcon />
+                            </Link>
+                        </label>
+                        { carrito>0 && user.name ? <span>{carrito}</span>:null}
+                        </div>
+                    </div>    
+                </div>
             </div>
-        </>
-    );
+        </>);
 }

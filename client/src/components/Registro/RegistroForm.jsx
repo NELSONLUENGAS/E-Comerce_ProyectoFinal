@@ -50,7 +50,7 @@ const RegistroForm= () => {
 		telefono: /^\d{7,14}$/, // 7 a 14 numeros.
 		dni: /^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$/,
 		ProvinciaNacionalidadCiudad: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
-		direccion: /^[a-zA-Z1-9\s]{4,40}$/,
+		direccion: /^[a-zA-Z0-9\s]{4,40}$/,
 		codigoPostal: /^[0-9]{4,5}$/,
 		fechaDeNacimiento: /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/
 	}
@@ -141,7 +141,7 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarNombre}
 					tipo="text"
 					label="Nombre"
-					placeholder="Axel"
+				
 					name="usuario"
 					leyendaError="El nombre solo puede contener letras y espacios."
 					expresionRegular={expresiones.nombre}
@@ -151,7 +151,7 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarlastname}
 					tipo="text"
 					label="Apellido"
-					placeholder="Beltrán"
+		
 					name="lastname"
 					leyendaError="Ingrese su apellido correctamente"
 					expresionRegular={expresiones.nombre}
@@ -161,7 +161,6 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarCorreo}
 					tipo="email"
 					label="Correo Electrónico"
-					placeholder="beltran.axel.493@gmail.com"
 					name="correo"
 					leyendaError="El correo solo puede contener letras, numeros, puntos, guiones y guion bajo."
 					expresionRegular={expresiones.correo}
@@ -190,7 +189,6 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarTelefono}
 					tipo="text"
 					label="Teléfono"
-					placeholder="54 9 336 4680581"
 					name="telefono"
 					leyendaError="El telefono solo puede contener numeros y el maximo son 14 dígitos."
 					expresionRegular={expresiones.telefono}
@@ -200,7 +198,7 @@ const RegistroForm= () => {
 					cambiarEstado={cambiardni}
 					tipo="text"
 					label="Numero De Documento"
-					placeholder="39770740"
+	
 					name="dni"
 					leyendaError="Ingrese el numero de documento correctamente"
 					expresionRegular={expresiones.dni}
@@ -210,7 +208,7 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarfechaDeNacimiento}
 					tipo="text"
 					label="Fecha De Nacimiento"
-					placeholder="15/08/1996"
+					placeholder="DD/MM/YYYY"
 					name="fechaDeNacimiento"
 					leyendaError="Ingresa tu fecha de nacimiento correctamente"
 					expresionRegular={expresiones.fechaDeNacimiento}
@@ -220,7 +218,6 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarnationality}
 					tipo="text"
 					label="Nacionalidad"
-					placeholder="Argentina"
 					name="nationality"
 					leyendaError="Ingresa tu nacionalidad, correctamente para cuando haces un pedido"
 					expresionRegular={expresiones.ProvinciaNacionalidadCiudad}
@@ -230,7 +227,6 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarprovince}
 					tipo="text"
 					label="Provincia"
-					placeholder="Buenos Aires"
 					name="province"
 					leyendaError="Ingresa tu provincia, correctamente para que el pedido este echo correctamente"
 					expresionRegular={expresiones.ProvinciaNacionalidadCiudad}
@@ -240,7 +236,6 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarcity}
 					tipo="text"
 					label="Ciudad"
-					placeholder="Buenos Aires"
 					name="city"
 					leyendaError="Ingrese tu ciudad correctamente"
 					expresionRegular={expresiones.ProvinciaNacionalidadCiudad}
@@ -250,7 +245,6 @@ const RegistroForm= () => {
 					cambiarEstado={cambiardirection}
 					tipo="text"
 					label="Direccion"
-					placeholder="Bartolome Mitre 250"
 					name="direction"
 					leyendaError="Ingrese tu direccion para cualquier pedido a domicilio, o entrega"
 					expresionRegular={expresiones.direccion}
@@ -260,7 +254,6 @@ const RegistroForm= () => {
 					cambiarEstado={cambiarpostalcode}
 					tipo="text"
 					label="Codigo Postal"
-					placeholder="2900"
 					name="postalcode"
 					leyendaError="ingrese tu codigo postal correctamente"
 					expresionRegular={expresiones.codigoPostal}

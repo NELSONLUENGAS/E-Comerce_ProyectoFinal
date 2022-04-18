@@ -1,7 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import RegistroForm from './CrearForm';
-//import Editar from '../EditarYBorrarProductos/Editar';
+import CrearForm from './CrearForm';
+
+
 const useStyles = makeStyles((theme) => ({
   container: {
     minHeight: '100vh',
@@ -11,10 +12,14 @@ const useStyles = makeStyles((theme) => ({
 
 function CrearProducto() {
   const classes = useStyles();
+
+
   return (
         <div className= {classes.container}>
           
-          <RegistroForm/>
+          <CrearForm
+
+          />
         </div>
   )
 }

@@ -3,12 +3,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductId } from "../../actions/index";
+import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actions/index";
 import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket,vaciarCarrito,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
+import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
 import Review from "./Review";
+import Corazon from "../../svg/heart-svgrepo-com.svg";
+import Corazonlleno from "../../svg/heart-full.svg";
 
 export default function ProductDetail() {
     const productosdel = {
@@ -33,7 +35,6 @@ export default function ProductDetail() {
             },
         ],
     };
-    console.log(productosdel);
     const navigate=useNavigate();
     let [finalStock,setFinalStock] = useState([])
     const [promedioReview, setPromedioReview] = useState(0);
@@ -41,7 +42,10 @@ export default function ProductDetail() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const productDetail = useSelector((state) => state.productId);
+    const favorites = useSelector((state) => state.favorites);
     const user = useSelector((state) => state.User);
+    const productReview = useSelector((state) => state.productReview);
+    const [productInFavorites,setProductInFavorites]=useState(false)
     const [item, setItem] = useState({
         id: productDetail.id,
         name: productDetail.name,
@@ -52,11 +56,29 @@ export default function ProductDetail() {
     });
     useEffect(() => {
         dispatch(getProductId(id));
+        dispatch(getProductReview(id));
+        
         // return () => dispatch(cleanGetIdProduct())
     }, [dispatch]);
-    console.log(productDetail);
+    console.log(productReview)
+   
 
-
+    function addfavorite(e){
+        e.preventDefault()
+        if(user.name){
+            const userData={productId:id}
+            dispatch(addFavorite(user.email,userData))
+            setProductInFavorites(true);
+        } else{
+            alert('Para agregar a favoritos por favor inicie sesion')
+            navigate('/SignIn')
+         }
+    }
+    function deletefavorite(e){
+        e.preventDefault()
+        dispatch(deleteFavorite(user.email,id))
+        setProductInFavorites(false);
+    }
 
    
 
@@ -77,9 +99,6 @@ export default function ProductDetail() {
             description: productDetail.description,
         });
     }, [productDetail]);
-
-    console.log("esto es el detail");
-    console.log(item);
 
     const AddToBasket = () => {
         
@@ -144,11 +163,11 @@ export default function ProductDetail() {
         }
     }
     useEffect(() =>{
-        if (productosdel.reviews.length){
+        if (productReview.length){
             let sumatotal = 0;
             let cantidad = 0;
-            productosdel?.reviews.map((item) => {
-                sumatotal = sumatotal + item.quantity;
+            productReview?.map((item) => {
+                sumatotal = sumatotal + item.rate;
                 cantidad = cantidad + 1;
                 return <> </>;
             });
@@ -169,8 +188,18 @@ export default function ProductDetail() {
             star.style.color = "orange";
             }
         }
-    },[productosdel.reviews])
+    },[productReview])
+    useEffect(()=>{
+        dispatch(getFavorites(user.email))
+    },[user])
 
+    useEffect(()=>{
+        favorites.map((item)=>{
+            if (item.wishlist.ProductId=== id){
+                setProductInFavorites(true)
+            }
+        })
+    },[favorites])
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
@@ -181,10 +210,21 @@ export default function ProductDetail() {
                     'password':inicioSesion.password
                 }))
                 await dispatch(getBasket(inicioSesion.email))
+                await dispatch(getFavorites(inicioSesion.email));
             }
             fetchData()
         }
     }, []);
+    useEffect(()=>{
+        for (let i=0;i++;i<favorites.length){
+            if(favorites.wishlist.ProductId === id){
+                setProductInFavorites(true);
+                alert('esta en favoritos')
+            }   
+            alert('entre en for') 
+        }
+        
+    },[favorites])
     return (
         <>
             <NavBar/>
@@ -208,8 +248,18 @@ export default function ProductDetail() {
                         <div className="title-product-detail">
                         {!productosdel.reviews.length ? null:(
                         <>
-                        
+                            <div className="title-with-favorite-product-detail">
+                            Nuevo
+                            {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>
+                           
+                            )}
+                            
+                            
+                    
+                            </div>
                             <h4>{productDetail.name}</h4>
+                           
+                            {productReview.length ? (
                             <div className="rating-product-detail">
                                 <label id={`${productDetail.name}${1}`}>
                                     ★
@@ -227,6 +277,7 @@ export default function ProductDetail() {
                                     ★
                                 </label>
                             </div>
+                            ):null}
                             </>)}
 
                             <h2>
@@ -373,7 +424,7 @@ export default function ProductDetail() {
                         </p>
                     </div>
                     <div className="review-product-detail">
-                    {!productosdel.reviews.length ? <h1>No hay opiniones del producto</h1>:(<>
+                    {productReview.length ? (<>
                         <div className="container-review-product-detail">
                             <h1>Opiniones sobre {productDetail.name}</h1>
                             <p style={{fontSize:"60px",marginBottom:"0"}}> {promedioReview.toFixed(1)} </p>
@@ -387,8 +438,8 @@ export default function ProductDetail() {
                                 <label id={`promedio${4}`}>★</label>
                                 <label id={`promedio${5}`}>★</label>
                             </div>
-                            { productosdel.reviews.length>1 ?
-                            <h6>Promedio entre {productosdel.reviews.length} opiniones</h6>:
+                            { productReview.length>1 ?
+                            <h6>Promedio entre {productReview.length} opiniones</h6>:
                             <h6>Hay una sola opinion</h6>
                             }
                         </div>
@@ -417,7 +468,7 @@ export default function ProductDetail() {
                             </button>
                         </div>
                         <div>
-                            {productosdel.reviews?.map((elem, i) => {
+                            {productReview?.map((elem, i) => {
                                 return (
                                     <Review
                                         key={elem.description}
@@ -426,7 +477,7 @@ export default function ProductDetail() {
                                 );
                             })}
                         </div>
-                        </> )}
+                        </> ):<h1>No hay opiniones del producto</h1>}
                     </div>
                    
                 </div>
