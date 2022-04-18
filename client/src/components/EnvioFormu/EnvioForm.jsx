@@ -7,7 +7,8 @@ import { PostDirection } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from './inputEnvio'
 import NavBar from '../NavBar/NavBar';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 const EnvioForm= () => {
 	const classes = useStyles();
 	const dispatch = useDispatch()
+	const Error = () => toast.error(`Por Favor llena el formulario Correctamente`)
+	const Registrado = () => toast.success(`Tu nueva Dirección ha sido registrada de manera correcta`)
 	const conectado = useSelector((state) => state.conectado);
 	const user = useSelector((state) => state.User);
 	const [direction, cambiardirection] = useState({campo: '', valido: null});
@@ -56,24 +59,25 @@ const EnvioForm= () => {
 			city.valido === 'true' &&
 			terminos
 		){
+			Registrado()
 		    let newAdress = {
 				province: province.campo,
 				city: city.campo,
 				postalcode: postalcode.campo,
 				direction: direction.campo,
 			}
-			console.log(newAdress)
-			dispatch(PostDirection(newAdress, user.email))
+			let email= user.email
+			dispatch(PostDirection(newAdress, email))
 			cambiarFormularioValido(true);
-			alert("Direccion agregada correctamente")
-			navigate('/user/adress')
 			cambiarprovince({campo: '', valido: null});
 			cambiarcity({campo: '', valido: null});
 			cambiardirection({campo: '', valido: null});
 			cambiarpostalcode({campo: '', valido: null});
 			// ... 
+			
 		} else {
 			cambiarFormularioValido(false);
+			Error()
 		}
 	}
 
@@ -81,6 +85,7 @@ const EnvioForm= () => {
 		
 			<NavBar/>
 		<main className={classes.main}>
+		
 			<h1>Direccion De Envio</h1>
 			<Formulario action="" onSubmit={onSubmit}>
 		
@@ -142,11 +147,18 @@ const EnvioForm= () => {
 						<b>Error:</b> Por favor rellena el formulario correctamente.
 					</p>
 				</MensajeError>}
+				
+           
 				<ContenedorBotonCentrado>
 					<Boton type="submit">Enviar</Boton>
 					{formularioValido === true && <MensajeExito>Formulario enviado exitosamente!</MensajeExito>}
+					<Toaster 
+            position="top-center"
+            reverseOrder={false}
+			/>
 				</ContenedorBotonCentrado>
 			</Formulario>
+			
 		</main>
 		</>);
 	
