@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import Input from './InputForm'
 import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
-
+import toast, { Toaster } from 'react-hot-toast';
 const useStyles = makeStyles((theme) => ({
     main: {
 		maxWidth: "800px",
@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
 const RegistroForm= () => {
 	const classes = useStyles();
 	const dispatch = useDispatch()
+	const Bienvenido = () => toast.success(`Bienvenido A Latcom`)
+	const Error = () => toast.error(`Por Favor llena el formulario correctamente`)
 	const [nombre, cambiarNombre] = useState({campo: '', valido: null});
 	const [lastname, cambiarlastname] = useState({campo: '', valido: null});
 	const [password, cambiarPassword] = useState({campo: '', valido: null});
@@ -108,7 +110,7 @@ const RegistroForm= () => {
 			}
 			dispatch(postCrearUsuario(input))
 			cambiarFormularioValido(true);
-			alert("Usuario creado correctamente")
+			Bienvenido()
 			Navigate('/SignIn')
 			cambiarNombre({campo: '', valido: null});
 			cambiarPassword({campo: '', valido: null});
@@ -127,6 +129,7 @@ const RegistroForm= () => {
 			// ... 
 		} else {
 			cambiarFormularioValido(false);
+			Error()
 		}
 	}
 
@@ -281,6 +284,11 @@ const RegistroForm= () => {
 					{formularioValido === true && <MensajeExito>Formulario enviado exitosamente!</MensajeExito>}
 				</ContenedorBotonCentrado>
 			</Formulario>
+			<Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
 		</main>
 		</>);
 	

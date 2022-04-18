@@ -12,6 +12,7 @@ import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Cart from "../../svg/shopping-cart.svg";
 import "./Product.css";
 import Corazonlleno from "../../svg/heart-full.svg";
+import toast, { Toaster } from 'react-hot-toast';
 
 const useStyles = makeStyles((theme) => ({
     formatoDescription: {
@@ -49,6 +50,11 @@ export default function Product({
     rating,
     description,
 }) {
+    const InicieSecion = () => toast.error("Por favor incia sesion",{duration: 2000,})
+    const addToBaskett = () => toast.success(`Se a agregado ${item.name} al carrito`,{duration: 4000,});
+    const addToFavorite = () => toast.success(`Se a agregado ${item.name} a favoritos`,{duration: 4000,});
+    
+    const DeleteFavorite = () => toast.success(`has sacado ${item.name} de tus favoritos`, {duration: 4000,})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -60,7 +66,6 @@ export default function Product({
         price: price,
         quantity: Number(1),
         description: description,
-        stock:stock
     });
     function addfavorite(e){
         e.preventDefault()
@@ -68,16 +73,18 @@ export default function Product({
             const userData={productId:id}
             dispatch(addFavorite(user.email,userData))
             setProductInFavorites(true);
+            addToFavorite()
         } else{
-            alert('Para agregar a favoritos por favor inicie sesion'
-            )
-            navigate('/SignIn')
+               InicieSecion() 
+               navigate('/SignIn')
         }
     }
     function deletefavorite(e){
         e.preventDefault()
         dispatch(deleteFavorite(user.email,id))
         setProductInFavorites(false);
+        DeleteFavorite()
+
     }
     const user = useSelector((state) => state.User);
     const favorites = useSelector((state) => state.favorites);
@@ -87,7 +94,7 @@ export default function Product({
     };
 
     const AddToBasket = () => {
-        if (user.email ) {
+        if (user.email) {
             const fetchData = async () => {
                 await dispatch(
                     addBasketBack({ productId: id, amount: 1 }, user.email)
@@ -96,14 +103,13 @@ export default function Product({
             };
             fetchData();
 
-            alert("El producto se agrego correctamente");
+            addToBaskett()
             console.log(id);
         } else {
-
-            // alert("Inicia sesion por favor");
-            // navigate("/SignIn");
             dispatch(addToBasket(item,1));
-            alert("El producto se agrego correctamente");
+            InicieSecion()
+            navigate('/SignIn')
+            // dispatch(addToBasket(item,1));
         }
     };
     
@@ -125,7 +131,7 @@ export default function Product({
         
         
         <div className="container-card-product">
-        
+       
                 <div className="div-img-heart-product">
                 {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>)}
                 </div>
@@ -155,11 +161,6 @@ export default function Product({
                         <p className="price-product">
                             $ {Intl.NumberFormat("es-ES").format(price)}
                         </p>
-                        
-                        {/* <button className="button-best-seller-stock">
-                            
-                            STOCK: {stock} {stock > 1 ? "unidades" : "unidad"}
-                        </button> */}
                         <p className="cuotas-product">
                             Hasta 12 cuotas sin interes
                         </p>
@@ -184,12 +185,16 @@ export default function Product({
                 
                
                 <div className="add-to-cart-product" onClick={AddToBasket}>
+                <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
                     src={Cart}
-                    alt="agregar al carrito"
-                />
+                    />
             </div>
         </div>
         
