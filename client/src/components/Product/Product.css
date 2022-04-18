@@ -1,13 +1,14 @@
 .container-card-product{
     border:solid #cdc6c6 0.2px;
     border-radius: 0.5rem;
-    height: 590px;
+    height: auto;
     width: 255px;
     overflow: hidden;
     background-color: #fff;
     margin-bottom: 25px;
     text-align: left;
     position: relative;
+    padding-bottom: 1rem;
 }
 .div-img-heart-product{
     position: absolute;
@@ -75,6 +76,17 @@
     padding: 0.3em;
     font-size: 11px;
 }
+.button-best-seller-stock{
+    margin-left: auto;
+    margin-right: 10px;
+    color:white;
+    background-color: red;
+    border: transparent;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    font-size: 10px;
+}
+
 .button-fast-delivery-product{
     color:white;
     background-color: #2cbf2f;
@@ -124,7 +136,7 @@
         margin-bottom: 0px;
         margin-top: 0px;
         gap:0px;
-        height: 170px;
+        height: auto;
         width: 350px;
         overflow: hidden;
         background-color: #fff;
