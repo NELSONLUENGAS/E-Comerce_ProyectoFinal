@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Input from './ChangePasswordInput'
 import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const ChangePasswordForms= () => {
 	const classes = useStyles();
 	const dispatch = useDispatch()
+	const Registrado = () => toast.success(`Tu contraseña ha sido cambiada con exito`)
 	const user =useSelector((state) => state.User);
 	const [passwordAntiguo, AntiguoPassword] = useState({campo: '', valido: null});
 	const [password, cambiarPassword] = useState({campo: '', valido: null});
@@ -84,7 +86,7 @@ const ChangePasswordForms= () => {
 			
 			dispatch(putPassword(input, user.email))
 			cambiarFormularioValido(true);
-			alert("Has cambiado correctamente la contraseña")
+			Registrado()
 			Navigate('/SignIn')
 			AntiguoPassword({campo: '', valido: null});
 			cambiarPassword({campo: '', valido: null});
