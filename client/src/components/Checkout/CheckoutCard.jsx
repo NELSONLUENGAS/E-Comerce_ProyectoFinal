@@ -11,6 +11,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch,useSelector } from "react-redux";
 import { RemoveToBasket,putBasketBack,getBasket,addToBasket,substractQuantityItem,addBasketBack,removeItemBasket} from "../../actions";
 import "./CheckoutCard.css";
+import Logo from '../../svg/latcom1.png'
+import {
+    Table,
+    Button, 
+    Container,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    FormGroup,
+    ModalFooter,
+  } from "reactstrap";
 
 export default function CheckoutCard({
     buttonQuantity,
@@ -21,6 +32,9 @@ export default function CheckoutCard({
     quantity,
     description,
 }) {
+    const Añadir = () => toast.success(`Has añadido a tu carrito ${names(name)}, ${name}`, {duration: 4000,})
+    const Sacar = () => toast.success(`Has sacado de tu carrito ${names(name)}: ${name}`, {duration: 4000,})
+    const Eliminar = () => toast.success(`Has eliminado de tu carrito ${DeleteCompra(name)}: ${name}`, {duration: 4000,})
     const dispatch = useDispatch();
     const removeItems = () => {
         if(user.email){
@@ -53,18 +67,39 @@ export default function CheckoutCard({
     let newName=name.slice(0,22);
     newName=newName+"..."
 
-
+    function names(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "una"
+        }else{
+            return "un"
+        }
+    }
+    function DeleteCompra(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "la"
+        }else{
+            return "el"
+        }
+    }
     function subtractionQuantity(){
       
     //   setQuantityProduct(Number(quantityProduct)-1)
     //   setPriceItem(price*(Number(quantityProduct)-1))
     //   dispatch(substractQuantityItem(item.id));
         //   dispatch(addBasketBack(item.id,-1))
+        
         if(quantityProduct>1){
             if(user.email){
             const fetchData = async () => {
                 await dispatch(putBasketBack({productId:id,amount:'Decrement'},user.email));   
                 await dispatch(getBasket(user.email));
+                Sacar()
               }
             fetchData()
               
@@ -87,6 +122,7 @@ export default function CheckoutCard({
             const fetchData = async () => {
                 await dispatch(putBasketBack({productId:id,amount:'Increment'},user.email));
                 await dispatch(getBasket(user.email));
+                Añadir()
             }
              fetchData()
              setQuantityProduct(quantityProduct+Number(1))
@@ -110,7 +146,11 @@ export default function CheckoutCard({
     return (
         <>
             <div className="container-checkout-card">
+            <Toaster 
+            position="top-center"
+            reverseOrder={false}
 
+            />
                     <div className="img-checkout-card"><img src={image} alt="imagen de producto"/></div>
                     <div className="description-checkout-card">
                         <div className="div-container-1-checkout-card">
@@ -124,12 +164,44 @@ export default function CheckoutCard({
                                 {buttonQuantity? ( <button className="button-quantity-checkout-card" onClick={addQuantity}>+</button>):null}
                             </div>
                             <div className="price-text-checkout-card">${Intl.NumberFormat("es-ES").format(priceItem)}</div>
-                            {buttonQuantity? (<IconButton fontSize="large" onClick={removeItems}>
+                            {buttonQuantity? (<IconButton fontSize="large" onClick={() => mostrarModalInsertar(id)}>
                                 <DeleteIcon/>
                             </IconButton>):null}
                         </div>
                     
                     </div>
+                    <Modal isOpen={modalInsertar} onRequestClose={()=>setStateModalInsectar(false)}>
+                <ModalHeader>
+                    <div><img className={classes.image} src={Logo}/></div>
+                </ModalHeader>
+                <form>
+                <ModalBody>
+                    <FormGroup>
+                        <p>
+                          {`Estas seguro que quieres eliminar de tu carrito ${DeleteCompra(name)} ${name},
+                          si posee mas compras de este mismo producto se eliminara definitivamente`}
+                        </p>
+                    </FormGroup>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        type="submit"
+                        onClick={removeItems}
+                    >
+                        Eliminar
+                    </Button>
+                    <Button
+                        
+                        color="primary"
+                        onClick={() => setStateModalInsectar(false)}
+                    >
+                        Cancelar
+                    </Button>
+                </ModalFooter>
+                 </form>
+            </Modal>
             </div>
         </>
     );
