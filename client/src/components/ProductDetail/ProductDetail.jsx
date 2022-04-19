@@ -1,13 +1,21 @@
 /** @format */
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actions/index";
 import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
+import { 
+    addToBasket,
+    getProductReview,
+    addBasketBack,
+    getBasket,
+    vaciarCarritoBack,
+    getUserSigningIn, 
+    postUserViews
+} from "../../actions/index";
 import Review from "./Review";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
@@ -54,6 +62,19 @@ export default function ProductDetail() {
         description: productDetail.description,
         stock:productDetail.stock
     });
+    //////---Views---//////
+    const location = useLocation()
+    
+    const pathname = location.pathname.split("/");
+    const reference = pathname[2];
+    let inicioSesion = JSON.parse(localStorage.getItem("userData"));
+    
+    useEffect(()=>{
+        if(inicioSesion){
+            dispatch(postUserViews({reference: reference,UserEmail: inicioSesion.email}));
+        }
+    },[dispatch])
+    //////---Views---//////
     const classes = useStyles();
     const [modalInsertar, setStateModalInsectar] = useState(false)
     const Cerrar = ()=>setStateModalInsectar(false)
@@ -211,9 +232,9 @@ export default function ProductDetail() {
     },[favorites])
 
     function DeleteCompra(name){
-        var nombreextraido = name.split(' ')[0];
-        var indice = nombreextraido.length-1
-        var ultima = nombreextraido.charAt(indice)
+        var nombreextraido = name?.split(' ')[0];
+        var indice = nombreextraido?.length-1
+        var ultima = nombreextraido?.charAt(indice)
         if(ultima==="a"){
             return "la"
         }else{
