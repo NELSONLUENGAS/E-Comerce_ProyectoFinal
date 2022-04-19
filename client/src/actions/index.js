@@ -254,14 +254,20 @@ export function postProductos(payload) {
 
 export function getUserSigningIn(payload,guestCart){
     return async function (dispatch){
-        const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`,guestCart);
-        return dispatch ({
-            type:"GET_USER_SIGNING_IN",
-            payload:json.data
-        })
+        console.log(guestCart)
+            const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`);
+            if(typeof json.data !=='string'){
+                await axios.post(`http://localhost:3001/guestCart/${payload.email}`,{guestCart:guestCart})
+            }
+            return dispatch ({
+                type:"GET_USER_SIGNING_IN",
+                payload:json.data
+            })
+            
     }
-    
 }
+
+
 export function logOut(payload){
     return{
         type:"LOG_OUT",

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {Users, Orders} = require('../db')
+const {Users, Product_Line,Products,Orders} = require('../db')
 const router = Router();
 
 router.get('/users', async (req, res) => {
@@ -9,30 +9,41 @@ router.get('/users', async (req, res) => {
 })
 
 router.get('/login', async (req, res) => {
-     const {email, password} = req.query, {guestCart} = req.body
+     const {email, password} = req.query
 
-    const user = await Users.findOne({where: {email, password}})
+    const user = await Users.findOne({where: {email, password}})   
     
     if(user) {
-    
-        if(guestCart){
-            
-            const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
-
-            guestCart.forEach(async (product) => {
-                const relation = await Product_Line.findOne({where: {OrderId: cart.id, ProductId: product.id}})
-
-                if(!relation){
-                    const currentProduct = await Products.findOne({where: {id}})
-                    await cart.addProduct(currentProduct, {through: {amount: product.amount, price: currentProduct.price}})
-                }
-            })
-        }
-    
         res.send(user)
     }
 
     else res.send('El usuario o contraseña son incorrectos')
+})
+router.post('/guestCart/:email',async(req,res) =>{
+    const {guestCart} = req.body
+    const {email} = req.params
+    console.log(guestCart)
+    if(guestCart){
+            
+        const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
+
+        guestCart.forEach(async (product) => {
+            const relation = await Product_Line.findOne({where: {OrderId: cart.id, ProductId: product.id}})
+
+            if(!relation){
+                const currentProduct = await Products.findOne({where: {id:product.id}})
+                await cart.addProduct(currentProduct, {through: {amount: product.quantity, price: currentProduct.price}})
+            }else{
+                let currentQuantity=relation.amount+product.quantity
+                if(product.stock>=currentQuantity) relation.amount = currentQuantity
+                else relation.amount=product.stock
+                await relation.save()
+            }
+        })
+        return res.send('Se añadieron los productos al carrito')
+    }
+    res.send('No se ha pasado un carrito')
+
 })
 
 router.post('/createUser', async (req, res) => {
