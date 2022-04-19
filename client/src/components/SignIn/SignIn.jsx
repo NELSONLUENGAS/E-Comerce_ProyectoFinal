@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 //import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -21,7 +20,18 @@ import NavBar from '../NavBar/NavBar'
 //import GoogleLogin from 'react-google-login';
 import Login from '../GoogleAuth/Login';
 //import LogoutButton from "./GoogleAuth/LogOut";
-
+import toast, { Toaster } from 'react-hot-toast';
+import {
+  Table,
+  Button, 
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  ModalFooter,
+} from "reactstrap";
+import Logo from '../../svg/latcom1.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +62,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  imagee:{
+    with: "200px",
+    height: "70px"
+  }
 }));
 
 export default function SignIn() {
@@ -60,22 +74,24 @@ export default function SignIn() {
   const classes = useStyles();
   //const {isAuthenticated} = useAuth0();
   const [email,setEmail] = useState('')
+  const [modalInsertar, setStateModalInsectar] = useState(false)
   const [password,setPassword] = useState('');
   const [validate,setValidate] = useState(0);
   const user = useSelector((state) => state.User);
-  const guestCart = useSelector((state) => state.basket);
-
-
+  const Error = () => toast.error("El email o la contraseña son incorrectos")
+  const IniciadoSecion = () => toast.success(`Ha iniciado sesion correctamente`)
+ const Bienvenido = ()=>setStateModalInsectar(true)
+ const Salir = ()=>setStateModalInsectar(false)
   useEffect(()=>{
     if(validate>0){
       setTimeout(()=>{
         console.log(user)      
         if (user.name){
-          alert("Ha iniciado sesion correctamente")
-          localStorage.setItem('userData', JSON.stringify(user));          
-          Navigate("/")
+          IniciadoSecion()
+          localStorage.setItem('userData', JSON.stringify(user)); 
+          Bienvenido()         
         }else {
-         alert("El usuario y o contraseña son incorrectos");
+         Error()
         }
       });
     }
@@ -90,20 +106,28 @@ export default function SignIn() {
     e.preventDefault()
     setPassword(e.target.value)
   }
+  const mostrarModalInsertar= (user)=> {
+
+    
+}
   function handleSignIn(e){
     e.preventDefault();
     const fetchData = async () => {
       await   dispatch(getUserSigningIn({
         email:email,
-        password:password,
-      },guestCart))
+        password:password
+      }))
       await setValidate(validate+1)
     }
   fetchData()
     
     
 }
-
+const IniciarCompra =(e)=>{
+  e.preventDefault()
+  Salir()
+  Navigate('/')
+} 
   return (<>
       <NavBar/>
     <Grid container component="main" className={classes.root}>
@@ -115,8 +139,13 @@ export default function SignIn() {
           </Avatar>
           
           <h5>Iniciar Sesion</h5>
-          
+          <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
           <form className={classes.form} noValidate>
+          
             <TextField
               variant="outlined"
               margin="normal"
@@ -147,12 +176,12 @@ export default function SignIn() {
               label="Remember me"
             />
             <Button
-              type="submit"
-              fullWidth
-              variant="contained"
+
+
               color="primary"
               className={classes.submit}
               onClick={(e) => handleSignIn(e)}
+    
             >
               Sign In
             </Button>
@@ -171,6 +200,38 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </form>
+          <Modal isOpen={modalInsertar} onRequestClose={()=>setStateModalInsectar(false)}>
+                <ModalHeader>
+                    <div><img className={classes.imagee} src={Logo}/></div>
+                </ModalHeader>
+                <form>
+                <ModalBody>
+                    <FormGroup>
+                        <p>
+                            {`Bienvenido a Latcom, ${user.name} ${user.lastname}`}
+                        </p>
+                        <p>
+                            {`Bienvenido a lo que queres`}
+                        </p>
+                        <p>
+                            {`Donde todos los dias eres bienvenido`}
+                        </p>
+                    </FormGroup>
+                </ModalBody>
+
+                <ModalFooter>
+            
+                    <Button
+                        color="danger"
+                        type="submit"
+                        onClick={IniciarCompra}
+                    >
+                        Iniciar mi compra
+                    </Button>
+          
+                </ModalFooter>
+                 </form>
+            </Modal>
         </div>
       </Grid>
     </Grid>

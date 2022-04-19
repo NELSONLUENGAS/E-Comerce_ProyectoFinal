@@ -13,9 +13,11 @@ import { useDispatch } from "react-redux";
 import NavBar from '../NavBar/NavBar'
 import { getMercadoPago, vaciarCarritoBack,getBasket,getUserSigningIn,getProducts,vaciarCarrito} from "../../actions/index.js";
 import "./CheckoutPage.css"
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function CheckoutPage() {
-    
+    const Vaciarr = () => toast.success(`Has vaciado tu carrito de compras`, {duration: 4000,})
+    const Inicie = () => toast.success(`Por Favor Inicie sesion`, {duration: 4000,})
     
     const cartProductsLocal = useSelector((state) => state.basket);
     const cartProducts = useSelector((state) => state.basketBack);
@@ -31,17 +33,15 @@ export default function CheckoutPage() {
     },[dispatch])
 
     function vaciarCarritoLocal(e){
-        let opcion = window.confirm("Esto vaciara tu carrito por completo, quieres continuar?")
-        if(opcion===true){
+  
+
             if(user.email){
             const fetchData = async () => {
+                Vaciarr()
                 await dispatch(vaciarCarritoBack(user.email))
                 await dispatch(getBasket(user.email))
-              }
+            } 
             fetchData()
-            } else{
-                dispatch(vaciarCarrito());
-            }
         }
     }
     const productsMercado = cartProducts.Products?.map((element) => {
@@ -71,7 +71,7 @@ export default function CheckoutPage() {
         dispatch(getMercadoPago(productsMercado));
         navigate('/Checkout/Payment')
         } else{
-            alert("Por Favor Inicie sesion")
+            Inicie()
             navigate('/SignIn')
         }
     }
@@ -97,6 +97,7 @@ export default function CheckoutPage() {
         <>
             <NavBar />
             <h1>Carrito</h1>
+            
             <div className="container-cart">
                 
 
@@ -140,6 +141,11 @@ export default function CheckoutPage() {
                     </div>
                     ):(<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>)
                     )}
+                    <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
             </div>
         </>
     );

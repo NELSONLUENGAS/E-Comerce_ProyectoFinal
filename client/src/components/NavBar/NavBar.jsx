@@ -17,9 +17,11 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
 import {getBasket,getCategoriesByName,getUserSigningIn} from '../../actions/index'
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function NavBar() {
     const dispatch= useDispatch()
+    const Cerrado = () => toast.success(`Latcom estara encantado de que vuelvas con nosotros, ${user.name} ${user.lastname}`, {duration: 6000,})
     const carrito = useSelector(state=>state.SumItemsBack)
     const ItemsAmount = useSelector(state=>state.ItemsAmount)
     const navigate = useNavigate()
@@ -131,7 +133,7 @@ export default function NavBar() {
     function handleLogout(){
         localStorage.removeItem('userData');    
         dispatch(logOut())
-        alert("Has cerrado sesion correctamente")
+        Cerrado()
         navigate("/SignIn")
     }
 
@@ -168,6 +170,11 @@ export default function NavBar() {
 
     return (<>
             <div className="container-global-navbar">
+            <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
                 <div className="div-container-1-navbar">
                                              
                         {expand.mobile ? (

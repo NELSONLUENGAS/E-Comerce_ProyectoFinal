@@ -19,6 +19,7 @@ import Input from "./inputEnvio";
 import NavBar from "../NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 
+
 const useStyles = makeStyles((theme) => ({
     main: {
         maxWidth: "800px",
@@ -82,7 +83,6 @@ const EnvioForm = () => {
 		setProvince(e.target.value)
 
 	}
-
     const onChangeTerminos = (e) => {
         cambiarTerminos(e.target.checked);
     };
