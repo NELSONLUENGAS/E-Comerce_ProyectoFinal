@@ -184,11 +184,7 @@ export default function Product({
                 
                
                 <div className="add-to-cart-product" onClick={AddToBasket}>
-                <Toaster 
-            position="top-center"
-            reverseOrder={false}
-
-            />
+        
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
