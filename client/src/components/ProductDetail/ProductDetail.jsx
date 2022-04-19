@@ -1,24 +1,17 @@
 /** @format */
 
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actions/index";
 import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { 
-    addToBasket,
-    getProductReview,
-    addBasketBack,
-    getBasket,
-    vaciarCarritoBack,
-    getUserSigningIn, 
-    postUserViews
-} from "../../actions/index";
+import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn, postUserViews} from "../../actions/index";
 import Review from "./Review";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
+import Logo from '../../svg/latcom1.png'
 import {
     Table,
     Button, 
@@ -31,7 +24,6 @@ import {
   } from "reactstrap";
   import { makeStyles } from "@material-ui/core/styles";
   import toast, { Toaster } from 'react-hot-toast';
-  import Logo from '../../svg/latcom1.png'
 
   const useStyles = makeStyles((theme) => ({
     image: {
@@ -39,8 +31,6 @@ import {
       height: "70px"
     },
   }));
-
-
 export default function ProductDetail() {
     const navigate=useNavigate();
     let [finalStock,setFinalStock] = useState([])
@@ -53,6 +43,10 @@ export default function ProductDetail() {
     const user = useSelector((state) => state.User);
     const productReview = useSelector((state) => state.productReview);
     const [productInFavorites,setProductInFavorites]=useState(false)
+    const [modalInsertar, setStateModalInsectar] = useState(false)
+    const classes = useStyles();
+    const Abrir = ()=>setStateModalInsectar(true)
+    const Cerrar = ()=>setStateModalInsectar(false)
     const [item, setItem] = useState({
         id: productDetail.id,
         name: productDetail.name,
@@ -62,7 +56,7 @@ export default function ProductDetail() {
         description: productDetail.description,
         stock:productDetail.stock
     });
-    //////---Views---//////
+  //////---Views---//////
     const location = useLocation()
     
     const pathname = location.pathname.split("/");
@@ -75,10 +69,26 @@ export default function ProductDetail() {
         }
     },[dispatch])
     //////---Views---//////
-    const classes = useStyles();
-    const [modalInsertar, setStateModalInsectar] = useState(false)
-    const Cerrar = ()=>setStateModalInsectar(false)
-    const Abrir = ()=>setStateModalInsectar(true)
+    function names(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "una"
+        }else{
+            return "un"
+        }
+    }
+    function DeleteCompra(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "la"
+        }else{
+            return "el"
+        }
+    }
     useEffect(() => {
         dispatch(getProductId(id));
         dispatch(getProductReview(id));
@@ -94,8 +104,9 @@ export default function ProductDetail() {
             const userData={productId:id}
             dispatch(addFavorite(user.email,userData))
             setProductInFavorites(true);
+            toast.success(`Has agregado ${productDetail.name} a favoritos`, {duration: 4000,})
         } else{
-            alert('Para agregar a favoritos por favor inicie sesion')
+            toast.error(`Por favor inicie sesion`, {duration: 4000,})
             navigate('/SignIn')
          }
     }
@@ -103,9 +114,12 @@ export default function ProductDetail() {
         e.preventDefault()
         dispatch(deleteFavorite(user.email,id))
         setProductInFavorites(false);
+        toast.error(`Has retirado del carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
     }
 
-   
+   const ComprarAhora = ()=>{
+       Abrir()
+   }
 
     useEffect(() => {
         
@@ -132,19 +146,20 @@ export default function ProductDetail() {
             const fetchData = async () => {
                 await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
                 await dispatch(getBasket(user.email));
+                toast.success(`Has añadido al carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
               }
             fetchData()
             
         } else{
             dispatch(addToBasket(item,quantity));
+            toast.success(`Has añadido al carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
             // alert("Por favor incia sesion")
             // navigate('/SignIn')
         }
     };
-    const AbrirComprarAhora = () =>{
-        Abrir()
-    }
+
     function ShopNow (e){
+        e.preventDefault()
         if(user.name){
                 const fetchData = async () => {
                     await dispatch(vaciarCarritoBack(user.email))
@@ -154,13 +169,10 @@ export default function ProductDetail() {
                 fetchData()
                 // dispatch(vaciarCarrito())
                 // dispatch(addToBasket(item,quantity));
-                Cerrar()
                 navigate('/checkout-page')
         }else{
-            dispatch(addToBasket(item,quantity));
-            navigate('/checkout-page')
-            // alert("Por favor incia sesion")
-            // navigate('/SignIn')
+                dispatch(vaciarCarrito());
+                dispatch(addToBasket(item,quantity));
         }
     }
 
@@ -208,10 +220,6 @@ export default function ProductDetail() {
                 const star = document.getElementById(`promedio${i}`);
                 star.style.color = "#3483fa";
             }
-            // let enteros = Math.floor(sumatotal/cantidad)
-            // let decimales = enteros-(sumatotal/cantidad)
-            // const star = document.getElementById(`promedio${decimales}`);
-            // star.style.color = "orange"
         
             for (let i = 1; i <= redondeo; i++) {
             const star = document.getElementById(`${productDetail.name}${i}`);
@@ -219,28 +227,19 @@ export default function ProductDetail() {
             }
         }
     },[productReview])
+
     useEffect(()=>{
         dispatch(getFavorites(user.email))
     },[user])
 
     useEffect(()=>{
         favorites.map((item)=>{
-            if (item.wishlist.ProductId=== id){
+            if (item.wishlist.ProductId=== productDetail.id){
                 setProductInFavorites(true)
             }
         })
     },[favorites])
 
-    function DeleteCompra(name){
-        var nombreextraido = name?.split(' ')[0];
-        var indice = nombreextraido?.length-1
-        var ultima = nombreextraido?.charAt(indice)
-        if(ultima==="a"){
-            return "la"
-        }else{
-            return "el"
-        }
-    }
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
@@ -256,25 +255,11 @@ export default function ProductDetail() {
             fetchData()
         }
     }, []);
-    useEffect(()=>{
-        for (let i=0;i++;i<favorites.length){
-            if(favorites.wishlist.ProductId === id){
-                setProductInFavorites(true);
-                alert('esta en favoritos')
-            }   
-            alert('entre en for') 
-        }
-        
-    },[favorites])
+    
     return (
         <>
             <NavBar/>
             <div style={{ marginTop: "5rem" }}>
-            <Toaster 
-            position="top-center"
-            reverseOrder={false}
-
-            />
                 <div className="container-product-detail">
                     <div className="container-div-important-info-product-detail">
                         <div className="img-product-detail">
@@ -433,11 +418,9 @@ export default function ProductDetail() {
                             </p>
 
                             <div className="button-buy-product-detail">
-                                <button onClick={AbrirComprarAhora}  className="button-primary-product-detail">
+                                <button  onClick={ComprarAhora} className="button-primary-product-detail">
                                     Comprar ahora
-
                                 </button>
-                            
                                 <button
                                     onClick={AddToBasket}
                                     className="button-secondary-product-detail"
@@ -539,8 +522,8 @@ export default function ProductDetail() {
                 <ModalBody>
                     <FormGroup>
                         <p>
-                          {`Estas seguro que quieres comprar este producto ahora, si tienes 
-                          algo en tu carrito, se vaciara, para solo colocar ${DeleteCompra(productDetail.name)} ${productDetail.name} `}
+                          {`Estas seguro que quieres comprar ${productDetail.name}, ahora?. Esto
+                          eliminara lo que tengas en el carrito definitivamente`}
                         </p>
                     </FormGroup>
                 </ModalBody>
@@ -549,9 +532,9 @@ export default function ProductDetail() {
                     <Button
                         color="danger"
                         type="submit"
-                        onClick={ShopNow}
+                        onClick={(e)=>ShopNow(e)}
                     >
-                        Agregar
+                        Comprar
                     </Button>
                     <Button
                         

@@ -40,14 +40,15 @@ export default function CheckoutCard({
     quantity,
     description,
 }) {
-    const Añadir = () => toast.success(`Has añadido a tu carrito ${names(name)}, ${name}`, {duration: 4000,})
-    const Sacar = () => toast.success(`Has sacado de tu carrito ${names(name)}: ${name}`, {duration: 4000,})
-    const Eliminar = () => toast.success(`Has eliminado de tu carrito ${DeleteCompra(name)}: ${name}`, {duration: 4000,})
+    const Añadir = () => toast.success(`Has añadido al carrito ${names(name)} ${name}`, {duration: 4000,})
+    const Sacar = () => toast.error(`Has retirado del carrito ${names(name)} ${name}`, {duration: 4000,})
+    const Eliminar = () => toast.error(`Has eliminado del carrito ${DeleteCompra(name)}: ${name}`, {duration: 4000,})
     const dispatch = useDispatch();
     const classes = useStyles();
     const [modalInsertar, setStateModalInsectar] = useState(false)
     const removeItems = (e) => {
-e.preventDefault()
+        e.preventDefault();
+        if(user.email){
            const fetchData = async () => {
                 const dataId={productId:id}
                 Eliminar()
@@ -56,6 +57,9 @@ e.preventDefault()
                 setStateModalInsectar(false)
             }
             fetchData()
+        } else if(!user.email){
+            dispatch(RemoveToBasket(id));
+        }
     };
     const [priceItem,setPriceItem] = useState(price*quantity)
     const [item] = useState({
@@ -112,6 +116,7 @@ e.preventDefault()
             setQuantityProduct(quantityProduct-Number(1))
             setPriceItem(price*(quantityProduct-Number(1)))
             } else{
+                Sacar()
                 dispatch(substractQuantityItem(item.id));
                 setQuantityProduct(quantityProduct-Number(1))
                 setPriceItem(price*(quantityProduct-Number(1)))}
@@ -134,6 +139,7 @@ e.preventDefault()
              setQuantityProduct(quantityProduct+Number(1))
              setPriceItem(price*(quantityProduct+Number(1)))
         }else {
+            Añadir()
           dispatch(addToBasket(item,1));
           setQuantityProduct(quantityProduct+Number(1))
           setPriceItem(price*(quantityProduct+Number(1)))
@@ -190,8 +196,7 @@ e.preventDefault()
                 <ModalBody>
                     <FormGroup>
                         <p>
-                          {`Estas seguro que quieres eliminar de tu carrito ${DeleteCompra(name)} ${name},
-                          si posee mas compras de este mismo producto se eliminara definitivamente`}
+                          {`Estas seguro que quieres eliminar del carrito todos los items de: ${name}?`}
                         </p>
                     </FormGroup>
                 </ModalBody>
@@ -200,7 +205,7 @@ e.preventDefault()
                     <Button
                         color="danger"
                         type="submit"
-                        onClick={removeItems}
+                        onClick={(e)=>removeItems(e)}
                     >
                         Eliminar
                     </Button>

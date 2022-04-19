@@ -78,16 +78,18 @@ export default function SignIn() {
   const [password,setPassword] = useState('');
   const [validate,setValidate] = useState(0);
   const user = useSelector((state) => state.User);
+  const guestCart = useSelector((state) => state.basket);
   const Error = () => toast.error("El email o la contraseña son incorrectos")
-  const IniciadoSecion = () => toast.success(`Ha iniciado sesion correctamente`)
  const Bienvenido = ()=>setStateModalInsectar(true)
  const Salir = ()=>setStateModalInsectar(false)
+
+
+
   useEffect(()=>{
     if(validate>0){
       setTimeout(()=>{
         console.log(user)      
         if (user.name){
-          IniciadoSecion()
           localStorage.setItem('userData', JSON.stringify(user)); 
           Bienvenido()         
         }else {
@@ -116,7 +118,7 @@ export default function SignIn() {
       await   dispatch(getUserSigningIn({
         email:email,
         password:password
-      }))
+      },guestCart))
       await setValidate(validate+1)
     }
   fetchData()
@@ -125,7 +127,6 @@ export default function SignIn() {
 }
 const IniciarCompra =(e)=>{
   e.preventDefault()
-  Salir()
   Navigate('/')
 } 
   return (<>
@@ -208,7 +209,7 @@ const IniciarCompra =(e)=>{
                 <ModalBody>
                     <FormGroup>
                         <p>
-                            {`Bienvenido a Latcom, ${user.name} ${user.lastname}`}
+                            {`Bienvenido a Latcom, ${user.name}`}
                         </p>
                         <p>
                             {`Bienvenido a lo que queres`}
@@ -222,11 +223,11 @@ const IniciarCompra =(e)=>{
                 <ModalFooter>
             
                     <Button
-                        color="danger"
+                        color="primary"
                         type="submit"
                         onClick={IniciarCompra}
                     >
-                        Iniciar mi compra
+                        Acceder
                     </Button>
           
                 </ModalFooter>
