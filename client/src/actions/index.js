@@ -428,6 +428,25 @@ export function getProductReviewByEmail(email,id){
     }
 }
 
+export function postUserViews(payload){
+    return async function(dispatch){
+        await axios.post(`http://localhost:3001/views`, payload)
+        return dispatch({
+            type: 'POST_VIEWS'
+        })
+    }
+}
+
+export function getUserViews(email){
+    return async function(dispatch){
+        const userViews = await axios.post('http://localhost:3001/views/user',email)
+        return dispatch({
+            type: 'GET_USER_VIEWS',
+            payload: userViews.data
+        })
+    }
+}
+
 
 
 
