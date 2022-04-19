@@ -1,0 +1,100 @@
+.container-favorites{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+}
+
+.container-title-favorites{
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30%;
+    height: 5rem;
+    margin-top: 2rem;
+}
+.container-favorites-detail{
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+    
+
+}
+
+.div-buscador-favorites{
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30%;
+    height: 2rem;
+}
+.input-buscador-favorites{appearance: none;
+    background-color: rgba(0,0,0,.04);
+    border: none;
+    border-radius: 16px;
+    font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+    font-size: 14px;
+    height: 32px;
+    line-height: 16px;
+    margin: 0;
+    padding: 8px 40px;
+    width: 100%;
+}
+@media (max-width: 700px){
+    .container-favorites{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90%;
+        margin: auto;
+    }
+    
+    .container-title-favorites{
+        display:flex;
+        flex-direction:row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 30%;
+        height: 5rem;
+        margin-top: 2rem;
+    }
+    .container-favorites-detail{
+        display:flex;
+        flex-direction:column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        margin-top: 2rem;
+        
+    
+    }
+    
+    .div-buscador-favorites{
+        display:flex;
+        flex-direction:row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 30%;
+        height: 2rem;
+    }
+    .input-buscador-favorites{appearance: none;
+        background-color: rgba(0,0,0,.04);
+        border: none;
+        border-radius: 16px;
+        font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+        font-size: 14px;
+        height: 32px;
+        line-height: 16px;
+        margin: 0;
+        padding: 8px 40px;
+        width: 100%;
+    }
+
+
+}

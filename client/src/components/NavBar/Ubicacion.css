@@ -1,0 +1,345 @@
+@media (min-width: 0px){
+    .locGrid{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: auto;
+    }
+    .locElement1{
+        grid-column: 1 / 13;
+        display: flex;
+        width: calc(100% - 2rem);
+        position: fixed;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background-color: aquamarine;
+        box-shadow: 
+        0px 5px 1px -1px rgb(0 0 0 / 20%), 
+        0px 1px 5px 5px rgb(0 0 0 / 14%), 
+        -3px 1px 3px 0px rgb(0 0 0 / 12%);
+    }
+    .locElement1 button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border-style: none;
+        color: #f50a0aec;
+    }
+    .locElement2{
+        grid-column: 1 / 13;
+        padding-top: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .locModalMobile0{
+        display: block;
+        padding: 1.5rem;
+    }
+    .locModalMobile0 h1{
+        display: flex;
+        font-size: 1.5rem;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .locModalMobile1{
+        display: none;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background-color: #a8dadc5d;
+        border-radius: 0.5rem;
+    }
+    .locModalMobile1 h3{
+        padding-bottom: 1rem;
+    }
+    .locModalMobile1 label {
+        display: flex;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        align-items: center;
+        gap: 1rem;
+    }
+    .locModalMobile1 label span{
+        padding-right: 1.5rem;
+        padding-bottom: 0.2rem;
+        border-bottom: solid #02304752;
+        border-width: 1.5px;
+    }
+    
+    .locModalMobile1 button {
+        border-style: none;
+        display: flex;
+        padding: 0.3rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 0.3rem;
+        cursor: pointer;
+    }
+    .locModalMobile1 button:hover{
+        transform: scale(0.95);
+        transition-duration: 0.3s;
+    }
+    .locModalMobile2{
+        position: relative;
+        display: block;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background-color: #02304765;
+        border-radius: 0.5rem;
+    }
+    .locModalMobile2 h3{
+        padding-bottom: 1rem;
+    }
+    .locModalMobile2 div:nth-of-type(1) button{
+        position: absolute;
+        right: 1rem;
+        border-style: none;
+        border-radius: 0.3rem;
+        padding: 0.2rem;
+        font-size: 0.7rem;
+        cursor: pointer;
+        background-color: #bccad3;
+        box-shadow: 
+        0px 2px 1px -1px rgb(0 0 0 / 20%), 
+        0px 1px 1px 0px rgb(0 0 0 / 14%), 
+        0px 1px 3px 0px rgb(0 0 0 / 12%);
+    }
+    .locModalMobile2 div:nth-of-type(1) button:hover{
+        transform: scale(1.1);
+    }
+    .locModalMobile2 div:nth-of-type(1) select{
+        border-style: none;
+        cursor: pointer;
+        margin-right: 1.5rem;
+        background-color: transparent;
+        padding: 0.3rem;
+    }
+    .locModalMobile2 div:nth-of-type(2) button{
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 700;
+        width: 100%;
+        padding: 0.3rem;
+        cursor: pointer;
+        border-style: none;
+        border-radius: 0.3rem;
+        color: #fff;
+        background-color: #21db218f;
+    }
+    .locModalMobile2 div:nth-of-type(2) button:hover{
+        transform: scale(0.98);
+    }
+    .locModalMobile3 {
+        display: flex;
+        justify-content: space-between;
+    }
+    .locModalMobile3 button{
+        background-color: #02304765;
+        border-style: none;
+        border-radius: 0.3rem;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0.2rem;
+    }
+    .locModalMobile3 button:hover{
+        transform: scale(1.1);
+    }
+    .locMenuMobile{
+        display: flex;
+        position: fixed;
+        padding: 1rem;
+        gap: 0.5rem;
+        font-size: 1rem;
+        right: 0rem;
+        top: 4rem;
+        border-radius: 0.3rem;
+        flex-direction: column;
+        background-color: #bccad3;
+        box-shadow: 
+        0px 2px 1px -1px rgb(0 0 0 / 20%), 
+        0px 1px 1px 0px rgb(0 0 0 / 14%), 
+        0px 1px 3px 0px rgb(0 0 0 / 12%);
+    }
+    .locMenuMobile::before{
+        content: '';
+        display: block;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #bccad3;
+        position: absolute;
+        right: 1.5rem;
+        top: -0.5rem;
+    }
+    .menuMobile span{
+        cursor: pointer;
+    }
+}
+@media (min-width: 450px){
+    .locGrid{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: auto;
+    }
+    .locElement1{
+        grid-column: 1 / 13;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background-color: aquamarine;
+        box-shadow: 
+        0px 5px 1px -1px rgb(0 0 0 / 20%), 
+        0px 1px 5px 5px rgb(0 0 0 / 14%), 
+        -3px 1px 3px 0px rgb(0 0 0 / 12%);
+    }
+    .locElement1 button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border-style: none;
+        color: #f50a0aec;
+    }
+    .locElement2{
+        grid-column: 1 / 13;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #457b9d;
+    }
+    .locModalMobile0{
+        background-color: #457b9d;
+        display: block;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        
+    }
+    .locModalMobile0 h1{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .locModalMobile1{
+        display: block;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background-color: #a8dadc5d;
+        border-radius: 0.5rem;
+    }
+    .locModalMobile1 h3{
+        padding-bottom: 1rem;
+    }
+    .locModalMobile1 label {
+        display: flex;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        align-items: center;
+        gap: 1rem;
+    }
+    .locModalMobile1 label span{
+        padding-right: 1.5rem;
+        padding-bottom: 0.2rem;
+        border-bottom: solid #02304752;
+        border-width: 1.5px;
+    }
+    
+    .locModalMobile1 button {
+        border-style: none;
+        display: flex;
+        padding: 0.3rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 0.3rem;
+        cursor: pointer;
+    }
+    .locModalMobile1 button:hover{
+        transform: scale(0.95);
+        transition-duration: 0.3s;
+    }
+    .locModalMobile2{
+        position: relative;
+        display: block;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background-color: #02304765;
+        border-radius: 0.5rem;
+    }
+    .locModalMobile2 h3{
+        padding-bottom: 1rem;
+    }
+    .locModalMobile2 div:nth-of-type(1) button{
+        position: absolute;
+        right: 1rem;
+        border-style: none;
+        border-radius: 0.3rem;
+        padding: 0.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: #bccad3;
+        box-shadow: 
+        0px 2px 1px -1px rgb(0 0 0 / 20%), 
+        0px 1px 1px 0px rgb(0 0 0 / 14%), 
+        0px 1px 3px 0px rgb(0 0 0 / 12%);
+    }
+    .locModalMobile2 div:nth-of-type(1) button:hover{
+        transform: scale(1.1);
+    }
+    .locModalMobile2 div:nth-of-type(1) select{
+        border-style: none;
+        cursor: pointer;
+        margin-right: 1.5rem;
+        background-color: transparent;padding: 0.3rem;
+    }
+    .locModalMobile2 div:nth-of-type(2) button{
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 700;
+        width: 100%;
+        padding: 0.3rem;
+        cursor: pointer;
+        border-style: none;
+        border-radius: 0.3rem;
+        color: #fff;
+        background-color: #21db218f;
+    }
+    .locModalMobile2 div:nth-of-type(2) button:hover{
+        transform: scale(0.98);
+    }
+    .locModalMobile3 {
+        display: flex;
+        justify-content: space-between;
+    }
+    .locModalMobile3 button{
+        background-color: #bccad3;
+        border-style: none;
+        border-radius: 0.3rem;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0.2rem;
+    }
+    .locModalMobile3 button:hover{
+        transform: scale(1.1);
+    }
+}
+@media (min-width: 900px){
+    .locGrid{
+        display: none;
+    }
+}

@@ -1,0 +1,87 @@
+.container-delivery-payment{
+    background-color: #fff;
+    text-align: left;
+    width: 50%;
+    margin: auto;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.button-mercadopago-payment{
+    color: #fff;
+    background-color: #3483fa;
+    border: transparent;
+    border-radius: 0.5rem;
+    height: 50px;
+    padding: 0.5rem;
+    width: 30%;
+}
+.div-buttons-payment{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    align-items: center;
+}
+.button-back-payment{
+    color:#3483fa;
+    background-color:rgba(65,137,230,.15) ;
+    border: transparent;
+    border-radius: 0.5em;
+    height: 50px;
+    padding: 0.5rem;
+    width: 10%;
+}
+.container-delivery-payment p{
+    font-size: 24px;
+
+}
+@media (max-width: 700px){
+    .container-delivery-payment{
+        background-color: #fff;
+        text-align: left;
+        width: 90%;
+        margin: auto;
+        border-radius: 1rem;
+        margin-top: 1rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    .container-delivery-payment p{
+        font-size: 18px;
+
+    }
+    .button-mercadopago-payment{
+        color: #fff;
+        background-color: #3483fa;
+        border: transparent;
+        border-radius: 0.5rem;
+        height: 60px;
+        padding: 0.5rem;
+        width: 100%;
+    }
+    .div-buttons-payment{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        width: 50%;
+        margin: auto;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .button-back-payment{
+        color:#3483fa;
+        background-color:rgba(65,137,230,.15) ;
+        border: transparent;
+        border-radius: 0.5em;
+        height: 60px;
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+
+}

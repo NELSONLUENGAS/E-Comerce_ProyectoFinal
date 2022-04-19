@@ -1,0 +1,134 @@
+.container-checkout-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    border-bottom: 1px solid;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2rem;
+
+}
+.description-checkout-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+
+}
+.div-container-2-checkout-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1.2rem;
+
+}
+.title-desktop-checkout-card{
+    display: flex;
+    width: 300px;
+}
+.title-mobile-checkout-card{
+    display: none;
+}
+.quantity-checkout-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border:3px solid #EBEBEB;
+    border-radius: 0.5rem;
+    justify-content: center;
+    text-align: center
+}
+.container-checkout-card img{
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+}
+.price-text-checkout-card{
+    font-size: 2rem;
+    width: 150px;
+}
+.quantity-text-checkout-card{
+    width: 40px;
+    font-size: 1.3rem;
+    align-items: center;
+    ;
+}
+.button-quantity-checkout-card{
+    height: 46px;
+    width: 40px;
+    color:blue;
+    background-color: #fff;
+    border: transparent;
+}
+
+@media (max-width: 1600px){
+    .container-checkout-card{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        border-bottom: 1px solid;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1rem;
+    
+    }
+    .title-checkout-card{
+        width: 200px;
+    }
+    .quantity-checkout-card{
+        display: flex;
+        flex-direction: row;
+        width: 30%;
+        align-items: center;
+        border:3px solid #EBEBEB;
+        border-radius: 0.5rem;
+        justify-content: center;
+        text-align: center
+    }
+    .container-checkout-card img{
+        height: 80px;
+        width: 80px;
+        object-fit: contain;
+    }
+    .price-text-checkout-card{
+        font-size:18px;
+        margin-right: 10px;
+        width: 70px;
+    }
+    .quantity-text-checkout-card{
+        width: 20px;
+        font-size: 15px;
+        align-items: center;
+        ;
+    }
+    .button-quantity-checkout-card{
+        height: 30px;
+        width: 30px;
+        color:blue;
+        background-color: #fff;
+        border: transparent;
+    }
+    .description-checkout-card{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .div-container-2-checkout-card{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
+    }
+    .title-desktop-checkout-card{
+        display: none;
+    }
+    .title-mobile-checkout-card{
+        display: flex;
+    }
+
+
+}

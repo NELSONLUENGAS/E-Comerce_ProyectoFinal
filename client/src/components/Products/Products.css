@@ -1,0 +1,222 @@
+.container-products{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap:100px;
+}
+.div-filter-products{
+  width: 15%;
+}
+.div-filter-categories-products{
+  background-color: #fff;
+  border-radius: 0.3em;
+  margin-top: 5rem;
+  padding: 0.5em;
+}
+.div-filter-today-products{
+  background-color: #fff;
+  border-radius: 0.3em;
+  margin-top: 1em;
+  padding: 1em;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}                                    
+.div-filter-price-products{
+  background-color: #fff;
+  border-radius: 0.3em;
+  margin-top: 1em;
+  padding: 0.5em;
+}
+.div-filter-price-products input{
+  margin-left: 5px;  
+  width: 95px;
+  font-size: 14px;
+  border-radius: 0.5em;
+  padding: 0.1em;
+  padding-left: 0.5em;
+  
+}
+.div-filter-price-products button{
+  margin-left: 5px;  
+  width: 50px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+.div-catalogue-products{
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap:1rem;
+  margin-top: 5rem;
+  position: relative;
+}
+.div-order-products{
+  position: absolute;
+  right: 10rem;
+  top:-3rem;
+  display: flex;
+  flex-direction: row;
+}
+.div-order-products select{
+  border: transparent;
+  margin-left: 1rem;
+  background-color:"#EBEBEB" ;
+  height: 25px;
+  width: 250px;
+}
+.div-margin-left{
+  width: 10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 20px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(12px);
+    -ms-transform: translateX(12px);
+    transform: translateX(12px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  @media (max-width: 700px){
+    .div-margin-left{
+      display: none;
+    }
+    .container-products{
+      margin:auto;
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap:100px;
+    }
+    .div-filter-products{
+      width: 15%;
+      display: none;
+    }
+    .div-filter-categories-products{
+      background-color: #fff;
+      border-radius: 0.3em;
+      margin-top: 5rem;
+      padding: 0.5em;
+    }
+    .div-filter-today-products{
+      background-color: #fff;
+      border-radius: 0.3em;
+      margin-top: 1em;
+      padding: 1em;
+      text-align: left;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }                                    
+    .div-filter-price-products{
+      background-color: #fff;
+      border-radius: 0.3em;
+      margin-top: 1em;
+      padding: 0.5em;
+    }
+    .div-filter-price-products input{
+      margin-left: 5px;  
+      width: 95px;
+      font-size: 14px;
+      border-radius: 0.5em;
+      padding: 0.1em;
+      padding-left: 0.5em;
+      
+    }
+    .div-filter-price-products button{
+      margin-left: 5px;  
+      width: 50px;
+      font-size: 12px;
+      border-radius: 5px;
+    }
+    .div-catalogue-products{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap:1rem;
+      margin-top: 5rem;
+      position: relative;
+    }
+    .div-order-products{
+      position:static;
+      display: flex;
+      flex-direction: row;
+    }
+    .div-order-products select{
+      border: transparent;
+      margin-left: 1rem;
+      background-color:"#EBEBEB" ;
+      height: 25px;
+    }
+
+  }

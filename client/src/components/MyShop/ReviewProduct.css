@@ -1,0 +1,75 @@
+.container-do-review{
+    height: 100%;
+    background-color: #fff;
+    margin:auto;
+    box-shadow: 0 6px 16px rgb(0 0 0 / 10%);
+    width: 615px;
+    height: 500px;
+    margin-top: 2rem;
+}
+.top-do-review{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 0.1rem solid grey;
+    height: 250px;
+}
+.top-do-review img{
+   border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    padding: 1rem;    object-fit: cover;
+    border: 1px solid rgba(0,0,0,.1);
+}
+.bottom-do-review{
+    margin-top: 2rem;
+    height: 300px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+    margin-left: 2rem;
+}
+.div-input-do-review input{
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    border-radius: 1rem;
+    height: 96px;
+    width: 70%;
+    border-radius: 0.3rem;
+    display: block;
+    
+}
+.send-button-do-review{
+    color:#fff;
+    background-color: #3483fa;
+    font-size: 14px;
+    height: 32px;
+    line-height: 16px;
+    width: 114px;
+    border: transparent;
+    border-radius: 0.3rem;
+
+}
+.stars-do-review{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-items: center;
+    height: 130px;
+    justify-content: center;
+}
+.stars-do-review button{
+    font-size: 3.5rem;
+    height: 7rem;
+    cursor:pointer;
+    color:gray;
+    border:transparent;
+    background-color: transparent;
+}
+.stars-do-review button:hover ~ button{
+    color: #3483fa;
+}
+.stars-do-review button:hover{
+  color: #3483fa;
+}
