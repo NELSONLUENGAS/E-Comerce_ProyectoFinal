@@ -11,8 +11,26 @@ import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaci
 import Review from "./Review";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
-import toast, { Toaster } from 'react-hot-toast';
+import Logo from '../../svg/latcom1.png'
+import {
+    Table,
+    Button, 
+    Container,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    FormGroup,
+    ModalFooter,
+  } from "reactstrap";
+  import { makeStyles } from "@material-ui/core/styles";
+  import toast, { Toaster } from 'react-hot-toast';
 
+  const useStyles = makeStyles((theme) => ({
+    image: {
+      with: "200px",
+      height: "70px"
+    },
+  }));
 export default function ProductDetail() {
     const navigate=useNavigate();
     let [finalStock,setFinalStock] = useState([])
@@ -25,6 +43,10 @@ export default function ProductDetail() {
     const user = useSelector((state) => state.User);
     const productReview = useSelector((state) => state.productReview);
     const [productInFavorites,setProductInFavorites]=useState(false)
+    const [modalInsertar, setStateModalInsectar] = useState(false)
+    const classes = useStyles();
+    const Abrir = ()=>setStateModalInsectar(true)
+    const Cerrar = ()=>setStateModalInsectar(false)
     const [item, setItem] = useState({
         id: productDetail.id,
         name: productDetail.name,
@@ -82,7 +104,9 @@ export default function ProductDetail() {
         toast.error(`Has retirado del carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
     }
 
-   
+   const ComprarAhora = ()=>{
+       Abrir()
+   }
 
     useEffect(() => {
         
@@ -120,10 +144,10 @@ export default function ProductDetail() {
             // navigate('/SignIn')
         }
     };
+
     function ShopNow (e){
+        e.preventDefault()
         if(user.name){
-            var opcion = window.confirm("Esto vaciara tu carrito y te llevara directamente a la compra del producto, quieres continuar? ")
-            if(opcion===true){
                 const fetchData = async () => {
                     await dispatch(vaciarCarritoBack(user.email))
                     await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
@@ -133,14 +157,9 @@ export default function ProductDetail() {
                 // dispatch(vaciarCarrito())
                 // dispatch(addToBasket(item,quantity));
                 navigate('/checkout-page')
-            }
         }else{
-            var opcion = window.confirm("Esto vaciara tu carrito y te llevara directamente a la compra del producto, quieres continuar? ")
-            if(opcion===true){
                 dispatch(vaciarCarrito());
                 dispatch(addToBasket(item,quantity));
-                navigate('/checkout-page')
-            }
         }
     }
 
@@ -386,7 +405,7 @@ export default function ProductDetail() {
                             </p>
 
                             <div className="button-buy-product-detail">
-                                <button  onClick={ShopNow} className="button-primary-product-detail">
+                                <button  onClick={ComprarAhora} className="button-primary-product-detail">
                                     Comprar ahora
                                 </button>
                                 <button
@@ -482,6 +501,38 @@ export default function ProductDetail() {
                     </div>
                    
                 </div>
+                <Modal isOpen={modalInsertar} onRequestClose={()=>setStateModalInsectar(false)}>
+                <ModalHeader>
+                    <div><img className={classes.image} src={Logo}/></div>
+                </ModalHeader>
+                <form>
+                <ModalBody>
+                    <FormGroup>
+                        <p>
+                          {`Estas seguro que quieres comprar ${productDetail.name}, ahora?. Esto
+                          eliminara lo que tengas en el carrito definitivamente`}
+                        </p>
+                    </FormGroup>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        type="submit"
+                        onClick={(e)=>ShopNow(e)}
+                    >
+                        Comprar
+                    </Button>
+                    <Button
+                        
+                        color="primary"
+                        onClick={() => setStateModalInsectar(false)}
+                    >
+                        Cancelar
+                    </Button>
+                </ModalFooter>
+                 </form>
+            </Modal>
             </div>
         </>
     );
