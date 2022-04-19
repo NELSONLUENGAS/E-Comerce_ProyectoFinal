@@ -11,6 +11,7 @@ import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaci
 import Review from "./Review";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function ProductDetail() {
     const navigate=useNavigate();
@@ -33,6 +34,26 @@ export default function ProductDetail() {
         description: productDetail.description,
         stock:productDetail.stock
     });
+    function names(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "una"
+        }else{
+            return "un"
+        }
+    }
+    function DeleteCompra(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "la"
+        }else{
+            return "el"
+        }
+    }
     useEffect(() => {
         dispatch(getProductId(id));
         dispatch(getProductReview(id));
@@ -48,8 +69,9 @@ export default function ProductDetail() {
             const userData={productId:id}
             dispatch(addFavorite(user.email,userData))
             setProductInFavorites(true);
+            toast.success(`Has agregado ${productDetail.name} a favoritos`, {duration: 4000,})
         } else{
-            alert('Para agregar a favoritos por favor inicie sesion')
+            toast.error(`Por favor inicie sesion`, {duration: 4000,})
             navigate('/SignIn')
          }
     }
@@ -57,6 +79,7 @@ export default function ProductDetail() {
         e.preventDefault()
         dispatch(deleteFavorite(user.email,id))
         setProductInFavorites(false);
+        toast.error(`Has retirado del carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
     }
 
    
@@ -86,11 +109,13 @@ export default function ProductDetail() {
             const fetchData = async () => {
                 await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
                 await dispatch(getBasket(user.email));
+                toast.success(`Has añadido al carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
               }
             fetchData()
             
         } else{
             dispatch(addToBasket(item,quantity));
+            toast.success(`Has añadido al carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
             // alert("Por favor incia sesion")
             // navigate('/SignIn')
         }
@@ -110,10 +135,12 @@ export default function ProductDetail() {
                 navigate('/checkout-page')
             }
         }else{
-            dispatch(addToBasket(item,quantity));
-            navigate('/checkout-page')
-            // alert("Por favor incia sesion")
-            // navigate('/SignIn')
+            var opcion = window.confirm("Esto vaciara tu carrito y te llevara directamente a la compra del producto, quieres continuar? ")
+            if(opcion===true){
+                dispatch(vaciarCarrito());
+                dispatch(addToBasket(item,quantity));
+                navigate('/checkout-page')
+            }
         }
     }
 
@@ -161,10 +188,6 @@ export default function ProductDetail() {
                 const star = document.getElementById(`promedio${i}`);
                 star.style.color = "#3483fa";
             }
-            // let enteros = Math.floor(sumatotal/cantidad)
-            // let decimales = enteros-(sumatotal/cantidad)
-            // const star = document.getElementById(`promedio${decimales}`);
-            // star.style.color = "orange"
         
             for (let i = 1; i <= redondeo; i++) {
             const star = document.getElementById(`${productDetail.name}${i}`);
@@ -172,17 +195,19 @@ export default function ProductDetail() {
             }
         }
     },[productReview])
+
     useEffect(()=>{
         dispatch(getFavorites(user.email))
     },[user])
 
     useEffect(()=>{
         favorites.map((item)=>{
-            if (item.wishlist.ProductId=== id){
+            if (item.wishlist.ProductId=== productDetail.id){
                 setProductInFavorites(true)
             }
         })
     },[favorites])
+
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
@@ -198,16 +223,7 @@ export default function ProductDetail() {
             fetchData()
         }
     }, []);
-    useEffect(()=>{
-        for (let i=0;i++;i<favorites.length){
-            if(favorites.wishlist.ProductId === id){
-                setProductInFavorites(true);
-                alert('esta en favoritos')
-            }   
-            alert('entre en for') 
-        }
-        
-    },[favorites])
+    
     return (
         <>
             <NavBar/>

@@ -51,10 +51,10 @@ export default function Product({
     description,
 }) {
     const InicieSecion = () => toast.error("Por favor incia sesion",{duration: 2000,})
-    const addToBaskett = () => toast.success(`Se a agregado ${item.name} al carrito`,{duration: 4000,});
-    const addToFavorite = () => toast.success(`Se a agregado ${item.name} a favoritos`,{duration: 4000,});
+    const addToBaskett = () => toast.success(`Has agregado ${item.name} al carrito`,{duration: 4000,});
+    const addToFavorite = () => toast.success(`Has agregado ${item.name} a favoritos`,{duration: 4000,});
     
-    const DeleteFavorite = () => toast.success(`has sacado ${item.name} de tus favoritos`, {duration: 4000,})
+    const DeleteFavorite = () => toast.error(`Has sacado ${item.name} de tus favoritos`, {duration: 4000,})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -107,8 +107,7 @@ export default function Product({
             console.log(id);
         } else {
             dispatch(addToBasket(item,1));
-            InicieSecion()
-            navigate('/SignIn')
+            addToBaskett()
             // dispatch(addToBasket(item,1));
         }
     };

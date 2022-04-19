@@ -17,7 +17,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function CheckoutPage() {
     const Vaciarr = () => toast.success(`Has vaciado tu carrito de compras`, {duration: 4000,})
-    const Inicie = () => toast.success(`Por Favor Inicie sesion`, {duration: 4000,})
+    const Inicie = () => toast(`Por Favor Inicie sesion`, {duration: 4000, position: 'bottom-center',})
     
     const cartProductsLocal = useSelector((state) => state.basket);
     const cartProducts = useSelector((state) => state.basketBack);
@@ -72,7 +72,10 @@ export default function CheckoutPage() {
         navigate('/Checkout/Payment')
         } else{
             Inicie()
-            navigate('/SignIn')
+            setTimeout(()=>{
+                navigate('/SignIn')
+            },1000)
+           
         }
     }
 
@@ -137,7 +140,7 @@ export default function CheckoutPage() {
                                 description={product.description}
                             />
                         ))}
-                        <Total buttonContinue={true} emptyCart={vaciarCarritoLocal}onPay={onPay}/>
+                        <Total buttonContinue={true} emptyCart={vaciarCarritoLocal} onPay={onPay}/>
                     </div>
                     ):(<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>)
                     )}

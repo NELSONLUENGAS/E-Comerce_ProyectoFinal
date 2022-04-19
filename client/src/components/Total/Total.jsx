@@ -51,12 +51,11 @@ const Total = ({onPay,buttonContinue,emptyCart}) => {
     useEffect(()=>{
         dispatch(SumItem())
     },[dispatch])
-    const mostrarModalInsertar= (e)=> {
-
-        setStateModalInsectar({
-          modalInsertar:true,
-      })  ;
-      }
+    function handleButtonDeleteCart(e){
+         setStateModalInsectar({
+            modalInsertar:true,
+        })
+    }
 
   return (
       <div className='containter-total'> 
@@ -64,11 +63,10 @@ const Total = ({onPay,buttonContinue,emptyCart}) => {
             {/* <h3>Total items: {TotalItem}</h3> */}
             <h3>Total a pagar:</h3>
             {user.email ? (<h3>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h3>):(<h3>{`$${Intl.NumberFormat("es-ES").format(TotalPriceLocal)}`}</h3>)}
-            <h3>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h3>
         </div>
         {buttonContinue ? (<div className="div-buttons-total">
-        <button onClick={(e) => emptyCart(e)} className="empty-cart-button-total">Vaciar carrito</button>
-            <button onClick={(e) => mostrarModalInsertar(e)} className="empty-cart-button-total">Vaciar carrito</button>
+        <button onClick={(e) => handleButtonDeleteCart(e)} className="empty-cart-button-total">Vaciar carrito</button> 
+            {/* <button onClick={(e) => mostrarModalInsertar(e)} className="empty-cart-button-total">Vaciar carrito</button> */}
             <button onClick={(e) => onPay(e)} className="continue-button-total" >Continuar compra</button>
             </div>
         ):null}
