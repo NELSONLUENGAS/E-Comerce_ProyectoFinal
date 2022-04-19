@@ -184,7 +184,7 @@ export default function Product({
                 
                
                 <div className="add-to-cart-product" onClick={AddToBasket}>
-    
+        
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
