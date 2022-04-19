@@ -11,17 +11,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import {logOut} from '../../actions/index'
 import Logo from '../../svg/latcom1.png'
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
-import {getBasket,getCategoriesByName,getUserSigningIn} from '../../actions/index'
+import {getBasket,getCategoriesByName,getUserSigningIn,vaciarCarrito,logOut} from '../../actions/index'
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function NavBar() {
     const dispatch= useDispatch()
-    const Cerrado = () => toast.success(`Latcom estara encantado de que vuelvas con nosotros, ${user.name} ${user.lastname}`, {duration: 6000,})
+    const Cerrado = () => toast.success(`${user.name} Latcom estara encantado de que vuelvas con nosotros!`, {duration: 5000,})
     const carrito = useSelector(state=>state.SumItemsBack)
     const ItemsAmount = useSelector(state=>state.ItemsAmount)
     const navigate = useNavigate()
@@ -133,6 +132,7 @@ export default function NavBar() {
     function handleLogout(){
         localStorage.removeItem('userData');    
         dispatch(logOut())
+        dispatch(vaciarCarrito())
         Cerrado()
         navigate("/SignIn")
     }

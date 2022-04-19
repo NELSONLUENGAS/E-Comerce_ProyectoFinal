@@ -113,13 +113,13 @@ export default function CheckoutCard({
               }
             fetchData()
               
-            setQuantityProduct(quantityProduct-1)
-            setPriceItem(price*(quantityProduct-1))
+            setQuantityProduct(quantityProduct-Number(1))
+            setPriceItem(price*(quantityProduct-Number(1)))
             } else{
                 Sacar()
                 dispatch(substractQuantityItem(item.id));
-                setQuantityProduct(quantityProduct-1)
-                setPriceItem(price*(quantityProduct-1))}
+                setQuantityProduct(quantityProduct-Number(1))
+                setPriceItem(price*(quantityProduct-Number(1)))}
             }
     }
     function addQuantity(){
