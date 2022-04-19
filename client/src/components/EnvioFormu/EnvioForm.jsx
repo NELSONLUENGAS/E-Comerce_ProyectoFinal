@@ -54,16 +54,11 @@ const EnvioForm = () => {
     };
     const provinces = [
         { province: "Buenos Aires",departamentos:['Adolfo Alsina','Adolfo Gonzalez Chaves','Alberti','Almirante Brown','Arrecifes','Avellaneda','Ayacucho','Azul','Bahia Blanca','Balcarce','Baradero','Benito Juarez','Berazategui','Berisso','Bolivar','Bragado','Brandsen','Campana','Cañuelas','Capitan Sarmiento','Carlos Casares',
-		'Carlos Tejedor','Carmen de Areco','Castelli','Chacabuco','Chascomus','Chivilcoy','Colon','Coronel de Marina Leonardo Rosales','Coronel Dorrego','Coronel Pringles','Coronel Suarez','Daireaux','Dolores','Ensenada','Escobar','Esteban Echeverria','Exaltacion de la Cruz','Ezeiza','Florencio Varela','Florentino Ameghino','General Alvarado',
-        'General Alvear','General Arenales','General Belgrano','General Guido','General Juan Madariaga','General La Madrid','General Las Heras','General Lavalle','General Paz','General Pinto','General Pueyrredon','General Rodriguez','General San Martin','General Viamonte',
-        'General Villegas','Guamini','Hipolito Yrigoyen','Hurlingham','Ituzaingo','Jose C. Paz','Junin','La Costa','La Matanza','La Plata','Lanus','Laprida','Las Flores','Leandro N. Alem',
-        'Lezama','Lincoln','Loberia','Lobos','Lomas de Zamora','Lujan','Magdalena','Maipu','Malvinas Argentinas','Mar Chiquita','Marcos Paz','Mercedes','Merlo','Monte',
-        'Monte Hermoso',' Moreno','Moron','Navarro','Necochea','Nueve de Julio','Olavarria','Patagones','Pehuajo','Pellegrini','Pergamino','Pila','Pilar',
-        'Pinamar','Presidente Peron','Puan','Punta Indio','Quilmes','Ramallo','Rauch','Rivadavia','Rojas','Roque Perez','Saavedra','Saladillo','Salliquelo','Salto','San Andres de Giles','San Antonio de Areco','San Cayetano','San Fernando','San Isidro','San Miguel','San Nicolas','San Pedro',' San Vicente',' Suipacha','Tandil','Tapalque','Tigre','Tordillo','Tornquist','Trenque Lauquen','Tres Arroyos','Tres de Febrero','Tres Lomas',' 25 de Mayo','Vicente Lopez','Villa Gesell','Villarino',' Zarate'] },
+		'Carlos Tejedor','Carmen de Areco','Castelli','Chacabuco','Chascomus','Chivilcoy','Colon','Coronel de Marina Leonardo Rosales','Coronel Dorrego','Coronel Pringles','Coronel Suarez','Daireaux','Dolores','Ensenada','Escobar','Esteban Echeverria','Exaltacion de la Cruz','Ezeiza','Florencio Varela','Florentino Ameghino'] },
         { province: "Catamarca",departamentos:['Ambato','Ancasti','Andalgala','Antofagasta de la Sierra','Belen','Capayán','Capital','El Alto','Fray Mamerto Esquiú','La Paz','Paclín','Pomán','Santa Maria','Santa Rosa','Tinogasta','Valle Viejo'] },
         { province: "Chaco",departamentos:{} },
         { province: "Chubut",departamentos:{} },
-        { province: "Cordoba",departamentos:[] },
+        { province: "Cordoba",departamentos:{} },
         { province: "Corrientes",departamentos:{} },
         { province: "Entre Rios",departamentos:{} },
         { province: "Formosa",departamentos:{} },

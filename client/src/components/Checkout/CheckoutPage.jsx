@@ -33,7 +33,7 @@ export default function CheckoutPage() {
     },[dispatch])
 
     function vaciarCarritoLocal(e){
-        e.preventDefault()
+  
 
             if(user.email){
             const fetchData = async () => {

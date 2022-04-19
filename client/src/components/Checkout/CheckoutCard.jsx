@@ -46,8 +46,8 @@ export default function CheckoutCard({
     const dispatch = useDispatch();
     const classes = useStyles();
     const [modalInsertar, setStateModalInsectar] = useState(false)
-    const removeItems = (e) => {
-e.preventDefault()
+    const removeItems = () => {
+        
            const fetchData = async () => {
                 const dataId={productId:id}
                 Eliminar()

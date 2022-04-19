@@ -67,7 +67,7 @@ const Total = ({onPay,buttonContinue,emptyCart}) => {
             <h3>{`$${Intl.NumberFormat("es-ES").format(TotalPrice)}`}</h3>
         </div>
         {buttonContinue ? (<div className="div-buttons-total">
-      
+        <button onClick={(e) => emptyCart(e)} className="empty-cart-button-total">Vaciar carrito</button>
             <button onClick={(e) => mostrarModalInsertar(e)} className="empty-cart-button-total">Vaciar carrito</button>
             <button onClick={(e) => onPay(e)} className="continue-button-total" >Continuar compra</button>
             </div>
