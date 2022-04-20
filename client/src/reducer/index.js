@@ -21,7 +21,6 @@ const initialState = {
         isLogin: true,
         role: 'admin'
     },
-    Views:[],
     orderAndFilter: {
         orderByPrice: "Relevant",
         filterByCategory: "Todas",

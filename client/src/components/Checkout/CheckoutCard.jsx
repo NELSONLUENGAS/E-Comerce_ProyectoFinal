@@ -154,6 +154,7 @@ export default function CheckoutCard({
             const fetchData = async () => {
                 await dispatch(putBasketBack({productId:id,amount:'Increment'},user.email));
                 await dispatch(getBasket(user.email));
+
                 Añadir()
             }
              fetchData()

@@ -49,7 +49,6 @@ const clientId = '413158522199-o91o6pf9hh3q9usmsdrhi7lq6io1cs44.apps.googleuserc
     }, [user])
   
     const updateUser = (currentUser) => {
-      console.log(currentUser)
       const name = currentUser.getBasicProfile().getName();
       const profileImg = currentUser.getBasicProfile().getImageUrl();
       setUser({
@@ -85,7 +84,6 @@ const clientId = '413158522199-o91o6pf9hh3q9usmsdrhi7lq6io1cs44.apps.googleuserc
         </div>
       );
     }
-    console.log(user)
   
     return (
       <div className="container">
