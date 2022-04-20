@@ -62,7 +62,9 @@ export default function ProductDetail() {
     const pathname = location.pathname.split("/");
     const reference = pathname[2];
     let inicioSesion = JSON.parse(localStorage.getItem("userData"));
-    
+    const ComprarAhora = ()=>{
+        Abrir()
+    }
     useEffect(()=>{
         if(inicioSesion){
             dispatch(postUserViews({reference: reference,UserEmail: inicioSesion.email}));
