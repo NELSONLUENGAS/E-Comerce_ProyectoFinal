@@ -68,7 +68,7 @@ export default function CheckoutPage() {
                 console.log('este es el cart')
                 console.log(cartProducts[i])
             }
-        dispatch(getMercadoPago(productsMercado));
+        dispatch(getMercadoPago({email: user.email, items: productsMercado}));
         navigate('/Checkout/Payment')
         } else{
             Inicie()
