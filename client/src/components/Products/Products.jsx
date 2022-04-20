@@ -197,7 +197,7 @@ export default function Products() {
                     await dispatch(
                         putOrderState(inicioSesion?.email, userData)
                     );
-                    const CompraCompletada = ()=>setStateModalInsectar(true)
+                    CompraCompletada()
                     //El llamado al back para cambiar el status de la orden y vaciar el carrito
                 }
             };
