@@ -1,40 +1,37 @@
 /** @format */
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actions/index";
 import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
+import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn, postUserViews} from "../../actions/index";
 import Review from "./Review";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
+import Logo from '../../svg/latcom1.png'
+import {
+    Table,
+    Button, 
+    Container,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    FormGroup,
+    ModalFooter,
+  } from "reactstrap";
+  import { makeStyles } from "@material-ui/core/styles";
+  import toast, { Toaster } from 'react-hot-toast';
 
+  const useStyles = makeStyles((theme) => ({
+    image: {
+      with: "200px",
+      height: "70px"
+    },
+  }));
 export default function ProductDetail() {
-    const productosdel = {
-        reviews: [
-            {
-                quantity: 3,
-                title: "Recomendable",
-                description:
-                    "Me encantó! trato de cuidarlo del agua y de limpiarle los pelos, así que hace un mes que lo vengo usando y es genial!.",
-            },
-            {
-                quantity: 4,
-                title: "Excelente",
-                description:
-                    "Muy bueno, lo recomiendo. Perdio un par de piquitos en 2 cepilladas pero mi esposa tiene el pelo dificil. Notó una diferencia positiva.",
-            },
-            {
-                quantity: 1,
-                title: "Malo",
-                description:
-                    "Siento que no me peina bien, me llevo mejor con el cepillo que compre en isadora, con eso digo todo.",
-            },
-        ],
-    };
     const navigate=useNavigate();
     let [finalStock,setFinalStock] = useState([])
     const [promedioReview, setPromedioReview] = useState(0);
@@ -46,6 +43,10 @@ export default function ProductDetail() {
     const user = useSelector((state) => state.User);
     const productReview = useSelector((state) => state.productReview);
     const [productInFavorites,setProductInFavorites]=useState(false)
+    const [modalInsertar, setStateModalInsectar] = useState(false)
+    const classes = useStyles();
+    const Abrir = ()=>setStateModalInsectar(true)
+    const Cerrar = ()=>setStateModalInsectar(false)
     const [item, setItem] = useState({
         id: productDetail.id,
         name: productDetail.name,
@@ -53,7 +54,41 @@ export default function ProductDetail() {
         price: productDetail.price,
         quantity: Number(1),
         description: productDetail.description,
+        stock:productDetail.stock
     });
+  //////---Views---//////
+    const location = useLocation()
+    
+    const pathname = location.pathname.split("/");
+    const reference = pathname[2];
+    let inicioSesion = JSON.parse(localStorage.getItem("userData"));
+    
+    useEffect(()=>{
+        if(inicioSesion){
+            dispatch(postUserViews({reference: reference,UserEmail: inicioSesion.email}));
+        }
+    },[dispatch])
+    //////---Views---//////
+    function names(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "una"
+        }else{
+            return "un"
+        }
+    }
+    function DeleteCompra(name){
+        var nombreextraido = name.split(' ')[0];
+        var indice = nombreextraido.length-1
+        var ultima = nombreextraido.charAt(indice)
+        if(ultima==="a"){
+            return "la"
+        }else{
+            return "el"
+        }
+    }
     useEffect(() => {
         dispatch(getProductId(id));
         dispatch(getProductReview(id));
@@ -69,8 +104,9 @@ export default function ProductDetail() {
             const userData={productId:id}
             dispatch(addFavorite(user.email,userData))
             setProductInFavorites(true);
+            toast.success(`Has agregado ${productDetail.name} a favoritos`, {duration: 4000,})
         } else{
-            alert('Para agregar a favoritos por favor inicie sesion')
+            toast.error(`Por favor inicie sesion`, {duration: 4000,})
             navigate('/SignIn')
          }
     }
@@ -78,9 +114,12 @@ export default function ProductDetail() {
         e.preventDefault()
         dispatch(deleteFavorite(user.email,id))
         setProductInFavorites(false);
+        toast.error(`Has retirado del carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
     }
 
-   
+   const ComprarAhora = ()=>{
+       Abrir()
+   }
 
     useEffect(() => {
         
@@ -97,6 +136,7 @@ export default function ProductDetail() {
             price: productDetail.price,
             quantity: Number(1),
             description: productDetail.description,
+            stock:productDetail.stock
         });
     }, [productDetail]);
 
@@ -106,18 +146,21 @@ export default function ProductDetail() {
             const fetchData = async () => {
                 await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
                 await dispatch(getBasket(user.email));
+                toast.success(`Has añadido al carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
               }
             fetchData()
             
         } else{
-            alert("Por favor incia sesion")
-            navigate('/SignIn')
+            dispatch(addToBasket(item,quantity));
+            toast.success(`Has añadido al carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
+            // alert("Por favor incia sesion")
+            // navigate('/SignIn')
         }
     };
+
     function ShopNow (e){
+        e.preventDefault()
         if(user.name){
-            var opcion = window.confirm("Esto vaciara tu carrito y te llevara directamente a la compra del producto, quieres continuar? ")
-            if(opcion===true){
                 const fetchData = async () => {
                     await dispatch(vaciarCarritoBack(user.email))
                     await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
@@ -127,10 +170,9 @@ export default function ProductDetail() {
                 // dispatch(vaciarCarrito())
                 // dispatch(addToBasket(item,quantity));
                 navigate('/checkout-page')
-            }
         }else{
-            alert("Por favor incia sesion")
-            navigate('/SignIn')
+                dispatch(vaciarCarrito());
+                dispatch(addToBasket(item,quantity));
         }
     }
 
@@ -178,10 +220,6 @@ export default function ProductDetail() {
                 const star = document.getElementById(`promedio${i}`);
                 star.style.color = "#3483fa";
             }
-            // let enteros = Math.floor(sumatotal/cantidad)
-            // let decimales = enteros-(sumatotal/cantidad)
-            // const star = document.getElementById(`promedio${decimales}`);
-            // star.style.color = "orange"
         
             for (let i = 1; i <= redondeo; i++) {
             const star = document.getElementById(`${productDetail.name}${i}`);
@@ -189,17 +227,19 @@ export default function ProductDetail() {
             }
         }
     },[productReview])
+
     useEffect(()=>{
         dispatch(getFavorites(user.email))
     },[user])
 
     useEffect(()=>{
         favorites.map((item)=>{
-            if (item.wishlist.ProductId=== id){
+            if (item.wishlist.ProductId=== productDetail.id){
                 setProductInFavorites(true)
             }
         })
     },[favorites])
+
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
@@ -215,16 +255,7 @@ export default function ProductDetail() {
             fetchData()
         }
     }, []);
-    useEffect(()=>{
-        for (let i=0;i++;i<favorites.length){
-            if(favorites.wishlist.ProductId === id){
-                setProductInFavorites(true);
-                alert('esta en favoritos')
-            }   
-            alert('entre en for') 
-        }
-        
-    },[favorites])
+    
     return (
         <>
             <NavBar/>
@@ -246,8 +277,8 @@ export default function ProductDetail() {
                             </div>
                         </div>
                         <div className="title-product-detail">
-                        {!productosdel.reviews.length ? null:(
-                        <>
+                        
+                        
                             <div className="title-with-favorite-product-detail">
                             Nuevo
                             {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>
@@ -278,7 +309,7 @@ export default function ProductDetail() {
                                 </label>
                             </div>
                             ):null}
-                            </>)}
+                            
 
                             <h2>
                                 $
@@ -367,6 +398,7 @@ export default function ProductDetail() {
                             >
                                 Tenés 30 días desde que lo recibís.
                             </p>
+                            {productDetail.stock>0 ? ( <>
                             <p>Stock Disponible</p>
                             <p>
                                 Cantidad:
@@ -386,7 +418,7 @@ export default function ProductDetail() {
                             </p>
 
                             <div className="button-buy-product-detail">
-                                <button  onClick={ShopNow} className="button-primary-product-detail">
+                                <button  onClick={ComprarAhora} className="button-primary-product-detail">
                                     Comprar ahora
                                 </button>
                                 <button
@@ -396,6 +428,7 @@ export default function ProductDetail() {
                                     Agregar al carrito
                                 </button>
                             </div>
+                            </>):(<p style={{color:"red"}}>No hay stock Disponible</p>)}
                             <svg
                                 className="ui-pdp-icon ui-pdp-icon--protected ui-pdp-color--GRAY"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -481,6 +514,38 @@ export default function ProductDetail() {
                     </div>
                    
                 </div>
+                <Modal isOpen={modalInsertar} onRequestClose={()=>setStateModalInsectar(false)}>
+                <ModalHeader>
+                    <div><img className={classes.image} src={Logo}/></div>
+                </ModalHeader>
+                <form>
+                <ModalBody>
+                    <FormGroup>
+                        <p>
+                          {`Estas seguro que quieres comprar ${productDetail.name}, ahora?. Esto
+                          eliminara lo que tengas en el carrito definitivamente`}
+                        </p>
+                    </FormGroup>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        type="submit"
+                        onClick={(e)=>ShopNow(e)}
+                    >
+                        Comprar
+                    </Button>
+                    <Button
+                        
+                        color="primary"
+                        onClick={() => setStateModalInsectar(false)}
+                    >
+                        Cancelar
+                    </Button>
+                </ModalFooter>
+                 </form>
+            </Modal>
             </div>
         </>
     );

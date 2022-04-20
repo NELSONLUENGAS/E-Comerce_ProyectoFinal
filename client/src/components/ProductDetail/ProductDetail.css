@@ -71,6 +71,8 @@ background-color: #fff;
 }
 .list-img-product-detail img{
     height: 50px;
+    width: 50px;
+    object-fit: contain;
     border: solid 2px ;
     border-radius: 0.5em;
 }

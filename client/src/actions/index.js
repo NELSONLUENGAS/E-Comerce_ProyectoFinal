@@ -34,6 +34,7 @@ export function getBasket(email){
         })
     }
 }
+
 export function getFavorites(email){
     return async function (dispatch){
         const products = await axios.get(`http://localhost:3001/users/${email}/wishlist`)
@@ -251,16 +252,22 @@ export function postProductos(payload) {
     }
 }
 
-export function getUserSigningIn(payload){
+export function getUserSigningIn(payload,guestCart){
     return async function (dispatch){
-        const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`);
-        return dispatch ({
-            type:"GET_USER_SIGNING_IN",
-            payload:json.data
-        })
+        console.log(guestCart)
+            const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`);
+            if(typeof json.data !=='string'){
+                await axios.post(`http://localhost:3001/guestCart/${payload.email}`,{guestCart:guestCart})
+            }
+            return dispatch ({
+                type:"GET_USER_SIGNING_IN",
+                payload:json.data
+            })
+            
     }
-    
 }
+
+
 export function logOut(payload){
     return{
         type:"LOG_OUT",
@@ -417,6 +424,25 @@ export function getProductReviewByEmail(email,id){
         return dispatch({
             type: 'GET_PRODUCT_REVIEW_BY_EMAIL',
             payload: productReview.data
+        })
+    }
+}
+
+export function postUserViews(payload){
+    return async function(dispatch){
+        await axios.post(`http://localhost:3001/views`, payload)
+        return dispatch({
+            type: 'POST_VIEWS'
+        })
+    }
+}
+
+export function getUserViews(email){
+    return async function(dispatch){
+        const userViews = await axios.post('http://localhost:3001/views/user',email)
+        return dispatch({
+            type: 'GET_USER_VIEWS',
+            payload: userViews.data
         })
     }
 }

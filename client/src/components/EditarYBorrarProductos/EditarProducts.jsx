@@ -5,6 +5,7 @@ import EditarProduct from "./EditarProduct";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, getSearch } from "../../actions";
 import SearchIcon from "../../svg/search.svg";
+import NavBar from '../NavBar/NavBar'
 //import Paginado from '../Paginado/Paginado';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,17 +66,18 @@ export default function Products() {
     console.log(Products);
   }
 
-  return (
+  return (<>
+    <NavBar/>
     <div className={classes.root}>
+        <h1>Editar y Eliminar Productos</h1>
       <div className={classes.paper}>
-        <h1>Hola</h1>
 
         <form
           onSubmit={(e) => handleSearch(e)}
           style={{
             display: "flex",
             backgroundColor: "#fff",
-            width: "80%",
+            width: "40%",
             justifyContent: "flex-end",
             alignItems: "center",
             flexDirection: "row",
@@ -131,5 +133,6 @@ export default function Products() {
         ))}
       </Grid>
     </div>
+    </>
   );
 }

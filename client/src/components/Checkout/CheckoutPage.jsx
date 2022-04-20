@@ -11,39 +11,17 @@ import Total from "../Total/Total";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import NavBar from '../NavBar/NavBar'
-import { getMercadoPago, vaciarCarritoBack,getBasket,getUserSigningIn } from "../../actions/index.js";
+import { getMercadoPago, vaciarCarritoBack,getBasket,getUserSigningIn,getProducts,vaciarCarrito} from "../../actions/index.js";
 import "./CheckoutPage.css"
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function CheckoutPage() {
+    const Vaciarr = () => toast.success(`Has vaciado tu carrito de compras`, {duration: 4000,})
+    const Inicie = () => toast(`Por Favor Inicie sesion`, {duration: 4000, position: 'bottom-center',})
     
-    const nuevas = [
-        {
-            "name": "Cepillo Alisador Babyliss Pro Eléctrico Nano Titanium",
-            "image": [
-                "https://http2.mlstatic.com/D_NQ_NP_658652-MCO43349304753_092020-O.webp"
-            ],
-            "Product_Line": {
-                "price": 148900,
-                "amount": 84,
-                "ProductId": "c13c6ccd-cf0c-4b74-9729-8d4739bf175e",
-                "OrderId": 1
-            }
-        },
-        {
-            "name": "Crema Aclarante Despigmentante Intimo Piel De Oro Grande",
-            "image": [
-                "https://http2.mlstatic.com/D_NQ_NP_630108-MCO43682659107_102020-O.webp"
-            ],
-            "Product_Line": {
-                "price": 49900,
-                "amount": 4,
-                "ProductId": "ab279fea-34f8-4bba-a1ac-0709353ae371",
-                "OrderId": 1
-            }
-        }
-    ]
-    // const cartProductsLocal = useSelector((state) => state.basket);
+    const cartProductsLocal = useSelector((state) => state.basket);
     const cartProducts = useSelector((state) => state.basketBack);
+    const allProducts = useSelector((state) => state.allProducts);
     const user = useSelector((state) => state.User);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -51,17 +29,19 @@ export default function CheckoutPage() {
 
     useEffect(()=>{
         dispatch(getBasket(user.email))
+        dispatch(getProducts())
     },[dispatch])
 
     function vaciarCarritoLocal(e){
-        let opcion = window.confirm("Esto vaciara tu carrito por completo, quieres continuar?")
-        if(opcion===true){
+  
+
+            if(user.email){
             const fetchData = async () => {
+                Vaciarr()
                 await dispatch(vaciarCarritoBack(user.email))
                 await dispatch(getBasket(user.email))
-              }
+            } 
             fetchData()
-            
         }
     }
     const productsMercado = cartProducts.Products?.map((element) => {
@@ -72,18 +52,35 @@ export default function CheckoutPage() {
         };
     });
     console.log("mercadopago basket");
-    console.log(productsMercado);
+    // console.log(productsMercado);
+    // console.log(cartProductsLocal);
+        console.log(cartProducts);
+        console.log(allProducts);
 
     function onPay(e){
         e.preventDefault();
         if(user.name){
-        dispatch(getMercadoPago(productsMercado));
+            for(let i=0;i++;i<cartProducts.length){
+                console.log(cartProducts[i])
+                if(cartProducts[i].Products.Product_Line.amount>cartProducts[i].Products.stock){
+                    alert(`El item ${cartProducts[i].name} no tiene stock suficiente para realizar la compra`)
+                }
+                console.log('este es el cart')
+                console.log(cartProducts[i])
+            }
+        dispatch(getMercadoPago({email: user.email, items: productsMercado}));
         navigate('/Checkout/Payment')
         } else{
-            alert("Por Favor Inicie sesion")
-            navigate('/SignIn')
+            Inicie()
+            setTimeout(()=>{
+                navigate('/SignIn')
+            },1000)
+           
         }
     }
+
+
+
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
@@ -103,11 +100,12 @@ export default function CheckoutPage() {
         <>
             <NavBar />
             <h1>Carrito</h1>
+            
             <div className="container-cart">
                 
 
-
-                {cartProducts.Products?.length && user.name ? (
+        {user.name ?(
+                cartProducts.Products?.length && user.name ? (
                     <div style={{width:"100%"}}>
                         {cartProducts.Products.map((element) => {
                             return(
@@ -120,16 +118,19 @@ export default function CheckoutPage() {
                                 price= {element.Product_Line.price}
                                 quantity={element.Product_Line.amount}
                                 description={element.description}
+                                stock={element.stock}
                             />)
                         })}
                         <Total buttonContinue={true} emptyCart={vaciarCarritoLocal}onPay={onPay}/>
                     </div>
                     ):<div style={{fontSize:"24px",margin:"auto",height:"300px",display:"flex",flexDirection:"row",justifyContent:"center",marginTop:"5rem"}}>El carrito se encuentra vacio</div>
-                }
-                 {/* (cartProductsLocal[0] ? (
+                
+                ):(
+                cartProductsLocal[0] ? (
                      <div>
                          {cartProductsLocal?.map((product) => (
                             <CheckoutCard
+                                buttonQuantity={true}
                                 key={product.id}
                                 id={product.id}
                                 name= {product.name}
@@ -139,11 +140,15 @@ export default function CheckoutPage() {
                                 description={product.description}
                             />
                         ))}
-                        <button onClick={vaciarCarritoLocal} style={{color:'white',backgroundColor:"red",border:"transparent",borderRadius: "0.5em",height: "50px",padding:"0.5rem"}}>Vaciar carrito</button>
-                        <Total onPay={onPay}/>
+                        <Total buttonContinue={true} emptyCart={vaciarCarritoLocal} onPay={onPay}/>
                     </div>
-                    ):<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>)
-                    :                 */}
+                    ):(<div style={{fontSize:"24px",height:"300px"}}>El carrito se encuentra vacio</div>)
+                    )}
+                    <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
             </div>
         </>
     );

@@ -20,6 +20,7 @@ const initialState = {
         isLogin: true,
         role: 'admin'
     },
+    Views:[],
     orderAndFilter: {
         orderByPrice: "Relevant",
         filterByCategory: "Todas",
@@ -51,6 +52,12 @@ export default function rootReducer(state = initialState, action) {
         case "PUT_PASSWORD": {
             return{
                 ...state,
+            }
+        }
+        case "GET_USER_VIEWS": {
+            return{
+                ...state,
+                Views: action.payload
             }
         }
         case 'FILTER_FREE_SHIPPING': {
@@ -116,7 +123,8 @@ export default function rootReducer(state = initialState, action) {
                     image: action.payload.image,
                     price: action.payload.price,
                     quantity: action.quantity,
-                    description: action.payload.description
+                    description: action.payload.description,
+                    stock:action.payload.stock
                 }
                 return {
                     ...state,

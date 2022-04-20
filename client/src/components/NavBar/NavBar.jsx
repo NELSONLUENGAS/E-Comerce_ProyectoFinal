@@ -11,16 +11,18 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import {logOut} from '../../actions/index'
 import Logo from '../../svg/latcom1.png'
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
-import {getBasket,getCategoriesByName,getUserSigningIn} from '../../actions/index'
+import {getBasket,getCategoriesByName,getUserSigningIn,vaciarCarrito,logOut} from '../../actions/index'
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function NavBar() {
     const dispatch= useDispatch()
+    const Cerrado = () => toast.success(`${user.name} Latcom estara encantado de que vuelvas con nosotros!`, {duration: 5000,})
     const carrito = useSelector(state=>state.SumItemsBack)
+    const ItemsAmount = useSelector(state=>state.ItemsAmount)
     const navigate = useNavigate()
     //////////////__States__///////////////////
     const [expand, setExpand] = useState({
@@ -130,7 +132,8 @@ export default function NavBar() {
     function handleLogout(){
         localStorage.removeItem('userData');    
         dispatch(logOut())
-        alert("Has cerrado sesion correctamente")
+        dispatch(vaciarCarrito())
+        Cerrado()
         navigate("/SignIn")
     }
 
@@ -167,6 +170,11 @@ export default function NavBar() {
 
     return (<>
             <div className="container-global-navbar">
+            <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
                 <div className="div-container-1-navbar">
                                              
                         {expand.mobile ? (
@@ -192,7 +200,7 @@ export default function NavBar() {
 
                                         </div>
                                         
-                                        <div style={{display:"flex",alignItems:"flex-start",flexDirection:"column",width:"100%",height:"80%",backgroundColor:"rgb(235, 235, 235)",justifyContent:"flex-start"}}>
+                                        <div style={{display:"flex",alignItems:"flex-start",flexDirection:"column",width:"100%",height:"80%",backgroundColor:"#C0C0C0",justifyContent:"flex-start"}}>
                                         
                                             <div style={{marginTop:"2rem",textAlign:"left"}}>
                                                 <Link to="/" style={{textDecoration:"none",color:"#000"}}><div className="sign-mobile-navbar"><h5>Inicio</h5></div></Link>
@@ -364,7 +372,7 @@ export default function NavBar() {
                                 <ShoppingCartIcon />
                             </Link>
                         </label>
-                        { carrito>0 && user.name ? <span>{carrito}</span>:null}
+                        { carrito>0 && user.email ? <span>{carrito}</span>: ItemsAmount>0 && !user.email ? <span>{ItemsAmount}</span>:null}
                         </div>
                     </div>    
                 </div>

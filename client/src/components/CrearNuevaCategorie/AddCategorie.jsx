@@ -6,6 +6,28 @@ import { getCategories } from "../../actions";
 import { useEffect } from "react";
 import { postCrearCategoria } from "../../actions";
 import './AddCategorie.css'
+import toast, { Toaster } from 'react-hot-toast';
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Table,
+  Button, 
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  ModalFooter,
+} from "reactstrap";
+import Logo from '../../svg/latcom1.png'
+import { height } from "@mui/system";
+
+const useStyles = makeStyles((theme) => ({
+  image: {
+    with: "200px",
+    height: "70px"
+  },
+}));
+
 const AddCategorie = () => {
 
   const categories = useSelector((state) => state.categories);
@@ -15,26 +37,57 @@ const AddCategorie = () => {
     name: "",
     description:""
   })
+  const classes = useStyles();
   const{name, description} = input
-
-  function handleDelete (e, id, name)  {
+const notify = () => toast.success(`Has creado una nueva categoria llamada, ${name} correctamente`);
+const notifyDelete = () => toast.success(`Se ha eliminado la categoria llamada, ${categoria} correctamente`);
+const VaciaDescription = () => toast.error("La descripcion esta vacia")
+const NombreVacios = () => toast.error("El nombre esta vacio")
+const CamposVacios = () => toast.error("Por Favor llena el formulario correctamente")
+const [modalInsertar, setStateModalInsectar] = useState(false)
+const [inputDelete, setState] = useState({
+  categoria: "",
+  idd: "",
+})
+const {categoria, idd}= inputDelete
+  function handleDelete (e)  {
     e.preventDefault()
-    var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+name)
-    if(opcion===true){
       const fetchData = async () => {
-      await dispatch(DeleteCategoria(id))
+      await dispatch(DeleteCategoria(idd))
       await dispatch(getCategories()); ;
+      notifyDelete()
+    
     }
     fetchData();
-    }
-    
+    setStateModalInsectar(false)
   };
+  const mostrarModalInsertar= (item)=> {
+    setState({
+      categoria: item.name,
+      idd: item.id
+    })
+    
+    setStateModalInsectar({
+      modalInsertar:true,
+  })  ;
+  }
   const HandleSubmit =()=>{
-    const fetchData = async () => {
+    if(name.length>1 && description.length<1){
+      VaciaDescription()
+    }else if(name.length<1 && description.length>1){
+      NombreVacios()
+    }else if(name.length<1 && description.length<1){
+      CamposVacios()
+    }else if(name.length>1 && description.length>1){
+      const fetchData = async () => {
       await dispatch(postCrearCategoria(input))
       await dispatch(getCategories()); ;
+     notify()
     }
-    fetchData();
+    fetchData()
+    }
+
+    ;
     
   }
   const handleChange = (e) => {
@@ -79,6 +132,11 @@ const AddCategorie = () => {
         <div className="mx-1 d-grid gap-2">
           <button style={{backgroundColor:"#3483fa",color:"white"}}onClick={HandleSubmit} className="btn btn-info mt-2" type="submit">
             Agregar
+            <Toaster 
+            position="top-center"
+            reverseOrder={false}
+
+            />
           </button>
         </div>
       </div>
@@ -105,18 +163,52 @@ const AddCategorie = () => {
               
                 <button
                 type="submit"
-                  onClick={(e) => handleDelete(e, item.id, item.name)}
+                  // onClick={(e) => handleDelete(e, item.id, item.name)}
                   className="button-delete"
+                  onClick={() => mostrarModalInsertar(item)}
                 >
                   Eliminar
                 </button>
               </td>
+         
             </tr>
           );
         })}
       </tbody>
     </table>
     </div>
+    <Modal isOpen={modalInsertar} onRequestClose={()=>setStateModalInsectar(false)}>
+                <ModalHeader>
+                    <div><img className={classes.image} src={Logo}/></div>
+                </ModalHeader>
+                <form>
+                <ModalBody>
+                    <FormGroup>
+                        <p>
+                            {`Estas seguro Que quieres elimianar 
+                            esta categoria ${categoria}, se borrara permanentemente`}
+                        </p>
+                    </FormGroup>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        type="submit"
+                        onClick={(e) => handleDelete(e)}
+                    >
+                        Eliminar
+                    </Button>
+                    <Button
+                        
+                        color="primary"
+                        onClick={() => setStateModalInsectar(false)}
+                    >
+                        Cancelar
+                    </Button>
+                </ModalFooter>
+                 </form>
+            </Modal>
     </div>
     </>
   );

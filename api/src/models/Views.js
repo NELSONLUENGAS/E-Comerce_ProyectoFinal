@@ -1,7 +1,10 @@
-const {DataTypes, UUID, UUIDV4} = require('sequelize');
+const {DataTypes} = require('sequelize');
 
-module.exports = sequelize => {
-    sequelize.define('Products', {
+module.exports = sequelize =>{
+    sequelize.define('Views', {
+        ref:{
+            type: DataTypes.INTEGER
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -20,6 +23,9 @@ module.exports = sequelize => {
         },
         description: {
             type: DataTypes.TEXT
+        },
+        UserEmail: {
+            type: DataTypes.STRING
         }
-    });
-};
+    })
+}

@@ -10,7 +10,7 @@ import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFa
 import { Link, useNavigate } from "react-router-dom";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Cart from "../../svg/shopping-cart.svg";
-import "./Product.css";
+import "./Card.css";
 import Corazonlleno from "../../svg/heart-full.svg";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -51,10 +51,10 @@ export default function Product({
     description,
 }) {
     const InicieSecion = () => toast.error("Por favor incia sesion",{duration: 2000,})
-    const addToBaskett = () => toast.success(`Has agregado ${item.name} al carrito`,{duration: 4000,});
-    const addToFavorite = () => toast.success(`Has agregado ${item.name} a favoritos`,{duration: 4000,});
+    const addTo = () => toast.success(`Se a agregado ${item.name} al carrito`,{duration: 3000,});
+    const addToFavorite = () => toast.success(`Se a agregado ${item.name} a favoritos`,{duration: 4000,});
     
-    const DeleteFavorite = () => toast.error(`Has sacado ${item.name} de tus favoritos`, {duration: 4000,})
+    const DeleteFavorite = () => toast.success(`has sacado ${item.name} de tus favoritos`, {duration: 4000,})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -96,18 +96,20 @@ export default function Product({
     const AddToBasket = () => {
         if (user.email) {
             const fetchData = async () => {
+                
                 await dispatch(
                     addBasketBack({ productId: id, amount: 1 }, user.email)
                 );
                 await dispatch(getBasket(user.email));
             };
             fetchData();
-
-            addToBaskett()
+            addTo()
+            
             console.log(id);
         } else {
             dispatch(addToBasket(item,1));
-            addToBaskett()
+            InicieSecion()
+            navigate('/SignIn')
             // dispatch(addToBasket(item,1));
         }
     };
@@ -184,7 +186,7 @@ export default function Product({
                 
                
                 <div className="add-to-cart-product" onClick={AddToBasket}>
-       
+             
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
