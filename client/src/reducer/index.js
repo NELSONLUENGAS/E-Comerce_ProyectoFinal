@@ -12,6 +12,7 @@ const initialState = {
     basketBack: [],
     productReviewByEmail:false,
     productReview:[],
+    Views:[],
     User: [],
     admins:[],
     favorites:[],
@@ -303,6 +304,12 @@ export default function rootReducer(state = initialState, action) {
                 ItemsAmount: 0,
                 SumPrice: [0],
 
+            }
+        case "GET_USER_VIEWS": {
+                return{
+                    ...state,
+                    Views: action.payload
+                }
             }
         case 'GET_BASKET':
 

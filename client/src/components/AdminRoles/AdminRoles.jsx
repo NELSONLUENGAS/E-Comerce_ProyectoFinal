@@ -80,21 +80,23 @@ const AddCategorie = () => {
   
 
           return (
-            <tr key={i}>
+          i=== 1 ? (<tr key={i}>
               <td>{item.email}</td>
               <td>{item.name} {item.lastname}</td>
               <td>
-              
-                {!item.email ===user.email ? (<button
+                
+                {item.email === user.email ? (null):(<button
                 type="submit"
                   onClick={(e) => handleDelete(e, item.email)}
                   className="button-delete"
                 >
                   Eliminar
-                </button>):null}
+                </button>)}
               </td>
             </tr>
-          );
+          
+            ):(null)
+          )
         })}
       </tbody>
     </table>

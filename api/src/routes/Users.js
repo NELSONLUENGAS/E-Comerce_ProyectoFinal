@@ -71,14 +71,13 @@ router.post('/guestCart/:email',async(req,res) =>{
 
 router.post('/createUser', async (req, res) => {
     const {email, password, name, lastname, birthday, dni, nationality,direction, phone,direccion} = req.body
-
     try {
         const user = {email, password, name, lastname, birthday, dni, nationality,principalDirection:direction, directions:direction, phone}
         await Users.create(user)
         await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart',name:name,lastname:lastname}})
         
-        await transporter.sendMail(welcome(email));
         res.send('The user has been created successfully')
+        await transporter.sendMail(welcome(email,name));
     } 
     catch(e) {
         res.status(500).send(`${e}`)

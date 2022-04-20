@@ -5,7 +5,8 @@ import './Ofertas.css'
 
 export default function Ofertas(){
     let productos = useSelector((state) => state.allProducts);
-    productos = productos.slice(33,36)
+    productos = [productos[22],productos[23],productos[25]]
+
     return(<>
     <div className="container-sale" >
             <h2>Ofertas</h2>
@@ -14,6 +15,7 @@ export default function Ofertas(){
                 { productos[0]? (
                         productos?.map((product) => (
                             <Product
+                                discount={product.price}
                                 name={product.name}
                                 image={product.image}
                                 price={product.price}

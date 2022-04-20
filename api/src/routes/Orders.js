@@ -199,21 +199,19 @@ router.put('/users/:email/changeStatusCart', async (req, res) => {
     })
 router.put('/users/:email/changeToComplete', async (req, res) => {
         const {email} = req.params, {orderId} = req.body
+        console.log(orderId);
         
         try {
             const cart = await Orders.findOne({
                 where: {UserEmail: email, status: 'In progress', id: orderId},
-                include: {model: Products}
-
-                })
-            
-    
+                include: {model: Products}})
                 if(cart){
+                    console.log(cart)
                     cart.status = 'Complete'
                     await cart.save()
                     
-                    await transporter.sendMail(orderComplete(email))
                     res.send('El status ha cambiado correctamente')
+                    await transporter.sendMail(orderComplete(email,cart))
                 } else res.status(404).send('Cart not found')
             }
             catch(e){
@@ -223,23 +221,23 @@ router.put('/users/:email/changeToComplete', async (req, res) => {
 })
 
 router.delete('/users/:email/cart', async (req, res) => {
-    const {productId} = req.body, {email} = req.params
-
+    const {productId} = req.query, {email} = req.params
     try {
         const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
-
-        const relation = await Product_Line.findOne({ProductId: productId, OrderId: cart.id})
-    
+        const relation = await Product_Line.findOne({where:{ProductId: Number(productId), OrderId: cart.id}})
+        
         if(relation) {
-            cart.total -= (relation.price * amount)
+            
+            cart.total -= (relation.price * relation.amount)
             await relation.destroy()
             await cart.save()
+            
             res.send('The product was removed from cart')
         }
         else res.send('Relation not found')
     }
     catch(e){
-        res.status(500).send(`${e}`)
+        res.status(500).send(e)
     }
 })
 

@@ -188,7 +188,7 @@ const orderMails = {
             </tr>
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;font-size:14px;line-height:21px">Total de la orden</td>
-            <td style="padding:0;Margin:0;font-size:14px;line-height:21px">${cart.total}</td>
+            <td style="padding:0;Margin:0;font-size:14px;line-height:21px">$${Intl.NumberFormat("es-ES").format(cart.total)}</td>
             </tr>
             </table><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><br></p></td>
             </tr>
@@ -203,7 +203,7 @@ const orderMails = {
             <td align="left" bgcolor="#ffffff" style="Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px"><h4 style="Margin:0;line-height:120%;mso-line-height-rule:exactly;font-family:'trebuchet ms', helvetica, sans-serif">DIRECCION ENVIO:</h4></td>
             </tr>
             <tr style="border-collapse:collapse">
-            <td align="left" bgcolor="#ffffff" style="padding:0;Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction}</p></td>
+            <td align="left" bgcolor="#ffffff" style="padding:0;Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction[0].direction}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction[0].city}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction[0].province}</p></td>
             </tr>
             </table></td>
             </tr>
@@ -293,7 +293,7 @@ const orderMails = {
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0">${product.name}</td>
             <td style="padding:0;Margin:0;width:60px;text-align:center">${product.Product_Line.amount}</td>
-            <td style="padding:0;Margin:0;width:100px;text-align:center">${product.price}</td>
+            <td style="padding:0;Margin:0;width:100px;text-align:center">$${Intl.NumberFormat("es-ES").format(product.price)}</td>
             </tr>
             </table><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><br></p></td>
             </tr>
@@ -351,7 +351,7 @@ const orderMails = {
             <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:500px" class="cke_show_border" cellspacing="1" cellpadding="1" border="0" align="right" role="presentation">
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">Subtotal:</td>
-            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">$${cart.total}</td>
+            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">$${Intl.NumberFormat("es-ES").format(cart.total)}</td>
             </tr>
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">PRECIO DE ENVIO:</td>
@@ -363,7 +363,7 @@ const orderMails = {
             </tr>
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px"><strong>TOTAL DE LA ORDEN:</strong></td>
-            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#3483fa"><strong>$${cart.total}</strong></td>
+            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#3483fa"><strong>$${Intl.NumberFormat("es-ES").format(cart.total)}</strong></td>
             </tr>
             </table><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><br></p></td>
             </tr>
@@ -434,7 +434,7 @@ const orderMails = {
                 `
         }
     },
-    orderComplete: (email) => {
+    orderComplete: (email, cart) => {
         return {
             from: "Latcom",
             to: email,
@@ -623,7 +623,7 @@ const orderMails = {
             </tr>
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;font-size:14px;line-height:21px">Total de la orden</td>
-            <td style="padding:0;Margin:0;font-size:14px;line-height:21px">${cart.total}</td>
+            <td style="padding:0;Margin:0;font-size:14px;line-height:21px">${Intl.NumberFormat("es-ES").format(cart.total)}</td>
             </tr>
             </table><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><br></p></td>
             </tr>
@@ -638,7 +638,7 @@ const orderMails = {
             <td align="left" bgcolor="#ffffff" style="Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px"><h4 style="Margin:0;line-height:120%;mso-line-height-rule:exactly;font-family:'trebuchet ms', helvetica, sans-serif">DIRECCION ENVIO:</h4></td>
             </tr>
             <tr style="border-collapse:collapse">
-            <td align="left" bgcolor="#ffffff" style="padding:0;Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction}</p></td>
+            <td align="left" bgcolor="#ffffff" style="padding:0;Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction[0].direction}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction[0].province}</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">${cart.direction[0].postalcode}</p></td>
             </tr>
             </table></td>
             </tr>
@@ -786,7 +786,7 @@ const orderMails = {
             <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:500px" class="cke_show_border" cellspacing="1" cellpadding="1" border="0" align="right" role="presentation">
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">Subtotal:</td>
-            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">$${cart.total}</td>
+            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">${Intl.NumberFormat("es-ES").format(cart.total)}</td>
             </tr>
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px">PRECIO DE ENVIO:</td>
@@ -798,7 +798,7 @@ const orderMails = {
             </tr>
             <tr style="border-collapse:collapse">
             <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px"><strong>TOTAL DE LA ORDEN:</strong></td>
-            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#3483fa"><strong>$${cart.total}</strong></td>
+            <td style="padding:0;Margin:0;text-align:right;font-size:18px;line-height:27px;color:#3483fa"><strong>$${Intl.NumberFormat("es-ES").format(cart.total)}</strong></td>
             </tr>
             </table><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><br></p></td>
             </tr>

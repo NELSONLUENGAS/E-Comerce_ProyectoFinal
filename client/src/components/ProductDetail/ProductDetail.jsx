@@ -7,7 +7,7 @@ import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actio
 import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn} from "../../actions/index";
+import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn, postUserViews} from "../../actions/index";
 import Review from "./Review";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
@@ -24,6 +24,7 @@ import {
   } from "reactstrap";
   import { makeStyles } from "@material-ui/core/styles";
   import toast, { Toaster } from 'react-hot-toast';
+  import { useLocation } from "react-router-dom";
 
   const useStyles = makeStyles((theme) => ({
     image: {
@@ -56,6 +57,20 @@ export default function ProductDetail() {
         description: productDetail.description,
         stock:productDetail.stock
     });
+    //////---Views---//////
+    const location = useLocation()
+
+    const pathname = location.pathname.split("/");
+    const reference = pathname[2];
+    let inicioSesion = JSON.parse(localStorage.getItem("userData"));
+
+    useEffect(()=>{
+        if(inicioSesion){
+            dispatch(postUserViews({reference: reference,UserEmail: inicioSesion.email}));
+        }
+    },[dispatch])
+    //////---Views---//////
+
     function names(name){
         var nombreextraido = name.split(' ')[0];
         var indice = nombreextraido.length-1

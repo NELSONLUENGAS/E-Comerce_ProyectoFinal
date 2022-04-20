@@ -1,5 +1,5 @@
 const userMails = {
-    welcome: (email) => {
+    welcome: (email,name) => {
         return {
             from: 'prueba1 ',
             to: email,

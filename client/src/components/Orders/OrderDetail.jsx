@@ -21,7 +21,9 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
     const dia = updatedAt.slice(8,10)
     const mes = updatedAt.slice(5,7)
     const año = updatedAt.slice(0,4)
-    const hora = updatedAt.slice(11,16)
+    const minutos = updatedAt.slice(13,16)
+    let hora = Number(updatedAt.slice(11,13))
+    hora=hora-3
     const dispatch = useDispatch()
 
     function handleClickHistory(e) {
@@ -43,7 +45,7 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
     return (
         <div className="container-finish-order">
             <div className="order-details-1" >
-                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>{dia}-{mes}-{año} a las {hora}</h6></div> 
+                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>{dia}-{mes}-{año} a las {hora}{minutos}</h6></div> 
                 
                 <div>
                 {status === 'Complete' ? (
@@ -71,7 +73,7 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
             </div>
             {order.history ? (<>
             <div className="order-details-2">
-                <h5>Total: $650.000</h5>
+                <h5>Total: ${Intl.NumberFormat("es-ES").format(total)}</h5>
                 <div style={{marginRight:"2rem"}}>
                 <h5 >Envio a: </h5>
                     

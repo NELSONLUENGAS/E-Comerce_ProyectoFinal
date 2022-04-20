@@ -56,13 +56,14 @@ export default function CheckoutCard({
 
     const Product = Products.filter(el => el.id ==id)
     console.log(Product.stock)
+
     const removeItems = (e) => {
         e.preventDefault();
         if(user.email){
            const fetchData = async () => {
-                const dataId={productId:id}
+                // const dataId={productId:id}
                 Eliminar()
-                await  dispatch(removeItemBasket(user.email,dataId)) 
+                await dispatch(removeItemBasket(user.email,id)) 
                 await dispatch(getBasket(user.email));
                 setStateModalInsectar(false)
             }

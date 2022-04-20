@@ -149,7 +149,7 @@ export function getProductId(id){
 }
 export function removeItemBasket(email,id){
     return async function (dispatch){
-        const products = await axios.delete(`http://localhost:3001/users/${email}/cart`,id);
+        const products = await axios.delete(`http://localhost:3001/users/${email}/cart?productId=`+id);
         return dispatch ({
             type:"DELETE_PRODUCT_FROM_ID",
             payload:products.data
@@ -418,6 +418,7 @@ export function changeStatusToComplete(email,orderId){
     return async function (dispatch) {
         console.log(orderId)
         const json = await axios.put(`http://localhost:3001/users/${email}/changeToComplete`,orderId);
+        console.log(json.data);
         return dispatch({
             type: "CHANGE_ORDER_TO_COMPLETE",
             payload: json.data

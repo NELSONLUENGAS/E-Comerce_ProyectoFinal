@@ -39,7 +39,7 @@
 
 .container-card-product:hover {
     transition: all 0.3s ease-out;
-    
+
     box-shadow: 0px 10px 10px -2px rgb(97, 94, 94);
 
 }
@@ -112,14 +112,10 @@
 }
 .price-product{
     font-size: 30px;
-    display: flex;
-    flex-direction: row;
-    gap:1rem;
-    align-items: center;
     margin-top: 1rem;
 }
 .name-product{
-    
+
     font-size: 15px;
     margin-top: 1rem;
 }
@@ -150,7 +146,7 @@
         justify-content: space-between;
         padding-top: 1em;
         padding-bottom: 1em;
-        
+
     }
     .div-img-heart-product{
         position: absolute;
@@ -172,7 +168,7 @@
         width: 100%;
         object-fit: contain;
         margin-top: 10px;
-    
+
     }
     .name-product{
          width: 230px;
@@ -188,7 +184,7 @@
         margin-left: 0.5rem;
         padding-left: 0.5em;
         padding-right: 0.5em;
-        
+
 
     }
     .cuotas-product{

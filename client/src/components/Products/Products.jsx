@@ -12,6 +12,7 @@ import { useState } from "react";
 import Paginado from "../Paginado/Paginado";
 import NavBarTwo from "../NavBar/NavBar";
 import { useSearchParams } from "react-router-dom";
+import Views from '../Views/Views'
 import {
     getProducts,
     getBasket,
@@ -24,7 +25,7 @@ import {
     filterByPrice,
     filterMoreSeller,
     filterToday,
-    orderByPrice,
+    orderByPrice,getUserViews,
 } from "../../actions/index";
 import Ofertas from "../Ofertas/Ofertas";
 import Carrousel from "../Carrousel/Carrousel";
@@ -33,7 +34,6 @@ import "./Products.css";
 import { useLocalStorage } from "../../useLocalStorage";
 import Advertising from "../Advertising/Advertising";
 import { putOrderState } from "../../actions/index";
-
 import {
     Table,
     Button, 
@@ -169,13 +169,10 @@ export default function Products() {
         dispatch(getProducts());
         dispatch(getCategories());
     }, [dispatch]);
-    console.log("sumbasketback");
-    console.log(sumBasketBack);
+    
     useEffect(() => {
         let inicioSesion = JSON.parse(localStorage.getItem("userData"));
         if (inicioSesion) {
-            console.log("sumbasketback");
-            console.log(sumBasketBack);
             const fetchData = async () => {
                 await dispatch(
                     getUserSigningIn({
@@ -183,17 +180,13 @@ export default function Products() {
                         password: inicioSesion.password,
                     })
                 );
-                await dispatch(getBasket(inicioSesion.email));
-                console.log("sumbasketback");
-                console.log(sumBasketBack);
+                dispatch(getUserViews({UserEmail: inicioSesion.email}));
                 if (queryParams.status === "approved") {
                     const userData = {
                         name: inicioSesion.name,
                         lastname: inicioSesion.lastname,
                         direction: inicioSesion.principalDirection,
-                        total: 40500,
                     };
-                    console.log(userData);
                     await dispatch(
                         putOrderState(inicioSesion?.email, userData)
                     );
@@ -203,7 +196,7 @@ export default function Products() {
             };
             fetchData();
         }
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         setCurrentProducts(
@@ -231,6 +224,7 @@ export default function Products() {
             <NavBarTwo />
             <Carrousel />
             <Ofertas />
+            <Views/>
             <Advertising
                 img={[
                     "https://http2.mlstatic.com/D_NQ_961158-MLA49576115480_042022-C.webp",

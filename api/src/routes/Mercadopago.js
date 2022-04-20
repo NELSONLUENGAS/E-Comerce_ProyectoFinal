@@ -26,11 +26,11 @@ router.post('/mercadoPago', async(req, res, next) => {
     const preference = {
         auto_return: "approved",
         external_reference: 'orderId',
-        items: req.body,//{items},
+        items: items,
         payer: {
             name: "user-name",
             surname: "user-surname",
-            email: "user@email.com",
+            email: email,
             date_created: "",
             phone: {
                 area_code: '11',

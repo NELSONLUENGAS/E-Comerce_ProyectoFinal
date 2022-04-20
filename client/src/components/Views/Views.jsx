@@ -12,7 +12,7 @@ export default function Views(){
     let inicioSesion = JSON.parse(localStorage.getItem("userData"));
     return(<>
     <div className="container-sale" >
-    { inicioSesion && productos.length > 2 ?  (<h2>Ultimos vistos</h2>):null}
+    { inicioSesion && productos.length>2 ? (<h2>Ultimos vistos</h2>):null}
         <div>
             <div className='container-products-sale'>
                 { inicioSesion? (

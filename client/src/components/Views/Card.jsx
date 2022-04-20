@@ -6,11 +6,11 @@
 import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFavorite, ControladorDeStock} from "../../actions";
+import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFavorite} from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Cart from "../../svg/shopping-cart.svg";
-import "./Product.css";
+import "./Card.css";
 import Corazonlleno from "../../svg/heart-full.svg";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -49,15 +49,12 @@ export default function Product({
     price,
     rating,
     description,
-    discount
 }) {
-
     const InicieSecion = () => toast.error("Por favor incia sesion",{duration: 2000,})
-    const addToBaskett = () => toast.success(`Has agregado ${item.name} al carrito`,{duration: 4000,});
-    const addToFavorite = () => toast.success(`Has agregado ${item.name} a favoritos`,{duration: 4000,});
-   
-    const DeleteFavorite = () => toast.error(`Has sacado ${item.name} de tus favoritos`, {duration: 4000,})
-    const NoHay = () => toast.error(`Has alcanzado el limite de stock`, {duration: 4000,})
+    const addTo = () => toast.success(`Se a agregado ${item.name} al carrito`,{duration: 3000,});
+    const addToFavorite = () => toast.success(`Se a agregado ${item.name} a favoritos`,{duration: 4000,});
+
+    const DeleteFavorite = () => toast.success(`has sacado ${item.name} de tus favoritos`, {duration: 4000,})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -70,12 +67,6 @@ export default function Product({
         quantity: Number(1),
         description: description,
     });
-  
- 
-    // const Cantidad = BackBasket.filter(el => el.id ==id)
-
-    const [contador, setStateContador] = useState(1)
- 
     function addfavorite(e){
         e.preventDefault()
         if(user.email){
@@ -88,7 +79,6 @@ export default function Product({
                navigate('/SignIn')
         }
     }
-
     function deletefavorite(e){
         e.preventDefault()
         dispatch(deleteFavorite(user.email,id))
@@ -102,38 +92,28 @@ export default function Product({
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const AddToBasket = (e) => {
-     e.preventDefault()
-        if (user.email) {
-            if(contador>stock){
-                NoHay()
-            } else if(contador<=stock){
-                setStateContador(contador+1)
 
+    const AddToBasket = () => {
+        if (user.email) {
             const fetchData = async () => {
+
                 await dispatch(
                     addBasketBack({ productId: id, amount: 1 }, user.email)
                 );
                 await dispatch(getBasket(user.email));
             };
             fetchData();
+            addTo()
 
-            addToBaskett()
             console.log(id);
-            }
-            
-            
-        } else if(contador<=stock){
-
-                setStateContador(contador+1)
-                 dispatch(addToBasket(item,1));
-            addToBaskett()
+        } else {
+            dispatch(addToBasket(item,1));
+            InicieSecion()
+            navigate('/SignIn')
             // dispatch(addToBasket(item,1));
-            }else{
-                NoHay()
-            }
+        }
     };
-    
+
     useEffect(()=>{
         if(user.email){
             dispatch(getFavorites(user.email))
@@ -149,10 +129,10 @@ export default function Product({
     },[favorites])
 
     return (<>
-        
-        
+
+
         <div className="container-card-product">
-       
+
                 <div className="div-img-heart-product">
                 {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>)}
                 </div>
@@ -179,19 +159,9 @@ export default function Product({
                         </button>
                     ) : null}
                     <div style={{ marginLeft: "1rem" }}>
-
-                        {discount? (<div style={{display:"flex",flexDirection:'row',height:"35px"}}><p className="price-product" style={{fontSize:"22px",color:"grey",textDecoration:"line-through"}}>
-                            $ {Intl.NumberFormat("es-ES").format(price*1.25)}
-                        </p>
-                        
-                        </div>):null}
-                        
-
                         <p className="price-product">
                             $ {Intl.NumberFormat("es-ES").format(price)}
-                            {discount? <button className="button-fast-delivery-product" > 20% off</button>:null}
                         </p>
-                        
                         <p className="cuotas-product">
                             Hasta 12 cuotas sin interes
                         </p>
@@ -205,18 +175,18 @@ export default function Product({
                             </p>
                         )}
                     </div>
-                    
-                   
+
+
                     <div className="div-name-product">
                         <p className="name-product">{name}</p>
                     </div>
-                    
+
                 </div>
                 </Link>
-                
-               
+
+
                 <div className="add-to-cart-product" onClick={AddToBasket}>
-       
+
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
@@ -224,7 +194,7 @@ export default function Product({
                     />
             </div>
         </div>
-        
+
         </>
     );
 }

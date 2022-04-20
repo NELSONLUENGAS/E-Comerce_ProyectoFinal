@@ -1,4 +1,4 @@
-const {Products, Categories} = require('../db')
+const {Products,Users, Categories} = require('../db')
 
 const belleza =  [[ 
       {
@@ -751,7 +751,7 @@ const camping =  [[
           "- Resistencia: 35+ MPH / 56+ KPH - Columnas de Agua: 2.000 mm a 2.500 mm. Armado en 8 minutos. - Maleta para trasportar. - Caben 4 tapetes y 4 Colchones. - Material varillas: Fibra de vidrio. - Sistema impermeable. - Sistema weather Tec TM a prueba de cualquier clima. - Toldo extra grande para una mayor resistencia al frió. - Piso tipo tina para evitar filtraciones. - Las ventanas laterales se pueden abrir y cerrar dependiendo del clima. - Peso: 5.1 kg. - Medidas aproximadas: 2.40mts x 2.00mts. Altura: 1.4mts.",
       },
       {
-        name: "Combo Carpa 4 Personas Klimber+colchon+almohadas+inflador+..",
+        name: "Combo Carpa 4 Personas Klimber+colchon +almohadas+inflador+",
         image:
           ["https://http2.mlstatic.com/D_NQ_NP_903618-MCO49326131937_032022-V.webp"],
         price: 199927,
@@ -1098,17 +1098,32 @@ const mascotas =  [[
           "Este juguete ayudará a tu perro a hacer ejercicio con más diversión. Tu mascota se emocionará por perseguir, morder, y no querer soltar este estupendo juguete. Tu peludo sentirá que no es solo un peluche silencioso y estará feliz de perseguirle por todos los rincones de tu casa. Este juguete interactivo llama la atención de tu mascota ya que vibra y hace un sonido de perro que gruñe durante 12 segundos cuando se enciende y se activará de nuevo agitando o tocando poderosamente. La bonita funda de felpa se puede lavar para un tiempo de uso más largo y reducir el riesgo de enfermo del perro cuando se ensucia (recuerde retirar primero la pelota y lavar solo la cubierta).",
       }], "MASCOTAS"
 ]
+adminUser={
+    email: "latcom@gmail.com", 
+    password: "Latcom", 
+    name: "Latcom", 
+    lastname: "Company", 
+    birthday: "21/04/2022", 
+    dni: "213123312", 
+    nationality: "Argentina", 
+    principalDirection: [{"direction":"Mitre 250","postalcode":"2102","city":"CABA","province":"Buenos Aires"}], 
+    directions: [{"direction":"Mitre 250","postalcode":"2102","city":"CABA","province":"Buenos Aires"}], 
+    phone: "111923819",
+    isAdmin:true
+  }
 
 async function preloadProducts() {
   const array = [[...belleza], [...camping], [...deportes], [...electrodomesticos], [...mascotas], [...muebles]]
-
-  await array.forEach(async (list) => {
-    const newCategory = await Categories.create({name: list[1], description: 'algo'})
-    list[0].forEach(async (product) => {
-      const newProduct = await Products.create(product)
-      newProduct.addCategories(newCategory)
+  if(await Products.count()===0){
+    await array.forEach(async (list) => {
+      const newCategory = await Categories.create({name: list[1], description: 'algo'})
+      list[0].forEach(async (product) => {
+        const newProduct = await Products.create(product)
+        newProduct.addCategories(newCategory)
+      })
     })
-  })
+    await Users.create(adminUser)
+  } 
 }
 
 module.exports = preloadProducts
