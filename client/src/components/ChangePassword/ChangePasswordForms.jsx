@@ -85,7 +85,6 @@ const ChangePasswordForms= () => {
 			}
 			
 			dispatch(putPassword(input, user.email))
-			localStorage.removeItem('userData');    
 			cambiarFormularioValido(true);
 			Registrado()
 			Navigate('/SignIn')

@@ -6,7 +6,7 @@
 import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFavorite, ControladorDeStock} from "../../actions";
+import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFavorite} from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Cart from "../../svg/shopping-cart.svg";
@@ -74,7 +74,7 @@ export default function Product({
     // const Cantidad = BackBasket.filter(el => el.id ==id)
 
     const [contador, setStateContador] = useState(1)
- 
+    const [contadorViejo, setStateContadorr] = useState(1)
     function addfavorite(e){
         e.preventDefault()
         if(user.email){

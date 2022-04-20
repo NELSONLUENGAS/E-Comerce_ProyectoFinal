@@ -43,7 +43,7 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
     return (
         <div className="container-finish-order">
             <div className="order-details-1" >
-                <div className="dia-hora-order-details"><h6>#{id}</h6><h6>{dia}-{mes}-{año} a las {hora}</h6></div> 
+                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>{dia}-{mes}-{año} a las {hora}</h6></div> 
                 
                 <div>
                 {status === 'Complete' ? (
@@ -52,7 +52,7 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                 }
                 </div>
                 
-                <div className="name-email-arrow-order-details">
+                <div style={{display:"flex",gap:"2rem"}}>
                     <div className="name-email-order-details">
                         <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{name} {lastname}</h6>
                         <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{UserEmail}</h6>
@@ -75,10 +75,10 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                 <div style={{marginRight:"2rem"}}>
                 <h5 >Envio a: </h5>
                     
-                    {/* <h6>{direction[0]?.direction},
+                    <h6>{direction[0]?.direction},
                 {direction[0]?.city},
                 {direction[0]?.province},
-                {direction[0]?.postalcode}  </h6> */}
+                {direction[0]?.postalcode}  </h6>
                 
                 
                 </div>
@@ -92,11 +92,9 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                                     return (
                                     <div key={product.id} className="product-order">
                                         <div className="div-img-product-order"><img src={product.image} alt="hola"></img></div>
-                                        <div className="div-product-info-order">
-                                            <h6>{product.name}</h6> 
-                                            <div>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
-                                            <div>{product.Product_Line.amount } u.</div>
-                                        </div>
+                                        <h6>{product.name}</h6> 
+                                        <div>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
+                                        <div>{product.Product_Line.amount } u.</div>
                                     </div>
                                     );
                                     })

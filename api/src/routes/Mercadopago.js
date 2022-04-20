@@ -23,15 +23,14 @@ router.post('/mercadoPago', async(req, res, next) => {
     //   currency_id: 'COP',
     //   unit_price: 100
     // }
-    const{ items, email} = req.body;
     const preference = {
         auto_return: "approved",
         external_reference: 'orderId',
-        items: items,
+        items: req.body,//{items},
         payer: {
             name: "user-name",
             surname: "user-surname",
-            email: email,
+            email: "user@email.com",
             date_created: "",
             phone: {
                 area_code: '11',

@@ -25,7 +25,6 @@ import {
     filterMoreSeller,
     filterToday,
     orderByPrice,
-    getUserViews,
 } from "../../actions/index";
 import Ofertas from "../Ofertas/Ofertas";
 import Carrousel from "../Carrousel/Carrousel";
@@ -34,7 +33,6 @@ import "./Products.css";
 import { useLocalStorage } from "../../useLocalStorage";
 import Advertising from "../Advertising/Advertising";
 import { putOrderState } from "../../actions/index";
-import Views from '../Views/Views';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -133,7 +131,6 @@ export default function Products() {
     useEffect(() => {
         let inicioSesion = JSON.parse(localStorage.getItem("userData"));
         if (inicioSesion) {
-            dispatch(getUserViews({UserEmail: inicioSesion.email}));
             console.log("sumbasketback");
             console.log(sumBasketBack);
             const fetchData = async () => {
@@ -163,7 +160,7 @@ export default function Products() {
             };
             fetchData();
         }
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         setCurrentProducts(
@@ -185,8 +182,7 @@ export default function Products() {
         <div style={{ backgroundColor: "#EBEBEB" }}>
             <NavBarTwo />
             <Carrousel />
-            {/* <Ofertas /> */}
-            <Views/>
+            <Ofertas />
             <Advertising
                 img={[
                     "https://http2.mlstatic.com/D_NQ_961158-MLA49576115480_042022-C.webp",

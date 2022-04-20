@@ -18,7 +18,7 @@
    border-radius: 50%;
     height: 200px;
     width: 200px;
-    padding: 1rem;    object-fit: contain;
+    padding: 1rem;    object-fit: cover;
     border: 1px solid rgba(0,0,0,.1);
 }
 .bottom-do-review{
@@ -72,109 +72,4 @@
 }
 .stars-do-review button:hover{
   color: #3483fa;
-}
-.mid-do-review{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-left: 2rem;
-    padding-top: 1rem;
-}
-
-@media (max-width: 700px){
-    .container-do-review{
-        height: 100%;
-        background-color: #fff;
-        margin:auto;
-        box-shadow: 0 6px 16px rgb(0 0 0 / 10%);
-        width: 90%;
-        height: 500px;
-        margin-top: 2rem;
-    }
-    .top-do-review{
-        display: flex;
-        margin-top: 2rem;
-        flex-direction: column-reverse;
-        justify-content: space-around;
-        border-bottom: 0.1rem solid grey;
-        height: auto;
-        width: 90%;
-        margin: auto;
-    }
-    .top-do-review img{
-       border-radius: 50%;
-        height: 200px;
-        width: 200px;
-        padding: 1rem;    object-fit: contain;
-        border: 1px solid rgba(0,0,0,.1);
-    }
-    .bottom-do-review{
-        padding-top: 2rem;
-        padding-left: 1rem;
-        height: auto;
-        padding-bottom: 2rem;
-        width: 100%;
-        background-color: #fff;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap:0.5rem;
-        margin: auto;
-    }
-    .div-input-do-review input{
-        overflow-x: hidden;
-        overflow-wrap: break-word;
-        border-radius: 1rem;
-        height: 96px;
-        width: 70%;
-        border-radius: 0.3rem;
-        display: block;
-        
-    }
-    .send-button-do-review{
-        color:#fff;
-        background-color: #3483fa;
-        margin: auto;
-        font-size: 14px;
-        height: 32px;
-        line-height: 16px;
-        width: 114px;
-        border: transparent;
-        border-radius: 0.3rem;
-    
-    }
-    .stars-do-review{
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        justify-items: center;
-        height: 130px;
-        justify-content: center;
-    }
-    .stars-do-review button{
-        font-size: 3.5rem;
-        height: 7rem;
-        cursor:pointer;
-        color:gray;
-        border:transparent;
-        background-color: transparent;
-    }
-    .stars-do-review button:hover ~ button{
-        color: #3483fa;
-    }
-    .stars-do-review button:hover{
-      color: #3483fa;
-    }
-    .mid-do-review{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-left: 0rem;
-        padding-top: 1rem;
-        background-color: #fff;
-    }
-
-
 }

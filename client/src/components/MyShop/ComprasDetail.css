@@ -82,12 +82,15 @@
     margin-bottom: 1rem;
 }
 .button-status-shop{
+    position: absolute;
+    top: -75px;
+    right: 0px;
     background-color: #3483fa;
     color:white;
     border:transparent;
-    height: 60px;
-    width: 140px;
-    margin-left: 1rem;
+    height: 50px;
+    width: 210px;
+    padding: 10px;
     border-radius: 0.5em;
     margin-right: 3rem;
 }
@@ -182,15 +185,17 @@
         margin-bottom: 1rem;
     }
     .button-status-shop{
+        position: absolute;
+        top: -35px;
+        right: 0%;
         background-color: #3483fa;
         color:white;
         border:transparent;
-        height: 30px;
-        width: 150px;
-        margin: auto;
-        margin-bottom: 1rem;
-        font-size: 12px;
+        height: 25px;
+        font-size: 14px;
+        padding: 2px;
         border-radius: 0.5em;
+        margin-right: 3rem;
     }
     .div-product-info-shop{
         display: flex;
