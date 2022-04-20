@@ -10,6 +10,34 @@ export function getProducts(){
         })
     }
 }
+export function getAdmins(){
+    return async function (dispatch){
+        const admins = await axios.get('http://localhost:3001/admins')
+        return dispatch ({
+            type:"GET_ADMINS",
+            payload:admins.data
+        })
+    }
+}
+
+export function deleteAdmin(email){
+    return async function (dispatch){
+        const admin = await axios.put(`http://localhost:3001/demote/${email}`)
+        return dispatch({
+            type:"DELETE_ADMIN",
+            payload:admin.data
+        })
+    }
+}
+export function addAdmin(email){
+    return async function (dispatch){
+        const admin = await axios.put(`http://localhost:3001/promote/${email}`)
+        return dispatch({
+            type:"ADD_ADMIN",
+            payload:admin.data
+        })
+    }
+}
 export function getEdit(payload){
     return {
         type:"GET_EDIT",
@@ -445,6 +473,17 @@ export function getUserViews(email){
             payload: userViews.data
         })
     }
+}
+
+export function editPrincipalDirection(index,email){
+    return async function(dispatch){
+        const direction = await axios.put(`http://localhost:3001/users/${email}/editPrincipalDirection`,index)
+        return dispatch({
+            type: 'EDIT_PRINCIPAL_DIRECTION',
+            payload: direction.data
+        })
+    }
+
 }
 
 

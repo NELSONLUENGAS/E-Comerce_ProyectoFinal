@@ -13,6 +13,7 @@ const initialState = {
     productReviewByEmail:false,
     productReview:[],
     User: [],
+    admins:[],
     favorites:[],
     Orders: [],
     myOrders: [],
@@ -52,6 +53,12 @@ export default function rootReducer(state = initialState, action) {
         case "PUT_PASSWORD": {
             return{
                 ...state,
+            }
+        }
+        case 'GET_ADMINS':{
+            return{
+                ...state,
+                admins:action.payload
             }
         }
         case "GET_USER_VIEWS": {

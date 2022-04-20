@@ -2,28 +2,25 @@ import React, {useState} from "react";
 import NavBar from '../NavBar/NavBar';
 import { DeleteCategoria } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../actions";
+import { getAdmins,addAdmin,deleteAdmin } from "../../actions";
 import { useEffect } from "react";
 import { postCrearCategoria } from "../../actions";
 import './AdminRoles.css'
 const AddCategorie = () => {
 
-  const categories = useSelector((state) => state.categories);
+  const admins = useSelector((state) => state.admins);
+  const user = useSelector((state) => state.User);
   const dispatch= useDispatch()
   const [refresh]=useState("")
-  const [input, setData] = useState({
-    name: "",
-    description:""
-  })
-  const{name, description} = input
+  const [email, setEmail] = useState("")
 
-  function handleDelete (e, id, name)  {
+  function handleDelete (e, emailSelected)  {
     e.preventDefault()
-    var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+name)
+    var opcion = window.confirm("Estás seguro que deseas sacarle el admin a " + emailSelected)
     if(opcion===true){
       const fetchData = async () => {
-      await dispatch(DeleteCategoria(id))
-      await dispatch(getCategories()); ;
+      await dispatch(deleteAdmin(emailSelected))
+      await dispatch(getAdmins()); ;
     }
     fetchData();
     }
@@ -31,23 +28,20 @@ const AddCategorie = () => {
   };
   const HandleSubmit =()=>{
     const fetchData = async () => {
-      await dispatch(postCrearCategoria(input))
-      await dispatch(getCategories()); ;
+      console.log(email);
+      await dispatch(addAdmin(email))
+      await dispatch(getAdmins()); ;
     }
     fetchData();
-    
   }
   const handleChange = (e) => {
     e.preventDefault()
-    setData({
-      ...input,
-      [e.target.name]:e.target.value
-    });
+    setEmail(e.target.value)
   };
 
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(getAdmins())
 }, [dispatch,refresh])
 
   return (<>
@@ -60,7 +54,7 @@ const AddCategorie = () => {
           <input
             onChange={handleChange}
             name="name"
-            value={name}
+            value={email}
             type="text"
             className="form-control"
   
@@ -76,30 +70,28 @@ const AddCategorie = () => {
       <table className="table-categorie" >
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Categoria</th>
-          <th>Descripcion</th>
-          <th>Eliminar</th>
+          <th>E-mail</th>
+          <th>Nombre</th>
+          <th>Accion</th>
         </tr>
       </thead>
       <tbody>
-        {categories?.map((item, i) => {
+        {admins?.map((item, i) => {
   
 
           return (
             <tr key={i}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.description}</td>
+              <td>{item.email}</td>
+              <td>{item.name} {item.lastname}</td>
               <td>
               
-                <button
+                {!item.email ===user.email ? (<button
                 type="submit"
-                  onClick={(e) => handleDelete(e, item.id, item.name)}
+                  onClick={(e) => handleDelete(e, item.email)}
                   className="button-delete"
                 >
                   Eliminar
-                </button>
+                </button>):null}
               </td>
             </tr>
           );

@@ -4,6 +4,7 @@
 /////Card de los productos comprados
 ////Se necesita cambios, pero tiene funcionalidad
 /////////////////////////
+import {Buttomm} from './Elements';
 import React, { useEffect } from "react";
 import { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
@@ -24,7 +25,8 @@ import {
   } from "reactstrap";
   import { makeStyles } from "@material-ui/core/styles";
   import toast, { Toaster } from 'react-hot-toast';
-
+  import { getProducts
+ } from '../../actions';
   const useStyles = makeStyles((theme) => ({
     image: {
       with: "200px",
@@ -43,9 +45,17 @@ export default function CheckoutCard({
     const Añadir = () => toast.success(`Has añadido al carrito ${names(name)} ${name}`, {duration: 4000,})
     const Sacar = () => toast.error(`Has retirado del carrito ${names(name)} ${name}`, {duration: 4000,})
     const Eliminar = () => toast.error(`Has eliminado del carrito ${DeleteCompra(name)}: ${name}`, {duration: 4000,})
+    const Stock = () => toast.error(`Has alcanzado el limite de stock para el item: ${name}`, {duration: 4000,})
     const dispatch = useDispatch();
-    const classes = useStyles();
+    const classes = useStyles();    
     const [modalInsertar, setStateModalInsectar] = useState(false)
+    const Products = useSelector((state) => state.products);
+    useEffect(() => {
+        dispatch(getProducts());
+    }, [dispatch]);
+
+    const Product = Products.filter(el => el.id ==id)
+    console.log(Product.stock)
     const removeItems = (e) => {
         e.preventDefault();
         if(user.email){
@@ -71,7 +81,8 @@ export default function CheckoutCard({
       description:description,
       stock:stock
   });
-    const user = useSelector((state) => state.User);
+
+      const user = useSelector((state) => state.User);
     const basketBack = useSelector((state) => state.basketBack);
     const [quantityProduct,setQuantityProduct] = useState(quantity);
     let newName=name.slice(0,22);
@@ -87,6 +98,7 @@ export default function CheckoutCard({
             return "un"
         }
     }
+
     function DeleteCompra(name){
         var nombreextraido = name.split(' ')[0];
         var indice = nombreextraido.length-1
@@ -97,18 +109,20 @@ export default function CheckoutCard({
             return "el"
         }
     }
-    function subtractionQuantity(){
+    function subtractionQuantity(e){
+        e.preventDefault()
       
     //   setQuantityProduct(Number(quantityProduct)-1)
     //   setPriceItem(price*(Number(quantityProduct)-1))
     //   dispatch(substractQuantityItem(item.id));
-        //   dispatch(addBasketBack(item.id,-1))
+    //   dispatch(addBasketBack(item.id,-1))
         
         if(quantityProduct>1){
             if(user.email){
             const fetchData = async () => {
                 await dispatch(putBasketBack({productId:id,amount:'Decrement'},user.email));   
                 await dispatch(getBasket(user.email));
+                // Mostrame()
                 Sacar()
               }
             fetchData()
@@ -119,17 +133,24 @@ export default function CheckoutCard({
                 Sacar()
                 dispatch(substractQuantityItem(item.id));
                 setQuantityProduct(quantityProduct-Number(1))
-                setPriceItem(price*(quantityProduct-Number(1)))}
+                setPriceItem(price*(quantityProduct-Number(1)))
             }
+        }else{
+            
+        }
     }
-    function addQuantity(){
-
+  
+    function addQuantity(e){
+        e.preventDefault()
     //   setQuantityProduct(Number(quantityProduct)+1)
     //   setPriceItem(price*(Number(quantityProduct)+1))
-        //   dispatch(addToBasket(item,1));
+    //   dispatch(addToBasket(item,1));
         console.log(item.id)
         console.log(user.email)
-        if(user.email){
+        
+        if(quantityProduct < Product[0].stock){
+            
+            if(user.email){
             const fetchData = async () => {
                 await dispatch(putBasketBack({productId:id,amount:'Increment'},user.email));
                 await dispatch(getBasket(user.email));
@@ -139,12 +160,16 @@ export default function CheckoutCard({
              setQuantityProduct(quantityProduct+Number(1))
              setPriceItem(price*(quantityProduct+Number(1)))
         }else {
-            Añadir()
+          Añadir()
           dispatch(addToBasket(item,1));
           setQuantityProduct(quantityProduct+Number(1))
           setPriceItem(price*(quantityProduct+Number(1)))
 
         }
+        }else{
+            Stock()
+        }
+        
  }
  const mostrarModalInsertar= (id)=> {
 
@@ -179,7 +204,7 @@ export default function CheckoutCard({
                              <div className="quantity-checkout-card">
                                 {buttonQuantity? (<button className="button-quantity-checkout-card" onClick={subtractionQuantity}>-</button>):null}
                                 <div className="quantity-text-checkout-card">{Number(quantityProduct)}</div>
-                                {buttonQuantity? ( <button className="button-quantity-checkout-card" onClick={addQuantity}>+</button>):null}
+                                {buttonQuantity? ( <Buttomm className="button-quantity-checkout-card" onClick={addQuantity}>+</Buttomm>):null}
                             </div>
                             <div className="price-text-checkout-card">${Intl.NumberFormat("es-ES").format(priceItem)}</div>
                             {buttonQuantity? (<IconButton fontSize="large" onClick={() => mostrarModalInsertar(id)}>
