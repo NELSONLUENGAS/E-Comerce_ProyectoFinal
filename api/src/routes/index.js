@@ -6,21 +6,20 @@ const router = Router();
 const productsRoute = require('./Products');
 const categoriesRoute = require('./Categories');
 const usersRoute = require('./Users');
-<<<<<<< Updated upstream
-=======
 const mercadoPagoRoute = require('./Mercadopago');
 const ordersRoute = require('./Orders')
->>>>>>> Stashed changes
+const orderWishlistRoute = require('./Wishlist');
+const reviewsRoute = require('./Review')
+const authsRoute = require('./Auths');
 
 //////////////////////////////////////////////////////////////////////////////////
 router.use('/', usersRoute);
 router.use('/', productsRoute);
 router.use('/', categoriesRoute);
-<<<<<<< Updated upstream
-=======
-// router.use('/', mercadoPagoRoute);
+router.use('/', mercadoPagoRoute);
 router.use('/', ordersRoute)
->>>>>>> Stashed changes
-
+router.use('/', orderWishlistRoute);
+router.use('/', reviewsRoute);
+router.use('/',authsRoute);
 //////////////////////////////////////////////////////////////////////////////////
 module.exports = router;

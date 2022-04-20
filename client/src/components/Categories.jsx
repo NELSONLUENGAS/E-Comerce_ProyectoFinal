@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import NavBar from './NavBar/NavBar'
 
 export default function Categories() {
     const categories = [
@@ -16,27 +17,27 @@ export default function Categories() {
         {
             nombre: "Cocina y Hogar",
             img: "https://cdn.popshelf.com/content/dam/popshelf/digital-assets/category/category-home-hero/Category_Kitchen_Gadgets_002.jpg",
-            link: "/beauty",
+            link: "/Cocina",
         },
         {
             nombre: "Deportes",
             img: "https://www.beachvillas.com/travel/wp-content/uploads/2020/11/Return_of_Sports.jpg",
-            link:"/beauty",
+            link:"/Deportes",
         },
         {
             nombre: "Herramientas",
             img: "https://academy.fredsappliance.com/wp-content/uploads/2020/11/tools1.jpg",
-            link:"/beauty",
+            link:"/Herramientas",
         },
         {
             nombre: "Mascotas",
             img: "https://www.america-retail.com/static//2020/01/pets.jpg",
-            link:"/beauty",
+            link:"/Mascotas",
         },
         {
             nombre: "Tecnologia",
             img: "https://s1.eestatic.com/2019/10/11/omicrono/hardware/television-tecnologia-privacidad_435968460_134955767_1024x576.jpg",
-            link:"/beauty",
+            link:"/Tecnologia",
         },
         // {
         //     nombre: "Videojuegos",
@@ -45,8 +46,12 @@ export default function Categories() {
         // },
     ];
     return (
+        <>
+        <NavBar/>
+        
         <div
             style={{
+                
                 display: "flex",
                 flexWrap: "wrap",
                 width:"50%",
@@ -57,9 +62,9 @@ export default function Categories() {
                 marginTop: "50px",
             }}
         >
-            {categories.map((element) => {
+            {categories.map((element,i) => {
                 return (
-                    <div>
+                    <div key={i}>
                         <img
                             style={{
                                 width: "400px",
@@ -77,5 +82,6 @@ export default function Categories() {
                 );
             })}
         </div>
+        </>
     );
 }

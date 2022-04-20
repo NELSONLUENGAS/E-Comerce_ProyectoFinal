@@ -5,20 +5,17 @@ module.exports = sequelize => {
         country: {
             type: DataTypes.STRING
         },
-        province: {
-            type: DataTypes.STRING,
-        },
-        city: {
-            type: DataTypes.STRING,
-        },
-        postalcode: {
-            type: DataTypes.STRING,
-        },
-        direction: {
-            type: DataTypes.STRING,
-        },
         phone: {
             type: DataTypes.STRING,
+        },
+        name:{
+            type: DataTypes.STRING,
+        },
+        lastname:{
+            type: DataTypes.STRING,
+        },
+        direction:{
+            type:DataTypes.JSON(),
         },
         total: {
             type: DataTypes.INTEGER,
@@ -27,5 +24,7 @@ module.exports = sequelize => {
         status: {
             type: DataTypes.ENUM('Cart', 'In progress', 'Rejected', 'Complete')
         }
+    }, {
+        timestamps: true
     });
 };

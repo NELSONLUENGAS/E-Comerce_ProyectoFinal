@@ -12,7 +12,7 @@ router.get('/products', async (req, res) => {
     if(name && category) {
         products = await Products.findAll({
             where: { name: {[Op.iLike]: `%${name}%`} },
-            includes: { model: Categories, where: {name: category} }
+            include: { model: Categories, where: {name: category} }
         })
     }
 
@@ -23,7 +23,7 @@ router.get('/products', async (req, res) => {
     }
 
     else if(category) {
-        products = await Products.findAll({includes: {
+        products = await Products.findAll({include: {
             model: Categories, where: {name: category}
         }})
     }
@@ -65,16 +65,17 @@ router.post('/createProduct', async (req, res) => {
     }
 })
 
-router.put('/updateProduct/:productId', async (req, res) => {
-    const {productId} = req.params, {name, price, stock, image, description} = req.body
+router.put('/updateProduct/', async (req, res) => {
+    const {id, name, price, stock, image, description, discount} = req.body
 
-    const product = await Products.findOne({where: {id: productId}})
+    const product = await Products.findOne({where: {id: id}})
 
     if(name) product.name = name
     if(price) product.price = price
     if(stock) product.stock = stock
     if(image) product.image = image
     if(description) product.description = description
+    if(discount) product.discount = discount
 
     await product.save()
     res.send('Product update')
@@ -84,7 +85,7 @@ router.delete('/deleteProduct/:productId', async (req, res) => {
     const {productId} = req.params
 
     try {
-        const product = await Products.findOne({where: {id: productId}})
+        const product = await Products.findByPk(productId)
     
         if(product) {
             await product.destroy()
@@ -97,6 +98,7 @@ router.delete('/deleteProduct/:productId', async (req, res) => {
         res.status(500).send('INVALID ID')
     }
 })
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 

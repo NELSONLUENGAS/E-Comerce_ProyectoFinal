@@ -8,7 +8,6 @@ module.exports = sequelize => {
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         name: {
             type: DataTypes.STRING,
@@ -19,7 +18,7 @@ module.exports = sequelize => {
             allowNull: false
         },
         birthday: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         },
         dni: {
@@ -30,26 +29,26 @@ module.exports = sequelize => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        province: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+        directions: {
+            type: DataTypes.ARRAY(DataTypes.JSON()),
             allowNull: false
         },
-        city: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
-        },
-        postalcode: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
-        },
-        direction: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+        principalDirection: {
+            type: DataTypes.JSON(),
             allowNull: false
         },
         phone: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        google: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        isAdmin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
     }, {
         timestamps: true
     });
