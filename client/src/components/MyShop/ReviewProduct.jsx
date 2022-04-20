@@ -107,7 +107,7 @@ export default function ReviewProduct({image,name}){
                     <img src={productDetail.image} alt="" />
                 </div>
             </div>
-            <div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",paddingLeft:"2rem",paddingTop:"1rem"}}>
+            <div className="mid-do-review">
                 <h6>Resume tu opinion en una frase</h6>
                 <input value={title} onChange={(e)=>handleTitle(e)}style={{height:"30px",width:"50%",resize:"none",borderRadius:"0.2rem"}}/>
             </div>

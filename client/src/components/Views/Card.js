@@ -6,11 +6,11 @@
 import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFavorite, ControladorDeStock} from "../../actions";
+import { addToBasket,deleteFavorite, getBasket, addBasketBack,getFavorites,addFavorite} from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Cart from "../../svg/shopping-cart.svg";
-import "./Product.css";
+import "./Card.css";
 import Corazonlleno from "../../svg/heart-full.svg";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -50,13 +50,11 @@ export default function Product({
     rating,
     description,
 }) {
-
     const InicieSecion = () => toast.error("Por favor incia sesion",{duration: 2000,})
-    const addToBaskett = () => toast.success(`Has agregado ${item.name} al carrito`,{duration: 4000,});
-    const addToFavorite = () => toast.success(`Has agregado ${item.name} a favoritos`,{duration: 4000,});
-   
-    const DeleteFavorite = () => toast.error(`Has sacado ${item.name} de tus favoritos`, {duration: 4000,})
-    const NoHay = () => toast.error(`Has alcanzado el limite del stock`, {duration: 4000,})
+    const addTo = () => toast.success(`Se a agregado ${item.name} al carrito`,{duration: 3000,});
+    const addToFavorite = () => toast.success(`Se a agregado ${item.name} a favoritos`,{duration: 4000,});
+    
+    const DeleteFavorite = () => toast.success(`has sacado ${item.name} de tus favoritos`, {duration: 4000,})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -69,12 +67,6 @@ export default function Product({
         quantity: Number(1),
         description: description,
     });
-  
- 
-    // const Cantidad = BackBasket.filter(el => el.id ==id)
-
-    const [contador, setStateContador] = useState(1)
- 
     function addfavorite(e){
         e.preventDefault()
         if(user.email){
@@ -87,7 +79,6 @@ export default function Product({
                navigate('/SignIn')
         }
     }
-
     function deletefavorite(e){
         e.preventDefault()
         dispatch(deleteFavorite(user.email,id))
@@ -101,36 +92,26 @@ export default function Product({
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const AddToBasket = (e) => {
-     e.preventDefault()
-        if (user.email) {
-            if(contador>stock){
-                NoHay()
-            } else if(contador<=stock){
-                setStateContador(contador+1)
 
+    const AddToBasket = () => {
+        if (user.email) {
             const fetchData = async () => {
+                
                 await dispatch(
                     addBasketBack({ productId: id, amount: 1 }, user.email)
                 );
                 await dispatch(getBasket(user.email));
             };
             fetchData();
-
-            addToBaskett()
+            addTo()
+            
             console.log(id);
-            }
-            
-            
-        } else if(contador<=stock){
-
-                setStateContador(contador+1)
-                 dispatch(addToBasket(item,1));
-            addToBaskett()
+        } else {
+            dispatch(addToBasket(item,1));
+            InicieSecion()
+            navigate('/SignIn')
             // dispatch(addToBasket(item,1));
-            }else{
-                NoHay()
-            }
+        }
     };
     
     useEffect(()=>{
@@ -205,7 +186,7 @@ export default function Product({
                 
                
                 <div className="add-to-cart-product" onClick={AddToBasket}>
-       
+             
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}

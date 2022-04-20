@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 export default function Profile() {
     const UserLogo ='https://www.mercadolibre.com/org-img/mkt/email-mkt-assets/my-profile/privacidadIcon.svg'
     const user = useSelector((state) => state.User);
+    console.log(user)
     let capitalLetter = user.name;
     capitalLetter = capitalLetter[0].toUpperCase();
     return (
@@ -23,7 +24,7 @@ export default function Profile() {
                             {capitalLetter}
                         </div>
 
-                        {user.name === "Agustin" ? (
+                        {user.isAdmin ? (
                             <>
                                 <div className="text-div-profile">
                                     <h3>
@@ -39,7 +40,7 @@ export default function Profile() {
                         )}
                     </div>
 
-                    {user.name === "Agustin" ? (
+                    {user.isAdmin ? (
                         <>
                             <Link
                                 style={{
