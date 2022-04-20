@@ -4,6 +4,7 @@ const router = Router();
 const nodemailer = require('nodemailer');
 const {welcome} = require('../emailMessages/usersMails')
 
+
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -92,6 +93,7 @@ router.post('/users/:email/addlocation', async (req, res) => {
     try{
         const user = await Users.findOne({where: {email}})
         user.directions = [...user.directions,newAdress]
+
         await user.save()
         res.send('Add new location')
     }

@@ -169,7 +169,7 @@ router.put('/users/:email/cart', async (req, res) => {
 router.put('/users/:email/changeStatusCart', async (req, res) => {
     const {email} = req.params
     const {name,lastname,direction} = req.body
-    
+
     try {
         const cart = await Orders.findOne({
             where: {UserEmail: email, status: 'Cart'},
@@ -183,6 +183,7 @@ router.put('/users/:email/changeStatusCart', async (req, res) => {
                     await product.save()
                 })
                 cart.status = 'In progress'
+
                 cart.direction = direction
                 await cart.save()
                 await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart', name, lastname}})
@@ -203,6 +204,7 @@ router.put('/users/:email/changeToComplete', async (req, res) => {
             const cart = await Orders.findOne({
                 where: {UserEmail: email, status: 'In progress', id: orderId},
                 include: {model: Products}
+
                 })
             
     
@@ -225,6 +227,7 @@ router.delete('/users/:email/cart', async (req, res) => {
 
     try {
         const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
+
         const relation = await Product_Line.findOne({ProductId: productId, OrderId: cart.id})
     
         if(relation) {
@@ -246,7 +249,7 @@ router.delete('/users/:email/emptycart', async (req, res) => {
         const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
 
         if(cart){
-            
+
                 await cart.destroy()
                 await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart'}})
                 res.send('The cart has been emptied')
