@@ -53,8 +53,8 @@ export default function Product({
     const InicieSecion = () => toast.error("Por favor incia sesion",{duration: 2000,})
     const addToBaskett = () => toast.success(`Has agregado ${item.name} al carrito`,{duration: 4000,});
     const addToFavorite = () => toast.success(`Has agregado ${item.name} a favoritos`,{duration: 4000,});
-    
     const DeleteFavorite = () => toast.error(`Has sacado ${item.name} de tus favoritos`, {duration: 4000,})
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -182,19 +182,15 @@ export default function Product({
                 </div>
                 </Link>
                 
-               
+               {stock>0 ?  (
                 <div className="add-to-cart-product" onClick={AddToBasket}>
-                <Toaster 
-            position="top-center"
-            reverseOrder={false}
-
-            />
+                
                 Agregar al carrito{" "}
                 <img
                     style={{ height: "20px", marginLeft: "1rem" }}
                     src={Cart}
                     />
-            </div>
+            </div>):null}
         </div>
         
         </>

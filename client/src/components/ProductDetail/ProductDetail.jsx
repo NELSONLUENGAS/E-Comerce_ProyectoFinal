@@ -35,23 +35,13 @@ export default function ProductDetail() {
         stock:productDetail.stock
     });
     function names(name){
-        var nombreextraido = name.split(' ')[0];
+        var nombreextraido = name?.split(' ')[0];
         var indice = nombreextraido.length-1
         var ultima = nombreextraido.charAt(indice)
         if(ultima==="a"){
             return "una"
         }else{
             return "un"
-        }
-    }
-    function DeleteCompra(name){
-        var nombreextraido = name.split(' ')[0];
-        var indice = nombreextraido.length-1
-        var ultima = nombreextraido.charAt(indice)
-        if(ultima==="a"){
-            return "la"
-        }else{
-            return "el"
         }
     }
     useEffect(() => {
@@ -82,11 +72,7 @@ export default function ProductDetail() {
         toast.error(`Has retirado del carrito ${names(productDetail.name)} ${productDetail.name}`, {duration: 4000,})
     }
 
-   
-
     useEffect(() => {
-        
-       
         setFinalStock([])
         for (let i = 2; i <= productDetail.stock ; i++) {
             setFinalStock(oldArray => [...oldArray,i])

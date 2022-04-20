@@ -35,7 +35,7 @@ export default function ComprasDetail({
     const dispatch=useDispatch()
     const user = useSelector((state) => state.User);
     const [modalInsertar, setStateModalInsectar] = useState(false)
-const DeleteFavorite = () => toast.success(`has sacado ${name} de tus favoritos`, {duration: 4000,})
+    const DeleteFavorite = () => toast.error(`Has sacado ${name} de tus favoritos`, {duration: 4000,})
 
     const mostrarModalInsertar= (id)=> {
 
@@ -80,9 +80,7 @@ const DeleteFavorite = () => toast.success(`has sacado ${name} de tus favoritos`
                 <ModalBody>
                     <FormGroup>
                         <p>
-                          {`Estas seguro que quieres eliminar de tus favoritos
-                          a la siguiente venta: ${name}`}
-                        </p>
+                          {`Estas seguro que quieres eliminar de tus favoritos el siguiente item?`}</p>{name}
                     </FormGroup>
                 </ModalBody>
 
