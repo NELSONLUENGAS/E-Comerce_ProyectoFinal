@@ -66,7 +66,7 @@ router.post('/createProduct', async (req, res) => {
 })
 
 router.put('/updateProduct/', async (req, res) => {
-    const {id, name, price, stock, image, description} = req.body
+    const {id, name, price, stock, image, description, discount} = req.body
 
     const product = await Products.findOne({where: {id: id}})
 
@@ -75,6 +75,7 @@ router.put('/updateProduct/', async (req, res) => {
     if(stock) product.stock = stock
     if(image) product.image = image
     if(description) product.description = description
+    if(discount) product.discount = discount
 
     await product.save()
     res.send('Product update')

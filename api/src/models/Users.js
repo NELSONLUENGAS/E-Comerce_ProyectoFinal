@@ -8,7 +8,6 @@ module.exports = sequelize => {
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         name: {
             type: DataTypes.STRING,
@@ -41,6 +40,10 @@ module.exports = sequelize => {
         phone: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        google: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         isAdmin: {
             type: DataTypes.BOOLEAN,

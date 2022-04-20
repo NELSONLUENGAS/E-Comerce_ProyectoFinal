@@ -9,7 +9,11 @@ module.exports = sequelize => {
         price: {
             type: DataTypes.FLOAT,
             allowNull: false
-        }, 
+        },
+        discount: {
+            type: DataTypes.FLOAT,
+            defaultValue: 1.0
+        },
         stock: {
             type: DataTypes.INTEGER,
             defaultValue: 0,
