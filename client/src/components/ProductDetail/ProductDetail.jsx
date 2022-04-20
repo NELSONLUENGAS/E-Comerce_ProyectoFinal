@@ -1,6 +1,6 @@
 /** @format */
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actions/index";
