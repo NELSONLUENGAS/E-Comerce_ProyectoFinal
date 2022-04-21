@@ -28,7 +28,6 @@ export default function Checkout() {
         e.preventDefault();
         navigate("/checkout-page");
     }
-    console.log(user.direction);
     useEffect(() => {
         dispatch(getBasket(user.email));
     }, [dispatch]);
@@ -36,7 +35,6 @@ export default function Checkout() {
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
-            console.log(inicioSesion)
             const fetchData = async () => {
                 await   dispatch(getUserSigningIn({
                     'email':inicioSesion.email,

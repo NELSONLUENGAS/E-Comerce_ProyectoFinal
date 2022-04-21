@@ -24,6 +24,7 @@ import ReviewProduct from './components/MyShop/ReviewProduct';
 import Adress from './components/Adress/Adress';
 import EditarFormProduct from './components/EditarYBorrarProductos/FormEditProduct/CrearProducto'
 import Editar from './components/EditarYBorrarProductos/EditarProducts';
+import RegisterGoogle from './components/GoogleAuth Register/RegisterGoogle';
 function App() {
   return (
     <Router>
@@ -33,6 +34,8 @@ function App() {
           <Route exact path="/checkout-page" element={<CheckoutPage/>} />
           <Route exact path="/SignIn" element={<SignIn/>}/>
           <Route exact path="/SignUp" element={<RegistroForm/>}/>
+          <Route exact path="/SignUp/google" element={<RegisterGoogle/>}/>
+          
           <Route exact path="/checkout-card" element={<CheckoutCard/>}/>
           <Route exact path="/Checkout/Payment" element={<Checkout/>} />
           <Route exact path="/Categories" element={<Categories/>}/>

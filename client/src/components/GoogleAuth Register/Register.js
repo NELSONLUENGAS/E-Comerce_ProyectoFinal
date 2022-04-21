@@ -4,6 +4,9 @@ import GoogleLogin from 'react-google-login';
 import React, { useState, useEffect } from 'react';
 import { gapi, loadAuth2 } from 'gapi-script'
 import { UserCard } from './UserCard';
+import {useNavigate} from 'react-router-dom'
+import {propertiesGoogle} from '../../actions/index'
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     submit: {
@@ -17,10 +20,12 @@ const useStyles = makeStyles((theme) => ({
 const clientId = '413158522199-o91o6pf9hh3q9usmsdrhi7lq6io1cs44.apps.googleusercontent.com';
 
 
+  
 
 
-
-    const  Login  = () => {
+    const  Register  = () => {
+    const dispatch=useDispatch()
+    const navigate= useNavigate()
     const [user, setUser] = useState(null);
     const classes = useStyles();
 
@@ -48,14 +53,19 @@ const clientId = '413158522199-o91o6pf9hh3q9usmsdrhi7lq6io1cs44.apps.googleuserc
       }//eslint-disable-next-line
     }, [user])
   
-    const updateUser = (currentUser) => {
-      const name = currentUser.getBasicProfile().getName();
-      const profileImg = currentUser.getBasicProfile().getImageUrl();
+    const updateUser = (currentUser) => {      
+      console.log(currentUser)
+    const {googleId,profileObj}=currentUser
+     const {email,givenName,familyName}=profileObj
       setUser({
-        name: name,
-        profileImg: profileImg,
+        password:googleId,
+        email:email,
+        name:givenName,
+        lastname:familyName
       });
     };
+
+
   
     const attachSignin = (element, auth2) => {
       auth2.attachClickHandler(element, {},
@@ -75,21 +85,16 @@ const clientId = '413158522199-o91o6pf9hh3q9usmsdrhi7lq6io1cs44.apps.googleuserc
     }
   
     if(user) {
-      return (
-        <div className="container">
-          <UserCard user={user} />
-          <div id="" className={classes.submit} onClick={signOut}>
-            Logout
-          </div>
-        </div>
-      );
+      console.log(user);
+      dispatch(propertiesGoogle(user))
+      navigate('/SignUp/google')
     }
   
     return (
       <div className="container">
         <GoogleLogin
         clientId={clientId}
-        buttonText="Login"
+        buttonText="Registrate con Google"
         onSuccess={updateUser}
         onFailure={(err) => console.log(err)}
         className={classes.submit}
@@ -101,7 +106,7 @@ const clientId = '413158522199-o91o6pf9hh3q9usmsdrhi7lq6io1cs44.apps.googleuserc
     );
   }
 
-    export default Login;
+    export default Register;
 
 
 

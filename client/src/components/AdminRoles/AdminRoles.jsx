@@ -28,7 +28,6 @@ const AddCategorie = () => {
   };
   const HandleSubmit =()=>{
     const fetchData = async () => {
-      console.log(email);
       await dispatch(addAdmin(email))
       await dispatch(getAdmins()); ;
     }

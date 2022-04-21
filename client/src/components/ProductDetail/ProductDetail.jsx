@@ -7,7 +7,7 @@ import { getProductId,addFavorite,getFavorites,deleteFavorite} from "../../actio
 import NavBar from '../NavBar/NavBar';
 import "./ProductDetail.css";
 import Combi from "../../svg/delivery-svgrepo-com.svg";
-import { addToBasket,vaciarCarrito,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn, postUserViews} from "../../actions/index";
+import { addToBasket,vaciarCarrito,cleanProductId,getProductReview,addBasketBack,getBasket,vaciarCarritoBack,getUserSigningIn, postUserViews} from "../../actions/index";
 import Review from "./Review";
 import Corazon from "../../svg/heart-svgrepo-com.svg";
 import Corazonlleno from "../../svg/heart-full.svg";
@@ -95,9 +95,8 @@ export default function ProductDetail() {
         dispatch(getProductId(id));
         dispatch(getProductReview(id));
         
-        // return () => dispatch(cleanGetIdProduct())
+        return () => dispatch(cleanProductId())
     }, [dispatch]);
-    console.log(productReview)
    
 
     function addfavorite(e){
@@ -164,7 +163,7 @@ export default function ProductDetail() {
         e.preventDefault()
         if(user.name){
                 const fetchData = async () => {
-                    await dispatch(vaciarCarritoBack(user.email))
+                    await dispatch(vaciarCarritoBack(user.email,user.name,user.lastname))
                     await dispatch(addBasketBack({"productId":id,"amount":Number(quantity)},user.email));
                     await dispatch(getBasket(user.email));
                   }
@@ -245,7 +244,6 @@ export default function ProductDetail() {
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
-            console.log(inicioSesion)
             const fetchData = async () => {
                 await   dispatch(getUserSigningIn({
                     'email':inicioSesion.email,
@@ -485,9 +483,9 @@ export default function ProductDetail() {
                                 id="Todas"
                                 onClick={(e) => handleReviewShow("Todas")}
                             >
-                                Todas
+                                Opiniones
                             </button>
-                            <button
+                            {/* <button
                                 className="button-product-detail"
                                 id="Positivas"
                                 onClick={(e) => handleReviewShow("Positivas")}
@@ -500,7 +498,7 @@ export default function ProductDetail() {
                                 onClick={(e) => handleReviewShow("Negativas")}
                             >
                                 Negativas
-                            </button>
+                            </button> */}
                         </div>
                         <div>
                             {productReview?.map((elem, i) => {

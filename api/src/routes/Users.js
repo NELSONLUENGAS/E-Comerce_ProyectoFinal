@@ -75,7 +75,6 @@ router.post('/createUser', async (req, res) => {
         const user = {email, password, name, lastname, birthday, dni, nationality,principalDirection:direction, directions:direction, phone}
         await Users.create(user)
         await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart',name:name,lastname:lastname}})
-        
         res.send('The user has been created successfully')
         await transporter.sendMail(welcome(email,name));
     } 
@@ -178,6 +177,16 @@ router.put('/changePassword/:email', async (req, res) => {
     }
 
     else res.send('The password that you entered is incorrect')
+})
+router.get('/user/:email', async (req, res) => {
+    const { email } = req.params;
+   try{
+    const user = await Users.findOne({ where: { email } });
+    if(user) res.send(user)
+    else res.send('no hay usuario con ese email')
+    }catch(e){
+        res.send(e)
+    }
 })
 
 module.exports = router;

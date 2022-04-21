@@ -153,9 +153,9 @@ export default function Product({
         
         <div className="container-card-product">
        
-                <div className="div-img-heart-product">
+                {/* <div className="div-img-heart-product">
                 {productInFavorites ? ( <img src={Corazonlleno} onClick={(e)=>deletefavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="favorito"/>):(<img src={Corazon} onClick={(e)=>addfavorite(e)} style={{height: "20px",cursor:"pointer"}}alt="agregado en favorito"/>)}
-                </div>
+                </div> */}
                 <div className="div-img-card-product">
                 <Link 
                 style={{ textDecoration: "none", color: "black"}}

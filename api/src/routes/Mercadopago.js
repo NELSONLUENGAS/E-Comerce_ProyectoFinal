@@ -9,6 +9,7 @@ mercadopago.configure({
 
 router.post('/mercadoPago', async(req, res, next) => {
     try{
+    const {email,items}=req.body
     //const {orderDetails, orderId} = req.body;
     //const {payer, items} = orderDetails;
     //const {email, ...} = payer;

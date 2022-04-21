@@ -242,14 +242,14 @@ router.delete('/users/:email/cart', async (req, res) => {
 })
 
 router.delete('/users/:email/emptycart', async (req, res) => {
-    const {email} = req.params
+    const {email} = req.params,{name,lastname}=req.query
     try {
         const cart = await Orders.findOne({where: {UserEmail: email, status: 'Cart'}})
 
         if(cart){
 
                 await cart.destroy()
-                await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart'}})
+                await Orders.findOrCreate({where: {UserEmail: email, status: 'Cart', name,lastname}})
                 res.send('The cart has been emptied')
 
         }

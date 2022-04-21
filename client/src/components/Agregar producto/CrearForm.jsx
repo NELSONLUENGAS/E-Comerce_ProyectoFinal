@@ -189,7 +189,7 @@ const CrearForm = () => {
 									return (
 										<option
 											value={item.nombre}
-											key={item.nombre}
+											key={i}
 										>
 											{item.name}
 										</option>

@@ -12,7 +12,6 @@ export default function Order(){
     const dispatch = useDispatch();
     const user = useSelector((state)=> state.User);
     const Orders = useSelector((state) => state.Orders);
-    console.log(Orders)
     //Orders.length && console.log(Orders, 'primero')
     const [open, setOpen] = useState({
         customer: false,
@@ -74,19 +73,19 @@ export default function Order(){
         <div className="container-filters-order">
            
 
-        <div className="div-buscador-order">
+        {/* <div className="div-buscador-order">
                 
                 <img style={{height:"18.5px",position:"absolute",left:"10px",bottom:"3px"}} src={SearchIcon} alt='busqueda'></img>
                 <input onChange={onChange} type='search' placeholder="Buscar por mail " className='input-buscador-order'/>
-        </div>
-        <div className='div-filters-order'>
+        </div> */}
+        {/* <div className='div-filters-order'>
             <h6 style={{marginBottom:"0.4rem"}}>Filtrar y ordenar</h6>
             <select>
                 <option>Por fecha mas recientes primero</option>
                 <option>Por fecha mas antiguos primero</option>
                 
             </select>
-            </div>
+        </div> */}
         </div>
             <div style={{margin:"auto",gap:"2rem"}}>
             {Orders.length ? 

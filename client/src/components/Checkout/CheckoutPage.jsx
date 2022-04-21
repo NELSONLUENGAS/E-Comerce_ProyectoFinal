@@ -25,7 +25,6 @@ export default function CheckoutPage() {
     const user = useSelector((state) => state.User);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log(cartProducts.Products);
 
     useEffect(()=>{
         dispatch(getBasket(user.email))
@@ -38,7 +37,7 @@ export default function CheckoutPage() {
             if(user.email){
             const fetchData = async () => {
                 Vaciarr()
-                await dispatch(vaciarCarritoBack(user.email))
+                await dispatch(vaciarCarritoBack(user.email,user.name,user.lastname))
                 await dispatch(getBasket(user.email))
             } 
             fetchData()
@@ -51,23 +50,10 @@ export default function CheckoutPage() {
             quantity: element.Product_Line.amount,
         };
     });
-    console.log("mercadopago basket");
-    // console.log(productsMercado);
-    // console.log(cartProductsLocal);
-        console.log(cartProducts);
-        console.log(allProducts);
 
     function onPay(e){
         e.preventDefault();
         if(user.name){
-            for(let i=0;i++;i<cartProducts.length){
-                console.log(cartProducts[i])
-                if(cartProducts[i].Products.Product_Line.amount>cartProducts[i].Products.stock){
-                    alert(`El item ${cartProducts[i].name} no tiene stock suficiente para realizar la compra`)
-                }
-                console.log('este es el cart')
-                console.log(cartProducts[i])
-            }
             dispatch(getMercadoPago({email: user.email, items: productsMercado}));
         navigate('/Checkout/Payment')
         } else{
@@ -84,7 +70,6 @@ export default function CheckoutPage() {
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
-            console.log(inicioSesion)
             const fetchData = async () => {
                 await   dispatch(getUserSigningIn({
                     'email':inicioSesion.email,

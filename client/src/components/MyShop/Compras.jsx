@@ -44,10 +44,10 @@ export default function Compras(){
             <div className="container-title-compras">
                 <h3 style={{textAlign:"left"}}>Compras</h3>
             </div>
-            <div className="div-buscador-compras">
+            {/* <div className="div-buscador-compras">
                 <img className='lupa-buscador-compras' src={SearchIcon} alt='busqueda'></img>
                 <input placeholder="Buscar producto comprado..." className='input-buscador-compras'/>
-            </div>
+            </div> */}
             {myOrders.length? (
             <div className="container-compras-detail" >
                 {myOrders.length ? myOrders.map((order) => <ComprasDetail key={order.id} {...order} />) : <div>No hay ordenes creadas</div>}

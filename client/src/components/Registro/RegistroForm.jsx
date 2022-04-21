@@ -9,6 +9,7 @@ import Input from './InputForm'
 import NavBar from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import Register from '../GoogleAuth Register/Register';
 const useStyles = makeStyles((theme) => ({
     main: {
 		maxWidth: "800px",
@@ -138,6 +139,7 @@ const RegistroForm= () => {
 			<NavBar/>
 		<main className={classes.main}>
 			<h1>Registrate</h1>
+			<Register/>
 			<Formulario action="" onSubmit={onSubmit}>
 				<Input
 					estado={nombre}

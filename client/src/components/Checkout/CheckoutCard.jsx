@@ -55,7 +55,6 @@ export default function CheckoutCard({
     }, [dispatch]);
 
     const Product = Products.filter(el => el.id ==id)
-    console.log(Product.stock)
 
     const removeItems = (e) => {
         e.preventDefault();
@@ -146,8 +145,6 @@ export default function CheckoutCard({
     //   setQuantityProduct(Number(quantityProduct)+1)
     //   setPriceItem(price*(Number(quantityProduct)+1))
     //   dispatch(addToBasket(item,1));
-        console.log(item.id)
-        console.log(user.email)
         
         if(quantityProduct < Product[0].stock){
             

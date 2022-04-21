@@ -12,6 +12,8 @@ const initialState = {
     basketBack: [],
     productReviewByEmail:false,
     productReview:[],
+    ofertas:[],
+    propertiesGoogle:[],
     Views:[],
     User: [],
     admins:[],
@@ -228,7 +230,12 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 products: action.payload,
-                allProducts: action.payload
+                allProducts: action.payload,
+            }
+        case 'GET_ALL_PRODUCTS':
+            return{
+                ...state,
+                ofertas:action.payload
             }
 
         case 'GET_ID_PRODUCTS':
@@ -247,8 +254,6 @@ export default function rootReducer(state = initialState, action) {
                 products: action.payload
             }
         case 'GET_MERCADOPAGO':
-            console.log("mercadopago reducer")
-            console.log(action.payload)
             return {
                 ...state,
                 mercadoPago: action.payload
@@ -374,6 +379,21 @@ export default function rootReducer(state = initialState, action) {
                     productReviewByEmail:true
                 }
             }
+        case 'PROPERTIES_USER_GOOGLE':
+            return{
+                ...state,
+                propertiesGoogle:action.payload
+            }
+        case 'CLEAN_PRODUCT_ID':
+            return{
+                ...state,
+                productId:[]
+            }
+        case 'GET_USER_BY_EMAIL':
+            return{
+                ...state,
+                User:action.payload
+            }
         default:
             return state
 
@@ -416,7 +436,7 @@ function orderBy(products, orderByPrice) {
 }
 function filterByCategory(state, productFilteredByCategory) {
     if (productFilteredByCategory === 'Todas') {
-        return state.allProducts
+        return state.products
     }
     return productFilteredByCategory
 }

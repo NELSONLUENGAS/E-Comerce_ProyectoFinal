@@ -101,7 +101,6 @@ const EnvioForm = () => {
                 postalcode: postalcode.campo,
                 direction: direction.campo,
             };
-            console.log(newAdress);
             dispatch(PostDirection(newAdress, user.email));
             cambiarFormularioValido(true);
             alert("Direccion agregada correctamente");
@@ -138,8 +137,8 @@ const EnvioForm = () => {
 					<div>
 						<label>Provincia</label>
 					 <select className="sc-dkzDqf gNDnlo" value={province} onChange={(e)=>handleProvinceChange(e)} style={{width:"100%",height:"50px",marginTop:"20px"}}>
-                        {provinces?.map((element) => {
-                            return <option value={element.province}>{element.province}</option>;
+                        {provinces?.map((element,i) => {
+                            return <option key={i}value={element.province}>{element.province}</option>;
                         })}
                     </select>
 					</div>

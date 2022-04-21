@@ -4,9 +4,8 @@ import './Ofertas.css'
 
 
 export default function Ofertas(){
-    let productos = useSelector((state) => state.allProducts);
-    productos = [productos[22],productos[23],productos[25]]
-
+    let productos = useSelector((state) => state.ofertas);
+    productos = [productos[0],productos[1],productos[2]]
     return(<>
     <div className="container-sale" >
             <h2>Ofertas</h2>

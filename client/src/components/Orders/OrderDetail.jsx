@@ -13,6 +13,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import accounting from "accounting";
 import {changeStatusToComplete} from '../../actions/index'
+import {Link} from 'react-router-dom'
 import "./OrderDetail.css";
 
 export default function OrderDetail({UserEmail,total, status,id,Products,date,direction,handleChangeStatus,updatedAt,name,lastname}) {
@@ -94,7 +95,7 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                                     return (
                                     <div key={product.id} className="product-order">
                                         <div className="div-img-product-order"><img src={product.image} alt="hola"></img></div>
-                                        <h6>{product.name}</h6> 
+                                        <Link  to={"/product/" + product.id} style={{textDecoration:"none",color:"#000"}}>  <h6>{product.name}</h6> </Link> 
                                         <div>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
                                         <div>{product.Product_Line.amount } u.</div>
                                     </div>

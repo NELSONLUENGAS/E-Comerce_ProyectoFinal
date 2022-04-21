@@ -89,30 +89,27 @@ class Carrousel extends Component {
   render() {
     const { activeIndex } = this.state;
 
-    const slides = items.map((item) => {
-      return (
-        <CarouselItem
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-          key={item.src}
-        >
-          <img src={item.src} alt={item.altText} className={item.className} // insertar hipervinculo en una pestaña nueva
-            onClick={() => window.open(item.link, '_blank')}
-          />
-            
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
-        </CarouselItem>
-      );
-    });
-
     return (
       <Carousel
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}
       >
-       
-        {slides}
+        {items.map((item) => {
+          return (
+            <CarouselItem
+              onExiting={this.onExiting}
+              onExited={this.onExited}
+              key={item.src}
+            >
+              <img src={item.src} alt={item.altText} className={item.className} // insertar hipervinculo en una pestaña nueva
+                onClick={() => window.open(item.link, '_blank')}
+              />
+                
+              <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+            </CarouselItem>
+          );
+        })}
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
         <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
       </Carousel>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
-import { editPrincipalDirection } from '../../actions'
+import { editPrincipalDirection,getUserByEmail } from '../../actions'
 export default function Adress() {
 const user = useSelector((state) => state.User);
 const navigate=useNavigate()
@@ -21,8 +21,13 @@ function handleAdress(e,i){
 function changeDirection(e){
     e.preventDefault()
     // console.log(`este es el index de adress ${indexAdress}`)
-    dispatch(editPrincipalDirection({index:indexAdress},user.email))
+    async function postAdress(){
+        await dispatch(editPrincipalDirection({index:indexAdress},user.email))
+        await dispatch(getUserByEmail(user.email))
+    }
+    postAdress()
 }
+
 
 return (<>
     <NavBar/>

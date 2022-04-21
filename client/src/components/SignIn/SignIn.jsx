@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from 'react';
 import NavBar from '../NavBar/NavBar'
 //import GoogleLogin from 'react-google-login';
-import Login from '../GoogleAuth/Login';
+import Login from '../GoogleAuth Login/Login';
 //import LogoutButton from "./GoogleAuth/LogOut";
 import toast, { Toaster } from 'react-hot-toast';
 import {
@@ -88,7 +88,6 @@ export default function SignIn() {
   useEffect(()=>{
     if(validate>0){
       setTimeout(()=>{
-        console.log(user)      
         if (user.name){
           localStorage.setItem('userData', JSON.stringify(user)); 
           Bienvenido()         

@@ -16,6 +16,7 @@ import Views from '../Views/Views'
 import {
     getProducts,
     getBasket,
+    getOfertas,
     getCategories,
     filterBy2Price,
     getCategoriesByName,
@@ -131,7 +132,6 @@ export default function Products() {
     };
 
     const onSubmitt = (e) => {
-        console.log("entre al boton de precio");
         e.preventDefault();
         setCurrentPage(1);
         dispatch(filterBy2Price(numberMin, numberMax));
@@ -167,6 +167,7 @@ export default function Products() {
 
     useEffect(() => {
         dispatch(getProducts());
+        dispatch(getOfertas());
         dispatch(getCategories());
     }, [dispatch]);
     
@@ -202,7 +203,6 @@ export default function Products() {
         setCurrentProducts(
             productos?.slice(indexOfFirstProduct, indexOfLastProduct)
         );
-        // console.log(categories);
     }, [
         productos,
         currentPage,

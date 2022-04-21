@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
+import { gapi, loadAuth2 } from 'gapi-script'
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -129,8 +130,15 @@ export default function NavBar() {
             category: false,
         });
     }
+    
     function handleLogout(){
-        localStorage.removeItem('userData');    
+        localStorage.removeItem('userData');  
+        const auth2 = gapi.auth2?.getAuthInstance();  
+        
+        if(auth2){
+            auth2.signOut().then(() => {
+            });            
+        }
         dispatch(logOut())
         dispatch(vaciarCarrito())
         Cerrado()
@@ -156,7 +164,6 @@ export default function NavBar() {
     useEffect(() => {
         let inicioSesion =JSON.parse(localStorage.getItem('userData'))
         if(inicioSesion){
-            console.log(inicioSesion)
             const fetchData = async () => {
                 await   dispatch(getUserSigningIn({
                     'email':inicioSesion.email,

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { gapi, loadAuth2 } from 'gapi-script'
 
 
 export function getProducts(){
@@ -10,6 +11,21 @@ export function getProducts(){
         })
     }
 }
+export function getOfertas(){
+    return async function (dispatch){
+        const products = await axios.get('http://localhost:3001/products')
+        return dispatch ({
+            type:"GET_ALL_PRODUCTS",
+            payload:products.data
+        })
+    }
+}
+export function cleanProductId(){
+    return ({
+        type:'CLEAN_PRODUCT_ID'
+    })
+}
+
 export function getAdmins(){
     return async function (dispatch){
         const admins = await axios.get('http://localhost:3001/admins')
@@ -74,8 +90,7 @@ export function getFavorites(email){
 }
 export function addFavorite(email,payload){
     return async function (dispatch){
-        const products = await axios.post(`http://localhost:3001/users/${email}/wishlist`,payload)
-        console.log(products.data)
+        const products = await axios.post(`http://localhost:3001/users/${email}/wishlist`,payload)        
         return dispatch ({
             type:"ADD_FAVORITE",
             payload:products.data
@@ -85,7 +100,6 @@ export function addFavorite(email,payload){
 export function deleteFavorite(email,productId){
     return async function (dispatch){
         const products = await axios.delete(`http://localhost:3001/users/${email}/wishlist/${productId}`)
-        console.log(products.data)
         return dispatch ({
             type:"DELETE_FAVORITE",
             payload:products.data
@@ -161,8 +175,6 @@ export function removeItemBasket(email,id){
 export function getMercadoPago(payload){
     return async(dispatch) => {
         const mercadopago = await axios.post('http://localhost:3001/mercadopago', payload);
-        console.log("mercadopago url")
-        console.log(mercadopago.data)
         return dispatch({
             type:"GET_MERCADOPAGO",
             payload: mercadopago.data
@@ -182,9 +194,9 @@ export function vaciarCarrito(){
         type:"DELETE_CART",
     }
 }
-export function vaciarCarritoBack(email){
+export function vaciarCarritoBack(email,name,lastname){
     return async function (dispatch){
-        const products = await axios.delete(`http://localhost:3001/users/${email}/emptycart`)
+        await axios.delete(`http://localhost:3001/users/${email}/emptycart?name=${name}&lastname=${lastname}`)
         return dispatch ({
             type:"DELET_CART_BACK",
         })
@@ -246,9 +258,6 @@ export function filterByPrice(payload){
 export function filterByCategory(filter){
     return async function (dispatch){
         const json = await axios.get(`http://localhost:3001/products?category=${filter}`);
-        console.log("Entre al filterBycATEGORY")
-        console.log(json.data)
-        console.log(filter)
         return dispatch ({
             type:"FILTER_BY_CATEGORY",
             payload:json.data,
@@ -269,7 +278,6 @@ export function postProductos(payload) {
   }
 
   export function postCrearUsuario(payload) {
-      console.log(payload)
     return async function (dispatch) {
         const json = await axios.post('http://localhost:3001/createUser', payload);
         return dispatch({
@@ -282,10 +290,13 @@ export function postProductos(payload) {
 
 export function getUserSigningIn(payload,guestCart){
     return async function (dispatch){
-        console.log(guestCart)
+        
             const json = await axios.get(`http://localhost:3001/login?email=${payload.email}&password=${payload.password}`);
             if(typeof json.data !=='string'){
                 await axios.post(`http://localhost:3001/guestCart/${payload.email}`,{guestCart:guestCart})
+            }else{
+                const auth2 = gapi.auth2?.getAuthInstance();
+                auth2?.signOut()
             }
             return dispatch ({
                 type:"GET_USER_SIGNING_IN",
@@ -325,8 +336,7 @@ export function PostDirection(payload, email) {
     }
   }
   export function DeleteCategoria(id) {
-    console.log('este es el id'); 
-    console.log(id);
+    
     return async function (dispatch) {
         const json = await axios.delete('http://localhost:3001/categories/'+id);
         return dispatch({
@@ -404,7 +414,7 @@ export function getOrdersUser(email){
     }
 }
 export function putOrderState(email,userData){
-    console.log(userData)
+    
     return async function(dispatch){
         const stateOrder = await axios.put(`http://localhost:3001/users/${email}/changeStatusCart`,userData);
         return dispatch({
@@ -416,9 +426,9 @@ export function putOrderState(email,userData){
 
 export function changeStatusToComplete(email,orderId){
     return async function (dispatch) {
-        console.log(orderId)
+        
         const json = await axios.put(`http://localhost:3001/users/${email}/changeToComplete`,orderId);
-        console.log(json.data);
+        
         return dispatch({
             type: "CHANGE_ORDER_TO_COMPLETE",
             payload: json.data
@@ -487,6 +497,22 @@ export function editPrincipalDirection(index,email){
 
 }
 
+export function propertiesGoogle(user){
+    return ({
+        type:'PROPERTIES_USER_GOOGLE',
+        payload:user
+    })
+}
+
+export function getUserByEmail(email){
+    return async function(dispatch){
+        const getUser = await axios.get(`http://localhost:3001/user/${email}`)
+        return dispatch({
+            type: 'GET_USER_BY_EMAIL',
+            payload: getUser.data
+        })
+    }
+}
 
 
 
