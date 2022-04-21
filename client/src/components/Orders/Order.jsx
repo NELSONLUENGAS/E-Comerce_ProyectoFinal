@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import {getOrders,getOrdersInProgress,getOrdersComplete, getOrdersUser,changeStatusToComplete} from '../../actions/index';
+import {getOrders,getOrdersInProgress,getOrdersComplete, getOrdersUser,changeStatusToComplete,changeToRejected} from '../../actions/index';
 import {useSelector, useDispatch} from 'react-redux';
 import OrderDetail from './OrderDetail';
 import './Order.css';
@@ -39,6 +39,15 @@ export default function Order(){
         dispatch(getOrders());
         
     }
+    function handleRejectOrder(e,id,email){
+        e.preventDefault()
+        const fetchData = async () => {
+            await dispatch(changeToRejected(email,{orderId:id}))
+            await dispatch(getOrders());
+          }
+        fetchData()
+        
+    }
     function handleGetOrders(e,type){
         e.preventDefault()
         switch(type){
@@ -56,6 +65,7 @@ export default function Order(){
             
 
     }
+   
 
     useEffect(() => {
         dispatch(getOrders());
@@ -64,8 +74,8 @@ export default function Order(){
 
     return (
         <>
-        <NavBar/><div style={{width:"50%",margin:"auto"}}>
-        <div style={{display:"flex",flexDirection:"row", justifyContent:"space-around",fontSize:"24px",gap:'3rem',backgroundColor:"#fff",margin:"auto",borderRadius:"0.5rem", marginTop:"2rem",borderTop:"5px solid #3483fa ",height:"5rem"}}>
+         <NavBar/><div className="container-all-order">
+        <div className='container-filter-orders-gral' >
             <button onClick={(e)=>handleGetOrders(e,'All')}style={{border:"transparent",backgroundColor:"#fff"}}>Todas</button>
             <button onClick={(e)=>handleGetOrders(e,'InProcess')} style={{border:"transparent",backgroundColor:"#fff"}}>En proceso</button>
             <button onClick={(e)=>handleGetOrders(e,'Complete')} style={{border:"transparent",backgroundColor:"#fff"}}>Finalizada</button>
@@ -88,10 +98,11 @@ export default function Order(){
         </div> */}
         </div>
             <div style={{margin:"auto",gap:"2rem"}}>
+                
             {Orders.length ? 
                     Orders?.map((order) => {
                         return (
-                        <OrderDetail key={order.id} updatedAt={order.updatedAt} UserEmail={order.UserEmail} total={order.total} status={order.status} id={order.id} Products={order.Products} direction={order.direction} name={order.name} lastname={order.lastname} handleChangeStatus={handleChangeStatus} />
+                        <OrderDetail key={order.id} updatedAt={order.updatedAt} UserEmail={order.UserEmail} total={order.total} status={order.status} id={order.id} Products={order.Products} direction={order.direction} name={order.name} lastname={order.lastname} handleChangeStatus={handleChangeStatus} handleRejectOrder={handleRejectOrder} />
                         )
                     }) : <div>No hay ordenes creadas</div>}
             </div>

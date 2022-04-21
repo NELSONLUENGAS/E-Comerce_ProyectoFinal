@@ -16,7 +16,7 @@ import Logo from '../../svg/latcom1.png'
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from './SearchBar'
 import { products } from "./Products";
-import {getBasket,getCategoriesByName,getUserSigningIn,vaciarCarrito,logOut} from '../../actions/index'
+import {getBasket,getCategoriesByName,cargarCarrito,getUserSigningIn,vaciarCarrito,logOut} from '../../actions/index'
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function NavBar() {

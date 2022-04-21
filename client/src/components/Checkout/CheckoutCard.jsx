@@ -83,6 +83,7 @@ export default function CheckoutCard({
   });
 
       const user = useSelector((state) => state.User);
+      const cartProductsLocal = useSelector((state) => state.basket);
     const basketBack = useSelector((state) => state.basketBack);
     const [quantityProduct,setQuantityProduct] = useState(quantity);
     let newName=name.slice(0,22);
@@ -134,6 +135,7 @@ export default function CheckoutCard({
                 dispatch(substractQuantityItem(item.id));
                 setQuantityProduct(quantityProduct-Number(1))
                 setPriceItem(price*(quantityProduct-Number(1)))
+                localStorage.setItem('basket', JSON.stringify(cartProductsLocal)); 
             }
         }else{
             
@@ -163,6 +165,7 @@ export default function CheckoutCard({
           dispatch(addToBasket(item,1));
           setQuantityProduct(quantityProduct+Number(1))
           setPriceItem(price*(quantityProduct+Number(1)))
+          localStorage.setItem('basket', JSON.stringify(cartProductsLocal)); 
 
         }
         }else{

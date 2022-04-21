@@ -19,8 +19,14 @@
     margin-top: 2rem;
     margin: auto;
 }
+.price-product{
+    width: 100%
+}
 
 @media (max-width: 700px){
+    .price-product{
+        width: 200px
+    }
     .container-sale{
         width:90%;
         margin:auto;

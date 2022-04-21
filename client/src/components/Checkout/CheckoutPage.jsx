@@ -11,7 +11,7 @@ import Total from "../Total/Total";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import NavBar from '../NavBar/NavBar'
-import { getMercadoPago, vaciarCarritoBack,getBasket,getUserSigningIn,getProducts,vaciarCarrito} from "../../actions/index.js";
+import { getMercadoPago, vaciarCarritoBack,getBasket,addToBasket,cargarSumItems,getUserSigningIn,getProducts,vaciarCarrito,cargarCarrito} from "../../actions/index.js";
 import "./CheckoutPage.css"
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -29,7 +29,23 @@ export default function CheckoutPage() {
     useEffect(()=>{
         dispatch(getBasket(user.email))
         dispatch(getProducts())
+        let localBasket = JSON.parse(localStorage.getItem("basket"));
+        let sumItems = 0
+        localBasket?.forEach(product=>{
+            sumItems+=product.quantity
+        })
+        console.log(localBasket)
+        console.log(sumItems)
+        if(localBasket){
+            dispatch(cargarCarrito(localBasket)) 
+            dispatch(cargarSumItems(sumItems))
+        }
+        
     },[dispatch])
+    useEffect(()=>{
+        localStorage.setItem('basket', JSON.stringify(cartProductsLocal));
+
+    },[cartProductsLocal])
 
     function vaciarCarritoLocal(e){
   
@@ -41,6 +57,9 @@ export default function CheckoutPage() {
                 await dispatch(getBasket(user.email))
             } 
             fetchData()
+        } else{
+            vaciarCarrito();
+            localStorage.removeItem('basket');  
         }
     }
     const productsMercado = cartProducts.Products?.map((element) => {

@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { useDispatch } from "react-redux";
 
-import { Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 import Card from "@material-ui/core/Card";
@@ -15,8 +14,18 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Logo from '../../svg/latcom1.png'
 import { getEdit, DeleteProduct, getProducts } from "../../actions";
-
+import {
+  Table,
+  Button, 
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  ModalFooter,
+} from "reactstrap";
 const useStyles = makeStyles((theme) => ({
   formatoDescription: {
     position: "center",
@@ -75,6 +84,9 @@ export default function EditarProduct({
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const dispatch = useDispatch();
+  const [modalInsertar, setStateModalInsectar] = useState(false)
+  const Bienvenido = ()=>setStateModalInsectar(true)
+  const Salir = ()=>setStateModalInsectar(false)
   var item = {
     id: id,
     name: name,
@@ -92,19 +104,18 @@ export default function EditarProduct({
     dispatch(getEdit(item));
     navigate("/admin/edit/form");
   };
-  const handleDelete = (e, id, name) => {
+  const handleDelete = (e) => {
     e.preventDefault();
-    var opcion = window.confirm(
-      "Estás Seguro que deseas Eliminar el Producto, " + name
-    );
-    if (opcion === true) {
       const fetchData = async () => {
-        await dispatch(DeleteProduct(id));
+         Salir()
+        await dispatch(DeleteProduct(item.id));
         await dispatch(getProducts());
-      };
-      fetchData();
     }
+    fetchData();
   };
+  const AbrirEliminar =()=>{
+    Bienvenido()
+  }
 
   return (
     <>
@@ -126,7 +137,7 @@ export default function EditarProduct({
             Editar
           </Button>
 
-          <Button color="danger" onClick={(e) => handleDelete(e, id, name)}>
+          <Button color="danger" onClick={AbrirEliminar}>
             Eliminar
           </Button>
 
@@ -148,6 +159,37 @@ export default function EditarProduct({
           </CardContent>
         </Collapse>
       </Card>
+      <Modal isOpen={modalInsertar} onRequestClose={()=>setStateModalInsectar(false)}>
+                <ModalHeader>
+                    <div><img className={classes.image} src={Logo}/></div>
+                </ModalHeader>
+                <form>
+                <ModalBody>
+                    <FormGroup>
+                        <p>
+                          {`Estas seguro que quieres eliminar esta venta ${name} ?`}
+                        </p>
+                    </FormGroup>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        type="submit"
+                        onClick={(e) => handleDelete(e, id)}
+                    >
+                        Eliminar
+                    </Button>
+                    <Button
+                        
+                        color="primary"
+                        onClick={() => setStateModalInsectar(false)}
+                    >
+                        Cancelar
+                    </Button>
+                </ModalFooter>
+                 </form>
+            </Modal>
     </>
   );
 }

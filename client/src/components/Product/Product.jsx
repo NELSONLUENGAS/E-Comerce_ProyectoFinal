@@ -55,7 +55,7 @@ export default function Product({
     const InicieSecion = () => toast.error("Por favor incia sesion",{duration: 2000,})
     const addToBaskett = () => toast.success(`Has agregado ${item.name} al carrito`,{duration: 4000,});
     const addToFavorite = () => toast.success(`Has agregado ${item.name} a favoritos`,{duration: 4000,});
-   
+    const cartProductsLocal = useSelector((state) => state.basket);
     const DeleteFavorite = () => toast.error(`Has sacado ${item.name} de tus favoritos`, {duration: 4000,})
     const NoHay = () => toast.error(`Has alcanzado el limite de stock`, {duration: 4000,})
     const dispatch = useDispatch();
@@ -115,10 +115,12 @@ export default function Product({
                     addBasketBack({ productId: id, amount: 1 }, user.email)
                 );
                 await dispatch(getBasket(user.email));
+                
             };
             fetchData();
 
             addToBaskett()
+            
             console.log(id);
             }
             
@@ -126,8 +128,8 @@ export default function Product({
         } else if(contador<=stock){
 
                 setStateContador(contador+1)
-                 dispatch(addToBasket(item,1));
-            addToBaskett()
+                dispatch(addToBasket(item,1)); 
+                addToBaskett()
             // dispatch(addToBasket(item,1));
             }else{
                 NoHay()
@@ -147,6 +149,10 @@ export default function Product({
             }
         })
     },[favorites])
+
+    useEffect(()=>{
+        localStorage.setItem('basket', JSON.stringify(cartProductsLocal));
+    },[cartProductsLocal])
 
     return (<>
         

@@ -24,7 +24,9 @@ import ReviewProduct from './components/MyShop/ReviewProduct';
 import Adress from './components/Adress/Adress';
 import EditarFormProduct from './components/EditarYBorrarProductos/FormEditProduct/CrearProducto'
 import Editar from './components/EditarYBorrarProductos/EditarProducts';
-import RegisterGoogle from './components/GoogleAuth Register/RegisterGoogle';
+import RegistroFormGoogle from './components/GoogleAuth Register/RegistroFormGoogle';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import ChangeWithToken from './components/ForgotPassword/ChangeWithToken';
 function App() {
   return (
     <Router>
@@ -34,13 +36,14 @@ function App() {
           <Route exact path="/checkout-page" element={<CheckoutPage/>} />
           <Route exact path="/SignIn" element={<SignIn/>}/>
           <Route exact path="/SignUp" element={<RegistroForm/>}/>
-          <Route exact path="/SignUp/google" element={<RegisterGoogle/>}/>
-          
+          <Route exact path="/SignUp/google" element={<RegistroFormGoogle/>}/>
+          <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
           <Route exact path="/checkout-card" element={<CheckoutCard/>}/>
           <Route exact path="/Checkout/Payment" element={<Checkout/>} />
           <Route exact path="/Categories" element={<Categories/>}/>
           <Route exact path="/product/:id" element={<ProductDetail/>}></Route>
           <Route exact path="/review/:id" element={<ReviewProduct/>}></Route>
+          <Route exact path="/change/:resetToken" element={<ChangeWithToken/>}></Route>
 
           <Route element={<AuthRoute/>}>
             <Route  path="/user/profile" element={<Profile/>}></Route>

@@ -10,6 +10,7 @@ const initialState = {
     categories: [],
     mercadoPago: {},
     basketBack: [],
+    token:"",
     productReviewByEmail:false,
     productReview:[],
     ofertas:[],
@@ -196,11 +197,11 @@ export default function rootReducer(state = initialState, action) {
                     ...state,
                     myOrders:[]
                 }
-            } else
+            } else{
             return {
                 ...state,
                 myOrders: action.payload
-            }
+            }}
         }
         case 'GET_ORDERS_IN_PROGRESS':{
             if(action.payload ==='No hay ordenes en progreso'){
@@ -393,6 +394,22 @@ export default function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 User:action.payload
+            }
+        case 'FORGET_PASSWORD':
+            return{
+                ...state,
+                token:"Mateo"
+            }
+        case 'GET_BASKET_LOCAL_STORAGE':
+            return{
+                ...state,
+                basket:action.payload
+
+            }
+        case 'GET_SUM_LOCAL_STORAGE':
+            return{
+                ...state,
+                ItemsAmount:action.payload
             }
         default:
             return state

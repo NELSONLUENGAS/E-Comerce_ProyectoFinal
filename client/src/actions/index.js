@@ -203,7 +203,14 @@ export function vaciarCarritoBack(email,name,lastname){
     }
 }
 
-
+export function deleteUser(email){
+    return async function (dispatch){
+        await axios.delete(`http://localhost:3001/users/${email}`)
+        return dispatch ({
+            type:"DELETE_USER",
+        })
+    }
+}
 export function RemoveToBasket(payload){
     return{
         type:"REMOVE_ITEM",
@@ -513,6 +520,40 @@ export function getUserByEmail(email){
         })
     }
 }
+
+export function forgotPassword(email,token){
+    return async function(dispatch){
+        await axios.post(`http://localhost:3001/users/${email}/forgotPassword/${token}`)
+        return dispatch({
+            type: 'FORGET_PASSWORD',
+            payload: token
+        })
+    }
+}
+
+export function changeToRejected(email,orderId){
+    return async function (dispatch) {
+        const json = await axios.put(`http://localhost:3001/users/${email}/changeToRejected`,orderId);
+        return dispatch({
+            type: "CHANGE_ORDER_TO_REJECTED",
+            payload: json.data
+        })
+    }
+
+}
+export function cargarCarrito(payload){
+    return ({
+        type: 'GET_BASKET_LOCAL_STORAGE',
+        payload
+    })
+}
+export function cargarSumItems(payload){
+    return ({
+        type: 'GET_SUM_LOCAL_STORAGE',
+        payload
+    })
+}
+
 
 
 

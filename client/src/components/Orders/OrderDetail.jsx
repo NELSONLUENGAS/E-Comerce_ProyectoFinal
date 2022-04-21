@@ -3,20 +3,13 @@
 import React from "react";
 import { useState } from "react";
 import {useSelector,useDispatch} from 'react-redux'
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import accounting from "accounting";
-import {changeStatusToComplete} from '../../actions/index'
 import {Link} from 'react-router-dom'
 import "./OrderDetail.css";
 
-export default function OrderDetail({UserEmail,total, status,id,Products,date,direction,handleChangeStatus,updatedAt,name,lastname}) {
+export default function OrderDetail({UserEmail,total,handleRejectOrder, status,id,Products,date,direction,handleChangeStatus,updatedAt,name,lastname}) {
     
     const [order, setOrder] = useState({history: false,description: false,sentStatus: status})
     const dia = updatedAt.slice(8,10)
@@ -41,24 +34,27 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
             description: !order.description,
         });
     }
-   
-
+    
     return (
         <div className="container-finish-order">
             <div className="order-details-1" >
-                <div style={{display:"flex",gap:"2rem"}}><h6>#{id}</h6><h6>{dia}-{mes}-{año} a las {hora}{minutos}</h6></div> 
-                
+                <div className="dia-hora-order-details"><h6>#{id}</h6><h6>{dia}-{mes}-{año} a las {hora}{minutos}</h6></div> 
                 <div>
-                {status === 'Complete' ? (
-                <h6 style={{color:"green"}}>Estado: {status}</h6>
-                ):<h6 style={{color:"#F3A712"}}>Estado: {status}</h6>
-                }
+                {status === 'Complete' ? (<h6 style={{color:"green"}}>Estado: {status}</h6>):null}
+                {status === 'Rejected' ? (<h6 style={{color:"red"}}>Estado: {status}</h6>):null}
+                {status === 'In progress' ? (<h6 style={{color:"#F3A712"}}>Estado: {status}</h6>):null}
+                
                 </div>
                 
-                <div style={{display:"flex",gap:"2rem"}}>
+                <div className="all-items-order-details">
                     <div className="name-email-order-details">
-                        <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{name} {lastname}</h6>
-                        <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{UserEmail}</h6>
+                        
+                        <div className="name-email-arrow-order-details">
+                            <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{name} {lastname}</h6>
+                            <h6 style={{cursor:"pointer"}}onClick={handleClickHistory}>{UserEmail}</h6>
+                            
+                        </div>
+                        
                     </div>
                     {order.history ? (<button className="button-more-details-order" onClick={handleClickHistory}>
                                     <ArrowDropUpIcon  />
@@ -70,8 +66,11 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                                 </button>
                                 )
                     }
+                    
                 </div> 
+                
             </div>
+            
             {order.history ? (<>
             <div className="order-details-2">
                 <h5>Total: ${Intl.NumberFormat("es-ES").format(total)}</h5>
@@ -85,19 +84,23 @@ export default function OrderDetail({UserEmail,total, status,id,Products,date,di
                 
                 
                 </div>
-                    {status=== 'In progress' ? (<div>
-                    <button onClick={(e)=>handleChangeStatus(e,id,UserEmail)} className="button-status-order">Cambiar a Finalizada</button>
-                </div>):null
-                }          
+                <div className="botones-cambio-orden">
+                    {status === 'In progress' ?(<button className="button-status-order" style={{backgroundColor:'red',width:'140px',marginBottom:"1rem"}}onClick={(e)=>handleRejectOrder(e,id,UserEmail)}>Rechazar orden</button>):null}
+                        {status=== 'In progress' ? (
+                        <button onClick={(e)=>handleChangeStatus(e,id,UserEmail)} className="button-status-order" style={{width:'140px'}}>Finalizar orden</button>):null
+                    }          
+                </div>
             </div>
             <div className="order-details-3">
                 {Products?.map((product, index) => {
                                     return (
                                     <div key={product.id} className="product-order">
                                         <div className="div-img-product-order"><img src={product.image} alt="hola"></img></div>
-                                        <Link  to={"/product/" + product.id} style={{textDecoration:"none",color:"#000"}}>  <h6>{product.name}</h6> </Link> 
-                                        <div>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
-                                        <div>{product.Product_Line.amount } u.</div>
+                                        <div className="div-product-info-order">
+                                            <Link  to={"/product/" + product.id} style={{textDecoration:"none",color:"#000"}}>  <h6>{product.name}</h6> </Link> 
+                                            <div>{accounting.formatMoney(product.price *product.Product_Line.amount,"$")}</div>
+                                            <div>{product.Product_Line.amount } u.</div>
+                                        </div>
                                     </div>
                                     );
                                     })

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {Users, Product_Line,Products,Orders} = require('../db')
+const {Users, Product_Line,Products,Orders,Review} = require('../db')
 const router = Router();
 const nodemailer = require('nodemailer');
 const {welcome} = require('../emailMessages/usersMails')
@@ -186,6 +186,48 @@ router.get('/user/:email', async (req, res) => {
     else res.send('no hay usuario con ese email')
     }catch(e){
         res.send(e)
+    }
+})
+router.delete('/users/:email', async (req, res) => {
+    const { email } = req.params;
+    const user = await Users.findOne({ where: { email } });
+    if (user) {
+        const orders = await Orders.findAll({where:{UserEmail: email}})
+        const reviews = await Review.findAll({where:{UserEmail: email}})
+        await orders.forEach(async cart=>{await cart.destroy()})
+        await reviews.forEach(async review=>{await review.destroy()})
+        await user.destroy();
+
+        res.send('The user has been deleted successfully');
+    } else {
+        res.send('The user does not exist');
+    }
+});
+router.post('/users/:email/forgotPassword/:token', async (req, res) => {
+    const {email, token} = req.params
+
+    const user = await Users.findOne({where: {email}})
+    if(user){
+        const mailOptions = {
+            from: 'latcom@gmail.com',
+            to: email,
+            subject: 'Recuperar contraseña',
+            html: `<h1>Recuperar contraseña</h1>
+            <p>Hola ${user.name} ${user.lastname}</p>
+            <p>Para recuperar tu contraseña ingresa al siguiente link:</p>
+            <a href="http://localhost:3000/change/${token}">Reset your Password</a>
+            `
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+        res.send('El mail ha sido enviado')
+    } else{
+        res.status(404).send('El usuario no ha sido encontrado')
     }
 })
 

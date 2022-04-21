@@ -81,10 +81,7 @@ router.get('/users/:email/orders', async (req, res) => {
     const {email} = req.params
 
     const history = await Orders.findAll({where:  
-        { UserEmail: {
-            [Op.iLike]:`%${email}%`
-            }
-        }, 
+        { UserEmail: email}, 
         include: {model: Products}
     })
     if(history.length) res.send(history)
@@ -259,6 +256,33 @@ router.delete('/users/:email/emptycart', async (req, res) => {
         res.status(500).send(`${e}`)
     }
 })
+router.put('/users/:email/changeToRejected', async (req, res) => {
+    const {email} = req.params, {orderId} = req.body
+        
+    try {
+        const cart = await Orders.findOne({
+            where: {id: orderId, UserEmail: email, status: 'In progress'},
+            include: {model: Products}
+        })
+            
+    
+        if(cart){
+            cart.status = 'Rejected'
+            cart.Products.forEach(async (product) => {
+                product.stock += product.Product_Line.amount
+                await product.save()
+            })
+            await cart.save()
+            return res.send('El status ha cambiado correctamente')
+        } 
+        
+        else res.status(404).send('Cart not found')
+    }
 
+    catch(e){
+        res.status(500).send(`${e}`)
+    }
+        
+})
 
 module.exports = router;

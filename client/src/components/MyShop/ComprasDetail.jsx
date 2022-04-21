@@ -36,7 +36,9 @@ export default function ComprasDetail({
             <div className="shop-details-1" >
                 <div style={{display:"flex",gap:"2rem"}}><h6>{dia}-{mes}-{año} a las {hora}</h6></div> 
                 <div>
-                {status==='Complete' ? (<h6 style={{color:"green"}}>Estado: {status}</h6>): (<h6 style={{color:"#F3A712"}}>Estado: {status}</h6>)}
+                {status === 'Complete' ? (<h6 style={{color:"green"}}>Estado: {status}</h6>):null}
+                {status === 'Rejected' ? (<h6 style={{color:"red"}}>Estado: {status}</h6>):null}
+                {status === 'In progress' ? (<h6 style={{color:"#F3A712"}}>Estado: {status}</h6>):null}
                 </div>
                 
             </div>

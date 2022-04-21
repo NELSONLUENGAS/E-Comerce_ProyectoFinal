@@ -174,6 +174,7 @@ export default function ProductDetail() {
         }else{
                 dispatch(vaciarCarrito());
                 dispatch(addToBasket(item,quantity));
+                navigate('/checkout-page')
         }
     }
 

@@ -3,7 +3,6 @@ import GoogleLogin from 'react-google-login';
 
 import React, { useState, useEffect } from 'react';
 import { gapi, loadAuth2 } from 'gapi-script'
-import { UserCard } from './UserCard';
 import {useNavigate} from 'react-router-dom'
 import {propertiesGoogle} from '../../actions/index'
 import { useDispatch } from 'react-redux';
