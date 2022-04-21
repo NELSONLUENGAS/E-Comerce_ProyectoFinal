@@ -39,6 +39,7 @@ export default function ProductDetail() {
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const { id } = useParams();
+    const cartProductsLocal = useSelector((state) => state.basket);
     const productDetail = useSelector((state) => state.productId);
     const favorites = useSelector((state) => state.favorites);
     const user = useSelector((state) => state.User);
@@ -256,6 +257,9 @@ export default function ProductDetail() {
             fetchData()
         }
     }, []);
+    useEffect(()=>{
+        localStorage.setItem('basket', JSON.stringify(cartProductsLocal));
+    },[cartProductsLocal])
     
     return (
         <>
