@@ -56,7 +56,7 @@ __IMPORTANTE__: El objeto de productos debe tener las siguientes propiedades
   }
 ]
 
-#Imagnes Proyecto
+#Imagenes Proyecto
 
 <p align="center">
   <img height="" src="./client/src/images/image.png" />
